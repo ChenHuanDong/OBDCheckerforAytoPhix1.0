@@ -4,6 +4,12 @@
     <string name="main_tv_special">Special</string>
     <string name="main_tv_persional">Persional</string>
     <string name="main_obd_connect">Connect</string>
+    <string name="main_tv_obd_connectdetail_not">Please connect to the device...</string>
+    <string name="main_tv_obd_connectdetail_do">Connect to the device successfully</string>
+    <string name="dashboards">Dashboards</string>
+    <string name="diagnostics">Diagnostics</string>
+    <string name="montiors">Montiors</string>
+    <string name="logs">Logs</string>
 
-   
+
 </resources>

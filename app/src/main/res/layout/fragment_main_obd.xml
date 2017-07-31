@@ -2,7 +2,14 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorOBDbackground"
                 tools:context="com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y37"
+        android:background="@color/colorWhite"/>
+
 
     <!--中间显示连接状态-->
     <TextView
@@ -10,7 +17,9 @@
         android:layout_height="@dimen/y37"
         android:gravity="center"
         android:text="@string/main_obd_connect"
-        android:textSize="@dimen/x18"/>
+        android:textColor="@color/colorConnect"
+        android:textSize="@dimen/x18"
+        android:textStyle="bold"/>
 
     <!--左上角图标-->
     <ImageView
@@ -28,12 +37,144 @@
     <!--右上角图片-->
     <ImageView
         android:layout_width="@dimen/x37"
-        android:layout_alignParentRight="true"
         android:layout_height="@dimen/x37"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--链接状态展示的底栏-->
+    <LinearLayout
+        android:layout_width="@dimen/x330"
+        android:layout_height="@dimen/y40"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y55"
+        android:background="#ffffff"/>
+
+
+    <!--详细细节的文字-->
+    <TextView
+        android:layout_width="@dimen/x246"
+        android:layout_height="@dimen/y40"
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginTop="@dimen/y55"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/main_tv_obd_connectdetail_do"
+        android:textColor="@color/colorConnect"
+        android:textSize="@dimen/x15"/>
+
+    <!--显示连接状态的图标-->
+    <ImageView
+        android:layout_width="@dimen/x45"
+        android:layout_height="@dimen/y40"
+        android:layout_marginLeft="@dimen/x308"
+        android:layout_marginTop="@dimen/y55"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+
+    <!--DashBoards（字在下  图片在上）-->
+    <TextView
+        android:layout_width="@dimen/x109"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x56"
+        android:layout_marginTop="@dimen/y209"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/dashboards"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginTop="@dimen/y115"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+
+    <!--Diagnostics-->
+    <TextView
+        android:layout_width="@dimen/x104"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x208"
+        android:layout_marginTop="@dimen/y210"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/diagnostics"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x210"
+        android:layout_marginTop="@dimen/y115"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+
+    <!--Montiors-->
+    <TextView
+        android:layout_width="@dimen/x78"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x72"
+        android:layout_marginTop="@dimen/y385"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/montiors"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginTop="@dimen/y291"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--Logs-->
+    <TextView
+        android:layout_width="@dimen/x44"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x238"
+        android:layout_marginTop="@dimen/y383"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/logs"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y291"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--Performance-->
+    <TextView
+        android:layout_width="@dimen/x44"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x238"
+        android:layout_marginTop="@dimen/y383"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/logs"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y291"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"/>
 
 
 
-
-
 </RelativeLayout>
+
