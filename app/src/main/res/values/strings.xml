@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">OBDCheckerforAytoPhix1.0</string>
+    <string name="app_name">OBDCheckerforAutoPhix1.0</string>
+    <string name="main_tv_obd">OBD</string>
+    <string name="main_tv_special">Special</string>
+    <string name="main_tv_persional">Persional</string>
+    <string name="main_obd_connect">Connect</string>
+
+   
 </resources>

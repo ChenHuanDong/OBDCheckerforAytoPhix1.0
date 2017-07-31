@@ -1,18 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.administrator.obdcheckerforaytophix10.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/frame_main_replace"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y602"
+        android:background="@color/colorLeimBlue"/>
 
-</android.support.constraint.ConstraintLayout>
+
+    <!--图标文字-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y52"
+        android:layout_alignParentBottom="true">
+        <!--obd-->
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y6"
+            android:layout_marginLeft="@dimen/x22"
+            android:background="@color/colorTransparent"
+            android:gravity="bottom|center_horizontal"
+            android:text="@string/main_tv_obd"
+            android:textSize="@dimen/x12"/>
+
+        <ImageView
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y7"
+            android:layout_marginLeft="@dimen/x39"/>
+
+
+        <!--special-->
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y6"
+            android:layout_marginLeft="@dimen/x148"
+            android:background="@color/colorTransparent"
+            android:gravity="bottom|center_horizontal"
+            android:text="@string/main_tv_special"
+            android:textSize="@dimen/x12"/>
+
+        <ImageView
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y7"
+            android:layout_marginLeft="@dimen/x165"/>
+
+
+        <!--Persional-->
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y6"
+            android:layout_marginLeft="@dimen/x270"
+            android:background="@color/colorTransparent"
+            android:gravity="bottom|center_horizontal"
+            android:text="@string/main_tv_persional"
+            android:textSize="@dimen/x12"/>
+
+        <ImageView
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/y45"
+            android:layout_marginBottom="@dimen/y7"
+            android:layout_marginLeft="@dimen/x285"/>
+
+    </RelativeLayout>
+
+
+    <!--上方透明按钮（最上层）-->
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorTransparent"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/btn_main_obd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"/>
+
+        <RadioButton
+            android:id="@+id/btn_main_special"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"/>
+
+        <RadioButton
+            android:id="@+id/btn_main_persional"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"/>
+
+    </RadioGroup>
+
+
+</RelativeLayout>

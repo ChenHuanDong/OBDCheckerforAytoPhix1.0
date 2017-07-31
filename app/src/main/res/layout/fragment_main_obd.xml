@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment">
+
+    <!--中间显示连接状态-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y37"
+        android:gravity="center"
+        android:text="@string/main_obd_connect"
+        android:textSize="@dimen/x18"/>
+
+    <!--左上角图标-->
+    <ImageView
+        android:layout_width="@dimen/x37"
+        android:layout_height="@dimen/x37"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--点击弹出PopupWindow-->
+    <Button
+        android:layout_width="@dimen/x45"
+        android:layout_height="@dimen/y30"
+        android:layout_marginLeft="@dimen/x215"
+        android:src="@mipmap/ic_launcher"/>
+
+    <!--右上角图片-->
+    <ImageView
+        android:layout_width="@dimen/x37"
+        android:layout_alignParentRight="true"
+        android:layout_height="@dimen/x37"
+        android:src="@mipmap/ic_launcher"/>
+
+
+
+
+
+</RelativeLayout>
