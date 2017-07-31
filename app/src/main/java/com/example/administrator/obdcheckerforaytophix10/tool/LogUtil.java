@@ -13,7 +13,7 @@ public class LogUtil {
 
     private final static boolean logFlag = true ;
 
-    public final static String tag = "[obdchecker]" ;
+    public final static String tag = "[bodyplus]" ;
     private final static int logLevel = Log.VERBOSE ;
     private static Hashtable<String , LogUtil> sLoggerTable  = new Hashtable<String, LogUtil>();
     private String mClassName ;
