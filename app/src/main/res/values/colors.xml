@@ -9,4 +9,7 @@
     <color name="colorConnect">#008EE5</color>
     <color name="colorOBDbackground">#EDEDED</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorDisConnect">#E51C23</color>
+
+
 </resources>

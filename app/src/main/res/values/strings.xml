@@ -10,6 +10,8 @@
     <string name="diagnostics">Diagnostics</string>
     <string name="montiors">Montiors</string>
     <string name="logs">Logs</string>
+    <string name="performance">Performance</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

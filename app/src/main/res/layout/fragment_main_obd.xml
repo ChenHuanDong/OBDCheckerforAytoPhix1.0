@@ -13,6 +13,7 @@
 
     <!--中间显示连接状态-->
     <TextView
+        android:id="@+id/obd_tv_title_connect"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y37"
         android:gravity="center"
@@ -29,6 +30,7 @@
 
     <!--点击弹出PopupWindow-->
     <Button
+        android:id="@+id/obd_btn_title_connect"
         android:layout_width="@dimen/x45"
         android:layout_height="@dimen/y30"
         android:layout_marginLeft="@dimen/x215"
@@ -156,24 +158,44 @@
 
     <!--Performance-->
     <TextView
-        android:layout_width="@dimen/x44"
+        android:layout_width="@dimen/x116"
         android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x238"
-        android:layout_marginTop="@dimen/y383"
+        android:layout_marginLeft="@dimen/x53"
+        android:layout_marginTop="@dimen/y539"
         android:gravity="center"
         android:singleLine="true"
-        android:text="@string/logs"
+        android:text="@string/performance"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x19"/>
 
     <ImageView
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x212"
-        android:layout_marginTop="@dimen/y291"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginTop="@dimen/y441"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"/>
 
+
+    <!--Settings-->
+    <TextView
+        android:layout_width="@dimen/x73"
+        android:layout_height="@dimen/y45"
+        android:layout_marginLeft="@dimen/x224"
+        android:layout_marginTop="@dimen/y539"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/settings"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x19"/>
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x210"
+        android:layout_marginTop="@dimen/y441"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
 
 
 </RelativeLayout>
