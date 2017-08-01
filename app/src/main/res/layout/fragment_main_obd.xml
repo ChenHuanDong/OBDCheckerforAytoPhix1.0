@@ -54,6 +54,7 @@
 
     <!--详细细节的文字-->
     <TextView
+        android:id="@+id/obd_tv_detail_connect"
         android:layout_width="@dimen/x246"
         android:layout_height="@dimen/y40"
         android:layout_marginLeft="@dimen/x35"
@@ -92,10 +93,10 @@
         android:layout_marginLeft="@dimen/x60"
         android:layout_marginTop="@dimen/y115"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/dashboards_obd"/>
 
 
-    <!--Diagnostics-->
+    <!--Diagnostics ()-->
     <TextView
         android:layout_width="@dimen/x104"
         android:layout_height="@dimen/y45"
@@ -113,10 +114,10 @@
         android:layout_marginLeft="@dimen/x210"
         android:layout_marginTop="@dimen/y115"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/diagnostics_obd"/>
 
 
-    <!--Montiors-->
+    <!--Montiors()-->
     <TextView
         android:layout_width="@dimen/x78"
         android:layout_height="@dimen/y45"
@@ -134,9 +135,9 @@
         android:layout_marginLeft="@dimen/x60"
         android:layout_marginTop="@dimen/y291"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/montiors_obd"/>
 
-    <!--Logs-->
+    <!--Logs()-->
     <TextView
         android:layout_width="@dimen/x44"
         android:layout_height="@dimen/y45"
@@ -154,9 +155,9 @@
         android:layout_marginLeft="@dimen/x212"
         android:layout_marginTop="@dimen/y291"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/logs_obd"/>
 
-    <!--Performance-->
+    <!--Performance()-->
     <TextView
         android:layout_width="@dimen/x116"
         android:layout_height="@dimen/y45"
@@ -174,10 +175,10 @@
         android:layout_marginLeft="@dimen/x60"
         android:layout_marginTop="@dimen/y441"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/performance_obd"/>
 
 
-    <!--Settings-->
+    <!--Settings()-->
     <TextView
         android:layout_width="@dimen/x73"
         android:layout_height="@dimen/y45"
@@ -195,7 +196,7 @@
         android:layout_marginLeft="@dimen/x210"
         android:layout_marginTop="@dimen/y441"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/settings_obd"/>
 
 
 </RelativeLayout>

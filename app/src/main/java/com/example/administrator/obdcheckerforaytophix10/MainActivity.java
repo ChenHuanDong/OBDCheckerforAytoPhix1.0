@@ -1,5 +1,11 @@
 package com.example.administrator.obdcheckerforaytophix10;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +18,7 @@ import android.widget.RadioButton;
 import com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
+import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //底部三个RadioButton
@@ -22,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPersionalFragment mPersionalFragment;
     //判断现在是在哪一页
     private int page = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置第一个按钮不可点击
         mRadioButton_obd.setClickable(false);
 
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
 
     }
 
@@ -120,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.replace(R.id.frame_main_replace, fragment);
         transaction.commit();
     }
+
+
 
 
 }
