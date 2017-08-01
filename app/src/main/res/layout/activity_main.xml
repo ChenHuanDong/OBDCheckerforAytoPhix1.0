@@ -10,7 +10,7 @@
         android:id="@+id/frame_main_replace"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y602"
-        android:background="@color/colorLeimBlue"/>
+        android:background="@color/colorWhite"/>
 
 
     <!--图标文字-->
