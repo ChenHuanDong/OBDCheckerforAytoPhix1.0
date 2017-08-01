@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 
 public class LogUtil {
-
+//
     private final static boolean logFlag = true ;
 
     public final static String tag = "[bodyplus]" ;
