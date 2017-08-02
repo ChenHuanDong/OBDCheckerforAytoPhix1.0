@@ -1,33 +1,31 @@
 package com.example.administrator.obdcheckerforaytophix10.main;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.administrator.obdcheckerforaytophix10.MainActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity;
+import com.example.administrator.obdcheckerforaytophix10.diagnostics.OBDDiagnosticsActivity;
+import com.example.administrator.obdcheckerforaytophix10.logs.OBDLogsActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.MainOBDPopLsAdapter;
+import com.example.administrator.obdcheckerforaytophix10.montiors.OBDMontiorsActivity;
+import com.example.administrator.obdcheckerforaytophix10.performance.OBDPerformanceActivity;
+import com.example.administrator.obdcheckerforaytophix10.settings.OBDSettingsActivity;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
-import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
 
@@ -43,6 +41,8 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
     private boolean isConnect = false;
     //MainActivity 的下面三个RadioButton
     private RadioButton btn_obd, btn_special, btn_persional;
+    //6个ImageView 点击跳转到对应的6个模块
+    private ImageView iv_dashboards, iv_diagnostics, iv_montiors, iv_logs, iv_performance, iv_settings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +63,18 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         tv_title.setOnClickListener(this);
         btn_title.setOnClickListener(this);
         tv_detail = view.findViewById(R.id.obd_tv_detail_connect);
+        iv_dashboards = view.findViewById(R.id.obd_iv_main_dashboards);
+        iv_diagnostics = view.findViewById(R.id.obd_iv_main_diagnostics);
+        iv_montiors = view.findViewById(R.id.obd_iv_main_montiors);
+        iv_logs = view.findViewById(R.id.obd_iv_main_logs);
+        iv_performance = view.findViewById(R.id.obd_iv_main_performance);
+        iv_settings = view.findViewById(R.id.obd_iv_main_settings);
+        iv_dashboards.setOnClickListener(this);
+        iv_diagnostics.setOnClickListener(this);
+        iv_montiors.setOnClickListener(this);
+        iv_logs.setOnClickListener(this);
+        iv_performance.setOnClickListener(this);
+        iv_settings.setOnClickListener(this);
     }
 
 
@@ -166,7 +178,32 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
             case R.id.obd_btn_title_connect:
 
                 break;
+            //下面六个跳转到对应的Aty里面
+            case R.id.obd_iv_main_dashboards:
+                moveToAty(OBDDashboardsActivity.class);
+                break;
+            case R.id.obd_iv_main_diagnostics:
+                moveToAty(OBDDiagnosticsActivity.class);
+                break;
+            case R.id.obd_iv_main_montiors:
+                moveToAty(OBDMontiorsActivity.class);
+                break;
+            case R.id.obd_iv_main_logs:
+                moveToAty(OBDLogsActivity.class);
+                break;
+            case R.id.obd_iv_main_performance:
+                moveToAty(OBDPerformanceActivity.class);
+                break;
+            case R.id.obd_iv_main_settings:
+                moveToAty(OBDSettingsActivity.class);
+                break;
         }
+    }
+    //跳转到Aty的方法  带动画
+    private void moveToAty(Class<?> cls) {
+        Intent intent_dashboards = new Intent(getActivity(), cls);
+        startActivity(intent_dashboards);
+        getActivity().overridePendingTransition(R.anim.slide_right_mid, R.anim.slide_mid_left);
     }
 
     //发送广播

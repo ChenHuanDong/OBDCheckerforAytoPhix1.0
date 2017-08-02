@@ -89,6 +89,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_dashboards"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x60"
@@ -110,6 +111,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_diagnostics"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x210"
@@ -131,6 +133,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_montiors"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x60"
@@ -151,6 +154,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_logs"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x212"
@@ -171,6 +175,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_performance"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x60"
@@ -192,6 +197,7 @@
         android:textSize="@dimen/x19"/>
 
     <ImageView
+        android:id="@+id/obd_iv_main_settings"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x210"
