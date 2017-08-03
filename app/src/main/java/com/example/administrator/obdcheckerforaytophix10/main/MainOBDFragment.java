@@ -216,8 +216,8 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                             dialog.dismiss();
                             //弹出Dialog
                             final PopupWindow popLoading = new PopupWindow(getActivity());
-                            popLoading.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                            popLoading.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                            popLoading.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+                            popLoading.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
                             View view_load = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_after_obd_pop, null);
                             ImageView anim_iv = view_load.findViewById(R.id.dia_pop_anim_iv);
                             anim_iv.setOnClickListener(new View.OnClickListener() {
