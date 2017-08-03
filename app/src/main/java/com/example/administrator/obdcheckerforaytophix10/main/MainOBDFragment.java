@@ -38,6 +38,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
+//
 public class MainOBDFragment extends Fragment implements View.OnClickListener {
 
     //上方显示连接状态栏          中间偏上详细信息
