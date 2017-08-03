@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //初始化
         initView();
+        mRadioButton_obd.performClick();
         //设置第一个按钮不可点击
         mRadioButton_obd.setClickable(false);
 
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     change_fragment_obd(mSpecialFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
                 }
 
+
+
                 //设置页数在第二页
                 page = 2;
                 break;
@@ -113,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mRadioButton_persional.setClickable(false);
 
                 change_fragment_obd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
+
+
 
                 //设置页数在第三页
                 page = 3;

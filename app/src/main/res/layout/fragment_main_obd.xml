@@ -6,204 +6,229 @@
                 android:background="@color/colorOBDbackground"
                 tools:context="com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment">
 
+    <!--两个显示链接状态的文字的字体颜色还没有具体给出，要具体的话别忘了去Java代码里面改-->
+
+
+    <!--TextView 下方的布局-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y37"
-        android:background="@color/colorWhite"/>
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground"/>
 
 
     <!--中间显示连接状态-->
+    <!--这个在外面显示了   要改的话去外面也要改-->
     <TextView
         android:id="@+id/obd_tv_title_connect"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y37"
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground"
         android:gravity="center"
         android:text="@string/main_obd_connect"
-        android:textColor="@color/colorConnect"
+        android:textColor="@color/colorTextColorDemo"
         android:textSize="@dimen/x18"
         android:textStyle="bold"/>
 
     <!--左上角图标-->
     <ImageView
-        android:layout_width="@dimen/x37"
-        android:layout_height="@dimen/x37"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x19"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/y12"
+        android:src="@drawable/upload_buttom_ui"/>
 
     <!--点击弹出PopupWindow-->
     <Button
         android:id="@+id/obd_btn_title_connect"
-        android:layout_width="@dimen/x45"
-        android:layout_height="@dimen/y30"
-        android:layout_marginLeft="@dimen/x215"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/x15"
+        android:layout_height="@dimen/y10"
+        android:layout_marginLeft="@dimen/x233"
+        android:layout_marginTop="@dimen/y19"
+        android:background="@drawable/xiala_ui"/>
 
     <!--右上角图片-->
     <ImageView
-        android:layout_width="@dimen/x37"
-        android:layout_height="@dimen/x37"
-        android:layout_alignParentRight="true"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/x19"
+        android:layout_height="@dimen/x19"
+        android:layout_marginLeft="@dimen/x341"
+        android:layout_marginTop="@dimen/y12"
+        android:src="@drawable/help_buttom_ui"/>
 
     <!--链接状态展示的底栏-->
-    <LinearLayout
-        android:layout_width="@dimen/x330"
-        android:layout_height="@dimen/y40"
-        android:layout_centerHorizontal="true"
+    <ImageView
+        android:layout_width="@dimen/x331"
+        android:layout_height="@dimen/y41"
+        android:layout_marginLeft="@dimen/x22"
         android:layout_marginTop="@dimen/y55"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:scaleType="fitXY"
+        android:src="@drawable/information_ui"/>
 
 
     <!--详细细节的文字-->
+    <!--和上面连接状态文字一样-->
     <TextView
         android:id="@+id/obd_tv_detail_connect"
-        android:layout_width="@dimen/x246"
-        android:layout_height="@dimen/y40"
-        android:layout_marginLeft="@dimen/x35"
+        android:layout_width="@dimen/x315"
+        android:layout_height="@dimen/y41"
+        android:layout_marginLeft="@dimen/x38"
         android:layout_marginTop="@dimen/y55"
-        android:gravity="center"
+        android:background="@color/colorTransparent"
+        android:gravity="center_vertical"
         android:singleLine="true"
         android:text="@string/main_tv_obd_connectdetail_do"
-        android:textColor="@color/colorConnect"
-        android:textSize="@dimen/x15"/>
+        android:textColor="@color/colorConnectDetail"
+        android:textSize="@dimen/x16"/>
 
     <!--显示连接状态的图标-->
     <ImageView
-        android:layout_width="@dimen/x45"
-        android:layout_height="@dimen/y40"
-        android:layout_marginLeft="@dimen/x308"
-        android:layout_marginTop="@dimen/y55"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/y20"
+        android:layout_marginLeft="@dimen/x312"
+        android:layout_marginTop="@dimen/y66"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/signal_ui"/>
+
+
+    <!--线  灰色的线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_marginTop="@dimen/y44"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
 
 
     <!--DashBoards（字在下  图片在上）-->
     <TextView
-        android:layout_width="@dimen/x109"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x56"
-        android:layout_marginTop="@dimen/y209"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x63"
+        android:layout_marginTop="@dimen/y226"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/dashboards"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
 
     <ImageView
         android:id="@+id/obd_iv_main_dashboards"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x60"
-        android:layout_marginTop="@dimen/y115"
+        android:layout_marginLeft="@dimen/x63"
+        android:layout_marginTop="@dimen/y116"
         android:scaleType="fitXY"
-        android:src="@drawable/dashboards_obd"/>
+        android:src="@drawable/dashboards_ui"/>
 
 
     <!--Diagnostics ()-->
     <TextView
-        android:layout_width="@dimen/x104"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x208"
-        android:layout_marginTop="@dimen/y210"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y226"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/diagnostics"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
+
 
     <ImageView
         android:id="@+id/obd_iv_main_diagnostics"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x210"
-        android:layout_marginTop="@dimen/y115"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y116"
         android:scaleType="fitXY"
-        android:src="@drawable/diagnostics_obd"/>
+        android:src="@drawable/diagnostics_ui"/>
 
 
     <!--Montiors()-->
     <TextView
-        android:layout_width="@dimen/x78"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x72"
-        android:layout_marginTop="@dimen/y385"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x62"
+        android:layout_marginTop="@dimen/y389"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/montiors"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
 
     <ImageView
         android:id="@+id/obd_iv_main_montiors"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x60"
-        android:layout_marginTop="@dimen/y291"
+        android:layout_marginLeft="@dimen/x62"
+        android:layout_marginTop="@dimen/y279"
         android:scaleType="fitXY"
-        android:src="@drawable/montiors_obd"/>
+        android:src="@drawable/logs_ui"/>
 
     <!--Logs()-->
     <TextView
-        android:layout_width="@dimen/x44"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x238"
-        android:layout_marginTop="@dimen/y383"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y389"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/logs"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
 
     <ImageView
         android:id="@+id/obd_iv_main_logs"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x212"
-        android:layout_marginTop="@dimen/y291"
+        android:layout_marginTop="@dimen/y279"
         android:scaleType="fitXY"
-        android:src="@drawable/logs_obd"/>
+        android:src="@drawable/logs_ui"/>
 
     <!--Performance()-->
     <TextView
-        android:layout_width="@dimen/x116"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x53"
-        android:layout_marginTop="@dimen/y539"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x62"
+        android:layout_marginTop="@dimen/y552"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/performance"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
 
     <ImageView
         android:id="@+id/obd_iv_main_performance"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x60"
-        android:layout_marginTop="@dimen/y441"
+        android:layout_marginLeft="@dimen/x62"
+        android:layout_marginTop="@dimen/y442"
         android:scaleType="fitXY"
-        android:src="@drawable/performance_obd"/>
+        android:src="@drawable/performance_ui"/>
 
 
     <!--Settings()-->
     <TextView
-        android:layout_width="@dimen/x73"
-        android:layout_height="@dimen/y45"
-        android:layout_marginLeft="@dimen/x224"
-        android:layout_marginTop="@dimen/y539"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y24"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y552"
         android:gravity="center"
         android:singleLine="true"
         android:text="@string/settings"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x19"/>
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x15"/>
+
 
     <ImageView
         android:id="@+id/obd_iv_main_settings"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/y100"
-        android:layout_marginLeft="@dimen/x210"
-        android:layout_marginTop="@dimen/y441"
+        android:layout_marginLeft="@dimen/x212"
+        android:layout_marginTop="@dimen/y442"
         android:scaleType="fitXY"
-        android:src="@drawable/settings_obd"/>
+        android:src="@drawable/settings_ui"/>
 
 
 </RelativeLayout>

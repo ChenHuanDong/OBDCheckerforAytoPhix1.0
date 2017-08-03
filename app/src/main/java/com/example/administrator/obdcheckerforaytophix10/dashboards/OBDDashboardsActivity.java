@@ -17,7 +17,7 @@ public class OBDDashboardsActivity extends AppCompatActivity {
         //隐藏标题栏0
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
+
         setContentView(R.layout.activity_obddashboards);
 
         initView();

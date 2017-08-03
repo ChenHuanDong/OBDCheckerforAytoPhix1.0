@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,10 +26,12 @@ import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboard
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.OBDDiagnosticsActivity;
 import com.example.administrator.obdcheckerforaytophix10.logs.OBDLogsActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.MainOBDPopLsAdapter;
+import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
 import com.example.administrator.obdcheckerforaytophix10.montiors.OBDMontiorsActivity;
 import com.example.administrator.obdcheckerforaytophix10.performance.OBDPerformanceActivity;
 import com.example.administrator.obdcheckerforaytophix10.settings.OBDSettingsActivity;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
 
@@ -75,6 +81,12 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         iv_logs.setOnClickListener(this);
         iv_performance.setOnClickListener(this);
         iv_settings.setOnClickListener(this);
+        //设置下面三个按钮不可点击   Fragment中  管理 Activity 控件
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        btn_obd = (RadioButton) activity.findViewById(R.id.btn_main_obd);
+        btn_special = (RadioButton) activity.findViewById(R.id.btn_main_special);
+        btn_persional = (RadioButton) activity.findViewById(R.id.btn_main_persional);
+
     }
 
 
@@ -84,8 +96,8 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         //如果未连接则title显示红色字体
         if (!isConnect) {
-            tv_title.setTextColor(this.getResources().getColor(R.color.colorDisConnect));
-            tv_detail.setTextColor(this.getResources().getColor(R.color.colorDisConnect));
+            tv_title.setTextColor(this.getResources().getColor(R.color.colorTextColorDemo));
+            tv_detail.setTextColor(this.getResources().getColor(R.color.colorConnectDetail));
             tv_detail.setText(this.getResources().getText(R.string.main_tv_obd_connectdetail_not));
         }
 
@@ -97,26 +109,16 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.obd_tv_title_connect:
                 if (!isConnect) {
-                    //设置下面三个按钮不可点击   Fragment中  管理 Activity 控件
-                    AppCompatActivity activity = (AppCompatActivity) getActivity();
-                    btn_obd = (RadioButton) activity.findViewById(R.id.btn_main_obd);
-                    btn_special = (RadioButton) activity.findViewById(R.id.btn_main_special);
-                    btn_persional = (RadioButton) activity.findViewById(R.id.btn_main_persional);
-                    btn_obd.setClickable(false);
-                    btn_special.setClickable(false);
-                    btn_persional.setClickable(false);
-                    //只能弹出一个Pop
-                    btn_title.setClickable(false);
-                    tv_title.setClickable(false);
+                    //下面三个   上面两个  中间六个  全部不能点
+                    setMainBtnCli(false);
 
-                    final PopupWindow mPop = new PopupWindow(getActivity());
-                    mPop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                    mPop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                    final OBDPopDialog dialog = new OBDPopDialog(getActivity());
+
                     View search_device = LayoutInflater.from(getActivity()).inflate(R.layout.pop_obd_search_device, null);
                     //LS
                     ListView lv = search_device.findViewById(R.id.obd_pop_ls_device);
                     MainOBDPopLsAdapter mAdapter = new MainOBDPopLsAdapter(getActivity());
-                    ArrayList<String> data = new ArrayList<>();
+                    final ArrayList<String> data = new ArrayList<>();
                     //假数据
                     data.add("OBDCHECK");
                     data.add("OBDLINK");
@@ -129,7 +131,7 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             //Popup  消失
-                            mPop.dismiss();
+                            dialog.dismiss();
                             //弹出Dialog
                             final PopupWindow popLoading = new PopupWindow(getActivity());
                             popLoading.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -141,11 +143,10 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                                 public void onClick(View view) {
                                     //正常应该是加动画  现在先设置一个点击事件
                                     popLoading.dismiss();
-                                    btn_title.setClickable(true);
-                                    tv_title.setClickable(true);
-                                    btn_obd.setClickable(true);
-                                    btn_special.setClickable(true);
-                                    btn_persional.setClickable(true);
+                                    //3 + 2 + 6 个按钮全部可以点击
+                                    setMainBtnCli(true);
+
+
                                     // 这里还应该有一个把  动画变成信号的
                                     tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorConnect));
                                     tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorConnect));
@@ -154,7 +155,6 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                                     isConnect = true;
                                 }
                             });
-
                             popLoading.setContentView(view_load);
                             popLoading.setOutsideTouchable(false);
                             popLoading.showAsDropDown(tv_title);
@@ -163,19 +163,110 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                         }
                     });
 
-                    mPop.setContentView(search_device);
-                    mPop.setOutsideTouchable(false);
-                    mPop.showAsDropDown(tv_title);
+                    //Pop不能把边框去掉  Dia可以
+                    Window win = dialog.getWindow();
+                    WindowManager.LayoutParams lp = win.getAttributes();
+                    win.setGravity(Gravity.LEFT | Gravity.TOP);
+                    lp.x = 0;
+                    lp.y = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.068);
+
+                    win.setAttributes(lp);
+
+                    dialog.setContentView(search_device);
+                    dialog.setCanceledOnTouchOutside(false);
+
+                    dialog.show();
+
 
                 } else {
                     //已连接时点击
-                    tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorDisConnect));
-                    tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorDisConnect));
+                    tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorConnectDetail));
+                    tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorConnectDetail));
                     tv_detail.setText(getActivity().getResources().getString(R.string.main_tv_obd_connectdetail_not));
                     isConnect = false;
                 }
+
+
                 break;
             case R.id.obd_btn_title_connect:
+                if (!isConnect) {
+                    //下面三个   上面两个  中间六个  全部不能点
+                    setMainBtnCli(false);
+
+                    final OBDPopDialog dialog = new OBDPopDialog(getActivity());
+
+                    View search_device = LayoutInflater.from(getActivity()).inflate(R.layout.pop_obd_search_device, null);
+                    //LS
+                    ListView lv = search_device.findViewById(R.id.obd_pop_ls_device);
+                    MainOBDPopLsAdapter mAdapter = new MainOBDPopLsAdapter(getActivity());
+                    final ArrayList<String> data = new ArrayList<>();
+                    //假数据
+                    data.add("OBDCHECK");
+                    data.add("OBDLINK");
+                    data.add("V100");
+                    mAdapter.setData(data);
+                    lv.setAdapter(mAdapter);
+
+                    //lv点击item连接对应蓝牙
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            //Popup  消失
+                            dialog.dismiss();
+                            //弹出Dialog
+                            final PopupWindow popLoading = new PopupWindow(getActivity());
+                            popLoading.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                            popLoading.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                            View view_load = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_after_obd_pop, null);
+                            ImageView anim_iv = view_load.findViewById(R.id.dia_pop_anim_iv);
+                            anim_iv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //正常应该是加动画  现在先设置一个点击事件
+                                    popLoading.dismiss();
+                                    //3 + 2 + 6 个按钮全部可以点击
+                                    setMainBtnCli(true);
+
+
+                                    // 这里还应该有一个把  动画变成信号的
+                                    tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorConnect));
+                                    tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorConnect));
+                                    tv_detail.setText(getActivity().getResources().getString(R.string.main_tv_obd_connectdetail_do));
+                                    //连接状态变成已连接
+                                    isConnect = true;
+                                }
+                            });
+                            popLoading.setContentView(view_load);
+                            popLoading.setOutsideTouchable(false);
+                            popLoading.showAsDropDown(tv_title);
+
+
+                        }
+                    });
+
+                    //Pop不能把边框去掉  Dia可以
+                    Window win = dialog.getWindow();
+                    WindowManager.LayoutParams lp = win.getAttributes();
+                    win.setGravity(Gravity.LEFT | Gravity.TOP);
+                    lp.x = 0;
+                    lp.y = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.068);
+
+                    win.setAttributes(lp);
+
+                    dialog.setContentView(search_device);
+                    dialog.setCanceledOnTouchOutside(false);
+
+                    dialog.show();
+
+
+                } else {
+                    //已连接时点击
+                    tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorConnectDetail));
+                    tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorConnectDetail));
+                    tv_detail.setText(getActivity().getResources().getString(R.string.main_tv_obd_connectdetail_not));
+                    isConnect = false;
+                }
+
 
                 break;
             //下面六个跳转到对应的Aty里面
@@ -199,6 +290,7 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
     //跳转到Aty的方法  带动画
     private void moveToAty(Class<?> cls) {
         Intent intent_dashboards = new Intent(getActivity(), cls);
@@ -213,4 +305,22 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         getActivity().sendBroadcast(intent);
         LogUtil.fussenLog().d("已发送广播");
     }
+
+    private void setMainBtnCli (boolean b){
+        //
+        btn_obd.setClickable(b);
+        btn_special.setClickable(b);
+        btn_persional.setClickable(b);
+        //只能弹出一个Pop
+        btn_title.setClickable(b);
+        tv_title.setClickable(b);
+        //6
+        iv_dashboards.setClickable(b);
+        iv_diagnostics.setClickable(b);
+        iv_montiors.setClickable(b);
+        iv_logs.setClickable(b);
+        iv_performance.setClickable(b);
+        iv_settings.setClickable(b);
+    }
+
 }

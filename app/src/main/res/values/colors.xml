@@ -7,11 +7,15 @@
     <color name="colorLeimBlue">#91bef0</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorConnect">#008EE5</color>
-    <color name="colorOBDbackground">#EDEDED</color>
+    <color name="colorOBDbackground">#212329</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDisConnect">#E51C23</color>
     <color name="colorPopBackground">#888888</color>
     <color name="colorPopBackground_tra">#99888888</color>
+    <color name="colorTextColorDemo">#C8C6C6</color>
+    <color name="colorConnectDetail">#FE9002</color>
+    <color name="colorPopBackGround">#E61A1B1E</color>
+
 
 
 </resources>

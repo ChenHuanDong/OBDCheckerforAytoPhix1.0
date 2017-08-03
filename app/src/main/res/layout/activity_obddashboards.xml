@@ -8,8 +8,41 @@
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y37">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y37"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/dashboards"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x17"/>
 
 
+        <ImageView
+            android:layout_width="@dimen/x37"
+            android:layout_height="@dimen/y37"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
+
+        <ImageView
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/y37"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
+
+
+    </RelativeLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y611"/>
 
 
 </LinearLayout>

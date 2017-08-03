@@ -17,6 +17,9 @@ public class ScreenUtils {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
+
+    //不计算虚拟按键在内
+
     //获取屏幕宽度
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context

@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/y45"
-              android:background="@color/colorPopBackground_tra"
+              android:layout_height="@dimen/y44"
+              android:background="@color/colorPopBackGround"
               android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_tv_obd_pop_device"
-        android:layout_width="@dimen/x93"
-        android:layout_height="@dimen/y23"
-        android:layout_marginLeft="@dimen/x28"
-        android:layout_marginTop="@dimen/y14"
-        android:gravity="center_vertical"
-        android:textColor="@color/colorDisConnect"
-        android:textSize="@dimen/x16"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y43"
+        android:background="@color/colorPopBackGround"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_tv_obd_pop_device"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/y44"
+            android:layout_marginLeft="@dimen/x28"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorConnectDetail"
+            android:textSize="@dimen/x15"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/y17"
+            android:layout_marginTop="@dimen/y14"
+            android:layout_marginLeft="@dimen/x158"
+            android:scaleType="fitXY"
+            android:src="@drawable/yes_ui"/>
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_1"/>
 
 
 </LinearLayout>
