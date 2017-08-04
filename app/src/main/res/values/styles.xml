@@ -10,6 +10,7 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!--Dialog样式   没有四周边框-->
     <style name="ShareDialog"  parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

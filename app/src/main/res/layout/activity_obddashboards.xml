@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/colorOBDbackground"
     tools:context="com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity">
 
-    <RelativeLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y37">
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/dashboards"
+        android:textAllCaps="false"
+        android:textColor="@color/colorConnectDetail"
+        android:textSize="@dimen/x18"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y37"
-            android:background="@color/colorWhite"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/dashboards"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/x17"/>
+    <!--返回按钮-->
+    <ImageView
+        android:layout_width="@dimen/x10"
+        android:layout_height="@dimen/y18"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/y13"
+        android:scaleType="fitXY"
+        android:src="@drawable/return_ui"/>
 
-
-        <ImageView
-            android:layout_width="@dimen/x37"
-            android:layout_height="@dimen/y37"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher"/>
-
-        <ImageView
-            android:layout_width="@dimen/x45"
-            android:layout_height="@dimen/y37"
-            android:layout_alignParentRight="true"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher"/>
-
-
-    </RelativeLayout>
+    <!--菜单按钮-->
+    <ImageView
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/y15"
+        android:layout_marginLeft="@dimen/x340"
+        android:layout_marginTop="@dimen/y15"
+        android:scaleType="fitXY"
+        android:src="@drawable/other_ui"/>
 
 
     <android.support.v4.view.ViewPager
+        android:layout_marginTop="@dimen/y44"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y611"/>
+        android:layout_height="@dimen/y559"
+        android:background="@color/colorOBDbackground"/>
 
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/y603"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorWhite"/>
+
+
+</RelativeLayout>
