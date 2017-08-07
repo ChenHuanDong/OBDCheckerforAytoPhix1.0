@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorOBDbackground"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/dashboards_fragment_out_relative"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorOBDbackground"
+                android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/dashboards_fragment_base_btn"
-        android:layout_width="@dimen/x50"
-        android:layout_height="@dimen/x50"
-        android:layout_marginTop="@dimen/y150"
-        android:background="@color/colorWhite"/>
-
-
-</LinearLayout>
+</RelativeLayout>

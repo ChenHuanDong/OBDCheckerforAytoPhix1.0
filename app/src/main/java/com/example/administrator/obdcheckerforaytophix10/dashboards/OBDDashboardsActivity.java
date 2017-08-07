@@ -15,7 +15,9 @@ import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefra
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsSecondPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsThirdPageFragment;
+import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
     //上方返回和右上角Other按钮
     private ImageView iv_retuen, iv_other;
+    private int width, height;
 
 
     @Override
@@ -73,6 +76,8 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         iv_other = (ImageView) findViewById(R.id.dashboards_main_iv_other);
         iv_retuen.setOnClickListener(this);
         iv_other.setOnClickListener(this);
+        width = (int) SPUtil.get(this, "screenWidth", 0);
+        height = (int) SPUtil.get(this, "screenHeight", 0);
     }
 
     //下面三个VP监听
@@ -86,12 +91,10 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
         ll.removeAllViews();
 
-        int width = ScreenUtils.getScreenWidth(this);
-        int height = ScreenUtils.getScreenHeight(this);
+
         //1080   1776
 
         for (int i = 0; i < data.size(); i++) {
-
 
             DashboardsMainPoint point = new DashboardsMainPoint(this);
 
@@ -101,12 +104,14 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 point.setSelected(false);
             }
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (((float) (56.0 / (float) width)) * width),
-                    (int) (((float) (56.0 / (float) height)) * height));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) ConversionUtil.myWantValue(width, (float) 19.44),
+                    (int) ConversionUtil.myWantValue(width, (float) 19.44));
             params.leftMargin = 0;
             params.topMargin = (int) (((float) (44 / 647)) * height);
             ll.addView(point, params);
             ll.setBackgroundColor(getResources().getColor(R.color.colorOBDbackground));
+
+
         }
 
 

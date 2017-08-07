@@ -7,9 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsView;
+import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 /**
  * Created by CHD on 2017/8/4.
@@ -17,7 +23,9 @@ import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 public class OBDDashboardsFirstPageFragment extends Fragment implements View.OnClickListener {
 
-    private Button btn;
+    private RelativeLayout mRe;
+    private int width;
+
 
     @Nullable
     @Override
@@ -29,14 +37,33 @@ public class OBDDashboardsFirstPageFragment extends Fragment implements View.OnC
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btn = view.findViewById(R.id.dashboards_fragment_base_btn);
-        btn.setOnClickListener(this);
+        initView(view);
+    }
+
+    private void initView(View view) {
+        mRe = view.findViewById(R.id.dashboards_fragment_out_relative);
+        width = (int) SPUtil.get(getActivity(), "screenWidth", 0);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        DashboardsView boards_one = new DashboardsView(getActivity());
+        //在这里设置宽
+        boards_one.setWidth(width);
+
+        int width = ScreenUtils.getScreenWidth(getActivity());
+        //1080   1776
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) ConversionUtil.myWantValue(width, (float) 150.0),
+                (int) ConversionUtil.myWantValue(width, (float) 150.0));
+        params.leftMargin = (int) ConversionUtil.myWantValue(width, (float) 25.0);
+        params.topMargin = (int) ConversionUtil.myWantValue(width, (float) 10.0);
+        mRe.addView(boards_one, params);
+
+
     }
+
 
     @Override
     public void onClick(View view) {
