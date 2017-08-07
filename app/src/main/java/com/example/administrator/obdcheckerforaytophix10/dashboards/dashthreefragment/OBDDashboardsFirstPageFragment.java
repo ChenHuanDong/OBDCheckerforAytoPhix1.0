@@ -24,7 +24,6 @@ import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 public class OBDDashboardsFirstPageFragment extends Fragment implements View.OnClickListener {
 
     private RelativeLayout mRe;
-    private int width;
 
 
     @Nullable
@@ -42,16 +41,16 @@ public class OBDDashboardsFirstPageFragment extends Fragment implements View.OnC
 
     private void initView(View view) {
         mRe = view.findViewById(R.id.dashboards_fragment_out_relative);
-        width = (int) SPUtil.get(getActivity(), "screenWidth", 0);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        DashboardsView boards_one = new DashboardsView(getActivity());
-        //在这里设置宽
-        boards_one.setWidth(width);
+        final DashboardsView boards_one = new DashboardsView(getActivity());
+
+        boards_one.setStartAngle(0);
+
 
         int width = ScreenUtils.getScreenWidth(getActivity());
         //1080   1776
@@ -60,6 +59,13 @@ public class OBDDashboardsFirstPageFragment extends Fragment implements View.OnC
         params.leftMargin = (int) ConversionUtil.myWantValue(width, (float) 25.0);
         params.topMargin = (int) ConversionUtil.myWantValue(width, (float) 10.0);
         mRe.addView(boards_one, params);
+
+        boards_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boards_one.setTextStyle(1);
+            }
+        });
 
 
     }

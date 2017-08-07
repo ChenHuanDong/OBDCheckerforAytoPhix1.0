@@ -15,7 +15,7 @@
     <color name="colorTextColorDemo">#C8C6C6</color>
     <color name="colorConnectDetail">#FE9002</color>
     <color name="colorPopBackGround">#E61A1B1E</color>
-
+    <color name="colorDashboardsPointer">#fe9002</color>
 
 
 </resources>
