@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
@@ -18,7 +20,7 @@ import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
 
-public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private ViewPager vp;
     private DashboardsMainAdapter mAdapter;
@@ -30,6 +32,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
     private ArrayList<DashboardsMainPoint> points;
     private LinearLayout ll;
+
+    //上方返回和右上角Other按钮
+    private ImageView iv_retuen, iv_other;
 
 
     @Override
@@ -54,7 +59,6 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         //设置监听
         vp.addOnPageChangeListener(this);
 
-
     }
 
     private void initView() {
@@ -65,9 +69,13 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         fThird = new OBDDashboardsThirdPageFragment();
         points = new ArrayList<>();
         ll = (LinearLayout) findViewById(R.id.dashboards_mian_bootom_ll);
+        iv_retuen = (ImageView) findViewById(R.id.dashboards_main_iv_return);
+        iv_other = (ImageView) findViewById(R.id.dashboards_main_iv_other);
+        iv_retuen.setOnClickListener(this);
+        iv_other.setOnClickListener(this);
     }
 
-
+    //下面三个VP监听
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -78,14 +86,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
         ll.removeAllViews();
 
-        LogUtil.fussenLog().d(position);
-
         int width = ScreenUtils.getScreenWidth(this);
         int height = ScreenUtils.getScreenHeight(this);
         //1080   1776
-        LogUtil.fussenLog().d("宽" + width + "高" + height + "---");
-
-        LogUtil.fussenLog().d((int) (((float) (56.0 / (float) width)) * width) + "这个是什么鬼");
 
         for (int i = 0; i < data.size(); i++) {
 
@@ -112,5 +115,18 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    //上方两个iv点击事件
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.dashboards_main_iv_return:
+                finish();
+                break;
+            case R.id.dashboards_main_iv_other:
+
+                break;
+        }
     }
 }

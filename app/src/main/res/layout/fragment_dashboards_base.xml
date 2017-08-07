@@ -7,6 +7,7 @@
 
 
     <Button
+        android:id="@+id/dashboards_fragment_base_btn"
         android:layout_width="@dimen/x50"
         android:layout_height="@dimen/x50"
         android:layout_marginTop="@dimen/y150"

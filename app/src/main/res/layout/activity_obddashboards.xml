@@ -22,6 +22,7 @@
 
     <!--返回按钮-->
     <ImageView
+        android:id="@+id/dashboards_main_iv_return"
         android:layout_width="@dimen/x10"
         android:layout_height="@dimen/y18"
         android:layout_marginLeft="@dimen/x15"
@@ -32,6 +33,7 @@
 
     <!--菜单按钮-->
     <ImageView
+        android:id="@+id/dashboards_main_iv_other"
         android:layout_width="@dimen/x20"
         android:layout_height="@dimen/y15"
         android:layout_marginLeft="@dimen/x340"
