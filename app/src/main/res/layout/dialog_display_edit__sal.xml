@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="@dimen/x335"
+              android:layout_height="wrap_content"
+              android:background="@color/colorDialogBackGround"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x60"
+        android:background="@color/colorDialogBackGround">
+
+        <TextView
+            android:layout_width="@dimen/x154"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/size_and_location"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+    </LinearLayout>
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Width-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <TextView
+            android:layout_width="@dimen/x216"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/width"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <EditText
+            android:id="@+id/display_sal_width_et"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x44"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x276"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="40"
+            android:textColor="@color/colorTextColorDemo"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="@dimen/x16"
+            app:theme="@style/MyEditText"/>
+
+
+    </RelativeLayout>
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Left-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <TextView
+            android:layout_width="@dimen/x107"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/left"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <EditText
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x44"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x276"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="0.5"
+            android:textColor="@color/colorTextColorDemo"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="@dimen/x16"
+            app:theme="@style/MyEditText"/>
+
+
+    </RelativeLayout>
+
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Top-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <TextView
+            android:layout_width="@dimen/x107"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/top"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <EditText
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x44"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x276"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="0.5"
+            android:textColor="@color/colorTextColorDemo"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="@dimen/x16"
+            app:theme="@style/MyEditText"/>
+
+
+    </RelativeLayout>
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <Button
+        android:id="@+id/display_sal_ok_btn"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x16"
+        android:text="@string/ok"
+        android:background="@color/colorDialogBackGround"
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"/>
+
+</LinearLayout>

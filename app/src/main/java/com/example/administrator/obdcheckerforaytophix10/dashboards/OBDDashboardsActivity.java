@@ -4,7 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +18,7 @@ import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefra
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsSecondPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsThirdPageFragment;
+import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
 import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
@@ -130,7 +134,18 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 finish();
                 break;
             case R.id.dashboards_main_iv_other:
+                OBDPopDialog dialog = new OBDPopDialog(this);
+                View view_other = LayoutInflater.from(this).inflate(R.layout.dialog_dashboards_other , null);
 
+                Window win = dialog.getWindow();
+                WindowManager.LayoutParams lp = win.getAttributes();
+                win.setGravity(Gravity.LEFT | Gravity.TOP);
+                lp.x = (int) (ScreenUtils.getScreenWidth(this) * 0.226666);
+                lp.y = (int) (ScreenUtils.getScreenHeight(this) * 0.060278);
+                win.setAttributes(lp);
+                dialog.setContentView(view_other);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
                 break;
         }
     }

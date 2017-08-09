@@ -14,4 +14,42 @@
     <string name="settings">Settings</string>
     <string name="rescan">Rescan</string>
     <string name="loading">Loading...</string>
+    <string name="edit_dashboards">Edit Dashboards</string>
+    <string name="size_and_location">Size and Location</string>
+    <string name="display_configuration">Display Configuration</string>
+    <string name="remove_display">Remove Display</string>
+    <string name="drag_and_move">Drag and Move</string>
+    <string name="bring_to__front">Bring to Front</string>
+    <string name="edit_display">Edit Display</string>
+    <string name="dashboards_style">Dashboards Style</string>
+    <string name="add_display">Add Display</string>
+    <string name="add_dashboars">Add Dashboards</string>
+    <string name="remove_dashboards">Remove Dashboards</string>
+    <string name="load_default_dashboards">Load Default Dashboards</string>
+    <string name="toggle_hud_mode">Toggle HUD Mode</string>
+    <string name="calibrate_device_sensors">Calibrate Device Sensors</string>
+    <string name="instant_fuel_economy">Instant fuel economy</string>
+    <string name="range">RANGE</string>
+    <string name="pid">PID</string>
+    <string name="number_of_decimals">Number of Decimals</string>
+    <string name="zero">Zero</string>
+    <string name="mulitiplier">Miltplier</string>
+    <string name="x_one">X1</string>
+    <string name="ok">OK</string>
+    <string name="yourinputisincorrectPleasereenterit">Your input is incorrect. Please re-enter it.</string>
+
+
+
+
+    <string name="width">Diameter(10-100)</string>
+    <string name="left">Left(0-100)</string>
+    <string name="top">Top(0-100)</string>
+
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+    <string name="four">Four</string>
+    <string name="five">Five</string>
+    <string name="six">Six</string>
+    <string name="seven">Seven</string>
 </resources>

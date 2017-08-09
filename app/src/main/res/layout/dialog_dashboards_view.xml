@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/x335"
+              android:layout_height="@dimen/x280"
+              android:background="@color/colorDialogBackGround"
+              android:orientation="vertical">
+
+    <!--Edit  Display-->
+    <LinearLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x60"
+        android:background="@color/colorDialogBackGround">
+
+        <TextView
+            android:layout_width="@dimen/x144"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/edit_display"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+    </LinearLayout>
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Size and Location-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/size_and_location"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x306"
+            android:layout_marginTop="@dimen/x13"
+            android:scaleType="fitXY"
+            android:src="@drawable/enter"/>
+
+        <ImageView
+            android:id="@+id/display_edit_one_sal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+
+
+    <!--Line-->
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Dispaly  Configuration-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/display_configuration"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x306"
+            android:layout_marginTop="@dimen/x13"
+            android:scaleType="fitXY"
+            android:src="@drawable/enter"/>
+
+
+        <ImageView
+            android:id="@+id/display_edit_one_dc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/remove_display"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/drag_and_move"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/bring_to__front"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -93,7 +93,7 @@
     <!--线  灰色的线-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y1"
+        android:layout_height="@dimen/x1"
         android:layout_marginTop="@dimen/y44"
         android:scaleType="fitXY"
         android:src="@drawable/line_ui"/>

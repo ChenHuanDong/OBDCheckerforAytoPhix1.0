@@ -16,6 +16,8 @@
     <color name="colorConnectDetail">#FE9002</color>
     <color name="colorPopBackGround">#E61A1B1E</color>
     <color name="colorDashboardsPointer">#fe9002</color>
-
+    <color name="colorDialogBackGround">#3B3F49</color>
+    <color name="colorDialogOtherBack">#4D000000</color>
+    <color name="colorEditTextControlActivated">#108EE9</color>
 
 </resources>
