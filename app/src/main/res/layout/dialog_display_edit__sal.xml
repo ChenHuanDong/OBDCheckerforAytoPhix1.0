@@ -48,13 +48,19 @@
             android:textAllCaps="false"
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>
-
+        <!--android:numeric="integer
+            设置只能输入数字
+        "-->
+        <!--android:digits="1234567890"
+            设置只能输入0~9
+        -->
         <EditText
             android:id="@+id/display_sal_width_et"
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x276"
+            android:digits="1234567890"
             android:gravity="center"
             android:singleLine="true"
             android:text="40"
@@ -90,12 +96,15 @@
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>
 
+        <!--设置只能输入数字和小数点-->
         <EditText
+            android:id="@+id/display_sal_left_et"
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x276"
             android:gravity="center"
+            android:digits="1234567890."
             android:singleLine="true"
             android:text="0.5"
             android:textColor="@color/colorTextColorDemo"
@@ -132,6 +141,8 @@
             android:textSize="@dimen/x16"/>
 
         <EditText
+            android:id="@+id/display_sal_top_et"
+            android:digits="1234567890."
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
             android:layout_centerVertical="true"
@@ -156,13 +167,13 @@
 
     <Button
         android:id="@+id/display_sal_ok_btn"
-        android:textAllCaps="true"
-        android:gravity="center"
-        android:textColor="@color/colorDashboardsPointer"
-        android:textSize="@dimen/x16"
-        android:text="@string/ok"
-        android:background="@color/colorDialogBackGround"
         android:layout_width="@dimen/x335"
-        android:layout_height="@dimen/x44"/>
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround"
+        android:gravity="center"
+        android:text="@string/ok"
+        android:textAllCaps="true"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x16"/>
 
 </LinearLayout>

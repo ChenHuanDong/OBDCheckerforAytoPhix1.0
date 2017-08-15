@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--先改成这个  以后再换回来-->
+
+        <!-- 先改成这个  以后再换回来 -->
         <activity
             android:name=".dashboards.OBDDashboardsActivity"
             android:launchMode="singleTask">
@@ -23,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name=".dashboards.OBDDashboardsActivity"-->
-            <!--android:launchMode="singleTask">-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name=".dashboards.OBDDashboardsActivity" -->
+        <!-- android:launchMode="singleTask"> -->
+        <!-- </activity> -->
         <activity
             android:name=".diagnostics.OBDDiagnosticsActivity"
             android:launchMode="singleTask">
@@ -45,6 +46,10 @@
         </activity>
         <activity
             android:name=".settings.OBDSettingsActivity"
+            android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".MainFragmentReplaceActivity"
             android:launchMode="singleTask">
         </activity>
     </application>

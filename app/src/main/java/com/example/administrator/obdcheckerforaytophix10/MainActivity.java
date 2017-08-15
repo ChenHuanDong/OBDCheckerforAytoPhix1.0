@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,8 @@ import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragm
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //底部三个RadioButton
     private RadioButton mRadioButton_obd, mRadioButton_special, mRadioButton_persional;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPersionalFragment mPersionalFragment;
     //判断现在是在哪一页
     private int page = 1;
+
+
 
 
     @Override
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
 
         //初始化
         initView();
@@ -105,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
 
-
                 //设置页数在第二页
                 page = 2;
                 break;
@@ -116,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mRadioButton_persional.setClickable(false);
 
                 change_fragment_obd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
-
 
 
                 //设置页数在第三页

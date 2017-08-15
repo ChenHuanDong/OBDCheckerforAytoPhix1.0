@@ -1,6 +1,10 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +15,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsMainPoint;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.DashboardsMainAdapter;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsHUDFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsSecondPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsThirdPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
@@ -24,6 +31,7 @@ import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
@@ -43,7 +51,6 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     private ImageView iv_retuen, iv_other;
     private int width, height;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_obddashboards);
+
 
         initView();
         //为data添加Fragment
@@ -111,7 +119,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) ConversionUtil.myWantValue(width, (float) 19.44),
                     (int) ConversionUtil.myWantValue(width, (float) 19.44));
             params.leftMargin = 0;
-            params.topMargin = (int) (((float) (44 / 647)) * height);
+            params.topMargin = (int) (((float) (30 / 647)) * height);
             ll.addView(point, params);
             ll.setBackgroundColor(getResources().getColor(R.color.colorOBDbackground));
 
@@ -136,6 +144,19 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
             case R.id.dashboards_main_iv_other:
                 OBDPopDialog dialog = new OBDPopDialog(this);
                 View view_other = LayoutInflater.from(this).inflate(R.layout.dialog_dashboards_other , null);
+                //HUD模式
+                LinearLayout ll_hud = view_other.findViewById(R.id.dia_dashboards_othre_hud);
+                ll_hud.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //点击带值跳转到公共替换Fragment的Aty
+                        Intent intent = new Intent(OBDDashboardsActivity.this , MainFragmentReplaceActivity.class);
+                        intent.putExtra("obdreplacefragment" , 1);
+                        startActivity(intent);
+                    }
+                });
+
+
 
                 Window win = dialog.getWindow();
                 WindowManager.LayoutParams lp = win.getAttributes();
@@ -149,4 +170,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 break;
         }
     }
+
+
+
 }

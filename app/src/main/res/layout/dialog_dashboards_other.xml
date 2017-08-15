@@ -22,200 +22,289 @@
 
     </RelativeLayout>
 
+    <!--放在除了三角以外的所有布局最外层  为了背景不是透明的-->
     <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x60"
-        android:background="@color/colorDialogBackGround">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorDialogBackGround"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="@dimen/x134"
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x60"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/edit_dashboards"
-            android:textAllCaps="false"
-            android:textColor="@color/colorDashboardsPointer"
-            android:textSize="@dimen/x18"
-            android:textStyle="bold"/>
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x60"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/edit_dashboards"
+                android:textAllCaps="false"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"
+                android:textStyle="bold"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
+        <!--Dashboards Mode -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
 
 
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/x134"
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/dashboards_style"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="@dimen/x31"
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/dashboardsMode"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="@dimen/x109"
+                android:layout_height="@dimen/x44"
+                android:gravity="center_vertical|right"
+                android:singleLine="true"
+                android:text="@string/classic"
+                android:textAllCaps="false"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:src="@drawable/enter"/>
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x99"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/one"
-            android:textAllCaps="false"
-            android:textColor="@color/colorDashboardsPointer"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/dashboards_style"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
+            <TextView
+                android:layout_width="@dimen/x109"
+                android:layout_height="@dimen/x44"
+                android:gravity="center_vertical|right"
+                android:singleLine="true"
+                android:text="@string/one"
+                android:textAllCaps="false"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                android:src="@drawable/enter"/>
 
 
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="@dimen/x134"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/add_display"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/add_display"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
 
 
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/x134"
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/add_dashboars"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/add_dashboars"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
 
 
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/x134"
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/load_default_dashboards"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/removeDashboards"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
 
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
 
-        <TextView
-            android:layout_width="@dimen/x134"
+
+        <LinearLayout
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/toggle_hud_mode"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/load_default_dashboards"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
-        android:src="@drawable/line_ui"/>
-
-
-    <LinearLayout
-        android:layout_width="@dimen/x290"
-        android:layout_height="@dimen/x44"
-        android:background="@color/colorDialogBackGround"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/x134"
+        <LinearLayout
+            android:id="@+id/dia_dashboards_othre_hud"
+            android:layout_width="@dimen/x290"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x15"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/calibrate_device_sensors"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextColorDemo"
-            android:textSize="@dimen/x16"/>
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/toggle_hud_mode"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
 
 
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_ui"/>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/x290"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x134"
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/calibrate_device_sensors"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </LinearLayout>
     </LinearLayout>
-
 
 </LinearLayout>

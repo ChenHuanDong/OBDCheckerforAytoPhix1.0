@@ -37,8 +37,9 @@
     <string name="x_one">X1</string>
     <string name="ok">OK</string>
     <string name="yourinputisincorrectPleasereenterit">Your input is incorrect. Please re-enter it.</string>
-
-
+    <string name="dashboardsMode">Dashboards Mode</string>
+    <string name="classic">Classic</string>
+    <string name="removeDashboards">Remove Dashboards</string>
 
 
     <string name="width">Diameter(10-100)</string>
@@ -52,4 +53,7 @@
     <string name="five">Five</string>
     <string name="six">Six</string>
     <string name="seven">Seven</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -15,4 +15,16 @@ public class MathUtil {
         }
         return a;
     }
+
+    //把String转化成int
+    public static float stringToFloat(String x) {
+        float a = 0;
+        if (!x.equals("")) {
+            a = Float.parseFloat(x);
+        } else {
+            a = (float) 0.0;
+        }
+        return a;
+    }
+
 }

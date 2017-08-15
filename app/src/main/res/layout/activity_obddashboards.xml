@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/dashboards_main_out_re"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,7 +55,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/dashboards_main_vp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y559"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/y44"
         android:background="@color/colorOBDbackground"/>
 
@@ -62,8 +63,8 @@
     <LinearLayout
         android:id="@+id/dashboards_mian_bootom_ll"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y44"
-        android:layout_marginTop="@dimen/y603"
+        android:layout_height="@dimen/y30"
+        android:layout_marginTop="@dimen/y617"
         android:background="@color/colorOBDbackground"
         android:gravity="center"
         android:orientation="horizontal">
@@ -83,6 +84,9 @@
             android:layout_height="@dimen/y30"/>
 
     </LinearLayout>
+
+
+
 
 
 </RelativeLayout>
