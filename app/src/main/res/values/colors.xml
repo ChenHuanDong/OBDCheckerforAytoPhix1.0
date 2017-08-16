@@ -24,4 +24,5 @@
     <color name="colorStyleTwoArcBottom">#00a6ff</color>
     <color name="colorStyleTwoArcTop">#1d2027</color>
     <color name="colorHUDtextColor">#44ff00</color>
+    <color name="colorStyleOneDisplay">#18191c</color>
 </resources>

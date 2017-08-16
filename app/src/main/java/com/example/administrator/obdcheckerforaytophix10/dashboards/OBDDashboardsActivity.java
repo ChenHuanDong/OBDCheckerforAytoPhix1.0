@@ -144,6 +144,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
             case R.id.dashboards_main_iv_other:
                 OBDPopDialog dialog = new OBDPopDialog(this);
                 View view_other = LayoutInflater.from(this).inflate(R.layout.dialog_dashboards_other , null);
+
+
+
                 //HUD模式
                 LinearLayout ll_hud = view_other.findViewById(R.id.dia_dashboards_othre_hud);
                 ll_hud.setOnClickListener(new View.OnClickListener() {

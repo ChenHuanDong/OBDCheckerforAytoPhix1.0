@@ -40,6 +40,8 @@
     <string name="dashboardsMode">Dashboards Mode</string>
     <string name="classic">Classic</string>
     <string name="removeDashboards">Remove Dashboards</string>
+    <string name="style">Style</string>
+
 
 
     <string name="width">Diameter(10-100)</string>

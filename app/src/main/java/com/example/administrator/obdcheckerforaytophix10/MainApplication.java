@@ -24,7 +24,10 @@ public class MainApplication extends Application {
 
         SPUtil.put(this, "screenWidth", ScreenUtils.getScreenWidth(this));
         SPUtil.put(this, "screenHeight", ScreenUtils.getScreenHeight(this));
-        SPUtil.put(this, "dashboardsdisplaysizeandlocationwidth", (int) 40);
+        //判断是经典还是自定义模式
+        SPUtil.put(this , "dashboardsisclassic" , true);
+        //6个仪表盘的初始大小位置设置
+        SPUtil.put(this, "dashboardsdisplaysizeandlocationwidth_one", (int) 40);
         SPUtil.put(this, "dashboardsdisplaysizeandlocation_left_one", (float) 6.667);
         SPUtil.put(this, "dashboardsdisplaysizeandlocation_top_one", (float) 1.748);
         SPUtil.put(this, "dashboardsdisplaysizeandlocationwidth_two", 40);
@@ -42,11 +45,23 @@ public class MainApplication extends Application {
         SPUtil.put(this, "dashboardsdisplaysizeandlocationwidth_six", 40);
         SPUtil.put(this, "dashboardsdisplaysizeandlocation_left_six", (float) 53.333);
         SPUtil.put(this, "dashboardsdisplaysizeandlocation_top_six", (float) 66.783);
+        //6个仪表盘的刻度初始数值
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_one", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_one", (int) 160);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_two", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_two", (int) 160);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_three", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_three", (int) 160);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_four", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_four", (int) 160);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_five", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_five", (int) 160);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_start_six", (int) 0);
+        SPUtil.put(this, "dashboardsdisplayconfiguration_end_six", (int) 160);
+
 
 
     }
-
-
 
 
 }

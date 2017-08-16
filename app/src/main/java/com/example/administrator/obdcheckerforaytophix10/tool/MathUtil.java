@@ -16,7 +16,7 @@ public class MathUtil {
         return a;
     }
 
-    //把String转化成int
+    //把String转化成float
     public static float stringToFloat(String x) {
         float a = 0;
         if (!x.equals("")) {

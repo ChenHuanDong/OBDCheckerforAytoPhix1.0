@@ -56,13 +56,14 @@ public class DashboardsView extends View implements View.OnClickListener {
     //375  647
     private Context mContext;
     private Paint mPaint = new Paint();
-    private int style = 0;
     private float startAngle = (float) 0.0;
     //0 是不旋转
     private int textStyle = 0;
 
-
     private int myDisplayId;
+    private int style = 0;
+    private float max = (float) 160.0;
+    private float min = (float) 0.0;
 
 
     public DashboardsView(Context context, int myId, int style) {
@@ -135,9 +136,31 @@ public class DashboardsView extends View implements View.OnClickListener {
             drawValueText(canvas);
             //绘制指针  三角和线
             drawStyleTwoPointer(canvas);
+        } else if (style == 2) {
+            //画四条线和四个圆弧
+            drawStyleThreeOutLineArw(canvas);
         }
 
 
+    }
+
+
+    //画四条线和四个圆弧
+    private void drawStyleThreeOutLineArw(Canvas canvas) {
+        canvas.save();
+
+        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(0);
+
+        RectF rectF = new RectF(0, 0, (float) ((16.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()));
+        canvas.drawLine((float) ((16.0 / 320.0) * getWidth()), 0,
+                (float) ((288.0 / 320.0) * getWidth()), 0, mPaint);
+        canvas.drawArc(rectF, 180, 90, false, mPaint);
+
+
+        canvas.restore();
     }
 
 
@@ -415,17 +438,10 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
         mPaint.setTextSize((float) ((12.0 * getWidth()) / 150.0));
-
-        float min = (float) 0.0;
-        float max = (float) 160.0;
-
         canvas.save();
         canvas.translate(getWidth() / 2, getWidth() / 2);
-
         for (int i = 0; i < percent + 1; i++) {
-
             canvas.save();
-
             if (textStyle == 0) {
                 canvas.translate(0, (float) ((10.0 / 300.0) * getWidth()));
                 canvas.scale(0.9f, 0.9f);
@@ -434,7 +450,6 @@ public class DashboardsView extends View implements View.OnClickListener {
             }
             float rAngle = ((endAngle - startAngle) / percent);
             float rFendu = (max - min) / percent;
-
             canvas.rotate(rAngle * i);
 
             if (textStyle == 0) {
@@ -442,12 +457,9 @@ public class DashboardsView extends View implements View.OnClickListener {
             } else {
                 canvas.rotate(180, 0, (float) ((100.0 / 300.0) * getWidth()));
             }
-
             //本来是100的  微调成110
-            canvas.drawText(((int) (rFendu * i)) + "", 0, (float) ((100.0 / 300.0) * getWidth()), mPaint);
-
+            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, (float) ((100.0 / 300.0) * getWidth()), mPaint);
             canvas.restore();
-
         }
 
         canvas.restore();
@@ -462,15 +474,27 @@ public class DashboardsView extends View implements View.OnClickListener {
     //Style  画最外层圆  黑色
     private void drawOutCircle(Canvas canvas) {
 
-        mPaint.setColor(getResources().getColor(R.color.colorBlack));
+        mPaint.setColor(getResources().getColor(R.color.colorStyleOneDisplay));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.yb_ui);
-        RectF rectF = new RectF(0, 0, getWidth(), getWidth());
-        canvas.drawBitmap(bitmap, null, rectF, mPaint);
+        canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mPaint);
 
 
+        int[] a = {getResources().getColor(R.color.colorTransparent), getResources().getColor(R.color.colorTransparent),
+                getResources().getColor(R.color.colorBlack)};
+        float[] b = {0.0f, 0.89333f, 1f};
+
+
+        Shader shader = new RadialGradient(getWidth() / 2, getWidth() / 2, getWidth() / 2,
+                a, b
+                , Shader.TileMode.CLAMP);
+
+        mPaint.setShader(shader);
+
+        canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mPaint);
+
+        mPaint.setShader(null);
         //恢复初始
         initView();
     }
@@ -478,114 +502,238 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //经典  自定义
+        if ((boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
 
-        final OBDPopDialog dialog = new OBDPopDialog(mContext);
-        View view_dia = LayoutInflater.from(mContext).inflate(R.layout.dialog_dashboards_view, null);
+            //经典模式打开只有DC
+            final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
+            View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
+            final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
+            final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
+            //这里做不同仪表盘ID的判断
+            if (myDisplayId == 1) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_one", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_one", (int) 0) + "");
+            } else if (myDisplayId == 2) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_two", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_two", (int) 0) + "");
+            } else if (myDisplayId == 3) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_three", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_three", (int) 0) + "");
+            } else if (myDisplayId == 4) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_four", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_four", (int) 0) + "");
+            } else if (myDisplayId == 5) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_five", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_five", (int) 0) + "");
+            } else if (myDisplayId == 6) {
+                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_six", (int) 0) + "");
+                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_six", (int) 0) + "");
+            }
 
-        //Size and Location
-        ImageView iv_sal = view_dia.findViewById(R.id.display_edit_one_sal);
-        iv_sal.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dialog.dismiss();
-                final OBDPopDialog dia_sal = new OBDPopDialog(mContext);
-                View view_sal = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit__sal, null);
-                //Width  右边ET
-                final EditText et_width = view_sal.findViewById(R.id.display_sal_width_et);
-                final EditText et_left = view_sal.findViewById(R.id.display_sal_left_et);
-                final EditText et_top = view_sal.findViewById(R.id.display_sal_top_et);
-                //这里做不同仪表盘的判断
-                if (myDisplayId == 1) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_one", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_one", (float) 0) + "");
-                } else if (myDisplayId == 2) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_two", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_two", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_two", (float) 0) + "");
-                } else if (myDisplayId == 3) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_three", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_three", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_three", (float) 0) + "");
-                } else if (myDisplayId == 4) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_four", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_four", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_four", (float) 0) + "");
-                } else if (myDisplayId == 5) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_five", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_five", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_five", (float) 0) + "");
-                } else if (myDisplayId == 6) {
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_six", 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_six", (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_six", (float) 0) + "");
+            Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
+            btn_ok.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dia_dc.dismiss();
+                    //点击确定发送广播 把初始值最终值发送
+                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
+                    intent.putExtra("identity", "DisplayConfiguration");
+                    intent.putExtra("startValue", et_start.getText().toString());
+                    intent.putExtra("endValue", et_end.getText().toString());
+                    intent.putExtra("myId", myDisplayId);
+                    mContext.sendBroadcast(intent);
                 }
-                //下方确认按钮
-                Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
-                //点击OK修改设置  发送广播
-                btn_ok.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            });
 
-                        if (MathUtil.stringToInt(et_width.getText().toString()) >= 10 && MathUtil.stringToInt(et_width.getText().toString()) <= 100 &&
-                                MathUtil.stringToFloat(et_left.getText().toString()) >= (float) 0.0 &&
-                                MathUtil.stringToFloat(et_left.getText().toString()) <= (float) 100.0 &&
-                                MathUtil.stringToFloat(et_top.getText().toString()) >= (float) 0.0 &&
-                                MathUtil.stringToFloat(et_top.getText().toString()) <= (float) 100.0) {
 
-                            dia_sal.dismiss();
+            //自定义setWin方法
+            setWin(dia_dc);
+            dia_dc.setContentView(view_dc);
+            dia_dc.setCanceledOnTouchOutside(true);
+            dia_dc.show();
+
+
+            //这个下面就是自定义的了
+        } else {
+
+            final OBDPopDialog dialog = new OBDPopDialog(mContext);
+            View view_dia = LayoutInflater.from(mContext).inflate(R.layout.dialog_dashboards_view, null);
+
+            //Size and Location
+            ImageView iv_sal = view_dia.findViewById(R.id.display_edit_one_sal);
+            iv_sal.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dialog.dismiss();
+                    final OBDPopDialog dia_sal = new OBDPopDialog(mContext);
+                    View view_sal = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit__sal, null);
+                    //Width  右边ET
+                    final EditText et_width = view_sal.findViewById(R.id.display_sal_width_et);
+                    final EditText et_left = view_sal.findViewById(R.id.display_sal_left_et);
+                    final EditText et_top = view_sal.findViewById(R.id.display_sal_top_et);
+                    //这里做不同仪表盘的判断
+                    if (myDisplayId == 1) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_one", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_one", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_one", (float) 0) + "");
+                    } else if (myDisplayId == 2) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_two", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_two", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_two", (float) 0) + "");
+                    } else if (myDisplayId == 3) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_three", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_three", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_three", (float) 0) + "");
+                    } else if (myDisplayId == 4) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_four", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_four", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_four", (float) 0) + "");
+                    } else if (myDisplayId == 5) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_five", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_five", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_five", (float) 0) + "");
+                    } else if (myDisplayId == 6) {
+                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_six", 0) + "");
+                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_six", (float) 0) + "");
+                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_six", (float) 0) + "");
+                    }
+                    //下方确认按钮
+                    Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
+                    //点击OK修改设置  发送广播
+                    btn_ok.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            if (MathUtil.stringToInt(et_width.getText().toString()) >= 10 && MathUtil.stringToInt(et_width.getText().toString()) <= 100 &&
+                                    MathUtil.stringToFloat(et_left.getText().toString()) >= (float) 0.0 &&
+                                    MathUtil.stringToFloat(et_left.getText().toString()) <= (float) 100.0 &&
+                                    MathUtil.stringToFloat(et_top.getText().toString()) >= (float) 0.0 &&
+                                    MathUtil.stringToFloat(et_top.getText().toString()) <= (float) 100.0) {
+
+                                dia_sal.dismiss();
+                                Intent intent = new Intent("dashboardsdisplaysizeandlocation");
+                                intent.putExtra("identity", "SizeAndLocation");
+                                intent.putExtra("width", et_width.getText().toString());
+                                intent.putExtra("left", et_left.getText().toString());
+                                intent.putExtra("top", et_top.getText().toString());
+                                intent.putExtra("myId", myDisplayId);
+                                mContext.sendBroadcast(intent);
+
+                            } else {
+                                Toast.makeText(mContext, getResources().getString(R.string.yourinputisincorrectPleasereenterit),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    });
+
+
+                    //自定义setWin方法
+                    setWin(dia_sal);
+                    dia_sal.setContentView(view_sal);
+                    dia_sal.setCanceledOnTouchOutside(true);
+                    dia_sal.show();
+
+                }
+            });
+
+            //Display Configuration
+            ImageView iv_dc = view_dia.findViewById(R.id.display_edit_one_dc);
+            iv_dc.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
+                    View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
+                    final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
+                    final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
+                    //这里做不同仪表盘ID的判断
+                    if (myDisplayId == 1) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_one", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_one", (int) 0) + "");
+                    } else if (myDisplayId == 2) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_two", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_two", (int) 0) + "");
+                    } else if (myDisplayId == 3) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_three", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_three", (int) 0) + "");
+                    } else if (myDisplayId == 4) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_four", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_four", (int) 0) + "");
+                    } else if (myDisplayId == 5) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_five", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_five", (int) 0) + "");
+                    } else if (myDisplayId == 6) {
+                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_six", (int) 0) + "");
+                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_six", (int) 0) + "");
+                    }
+
+                    Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
+                    btn_ok.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dia_dc.dismiss();
+                            //点击确定发送广播 把初始值最终值发送
                             Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                            intent.putExtra("width", et_width.getText().toString());
-                            intent.putExtra("left", et_left.getText().toString());
-                            intent.putExtra("top", et_top.getText().toString());
+                            intent.putExtra("identity", "DisplayConfiguration");
+                            intent.putExtra("startValue", et_start.getText().toString());
+                            intent.putExtra("endValue", et_end.getText().toString());
                             intent.putExtra("myId", myDisplayId);
                             mContext.sendBroadcast(intent);
-
-                        } else {
-                            Toast.makeText(mContext, getResources().getString(R.string.yourinputisincorrectPleasereenterit),
-                                    Toast.LENGTH_SHORT).show();
                         }
+                    });
 
 
-                    }
-                });
+                    //自定义setWin方法
+                    setWin(dia_dc);
+                    dia_dc.setContentView(view_dc);
+                    dia_dc.setCanceledOnTouchOutside(true);
+                    dia_dc.show();
+
+                }
+            });
+
+            //留给Style
 
 
-                //自定义setWin方法
-                setWin(dia_sal);
-                dia_sal.setContentView(view_sal);
-                dia_sal.setCanceledOnTouchOutside(true);
-                dia_sal.show();
-
-            }
-        });
-
-        //Display Configuration
-        ImageView iv_dc = view_dia.findViewById(R.id.display_edit_one_dc);
-        iv_dc.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                OBDPopDialog dia_dc = new OBDPopDialog(mContext);
-                View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
+            //Remove  Display
+            ImageView iv_rd = view_dia.findViewById(R.id.display_edit_one_rd);
+            iv_rd.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
+                    intent.putExtra("identity", "RemoveDisplay");
+                    intent.putExtra("myId", myDisplayId);
+                    mContext.sendBroadcast(intent);
+                }
+            });
 
 
-                //自定义setWin方法
-                setWin(dia_dc);
-                dia_dc.setContentView(view_dc);
-                dia_dc.setCanceledOnTouchOutside(true);
-                dia_dc.show();
+            //BringToFirst
+            ImageView iv_btf = view_dia.findViewById(R.id.display_edit_one_btf);
+            iv_btf.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    //点击发送广播提醒  把这个ID的Display移到最前
+                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
+                    intent.putExtra("identity", "BringToFirst");
+                    intent.putExtra("myId", myDisplayId);
+                    mContext.sendBroadcast(intent);
+                }
+            });
 
-            }
-        });
 
-
-        //自定义setWin方法
-        setWin(dialog);
-        dialog.setContentView(view_dia);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.show();
+            //自定义setWin方法
+            setWin(dialog);
+            dialog.setContentView(view_dia);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
+        }
 
 
     }
@@ -618,4 +766,28 @@ public class DashboardsView extends View implements View.OnClickListener {
         return getWidth();
     }
 
+    public void setMyDisplayId(int myDisplayId) {
+        this.myDisplayId = myDisplayId;
+    }
+
+    public void setStyle(int style) {
+        this.style = style;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
+    public void setMax(float max) {
+        this.max = max;
+        invalidate();
+    }
+
+    public float getMin() {
+        return min;
+    }
+
+    public void setMin(float min) {
+        this.min = min;
+    }
 }

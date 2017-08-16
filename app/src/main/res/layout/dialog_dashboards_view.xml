@@ -81,7 +81,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/x128"
+            android:layout_width="@dimen/x250"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x15"
             android:gravity="center_vertical"
@@ -116,6 +116,47 @@
         android:src="@drawable/line_ui"/>
 
 
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x128"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/style"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x306"
+            android:layout_marginTop="@dimen/x13"
+            android:scaleType="fitXY"
+            android:src="@drawable/enter"/>
+
+
+        <ImageView
+            android:id="@+id/display_edit_one_s"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+<!--Remove Display-->
     <LinearLayout
         android:layout_width="@dimen/x335"
         android:layout_height="@dimen/x44"
@@ -131,6 +172,12 @@
             android:textAllCaps="false"
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>
+
+        <ImageView
+            android:id="@+id/display_edit_one_rd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
 
     </LinearLayout>
 
@@ -181,6 +228,12 @@
             android:textAllCaps="false"
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>
+
+        <ImageView
+            android:id="@+id/display_edit_one_btf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
 
     </LinearLayout>
 

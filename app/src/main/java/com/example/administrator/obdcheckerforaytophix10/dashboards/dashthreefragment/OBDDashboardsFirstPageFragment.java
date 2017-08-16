@@ -53,7 +53,6 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-
     }
 
     private void initView(View view) {
@@ -65,52 +64,17 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-
-
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 1);
+        boards_one = new DashboardsView(getActivity(), 1, 2);
         boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01),
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_one", (int) 0) * 0.01),
                         //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
                         (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_one", (float) 0.0) * 0.01),
                         //
                         (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_one", (float) 0.0) * 0.01)));
-        //如果是Style2   圆盘中间字体需要换成指定的字体
-
-//        if (boards_one.getStyle() == 1) {
-//
-//            TextView tv = new TextView(getActivity());
-//            //和下面一下
-//            tv.setTextSize((float) ((35.0 / 300.0) *
-//                    (float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01)));
-//
-//            tv.setBackgroundColor(Color.rgb(0x91, 0xbe, 0xf0));
-//            tv.setTextColor(getActivity().getResources().getColor(R.color.colorWhite));
-//            tv.setText("2500");
-//            tv.setGravity(Gravity.CENTER);
-//            tv.setTypeface(font);
-//
-//
-//            mRe.addView(tv, setMyParams_styleTwo(
-//                    (float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01 * 0.4333),
-//                    (float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01 * 0.1333),
-//                    (float) ((375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_one", (float) 0.0) * 0.01)
-//                            + (int) ((85.0 / 300.0) *
-//                            (float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01))
-//                    ),
-//
-//                    (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_one", (float) 0.0) * 0.01)
-//                            + (int) ((140.0 / 300.0) *
-//                            (float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth", (int) 0) * 0.01))
-//                    )
-//
-//            );
-//
-//
-//        }
 
 
         boards_two = new DashboardsView(getActivity(), 2, 0);
@@ -160,83 +124,73 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                int myId = intent.getIntExtra("myId", 0);
-
-                if (myId == 1) {
-                    mRe.removeView(boards_one);
-                    boards_one = new DashboardsView(getActivity(), 1, 0);
-                    boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_one.setStartAngle(0);
-                    mRe.addView(boards_one,
-                            //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    //
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_one", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_one", MathUtil.stringToFloat(intent.getStringExtra("top")));
-                } else if (myId == 2) {
-                    mRe.removeView(boards_two);
-                    boards_two = new DashboardsView(getActivity(), 2, 0);
-                    boards_two.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_two.setStartAngle(0);
-                    mRe.addView(boards_two,
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_two", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_two", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_two", MathUtil.stringToFloat(intent.getStringExtra("top")));
-                } else if (myId == 3) {
-                    mRe.removeView(boards_three);
-                    boards_three = new DashboardsView(getActivity(), 3, 0);
-                    boards_three.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_three.setStartAngle(0);
-                    mRe.addView(boards_three,
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_three", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_three", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_three", MathUtil.stringToFloat(intent.getStringExtra("top")));
-                } else if (myId == 4) {
-                    mRe.removeView(boards_four);
-                    boards_four = new DashboardsView(getActivity(), 4, 0);
-                    boards_four.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_four.setStartAngle(0);
-                    mRe.addView(boards_four,
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_four", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_four", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_four", MathUtil.stringToFloat(intent.getStringExtra("top")));
-                } else if (myId == 5) {
-                    mRe.removeView(boards_five);
-                    boards_five = new DashboardsView(getActivity(), 5, 0);
-                    boards_five.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_five.setStartAngle(0);
-                    mRe.addView(boards_five,
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_five", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_five", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_five", MathUtil.stringToFloat(intent.getStringExtra("top")));
-                } else if (myId == 6) {
-                    mRe.removeView(boards_six);
-                    boards_six = new DashboardsView(getActivity(), 6, 0);
-                    boards_six.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                    boards_six.setStartAngle(0);
-                    mRe.addView(boards_six,
-                            setMyParams((float) (375.0f * (float) MathUtil.stringToInt(intent.getStringExtra("width")) * 0.01),
-                                    (float) (375.0f * MathUtil.stringToFloat(intent.getStringExtra("left")) * 0.01),
-                                    (float) (572.0f * MathUtil.stringToFloat(intent.getStringExtra("top")) * 0.01)));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_six", MathUtil.stringToInt(intent.getStringExtra("width")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_six", MathUtil.stringToFloat(intent.getStringExtra("left")));
-                    SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_six", MathUtil.stringToFloat(intent.getStringExtra("top")));
+                String identity = intent.getStringExtra("identity");
+                if (identity.equals("SizeAndLocation")) {
+                    int myId = intent.getIntExtra("myId", 0);
+                    if (myId == 1) {
+                        editSizeAndLocation(intent, boards_one, 1, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "one");
+                    } else if (myId == 2) {
+                        editSizeAndLocation(intent, boards_two, 2, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "two");
+                    } else if (myId == 3) {
+                        editSizeAndLocation(intent, boards_three, 3, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "three");
+                    } else if (myId == 4) {
+                        editSizeAndLocation(intent, boards_four, 4, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "four");
+                    } else if (myId == 5) {
+                        editSizeAndLocation(intent, boards_five, 5, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "five");
+                    } else if (myId == 6) {
+                        editSizeAndLocation(intent, boards_six, 6, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
+                                , "six");
+                    }
+                } else if (identity.equals("BringToFirst")) {
+                    int myId = intent.getIntExtra("myId", 0);
+                    if (myId == 1) {
+                        boards_one.bringToFront();
+                    } else if (myId == 2) {
+                        boards_two.bringToFront();
+                    } else if (myId == 3) {
+                        boards_three.bringToFront();
+                    } else if (myId == 4) {
+                        boards_four.bringToFront();
+                    } else if (myId == 5) {
+                        boards_five.bringToFront();
+                    } else if (myId == 6) {
+                        boards_six.bringToFront();
+                    }
+                } else if (identity.equals("DisplayConfiguration")) {
+                    int myId = intent.getIntExtra("myId", 0);
+                    if (myId == 1) {
+                        editDisplayConfiguration(boards_one, intent, "one");
+                    } else if (myId == 2) {
+                        editDisplayConfiguration(boards_two, intent, "two");
+                    } else if (myId == 3) {
+                        editDisplayConfiguration(boards_three, intent, "three");
+                    } else if (myId == 4) {
+                        editDisplayConfiguration(boards_four, intent, "four");
+                    } else if (myId == 5) {
+                        editDisplayConfiguration(boards_five, intent, "five");
+                    } else if (myId == 6) {
+                        editDisplayConfiguration(boards_six, intent, "six");
+                    }
+                } else if (identity.equals("RemoveDisplay")) {
+                    int myId = intent.getIntExtra("myId", 0);
+                    if (myId == 1) {
+                        mRe.removeView(boards_one);
+                    } else if (myId == 2) {
+                        mRe.removeView(boards_two);
+                    } else if (myId == 3) {
+                        mRe.removeView(boards_three);
+                    } else if (myId == 4) {
+                        mRe.removeView(boards_four);
+                    } else if (myId == 5) {
+                        mRe.removeView(boards_five);
+                    } else if (myId == 6) {
+                        mRe.removeView(boards_six);
+                    }
                 }
 
 
@@ -259,7 +213,34 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         return params;
     }
 
+    private DashboardsView editSizeAndLocation(Intent intent, DashboardsView display, int displayId, int displayStyle, float width, float left, float top, String id) {
+        mRe.removeView(display);
+        display.setMyDisplayId(displayId);
+        display.setStyle(displayStyle);
+        display.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        display.setStartAngle(0);
+        mRe.addView(display,
+                //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
+                setMyParams((float) (375.0f * width * 0.01),
+                        //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
+                        (float) (375.0f * left * 0.01),
+                        //
+                        (float) (572.0f * top * 0.01)));
+        SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocationwidth_" + id, MathUtil.stringToInt(intent.getStringExtra("width")));
+        SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_left_" + id, MathUtil.stringToFloat(intent.getStringExtra("left")));
+        SPUtil.put(getActivity(), "dashboardsdisplaysizeandlocation_top_" + id, MathUtil.stringToFloat(intent.getStringExtra("top")));
 
+        return display;
+    }
+
+    private void editDisplayConfiguration(DashboardsView display, Intent intent, String spid) {
+        display.setMin(MathUtil.stringToInt(intent.getStringExtra("startValue")));
+        display.setMax(MathUtil.stringToInt(intent.getStringExtra("endValue")));
+        SPUtil.put(getActivity(), "dashboardsdisplayconfiguration_start_" + spid,
+                MathUtil.stringToInt(intent.getStringExtra("startValue")));
+        SPUtil.put(getActivity(), "dashboardsdisplayconfiguration_end_" + spid,
+                MathUtil.stringToInt(intent.getStringExtra("endValue")));
+    }
 
 
 }
