@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorOBDbackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x24"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x15"
+            android:singleLine="true"
+            android:text="@string/fill"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x14"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="@dimen/x150"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/enabled"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <!--lv-->
+            <ch.ielse.view.SwitchView
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x310"
+                android:layout_marginTop="@dimen/x7"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x65"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x15"
+                android:singleLine="true"
+                android:text="@string/inner_position"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="@dimen/x45"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x327"
+                android:singleLine="true"
+                android:text="-360"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <SeekBar
+                android:layout_width="@dimen/x315"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/x29"
+                android:maxHeight="@dimen/x2"
+                android:progressDrawable="@drawable/seekbar_bg"
+                android:thumb="@drawable/seekbar_thumb"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x65"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x15"
+                android:singleLine="true"
+                android:text="@string/outer_position"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="@dimen/x45"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x327"
+                android:singleLine="true"
+                android:text="-360"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <SeekBar
+                android:layout_width="@dimen/x315"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginTop="@dimen/x29"
+                android:maxHeight="@dimen/x2"
+                android:progressDrawable="@drawable/seekbar_bg"
+                android:thumb="@drawable/seekbar_thumb"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="@string/color"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <TextView
+                android:layout_width="@dimen/x65"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x255"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="ff292929"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x13"/>
+
+            <!--两个 一个在下一个在上-->
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x330"
+                android:layout_marginTop="@dimen/x7"
+                android:background="@color/colorWhite"/>
+
+            <Button
+                android:layout_width="@dimen/x28"
+                android:layout_height="@dimen/x28"
+                android:layout_marginLeft="@dimen/x331"
+                android:layout_marginTop="@dimen/x8"
+                android:background="@color/colorBlack"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorTransparent"/>
+
+    </LinearLayout>
+</ScrollView>

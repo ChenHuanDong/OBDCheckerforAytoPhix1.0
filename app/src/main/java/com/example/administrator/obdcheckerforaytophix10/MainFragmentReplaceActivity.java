@@ -14,6 +14,7 @@ import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 //这个Aty  是管理点击跳转到所有的Fragment
 //HUD的Fragment是1
+//Style  是2
 
 public class MainFragmentReplaceActivity extends AppCompatActivity {
 
@@ -41,6 +42,8 @@ public class MainFragmentReplaceActivity extends AppCompatActivity {
                 break;
             case 1:
                 change_fragment_noanim(new OBDDashboardsHUDFragment());
+                break;
+            case 2:
                 break;
         }
 

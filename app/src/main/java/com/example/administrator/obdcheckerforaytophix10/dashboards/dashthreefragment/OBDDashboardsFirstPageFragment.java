@@ -65,9 +65,8 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
 
 
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 2);
+        boards_one = new DashboardsView(getActivity(), 1, 0);
         boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_one.setStartAngle(0);
         mRe.addView(boards_one,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
                 setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_one", (int) 0) * 0.01),

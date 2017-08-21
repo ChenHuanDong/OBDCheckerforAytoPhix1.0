@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RadialGradient;
@@ -27,12 +28,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.administrator.obdcheckerforaytophix10.MainActivity;
 import com.example.administrator.obdcheckerforaytophix10.MainApplication;
+import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
 import com.example.administrator.obdcheckerforaytophix10.tool.LcndUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
@@ -56,7 +60,6 @@ public class DashboardsView extends View implements View.OnClickListener {
     //375  647
     private Context mContext;
     private Paint mPaint = new Paint();
-    private float startAngle = (float) 0.0;
     //0 是不旋转
     private int textStyle = 0;
 
@@ -64,6 +67,12 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int style = 0;
     private float max = (float) 160.0;
     private float min = (float) 0.0;
+
+    private float value = 0;
+    private float startAngle = (float) 90.0;
+    private float endAngle = (float) 270.0;
+    private String color_back_inner_color = "#00000000";
+    private String color_back_outer_color = "#ff000000";
 
 
     public DashboardsView(Context context, int myId, int style) {
@@ -107,7 +116,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         super.onDraw(canvas);
 
         if (style == 0) {
-            //绘制最外层黑色圆
+            //绘制最外层黑色圆   带渐变
             drawOutCircle(canvas);
             //绘制四周的长短刻度   以及绘制文字
             drawScale(canvas);
@@ -137,30 +146,101 @@ public class DashboardsView extends View implements View.OnClickListener {
             //绘制指针  三角和线
             drawStyleTwoPointer(canvas);
         } else if (style == 2) {
-            //画四条线和四个圆弧
-            drawStyleThreeOutLineArw(canvas);
+            //绘制圆角阴影
+            drawCircleShadle(canvas);
+            //绘制底盘颜色
+            drawStyleThreeBottom(canvas);
+            //绘制里面的圆角矩形
+            drawStyleThreeCenter(canvas);
+            //绘制文字Top And  Bottom
+            drawStyThreeTop(canvas);
+            //绘制中心数值
+            drawStyThreeCenter(canvas);
+
+
         }
 
 
     }
 
 
-    //画四条线和四个圆弧
-    private void drawStyleThreeOutLineArw(Canvas canvas) {
-        canvas.save();
-
+    //绘制中心数值
+    private void drawStyThreeCenter(Canvas canvas) {
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextSize((float) ((74.0 / 320.0) * getWidth()));
         mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setTypeface(LcndUtil.getfont(mContext));
+
+        canvas.drawText("0.00", getWidth() / 2, (float) ((200.0 / 320.0) * getWidth()), mPaint);
+
+    }
+
+    //绘制文字Top And  Bottom
+    private void drawStyThreeTop(Canvas canvas) {
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextSize((float) ((36.0 / 320.0) * getWidth()));
+        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+
+        canvas.drawText("RPM", getWidth() / 2, (float) ((110.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawText("/min", getWidth() / 2, (float) ((256.0 / 320.0) * getWidth()), mPaint);
+
+
+    }
+
+
+    //绘制里面的圆角矩形
+    private void drawStyleThreeCenter(Canvas canvas) {
+
+        mPaint.setColor(getResources().getColor(R.color.colorBlack));
+
+        canvas.drawRect((float) ((21.0 / 320.0) * getWidth()), (float) ((37.0 / 320.0) * getWidth()),
+                (float) ((299.0 / 320.0) * getWidth()), (float) ((283.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawRect((float) ((37.0 / 320.0) * getWidth()), (float) ((21.0 / 320.0) * getWidth()),
+                (float) ((283.0 / 320.0) * getWidth()), (float) ((299.0 / 320.0) * getWidth()), mPaint);
+
+        canvas.drawCircle((float) ((37.0 / 320.0) * getWidth()), (float) ((37.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((37.0 / 320.0) * getWidth()), (float) ((283.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((283.0 / 320.0) * getWidth()), (float) ((37.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((283.0 / 320.0) * getWidth()), (float) ((283.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+
+
+    }
+
+    //绘制底盘颜色
+    private void drawStyleThreeBottom(Canvas canvas) {
+
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
+        mPaint.setColor(getResources().getColor(R.color.colorDashboardsPointer));
 
-        RectF rectF = new RectF(0, 0, (float) ((16.0 / 320.0) * getWidth()),
-                (float) ((16.0 / 320.0) * getWidth()));
-        canvas.drawLine((float) ((16.0 / 320.0) * getWidth()), 0,
-                (float) ((288.0 / 320.0) * getWidth()), 0, mPaint);
-        canvas.drawArc(rectF, 180, 90, false, mPaint);
+        canvas.drawRect((float) ((16.0 / 320.0) * getWidth()), 0,
+                (float) ((304.0 / 320.0) * getWidth()), getWidth(), mPaint);
+        canvas.drawRect(0, (float) ((16.0 / 320.0) * getWidth()),
+                getWidth(), (float) ((304.0 / 320.0) * getWidth()), mPaint);
 
 
-        canvas.restore();
+        canvas.drawCircle((float) ((16.0 / 320.0) * getWidth()), (float) ((16.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((304.0 / 320.0) * getWidth()), (float) ((16.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((16.0 / 320.0) * getWidth()), (float) ((304.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawCircle((float) ((304.0 / 320.0) * getWidth()), (float) ((304.0 / 320.0) * getWidth()),
+                (float) ((16.0 / 320.0) * getWidth()), mPaint);
+
+    }
+
+    //绘制圆角阴影
+    private void drawCircleShadle(Canvas canvas) {
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.stythreebottom);
+        RectF rectF = new RectF(0, 0, getWidth(), getWidth());
+        canvas.drawBitmap(bitmap, null, rectF, mPaint);
+
     }
 
 
@@ -363,8 +443,14 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setColor(getResources().getColor(R.color.colorDashboardsPointer));
 
         canvas.translate(getWidth() / 2, getWidth() / 2);
-        //初始角度  要在这里设置
-        canvas.rotate(startAngle);
+
+        //指针旋转
+        if (startAngle + value < endAngle) {
+            canvas.rotate(startAngle + value);
+        } else {
+            canvas.rotate(endAngle);
+        }
+
 
         //下面的6也要提出去  是12 / 2
         Path path = new Path();
@@ -372,6 +458,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         path.lineTo((float) ((6.0 / 300.0) * getWidth()), 0);
         path.lineTo(0, (float) ((120.0 / 300.0) * getWidth()));
         path.close();
+
 
         canvas.drawPath(path, mPaint);
 
@@ -389,7 +476,7 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         //起始角度  最终角度  总共的大刻度  两个长刻度之间分隔
         //这些最后都要提出去
-        float endAngle = (float) 360.0;
+
         float percent = (float) 8.0;
         float fenge = (float) 5.0;
 
@@ -398,7 +485,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         canvas.translate(getWidth() / 2, getWidth() / 2);
         //先旋转设置的初始角度
         canvas.rotate(startAngle);
-        //画短指针
+        //画短刻度
         for (int i = 0; i < percent * fenge; i++) {
             canvas.save();
 
@@ -440,27 +527,55 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setTextSize((float) ((12.0 * getWidth()) / 150.0));
         canvas.save();
         canvas.translate(getWidth() / 2, getWidth() / 2);
+
+
+        //每大分度的角度
+        float rAngle = ((endAngle - startAngle) / percent);
+        float rFendu = (max - min) / percent;
+        canvas.scale(0.85f, 0.85f);
+
+
         for (int i = 0; i < percent + 1; i++) {
             canvas.save();
-            if (textStyle == 0) {
-                canvas.translate(0, (float) ((10.0 / 300.0) * getWidth()));
-                canvas.scale(0.9f, 0.9f);
-            } else {
-                canvas.scale(0.9f, 0.9f);
-            }
-            float rAngle = ((endAngle - startAngle) / percent);
-            float rFendu = (max - min) / percent;
-            canvas.rotate(rAngle * i);
 
-            if (textStyle == 0) {
-                canvas.rotate(-rAngle * i, 0, (float) ((100.0 / 300.0) * getWidth()));
-            } else {
-                canvas.rotate(180, 0, (float) ((100.0 / 300.0) * getWidth()));
-            }
-            //本来是100的  微调成110
-            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, (float) ((100.0 / 300.0) * getWidth()), mPaint);
+            //初始旋转    后面再旋转回来
+            canvas.rotate(rAngle * i + startAngle);
+            canvas.translate(0, (float) ((110.0 / 300.0) * getWidth()));
+
+            canvas.rotate(-rAngle * i - startAngle);
+
+            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, 0, mPaint);
+
             canvas.restore();
         }
+
+
+//        for (int i = 0; i < percent + 1; i++) {
+//            canvas.save();
+//
+//            if (textStyle == 0) {
+//                canvas.translate(0, (float) ((10.0 / 300.0) * getWidth()));
+//                canvas.scale(0.9f, 0.9f);
+//            } else {
+//                canvas.scale(0.9f, 0.9f);
+//            }
+//
+//            float rAngle = ((endAngle - startAngle) / percent);
+//            float rFendu = (max - min) / percent;
+//            canvas.rotate(rAngle * i);
+//
+//            if (textStyle == 0) {
+//                canvas.rotate(-rAngle * i, 0, (float) ((100.0 / 300.0) * getWidth()));
+//            } else {
+//                canvas.rotate(180, 0, (float) ((100.0 / 300.0) * getWidth()));
+//            }
+//
+//
+//            //本来是100的  微调成110
+//            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, (float) ((100.0 / 300.0) * getWidth()), mPaint);
+//            canvas.restore();
+//        }
+
 
         canvas.restore();
 
@@ -481,8 +596,8 @@ public class DashboardsView extends View implements View.OnClickListener {
         canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mPaint);
 
 
-        int[] a = {getResources().getColor(R.color.colorTransparent), getResources().getColor(R.color.colorTransparent),
-                getResources().getColor(R.color.colorBlack)};
+        int[] a = {getResources().getColor(R.color.colorTransparent), Color.parseColor(color_back_inner_color),
+                Color.parseColor(color_back_outer_color)};
         float[] b = {0.0f, 0.89333f, 1f};
 
 
@@ -503,11 +618,27 @@ public class DashboardsView extends View implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //经典  自定义
-        if ((boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
+        if (!(boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
 
             //经典模式打开只有DC
             final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
             View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
+            //经典模式下的长按增加一个移除仪表盘
+            //自定义模式下不要有
+
+
+            //不同仪表盘打开出现不同样式
+            ImageView iv_rangeline = view_dc.findViewById(R.id.display_range_line);
+            RelativeLayout re_range = view_dc.findViewById(R.id.display_range_re);
+            ImageView iv_mu = view_dc.findViewById(R.id.display_multipier_line);
+            RelativeLayout re_mu = view_dc.findViewById(R.id.display_multipier_re);
+            if (!(style == 0)) {
+                iv_rangeline.setVisibility(GONE);
+                re_range.setVisibility(GONE);
+                iv_mu.setVisibility(GONE);
+                re_mu.setVisibility(GONE);
+            }
+
             final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
             final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
             //这里做不同仪表盘ID的判断
@@ -556,7 +687,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
             //这个下面就是自定义的了
         } else {
-
             final OBDPopDialog dialog = new OBDPopDialog(mContext);
             View view_dia = LayoutInflater.from(mContext).inflate(R.layout.dialog_dashboards_view, null);
 
@@ -648,6 +778,26 @@ public class DashboardsView extends View implements View.OnClickListener {
                     dialog.dismiss();
                     final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
                     View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
+                    //自定义模式下  点开要把RemoveDisplay  隐藏  因为外层有了
+                    ImageView iv_remove_line = view_dc.findViewById(R.id.display_remove_line);
+                    RelativeLayout re_remove = view_dc.findViewById(R.id.display_remove_re);
+                    iv_remove_line.setVisibility(GONE);
+                    re_remove.setVisibility(GONE);
+
+
+                    //不同仪表盘打开出现不同样式
+                    ImageView iv_rangeline = view_dc.findViewById(R.id.display_range_line);
+                    RelativeLayout re_range = view_dc.findViewById(R.id.display_range_re);
+                    ImageView iv_mu = view_dc.findViewById(R.id.display_multipier_line);
+                    RelativeLayout re_mu = view_dc.findViewById(R.id.display_multipier_re);
+                    if (!(style == 0)) {
+                        iv_rangeline.setVisibility(GONE);
+                        re_range.setVisibility(GONE);
+                        iv_mu.setVisibility(GONE);
+                        re_mu.setVisibility(GONE);
+                    }
+
+
                     final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
                     final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
                     //这里做不同仪表盘ID的判断
@@ -696,8 +846,28 @@ public class DashboardsView extends View implements View.OnClickListener {
                 }
             });
 
-            //留给Style
+            //Style
+            ImageView iv_style = view_dia.findViewById(R.id.display_edit_one_s);
+            iv_style.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, OBDStyleActivity.class);
+                    //跳转的时候把参数传过去   根据Style  判断调到那个页面   Style0   Style12
+                    if (style == 0) {
+                        //这里还要把参数传过去
+                        intent.putExtra( "back_inner_color" ,
+                                (String)SPUtil.get(mContext , "dashboardsdisplay_style_back_innercolor" , "00000000"));
+                        intent.putExtra( "back_outer_color" ,
+                                (String)SPUtil.get(mContext , "dashboardsdisplay_style_back_outercolor" , "00000000"));
 
+
+
+                        mContext.startActivity(intent);
+                    } else {
+                        //这个是跳转到其他两个的
+                    }
+                }
+            });
 
             //Remove  Display
             ImageView iv_rd = view_dia.findViewById(R.id.display_edit_one_rd);
@@ -789,5 +959,25 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     public void setMin(float min) {
         this.min = min;
+    }
+
+    public void setValue(float value) {
+        this.value = value;
+        invalidate();
+    }
+
+    public void setEndAngle(float endAngle) {
+        this.endAngle = endAngle;
+        invalidate();
+    }
+
+    public void setColor_back_inner_color(String color_back_inner_color) {
+        this.color_back_inner_color = color_back_inner_color;
+        invalidate();
+    }
+
+    public void setColor_back_outer_color(String color_back_outer_color) {
+        this.color_back_outer_color = color_back_outer_color;
+        invalidate();
     }
 }

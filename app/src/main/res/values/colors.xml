@@ -25,4 +25,6 @@
     <color name="colorStyleTwoArcTop">#1d2027</color>
     <color name="colorHUDtextColor">#44ff00</color>
     <color name="colorStyleOneDisplay">#18191c</color>
+    <color name="colorStyleThreebottom">#202226</color>
+    <color name="colorSeekbarSecond">#DDDDDD</color>
 </resources>

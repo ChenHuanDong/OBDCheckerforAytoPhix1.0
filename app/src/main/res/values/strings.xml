@@ -41,6 +41,47 @@
     <string name="classic">Classic</string>
     <string name="removeDashboards">Remove Dashboards</string>
     <string name="style">Style</string>
+    <string name="cancel">Cancel</string>
+    <string name="value">Value</string>
+    <string name="frame">Frame</string>
+    <string name="axis">Axis</string>
+    <string name="needle">Needle</string>
+    <string name="range_new">Range</string>
+    <string name="rangles">RANGLES</string>
+    <string name="start_angle">Start Angle</string>
+    <string name="end_angle">End Angle</string>
+    <string name="background_color">BACKGROUND COLOR</string>
+    <string name="inner_color">Inner Color</string>
+    <string name="outer_color">Outer Color</string>
+    <string name="title_label">TITLE LABEL</string>
+    <string name="title_color">Title Color</string>
+    <string name="font_scale">Font Scale</string>
+    <string name="position">Position</string>
+    <string name="value_label">VALUE LABEI</string>
+    <string name="value_visible">Value Visible</string>
+    <string name="value_color">Value Color</string>
+    <string name="units_label">UNITS LABEL</string>
+    <string name="units_color">Units Color</string>
+    <string name="vertical_position">Vertical Position</string>
+    <string name="horizontal_position">Horizontal Position</string>
+    <string name="major_ticks">MAJOR TICKS</string>
+    <string name="width_new">Width</string>
+    <string name="lenght">Length</string>
+    <string name="color">Color</string>
+    <string name="minor_ticks">MINOR TICKS</string>
+    <string name="lables">LABLES</string>
+    <string name="visible">Visible</string>
+    <string name="rotate">Rotate</string>
+    <string name="offest_form_tickline">Offest From Tickline</string>
+    <string name="labels">LABELS</string>
+    <string name="knob">KNOB</string>
+    <string name="radius">Radius</string>
+    <string name="fill">FILL</string>
+    <string name="enabled">Enabled</string>
+    <string name="inner_position">Inner Position</string>
+    <string name="outer_position">Outer Position</string>
+    <string name="color_selector">Color Selector</string>
+
 
 
 

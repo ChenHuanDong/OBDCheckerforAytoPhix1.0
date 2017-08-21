@@ -23,7 +23,7 @@ public class OBDDashboardsSecondPageFragment extends Fragment {
 
     private RelativeLayout mRe;
     private BroadcastReceiver br;
-    private DashboardsView boards_one, boards_two, boards_three, boards_four, boards_five, boards_six;
+    private DashboardsView boards_one, boards_two;
 
     @Nullable
     @Override
@@ -47,61 +47,25 @@ public class OBDDashboardsSecondPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 1);
+        boards_one = new DashboardsView(getActivity(), 1, 0);
         boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_one", (int) 0) * 0.01),
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_seven", (int) 0) * 0.01),
                         //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_one", (float) 0.0) * 0.01),
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_seven", (float) 0.0) * 0.01),
                         //
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_one", (float) 0.0) * 0.01)));
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_seven", (float) 0.0) * 0.01)));
 
 
-        boards_two = new DashboardsView(getActivity(), 2, 1);
+        boards_two = new DashboardsView(getActivity(), 2, 0);
         boards_two.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_two.setStartAngle(0);
         mRe.addView(boards_two,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_two", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_two", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_two", (float) 0.0) * 0.01)));
-
-
-        boards_three = new DashboardsView(getActivity(), 3, 1);
-        boards_three.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_three.setStartAngle(0);
-        mRe.addView(boards_three,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_three", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_three", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_three", (float) 0.0) * 0.01)));
-
-        boards_four = new DashboardsView(getActivity(), 4, 1);
-        boards_four.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_four.setStartAngle(0);
-        mRe.addView(boards_four,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_four", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_four", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_four", (float) 0.0) * 0.01)));
-
-
-        boards_five = new DashboardsView(getActivity(), 5, 1);
-        boards_five.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_five.setStartAngle(0);
-        mRe.addView(boards_five,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_five", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_five", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_five", (float) 0.0) * 0.01)));
-
-
-        boards_six = new DashboardsView(getActivity(), 6, 1);
-        boards_six.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_six.setStartAngle(0);
-        mRe.addView(boards_six,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_six", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_six", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_six", (float) 0.0) * 0.01)));
-
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_eight", (int) 0) * 0.01),
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_eight", (float) 0.0) * 0.01),
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_eight", (float) 0.0) * 0.01)));
 
 
     }

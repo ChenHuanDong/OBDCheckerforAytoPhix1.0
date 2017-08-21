@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/x335"
+              android:layout_height="wrap_content"
+              android:background="@color/colorDialogBackGround"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="@dimen/x250"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginTop="@dimen/x12"
+        android:singleLine="true"
+        android:text="@string/color_selector"
+        android:textAllCaps="false"
+        android:textColor="@color/colorConnect"
+        android:textSize="@dimen/x22"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:layout_marginTop="@dimen/x15"
+        android:background="@color/colorConnect"/>
+
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x335">
+
+        <com.flask.colorpicker.ColorPickerView
+            android:id="@+id/colorpick"
+            android:layout_width="@dimen/x335"
+            android:layout_height="@dimen/x335"
+            android:layout_marginTop="@dimen/x15"
+            android:background="@color/colorTransparent"/>
+
+        <ImageView
+            android:id="@+id/iv_show"
+            android:background="#91bef0"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"/>
+
+    </RelativeLayout>
+
+    <com.flask.colorpicker.slider.AlphaSlider
+        android:id="@+id/alphaSlider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:layout_marginTop="@dimen/x10"/>
+
+    <com.flask.colorpicker.slider.LightnessSlider
+        android:id="@+id/lightnessSlider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:layout_marginTop="@dimen/x10"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x10"
+        android:background="@color/colorTransparent"/>
+
+
+
+</LinearLayout>

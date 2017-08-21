@@ -52,6 +52,11 @@
             android:name=".MainFragmentReplaceActivity"
             android:launchMode="singleTask">
         </activity>
+        <activity
+            android:name=".dashboards.OBDStyleActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" >
+        </activity>
     </application>
 
 </manifest>
