@@ -52,20 +52,20 @@ public class OBDDashboardsSecondPageFragment extends Fragment {
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_seven", (int) 0) * 0.01),
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_7", (int) 0) * 0.01),
                         //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_seven", (float) 0.0) * 0.01),
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_7", (float) 0.0) * 0.01),
                         //
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_seven", (float) 0.0) * 0.01)));
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_7", (float) 0.0) * 0.01)));
 
 
         boards_two = new DashboardsView(getActivity(), 2, 0);
         boards_two.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_two.setStartAngle(0);
         mRe.addView(boards_two,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_eight", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_eight", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_eight", (float) 0.0) * 0.01)));
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_8", (int) 0) * 0.01),
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_8", (float) 0.0) * 0.01),
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_8", (float) 0.0) * 0.01)));
 
 
     }

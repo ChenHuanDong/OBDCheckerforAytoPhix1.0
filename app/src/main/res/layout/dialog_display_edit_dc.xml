@@ -79,6 +79,7 @@
             android:textSize="@dimen/x16"/>
 
         <EditText
+            android:digits="1234567890"
             android:id="@+id/display_configuration_et_start"
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
@@ -100,6 +101,7 @@
             android:background="@color/colorWhite"/>
 
         <EditText
+            android:digits="1234567890"
             android:id="@+id/display_configuration_et_end"
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
@@ -177,7 +179,7 @@
         android:background="@color/colorDialogBackGround">
 
         <TextView
-            android:layout_width="@dimen/x170"
+            android:layout_width="@dimen/x270"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x15"
             android:gravity="center_vertical"
@@ -298,6 +300,8 @@
         android:scaleType="fitXY"
         android:src="@drawable/line_ui"/>
 
+
+    <!--OK  Button-->
     <Button
         android:id="@+id/display_dc_ok_btn"
         android:layout_width="@dimen/x335"
@@ -308,8 +312,6 @@
         android:textAllCaps="true"
         android:textColor="@color/colorDashboardsPointer"
         android:textSize="@dimen/x16"/>
-
-
 
 
 </LinearLayout>

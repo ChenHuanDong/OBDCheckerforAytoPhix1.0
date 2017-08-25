@@ -53,11 +53,11 @@ public class OBDDashboardsThirdPageFragment extends Fragment {
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_nine", (int) 0) * 0.01),
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_9", (int) 0) * 0.01),
                         //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_nine", (float) 0.0) * 0.01),
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_9", (float) 0.0) * 0.01),
                         //
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_nine", (float) 0.0) * 0.01)));
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_9", (float) 0.0) * 0.01)));
 
 
     }

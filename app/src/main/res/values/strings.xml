@@ -81,8 +81,11 @@
     <string name="inner_position">Inner Position</string>
     <string name="outer_position">Outer Position</string>
     <string name="color_selector">Color Selector</string>
-
-
+    <string name="gradient_radius">Gradient Radius</string>
+    <string name="poniter">PONITER</string>
+    <string name="fill_enabled">Fill Enabled</string>
+    <string name="frame_scale">Frame Scale</string>
+    <string name="frame_color">Frame Color</string>
 
 
     <string name="width">Diameter(10-100)</string>

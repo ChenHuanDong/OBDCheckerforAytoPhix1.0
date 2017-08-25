@@ -10,6 +10,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,139 +68,119 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
 
         //新的Display   每次新建必须设置仪表盘id
         boards_one = new DashboardsView(getActivity(), 1, 0);
-        boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        mRe.addView(boards_one,
-                //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_one", (int) 0) * 0.01),
-                        //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_one", (float) 0.0) * 0.01),
-                        //
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_one", (float) 0.0) * 0.01)));
-
-
+        initDisplay(boards_one);
         boards_two = new DashboardsView(getActivity(), 2, 0);
-        boards_two.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_two.setStartAngle(0);
-        mRe.addView(boards_two,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_two", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_two", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_two", (float) 0.0) * 0.01)));
-
-
+        initDisplay(boards_two);
         boards_three = new DashboardsView(getActivity(), 3, 0);
-        boards_three.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_three.setStartAngle(0);
-        mRe.addView(boards_three,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_three", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_three", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_three", (float) 0.0) * 0.01)));
-
+        initDisplay(boards_three);
         boards_four = new DashboardsView(getActivity(), 4, 0);
-        boards_four.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_four.setStartAngle(0);
-        mRe.addView(boards_four,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_four", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_four", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_four", (float) 0.0) * 0.01)));
-
-
+        initDisplay(boards_four);
         boards_five = new DashboardsView(getActivity(), 5, 0);
-        boards_five.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_five.setStartAngle(0);
-        mRe.addView(boards_five,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_five", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_five", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_five", (float) 0.0) * 0.01)));
-
-
+        initDisplay(boards_five);
         boards_six = new DashboardsView(getActivity(), 6, 0);
-        boards_six.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        boards_six.setStartAngle(0);
-        mRe.addView(boards_six,
-                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_six", (int) 0) * 0.01),
-                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_six", (float) 0.0) * 0.01),
-                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_six", (float) 0.0) * 0.01)));
-
+        initDisplay(boards_six);
 
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String identity = intent.getStringExtra("identity");
-                if (identity.equals("SizeAndLocation")) {
-                    int myId = intent.getIntExtra("myId", 0);
-                    if (myId == 1) {
-                        editSizeAndLocation(intent, boards_one, 1, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "one");
-                    } else if (myId == 2) {
-                        editSizeAndLocation(intent, boards_two, 2, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "two");
-                    } else if (myId == 3) {
-                        editSizeAndLocation(intent, boards_three, 3, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "three");
-                    } else if (myId == 4) {
-                        editSizeAndLocation(intent, boards_four, 4, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "four");
-                    } else if (myId == 5) {
-                        editSizeAndLocation(intent, boards_five, 5, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "five");
-                    } else if (myId == 6) {
-                        editSizeAndLocation(intent, boards_six, 6, 0, (float) MathUtil.stringToInt(intent.getStringExtra("width")), MathUtil.stringToFloat(intent.getStringExtra("left")), MathUtil.stringToFloat(intent.getStringExtra("top"))
-                                , "six");
-                    }
-                } else if (identity.equals("BringToFirst")) {
-                    int myId = intent.getIntExtra("myId", 0);
-                    if (myId == 1) {
-                        boards_one.bringToFront();
-                    } else if (myId == 2) {
-                        boards_two.bringToFront();
-                    } else if (myId == 3) {
-                        boards_three.bringToFront();
-                    } else if (myId == 4) {
-                        boards_four.bringToFront();
-                    } else if (myId == 5) {
-                        boards_five.bringToFront();
-                    } else if (myId == 6) {
-                        boards_six.bringToFront();
-                    }
-                } else if (identity.equals("DisplayConfiguration")) {
-                    int myId = intent.getIntExtra("myId", 0);
-                    if (myId == 1) {
-                        editDisplayConfiguration(boards_one, intent, "one");
-                    } else if (myId == 2) {
-                        editDisplayConfiguration(boards_two, intent, "two");
-                    } else if (myId == 3) {
-                        editDisplayConfiguration(boards_three, intent, "three");
-                    } else if (myId == 4) {
-                        editDisplayConfiguration(boards_four, intent, "four");
-                    } else if (myId == 5) {
-                        editDisplayConfiguration(boards_five, intent, "five");
-                    } else if (myId == 6) {
-                        editDisplayConfiguration(boards_six, intent, "six");
-                    }
-                } else if (identity.equals("RemoveDisplay")) {
-                    int myId = intent.getIntExtra("myId", 0);
-                    if (myId == 1) {
-                        mRe.removeView(boards_one);
-                    } else if (myId == 2) {
-                        mRe.removeView(boards_two);
-                    } else if (myId == 3) {
-                        mRe.removeView(boards_three);
-                    } else if (myId == 4) {
-                        mRe.removeView(boards_four);
-                    } else if (myId == 5) {
-                        mRe.removeView(boards_five);
-                    } else if (myId == 6) {
-                        mRe.removeView(boards_six);
-                    }
-                }
+                mRe.removeAllViews();
+                initDisplay(boards_one);
+                initDisplay(boards_two);
+                initDisplay(boards_three);
+                initDisplay(boards_four);
+                initDisplay(boards_five);
+                initDisplay(boards_six);
+
 
 
             }
         };
 
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("dashboardsdisplaysizeandlocation");
+        intentFilter.addAction("changeDisplay");
         getActivity().registerReceiver(br, intentFilter);
+
+    }
+
+    private void initDisplay(DashboardsView display) {
+        display.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        display.setStartAngle((Integer) SPUtil.get(getActivity(), "dashboardsdisplayconfiguration_start_" + display.getMyDisplayId(), 0));
+        display.setEndAngle((Integer) SPUtil.get(getActivity(), "dashboardsdisplayconfiguration_end_" + display.getMyDisplayId(), 0));
+        display.setColor_back_inner_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_style_back_innercolor_" + display.getMyDisplayId(), "0"));
+        display.setColor_back_outer_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_style_back_outercolor_" + display.getMyDisplayId(), "0"));
+        display.setColor_title_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_title_color_" + display.getMyDisplayId(), "0"));
+        display.setTitle_text_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_title_size_" + display.getMyDisplayId(), 0));
+        display.setTitle_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_title_position_" + display.getMyDisplayId(), 0));
+        display.setValueshow((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_value_show_" + display.getMyDisplayId(), true));
+        display.setColor_value("#" + SPUtil.get(getActivity(), "dashboardsdisplay_value_color_" + display.getMyDisplayId(), "0"));
+        display.setValue_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_value_size_" + display.getMyDisplayId(), 0));
+        display.setValue_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_value_position_" + display.getMyDisplayId(), 0));
+        display.setUnits_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_units_color_" + display.getMyDisplayId(), "0"));
+        display.setUnits_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_units_size_" + display.getMyDisplayId(), 0));
+        display.setUnits_ver((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_units_ver_" + display.getMyDisplayId(), 0));
+        display.setUnits_hor((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_units_hor_" + display.getMyDisplayId(), 0));
+        display.setMajor_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_major_color_" + display.getMyDisplayId(), "0"));
+        display.setMajor_width((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_major_width_" + display.getMyDisplayId(), 0));
+        display.setMajor_height((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_major_height_" + display.getMyDisplayId(), 0));
+        display.setMinor_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_major_color_" + display.getMyDisplayId(), "0"));
+        display.setMinor_width((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_minor_width_" + display.getMyDisplayId(), 0));
+        display.setMinor_height((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_minor_height_" + display.getMyDisplayId(), 0));
+        display.setTextShow((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_lable_show_" + display.getMyDisplayId(), true));
+        display.setTextRotate((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_lable_rotate_" + display.getMyDisplayId(), false));
+        display.setLable_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_lable_size_" + display.getMyDisplayId(), 0));
+        display.setLable_offset((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_lable_offset_" + display.getMyDisplayId(), 85));
+        display.setPointerShow((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_pointer_show_" + display.getMyDisplayId(), true));
+        display.setPoint_width((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_pointer_width_" + display.getMyDisplayId(), 0));
+        display.setPoint_length((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_pointer_length_" + display.getMyDisplayId(), 0));
+        display.setPoint_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_pointer_color_" + display.getMyDisplayId(), "0"));
+        display.setPoint_rad((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_pointer_rad_" + display.getMyDisplayId(), 0));
+        display.setCenter_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_center_color_" + display.getMyDisplayId(), "0"));
+        display.setRange_show((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_range_visible_" + display.getMyDisplayId(), false));
+        display.setRange_startrangle((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_range_startAngle_" + display.getMyDisplayId(), 0));
+        display.setRange_endrangle((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_range_endAngle_" + display.getMyDisplayId(), 0));
+        display.setRange_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_range_color_" + display.getMyDisplayId(), ""));
+        display.setMax((Integer) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_value_max_" + display.getMyDisplayId(), 0));
+        display.setMin((Integer) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_value_min_" + display.getMyDisplayId(), 0));
+        //一会来要把Style 1
+        display.setStyle_two_back_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_back_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_two_back_rad((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_back_rad_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_title_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_title_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_two_title_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_title_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_title_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_title_position_" + display.getMyDisplayId(), 0));
+        display.setIs_two_value_show((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_two_value_show_" + display.getMyDisplayId(), true));
+        display.setStyle_two_value_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_value_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_two_value_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_value_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_value_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_value_position_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_units_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_units_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_two_units_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_units_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_units_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_units_position_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_pointer_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_pointer_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_two_pointer_width((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_two_pointer_width_" + display.getMyDisplayId(), 0));
+        display.setStyle_two_range_show((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_two_range_show_" + display.getMyDisplayId(), true));
+        display.setStyle_two_range_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_two_range_color_" + display.getMyDisplayId(), "0"));
+        //Style 2
+        display.setStyle_three_inner_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_inner_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_three_outer_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_outer_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_three_back_rad((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_back_rad_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_title_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_title_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_three_title_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_title_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_title_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_title_position_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_value_show((Boolean) SPUtil.get(getActivity(), "dashboardsdisplay_three_value_show_" + display.getMyDisplayId(), true));
+        display.setStyle_three_value_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_value_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_three_value_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_value_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_value_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_value_position_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_units_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_units_color_" + display.getMyDisplayId(), "0"));
+        display.setStyle_three_units_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_units_size_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_units_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_units_position_" + display.getMyDisplayId(), 0));
+        display.setStyle_three_frame_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_frame_color_" + display.getMyDisplayId(), "0"));
+
+        mRe.addView(display,
+                //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375
+                setMyParams((float) (375.0f * (int) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocationwidth_" + display.getMyDisplayId(), (int) 0) * 0.01),
+                        //          把传过来的数变成Float型   然后 变成百分比  乘以宽度x375
+                        (float) (375.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_left_" + display.getMyDisplayId(), (float) 0.0) * 0.01),
+                        //
+                        (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_" + display.getMyDisplayId(), (float) 0.0) * 0.01)));
 
     }
 
@@ -212,7 +194,7 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         return params;
     }
 
-    private DashboardsView editSizeAndLocation(Intent intent, DashboardsView display, int displayId, int displayStyle, float width, float left, float top, String id) {
+    private DashboardsView editSizeAndLocation(Intent intent, DashboardsView display, int displayId, int displayStyle, float width, float left, float top, int id) {
         mRe.removeView(display);
         display.setMyDisplayId(displayId);
         display.setStyle(displayStyle);
@@ -232,7 +214,7 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         return display;
     }
 
-    private void editDisplayConfiguration(DashboardsView display, Intent intent, String spid) {
+    private void editDisplayConfiguration(DashboardsView display, Intent intent, int spid) {
         display.setMin(MathUtil.stringToInt(intent.getStringExtra("startValue")));
         display.setMax(MathUtil.stringToInt(intent.getStringExtra("endValue")));
         SPUtil.put(getActivity(), "dashboardsdisplayconfiguration_start_" + spid,

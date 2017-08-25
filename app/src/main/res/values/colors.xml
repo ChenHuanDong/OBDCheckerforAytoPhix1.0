@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorLeimBlue">#91bef0</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite">#ffffffff</color>
     <color name="colorConnect">#008EE5</color>
     <color name="colorOBDbackground">#212329</color>
     <color name="colorBlack">#000000</color>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/dashboards_main_out_re"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboards_main_out_re"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOBDbackground"
@@ -23,7 +23,6 @@
 
     <!--返回按钮-->
     <ImageView
-        android:id="@+id/dashboards_main_iv_return"
         android:layout_width="@dimen/x10"
         android:layout_height="@dimen/y18"
         android:layout_marginLeft="@dimen/x15"
@@ -31,10 +30,16 @@
         android:scaleType="fitXY"
         android:src="@drawable/return_ui"/>
 
+    <!--返回按钮上面的透明按钮-->
+    <ImageView
+        android:id="@+id/dashboards_main_iv_return"
+        android:layout_width="@dimen/x35"
+        android:layout_height="@dimen/y31"
+        android:background="#00000000"/>
+
 
     <!--菜单按钮-->
     <ImageView
-        android:id="@+id/dashboards_main_iv_other"
         android:layout_width="@dimen/x20"
         android:layout_height="@dimen/y15"
         android:layout_marginLeft="@dimen/x340"
@@ -42,13 +47,21 @@
         android:scaleType="fitXY"
         android:src="@drawable/other_ui"/>
 
+    <!--菜单按钮上面的透明按钮-->
+    <ImageView
+        android:id="@+id/dashboards_main_iv_other"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30"
+        android:layout_marginLeft="@dimen/x330"
+        android:background="#00000000"/>
+
 
     <!-- 线 -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x1"
-        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/x45"
+        android:scaleType="fitXY"
         android:src="@drawable/line_ui"/>
 
 
@@ -84,9 +97,6 @@
             android:layout_height="@dimen/y30"/>
 
     </LinearLayout>
-
-
-
 
 
 </RelativeLayout>

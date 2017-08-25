@@ -36,6 +36,7 @@ import com.example.administrator.obdcheckerforaytophix10.MainApplication;
 import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDOtherStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
 import com.example.administrator.obdcheckerforaytophix10.tool.LcndUtil;
@@ -56,6 +57,9 @@ import java.io.File;
 
 //单位统一换算方法 按照getWidth   getWidth 等比例来
 //getWidth  想象成300px
+
+//style 0   设置数值是value
+
 public class DashboardsView extends View implements View.OnClickListener {
     //375  647
     private Context mContext;
@@ -64,15 +68,95 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int textStyle = 0;
 
     private int myDisplayId;
-    private int style = 0;
-    private float max = (float) 160.0;
-    private float min = (float) 0.0;
+    private int style = 1;
+    private int max = 160;
+    private int min = 0;
 
-    private float value = 0;
-    private float startAngle = (float) 90.0;
-    private float endAngle = (float) 270.0;
+    private int value = 0;
+    private int startAngle = 0;
+    private int endAngle = 270;
     private String color_back_inner_color = "#00000000";
     private String color_back_outer_color = "#ff000000";
+    private String color_title_color = "#fe9002";
+
+    private int title_text_size = 10;
+    private int title_position = 35;
+
+    private boolean isValueshow = true;
+    private String color_value = "#fe9002";
+    private int value_size = 12;
+    private int value_position = 100;
+
+    private String units_color = "#fe9002";
+    private int units_size = 7;
+    private int units_ver = 50;
+    private int units_hor = 75;
+
+    private int major_width = 10;
+    private int major_height = 74;
+    private String major_color = "#ffffffff";
+
+    private int minor_width = 10;
+    private int minor_height = 80;
+    private String minor_color = "#ffffffff";
+
+    private boolean isTextShow = true;
+    private boolean isTextRotate = false;
+    private int lable_size = 8;
+    private int lable_offset = 85;
+
+    private boolean isPointerShow = true;
+    private int point_width = 4;
+    private int point_length = 40;
+    private String point_color = "#fe9002";
+    private int point_rad = 5;
+    private String center_color = "#ffffffff";
+
+    private boolean range_show = false;
+    private int range_startrangle = 0;
+    private int range_endrangle = 360;
+    private String range_color = "#91bef0";
+
+    private String style_two_back_color = "#00a6ff";
+    private int style_two_back_rad = 60;
+
+    private String style_two_title_color = "#757476";
+    private int style_two_title_size = 8;
+    private int style_two_title_position = 40;
+
+    private boolean is_two_value_show = true;
+    private String style_two_value_color = "#ffffffff";
+    private int style_two_value_size = 18;
+    private int style_two_value_position = 60;
+
+    private String style_two_units_color = "#757476";
+    private int style_two_units_size = 8;
+    private int style_two_units_position = 73;
+
+    private String style_two_pointer_color = "#ffffffff";
+    private int style_two_pointer_width = 2;
+
+    private boolean style_two_range_show = true;
+    private String style_two_range_color = "#00a6ff";
+
+    private String style_three_inner_color = "#000000";
+    private String style_three_outer_color = "#000000";
+    private int style_three_back_rad = 50;
+
+    private String style_three_title_color = "#ffffffff";
+    private int style_three_title_size = 14;
+    private int style_three_title_position = 34;
+
+    private boolean style_three_value_show = true;
+    private String style_three_value_color = "#ffffffff";
+    private int style_three_value_size = 23;
+    private int style_three_value_position = 63;
+
+    private String style_three_units_color = "#ffffffff";
+    private int style_three_units_size = 14;
+    private int style_three_units_position = 80;
+
+    private String style_three_frame_color = "#000000";
 
 
     public DashboardsView(Context context, int myId, int style) {
@@ -118,16 +202,28 @@ public class DashboardsView extends View implements View.OnClickListener {
         if (style == 0) {
             //绘制最外层黑色圆   带渐变
             drawOutCircle(canvas);
+
+            if (range_show) {
+                //绘制Range
+                drawRange(canvas);
+            }
+
             //绘制四周的长短刻度   以及绘制文字
             drawScale(canvas);
-            //绘制中间的橘黄色指针
-            drawPointer(canvas);
-            //绘制中间的白色圆球
-            drawCenterCircle(canvas);
+            if (isPointerShow) {
+                //绘制中间的橘黄色指针
+                drawPointer(canvas);
+                //绘制中间的白色圆球
+                drawCenterCircle(canvas);
+            }
             //绘制标题
             drawTitle(canvas);
-            //绘制下方数值
-            drawBottomText(canvas);
+            //绘制 矩形下方 下方数值
+            if (isValueshow) {
+                drawBottomText(canvas);
+            }
+            //绘制单位
+            drawUnitslabel(canvas);
         } else if (style == 1) {
             //绘制底层表盘
             drawDown_two(canvas);
@@ -142,7 +238,9 @@ public class DashboardsView extends View implements View.OnClickListener {
             //绘制灰色圆弧在蓝色圆弧上面   (这里注意 最后输入结果的时候需要注意一下)  而且画笔只变一下颜色就可以了
             drawTwoTopArc(canvas);
             //自定义字体文字
-            drawValueText(canvas);
+            if (is_two_value_show) {
+                drawValueText(canvas);
+            }
             //绘制指针  三角和线
             drawStyleTwoPointer(canvas);
         } else if (style == 2) {
@@ -152,10 +250,14 @@ public class DashboardsView extends View implements View.OnClickListener {
             drawStyleThreeBottom(canvas);
             //绘制里面的圆角矩形
             drawStyleThreeCenter(canvas);
+            //绘制渐变圆
+            drawStyleThreeCircle(canvas);
             //绘制文字Top And  Bottom
             drawStyThreeTop(canvas);
             //绘制中心数值
-            drawStyThreeCenter(canvas);
+            if (style_three_value_show) {
+                drawStyThreeCenter(canvas);
+            }
 
 
         }
@@ -164,25 +266,85 @@ public class DashboardsView extends View implements View.OnClickListener {
     }
 
 
+    //绘制渐变圆
+    private void drawStyleThreeCircle(Canvas canvas) {
+
+        int[] a = {Color.parseColor(style_three_inner_color), Color.parseColor(style_three_outer_color),
+                Color.parseColor(style_three_outer_color)};
+
+        float[] b = {0.0f, style_three_back_rad / 100.0f, 1f};
+
+        Shader shader = new RadialGradient(getWidth() / 2, getWidth() / 2, getWidth() / 2,
+                a, b
+                , Shader.TileMode.CLAMP);
+
+        mPaint.setShader(shader);
+
+        canvas.drawCircle(getWidth() / 2, getWidth() / 2, (float) ((139.0 / 320.0) * getWidth()), mPaint);
+
+        mPaint.setShader(null);
+
+    }
+
+
+    //绘制Range
+    private void drawRange(Canvas canvas) {
+
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth((float) ((6 / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(range_color));
+
+        canvas.save();
+
+        canvas.rotate(90, getWidth() / 2, getWidth() / 2);
+
+        RectF rectF = new RectF((float) ((7 / 100.0) * getWidth()), (float) ((7 / 100.0) * getWidth()),
+                (float) ((93 / 100.0) * getWidth()), (float) ((93 / 100.0) * getWidth()));
+        canvas.drawArc(rectF, range_startrangle, range_endrangle, false, mPaint);
+
+        canvas.restore();
+
+    }
+
+
+    //绘制单位
+    private void drawUnitslabel(Canvas canvas) {
+
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setColor(Color.parseColor(units_color));
+
+        mPaint.setTextSize((float) ((units_size / 100.0) * getWidth()));
+
+        canvas.drawText("F", (float) ((units_ver / 100.0) * getWidth()), (float) ((units_hor / 100.0) * getWidth()), mPaint);
+
+
+    }
+
+
     //绘制中心数值
     private void drawStyThreeCenter(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setTextSize((float) ((74.0 / 320.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setTextSize((float) ((style_three_value_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_three_value_color));
         mPaint.setTypeface(LcndUtil.getfont(mContext));
 
-        canvas.drawText("0.00", getWidth() / 2, (float) ((200.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawText("0.00", getWidth() / 2, (float) ((style_three_value_position / 100.0) * getWidth()), mPaint);
 
     }
 
     //绘制文字Top And  Bottom
     private void drawStyThreeTop(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setTextSize((float) ((36.0 / 320.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setTextSize((float) ((style_three_title_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_three_title_color));
+        mPaint.setTypeface(null);
 
-        canvas.drawText("RPM", getWidth() / 2, (float) ((110.0 / 320.0) * getWidth()), mPaint);
-        canvas.drawText("/min", getWidth() / 2, (float) ((256.0 / 320.0) * getWidth()), mPaint);
+        canvas.drawText("RPM", getWidth() / 2, (float) ((style_three_title_position / 100.0) * getWidth()), mPaint);
+
+        mPaint.setTextSize((float) ((style_three_units_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_three_units_color));
+
+        canvas.drawText("/min", getWidth() / 2, (float) ((style_three_units_position / 100.0) * getWidth()), mPaint);
 
 
     }
@@ -191,7 +353,9 @@ public class DashboardsView extends View implements View.OnClickListener {
     //绘制里面的圆角矩形
     private void drawStyleThreeCenter(Canvas canvas) {
 
-        mPaint.setColor(getResources().getColor(R.color.colorBlack));
+
+        mPaint.setColor(Color.parseColor(style_three_frame_color));
+
 
         canvas.drawRect((float) ((21.0 / 320.0) * getWidth()), (float) ((37.0 / 320.0) * getWidth()),
                 (float) ((299.0 / 320.0) * getWidth()), (float) ((283.0 / 320.0) * getWidth()), mPaint);
@@ -246,17 +410,18 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     //绘制指针  三角和线
     private void drawStyleTwoPointer(Canvas canvas) {
+
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setColor(Color.parseColor(style_two_pointer_color));
 
 
         canvas.save();
 
         canvas.translate(getWidth() / 2, getWidth() / 2);
 
-        //这里还要偏转角度
-        canvas.rotate(-135 + 0);
+        //这里还要偏转角度   最大持续角度是270
+        canvas.rotate(-135 + value * 2.7f);
 
 //        指针长度不对？？  鬼知道什么原因   实在不行就根据偏移角度设置三角形和下面线的长度
 
@@ -267,6 +432,8 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         canvas.drawPath(path, mPaint);
 
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(style_two_pointer_width);
 
         canvas.drawLine(0, (float) ((-122.0 / 300.0) * getWidth()), 0, (float) ((-102.0 / 300.0) * getWidth()), mPaint);
 
@@ -282,15 +449,15 @@ public class DashboardsView extends View implements View.OnClickListener {
 
 
         mPaint.setTypeface(LcndUtil.getfont(mContext));
-        mPaint.setTextSize((float) ((54.0 / 300.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setTextSize((float) ((style_two_value_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_two_value_color));
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setStrokeWidth(0);
         mPaint.setStyle(Paint.Style.FILL);
 
-        canvas.translate((float) ((85.0 / 300.0) * getWidth()), (float) ((138.0 / 300.0) * getWidth()));
+        canvas.translate((float) ((85.0 / 300.0) * getWidth()), 0);
 
-        canvas.drawText("2500", (float) ((60.0 / 300.0) * getWidth()), (float) ((40.0 / 300.0) * getWidth()), mPaint);
+        canvas.drawText("2500", (float) ((60.0 / 300.0) * getWidth()), (float) ((style_two_value_position / 100.0) * getWidth()), mPaint);
 
 
         canvas.restore();
@@ -303,10 +470,16 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         mPaint.setStrokeWidth((float) ((13.0 / 300.0) * getWidth()));
         mPaint.setColor(getResources().getColor(R.color.colorStyleTwoArcTop));
+
+
         RectF rectF = new RectF((float) ((30.0 / 300.0) * getWidth()), (float) ((30.0 / 300.0) * getWidth()),
                 (float) ((270.0 / 300.0) * getWidth()), (float) ((270.0 / 300.0) * getWidth()));
-
-        canvas.drawArc(rectF, 52, 38, false, mPaint);
+        //52是开始角度   持续角度是76
+        if (style_two_range_show) {
+            canvas.drawArc(rectF, 52, 76 - (value * 0.76f), false, mPaint);
+        } else {
+            canvas.drawArc(rectF, 52, 76, false, mPaint);
+        }
 
     }
 
@@ -316,7 +489,8 @@ public class DashboardsView extends View implements View.OnClickListener {
         RectF rectF = new RectF((float) ((30.0 / 300.0) * getWidth()), (float) ((30.0 / 300.0) * getWidth()),
                 (float) ((270.0 / 300.0) * getWidth()), (float) ((270.0 / 300.0) * getWidth()));
 
-        mPaint.setColor(getResources().getColor(R.color.colorStyleTwoArcBottom));
+        mPaint.setColor(Color.parseColor(style_two_range_color));
+
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth((float) ((12.0 / 300.0) * getWidth()));
         mPaint.setAntiAlias(true);
@@ -330,14 +504,17 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setTextSize((float) ((24.0 / 300.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorStyleTwoTitle));
+        mPaint.setTextSize((float) ((style_two_title_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_two_title_color));
         mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTypeface(null);
 
-        canvas.drawText("MPH", getWidth() / 2, (float) ((120.0 / 300.0) * getWidth()), mPaint);
+        canvas.drawText("MPH", getWidth() / 2, (float) ((style_two_title_position / 100.0) * getWidth()), mPaint);
 
+        mPaint.setTextSize((float) ((style_two_units_size / 100.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(style_two_units_color));
 
-        canvas.drawText("R/MIN", getWidth() / 2, (float) ((218.0 / 300.0) * getWidth()), mPaint);
+        canvas.drawText("R/MIN", getWidth() / 2, (float) ((style_two_units_position / 100.0) * getWidth()), mPaint);
 
         initView();
 
@@ -363,14 +540,18 @@ public class DashboardsView extends View implements View.OnClickListener {
     //绘制渐变的圆
     private void drawDradientCircle(Canvas canvas) {
 
+        int[] a = {Color.parseColor(style_two_back_color), Color.parseColor(style_two_back_color),
+                getResources().getColor(R.color.colorTransparent)};
+
+        float[] b = {0.0f, style_two_back_rad / 100.0f, 1f};
+
         Shader shader = new RadialGradient(getWidth() / 2, getWidth() / 2, getWidth() / 2,
-                getResources().getColor(R.color.colorDisplayStyleTwo), getResources().getColor(R.color.colorTransparent)
+                a, b
                 , Shader.TileMode.CLAMP);
 
         mPaint.setShader(shader);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setColor(getResources().getColor(R.color.colorDisplayStyleTwo));
 
         canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mPaint);
 
@@ -391,27 +572,30 @@ public class DashboardsView extends View implements View.OnClickListener {
     private void drawBottomText(Canvas canvas) {
 
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setColor(getResources().getColor(R.color.colorDashboardsPointer));
+        mPaint.setColor(Color.parseColor(color_value));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setTextSize((float) ((12.0 * getWidth()) / 150.0));
 
-        canvas.drawText("N/A", getWidth() / 2, getHeight(), mPaint);
+
+        mPaint.setTextSize((float) ((value_size * getWidth()) / 150.0));
+
+        canvas.drawText("N/A", getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
 
     }
 
     //绘制标题
     private void drawTitle(Canvas canvas) {
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(getResources().getColor(R.color.colorDashboardsPointer));
+        mPaint.setColor(Color.parseColor(color_title_color));
         mPaint.setStrokeWidth(0);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setTextSize((float) ((10.0 * getWidth()) / 150.0));
+        mPaint.setTextSize((float) ((title_text_size * getWidth()) / 150.0));
 
         canvas.save();
 
         canvas.translate(getWidth() / 2, getWidth() / 2);
-        canvas.drawText("Title", 0, (float) (-(38.0 / 300.0) * getWidth()), mPaint);
+
+        canvas.drawText("Title", 0, (float) (-(title_position / 225.0) * getWidth()), mPaint);
 
         canvas.restore();
     }
@@ -419,14 +603,16 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     //绘制中间的白色圆球
     private void drawCenterCircle(Canvas canvas) {
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+
+
+        mPaint.setColor(Color.parseColor(center_color));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
 
         canvas.save();
 
         canvas.translate(getWidth() / 2, getWidth() / 2);
-        canvas.drawCircle(0, 0, (float) ((15.0 / 300.0) * getWidth()), mPaint);
+        canvas.drawCircle(0, 0, (float) ((point_rad / 100.0) * getWidth()), mPaint);
 
 
         canvas.restore();
@@ -440,7 +626,7 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setColor(getResources().getColor(R.color.colorDashboardsPointer));
+        mPaint.setColor(Color.parseColor(point_color));
 
         canvas.translate(getWidth() / 2, getWidth() / 2);
 
@@ -450,13 +636,11 @@ public class DashboardsView extends View implements View.OnClickListener {
         } else {
             canvas.rotate(endAngle);
         }
-
-
         //下面的6也要提出去  是12 / 2
         Path path = new Path();
-        path.moveTo((float) (-1 * (6.0 / 300.0) * getWidth()), 0);
-        path.lineTo((float) ((6.0 / 300.0) * getWidth()), 0);
-        path.lineTo(0, (float) ((120.0 / 300.0) * getWidth()));
+        path.moveTo((float) (-1 * (point_width / 200.0) * getWidth()), 0);
+        path.lineTo((float) ((point_width / 200.0) * getWidth()), 0);
+        path.lineTo(0, (float) ((point_length / 100.0) * getWidth()));
         path.close();
 
 
@@ -470,9 +654,10 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     //绘制短指针
     private void drawScale(Canvas canvas) {
+
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth((float) ((2.0 / 300.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+        mPaint.setStrokeWidth((float) ((minor_width / 1500.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(minor_color));
 
         //起始角度  最终角度  总共的大刻度  两个长刻度之间分隔
         //这些最后都要提出去
@@ -492,16 +677,18 @@ public class DashboardsView extends View implements View.OnClickListener {
             float rAngle = ((endAngle - startAngle) / percent) / fenge;
 
             canvas.rotate(rAngle * i);
-
-            canvas.drawLine(0, (float) ((130.0 / 300.0) * getWidth()),
-                    0, (float) ((120.0 / 300.0) * getWidth()), mPaint);
+            //43是起始点   40 是终点    40越小线越长
+            canvas.drawLine(0, (float) ((43 / 100.0) * getWidth()),
+                    0, (float) ((minor_height / 200.0) * getWidth()), mPaint);
 
             canvas.restore();
         }
 
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth((float) ((2.0 / 300.0) * getWidth()));
-        mPaint.setColor(getResources().getColor(R.color.colorWhite));
+
+
+        mPaint.setStrokeWidth((float) ((major_width / 1500.0) * getWidth()));
+        mPaint.setColor(Color.parseColor(major_color));
 
         //画长指针
         for (int i = 0; i < percent + 1; i++) {
@@ -511,8 +698,10 @@ public class DashboardsView extends View implements View.OnClickListener {
 
             canvas.rotate(rAngle * i);
 
-            canvas.drawLine(0, (float) ((130.0 / 300.0) * getWidth()),
-                    0, (float) ((110.0 / 300.0) * getWidth()), mPaint);
+
+            //43是起始点   37是终点    37越小线越长
+            canvas.drawLine(0, (float) ((43 / 100.0) * getWidth()),
+                    0, (float) ((major_height / 200.0) * getWidth()), mPaint);
 
 
             canvas.restore();
@@ -524,7 +713,8 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setColor(getResources().getColor(R.color.colorWhite));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
-        mPaint.setTextSize((float) ((12.0 * getWidth()) / 150.0));
+
+        mPaint.setTextSize((float) ((lable_size * getWidth()) / 100.0));
         canvas.save();
         canvas.translate(getWidth() / 2, getWidth() / 2);
 
@@ -532,8 +722,8 @@ public class DashboardsView extends View implements View.OnClickListener {
         //每大分度的角度
         float rAngle = ((endAngle - startAngle) / percent);
         float rFendu = (max - min) / percent;
-        canvas.scale(0.85f, 0.85f);
 
+        canvas.scale((float) (lable_offset / 100.0), (float) (lable_offset / 100.0));
 
         for (int i = 0; i < percent + 1; i++) {
             canvas.save();
@@ -542,39 +732,19 @@ public class DashboardsView extends View implements View.OnClickListener {
             canvas.rotate(rAngle * i + startAngle);
             canvas.translate(0, (float) ((110.0 / 300.0) * getWidth()));
 
-            canvas.rotate(-rAngle * i - startAngle);
+            //下面两个只能选一个   不旋转是第一个   旋转时第二个
+            if (!isTextRotate) {
+                canvas.rotate(-rAngle * i - startAngle);
+            } else {
+                canvas.rotate(180);
+            }
 
-            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, 0, mPaint);
+            if (isTextShow) {
+                canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, 0, mPaint);
+            }
 
             canvas.restore();
         }
-
-
-//        for (int i = 0; i < percent + 1; i++) {
-//            canvas.save();
-//
-//            if (textStyle == 0) {
-//                canvas.translate(0, (float) ((10.0 / 300.0) * getWidth()));
-//                canvas.scale(0.9f, 0.9f);
-//            } else {
-//                canvas.scale(0.9f, 0.9f);
-//            }
-//
-//            float rAngle = ((endAngle - startAngle) / percent);
-//            float rFendu = (max - min) / percent;
-//            canvas.rotate(rAngle * i);
-//
-//            if (textStyle == 0) {
-//                canvas.rotate(-rAngle * i, 0, (float) ((100.0 / 300.0) * getWidth()));
-//            } else {
-//                canvas.rotate(180, 0, (float) ((100.0 / 300.0) * getWidth()));
-//            }
-//
-//
-//            //本来是100的  微调成110
-//            canvas.drawText(((int) (rFendu * i) + ((int) min)) + "", 0, (float) ((100.0 / 300.0) * getWidth()), mPaint);
-//            canvas.restore();
-//        }
 
 
         canvas.restore();
@@ -617,7 +787,7 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        //经典  自定义
+        //经典  自定义    if  后面加了！  试了为方便调试  最后要去掉！别忘了
         if (!(boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
 
             //经典模式打开只有DC
@@ -625,7 +795,6 @@ public class DashboardsView extends View implements View.OnClickListener {
             View view_dc = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit_dc, null);
             //经典模式下的长按增加一个移除仪表盘
             //自定义模式下不要有
-
 
             //不同仪表盘打开出现不同样式
             ImageView iv_rangeline = view_dc.findViewById(R.id.display_range_line);
@@ -642,25 +811,9 @@ public class DashboardsView extends View implements View.OnClickListener {
             final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
             final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
             //这里做不同仪表盘ID的判断
-            if (myDisplayId == 1) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_one", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_one", (int) 0) + "");
-            } else if (myDisplayId == 2) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_two", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_two", (int) 0) + "");
-            } else if (myDisplayId == 3) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_three", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_three", (int) 0) + "");
-            } else if (myDisplayId == 4) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_four", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_four", (int) 0) + "");
-            } else if (myDisplayId == 5) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_five", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_five", (int) 0) + "");
-            } else if (myDisplayId == 6) {
-                et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_six", (int) 0) + "");
-                et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_six", (int) 0) + "");
-            }
+            et_start.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, (int) 0) + "");
+            et_end.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, (int) 0) + "");
+
 
             Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
             btn_ok.setOnClickListener(new OnClickListener() {
@@ -668,10 +821,9 @@ public class DashboardsView extends View implements View.OnClickListener {
                 public void onClick(View view) {
                     dia_dc.dismiss();
                     //点击确定发送广播 把初始值最终值发送
-                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                    intent.putExtra("identity", "DisplayConfiguration");
-                    intent.putExtra("startValue", et_start.getText().toString());
-                    intent.putExtra("endValue", et_end.getText().toString());
+                    Intent intent = new Intent("changeDisplay");
+                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                     intent.putExtra("myId", myDisplayId);
                     mContext.sendBroadcast(intent);
                 }
@@ -704,31 +856,34 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final EditText et_left = view_sal.findViewById(R.id.display_sal_left_et);
                     final EditText et_top = view_sal.findViewById(R.id.display_sal_top_et);
                     //这里做不同仪表盘的判断
-                    if (myDisplayId == 1) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_one", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_one", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_one", (float) 0) + "");
-                    } else if (myDisplayId == 2) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_two", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_two", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_two", (float) 0) + "");
-                    } else if (myDisplayId == 3) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_three", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_three", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_three", (float) 0) + "");
-                    } else if (myDisplayId == 4) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_four", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_four", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_four", (float) 0) + "");
-                    } else if (myDisplayId == 5) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_five", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_five", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_five", (float) 0) + "");
-                    } else if (myDisplayId == 6) {
-                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_six", 0) + "");
-                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_six", (float) 0) + "");
-                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_six", (float) 0) + "");
-                    }
+                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_" + myDisplayId, 0) + "");
+                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId, (float) 0) + "");
+                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_" + myDisplayId, (float) 0) + "");
+//                    if (myDisplayId == 1) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_one", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_one", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_one", (float) 0) + "");
+//                    } else if (myDisplayId == 2) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_two", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_two", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_two", (float) 0) + "");
+//                    } else if (myDisplayId == 3) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_three", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_three", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_three", (float) 0) + "");
+//                    } else if (myDisplayId == 4) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_four", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_four", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_four", (float) 0) + "");
+//                    } else if (myDisplayId == 5) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_five", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_five", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_five", (float) 0) + "");
+//                    } else if (myDisplayId == 6) {
+//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_six", 0) + "");
+//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_six", (float) 0) + "");
+//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_six", (float) 0) + "");
+//                    }
                     //下方确认按钮
                     Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
                     //点击OK修改设置  发送广播
@@ -781,6 +936,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                     //自定义模式下  点开要把RemoveDisplay  隐藏  因为外层有了
                     ImageView iv_remove_line = view_dc.findViewById(R.id.display_remove_line);
                     RelativeLayout re_remove = view_dc.findViewById(R.id.display_remove_re);
+                    //自定义情况下把  RemoDisplay  取消掉
                     iv_remove_line.setVisibility(GONE);
                     re_remove.setVisibility(GONE);
 
@@ -801,37 +957,18 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
                     final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
                     //这里做不同仪表盘ID的判断
-                    if (myDisplayId == 1) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_one", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_one", (int) 0) + "");
-                    } else if (myDisplayId == 2) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_two", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_two", (int) 0) + "");
-                    } else if (myDisplayId == 3) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_three", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_three", (int) 0) + "");
-                    } else if (myDisplayId == 4) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_four", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_four", (int) 0) + "");
-                    } else if (myDisplayId == 5) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_five", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_five", (int) 0) + "");
-                    } else if (myDisplayId == 6) {
-                        et_start.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_start_six", (int) 0) + "");
-                        et_end.setText(SPUtil.get(mContext, "dashboardsdisplayconfiguration_end_six", (int) 0) + "");
-                    }
+                    et_start.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, (int) 0) + "");
+                    et_end.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, (int) 0) + "");
+
 
                     Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
                     btn_ok.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             dia_dc.dismiss();
-                            //点击确定发送广播 把初始值最终值发送
-                            Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                            intent.putExtra("identity", "DisplayConfiguration");
-                            intent.putExtra("startValue", et_start.getText().toString());
-                            intent.putExtra("endValue", et_end.getText().toString());
-                            intent.putExtra("myId", myDisplayId);
+                            Intent intent = new Intent("changeDisplay");
+                            SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                            SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                             mContext.sendBroadcast(intent);
                         }
                     });
@@ -851,20 +988,19 @@ public class DashboardsView extends View implements View.OnClickListener {
             iv_style.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, OBDStyleActivity.class);
+
                     //跳转的时候把参数传过去   根据Style  判断调到那个页面   Style0   Style12
                     if (style == 0) {
-                        //这里还要把参数传过去
-                        intent.putExtra( "back_inner_color" ,
-                                (String)SPUtil.get(mContext , "dashboardsdisplay_style_back_innercolor" , "00000000"));
-                        intent.putExtra( "back_outer_color" ,
-                                (String)SPUtil.get(mContext , "dashboardsdisplay_style_back_outercolor" , "00000000"));
-
-
-
+                        //这里只用把id传过去
+                        Intent intent = new Intent(mContext, OBDStyleActivity.class);
+                        intent.putExtra("DisplayId", myDisplayId);
                         mContext.startActivity(intent);
                     } else {
                         //这个是跳转到其他两个的
+                        Intent intent = new Intent(mContext, OBDOtherStyleActivity.class);
+                        intent.putExtra("DisplayId", myDisplayId);
+                        intent.putExtra("DisplayStyle", style);
+                        mContext.startActivity(intent);
                     }
                 }
             });
@@ -918,7 +1054,7 @@ public class DashboardsView extends View implements View.OnClickListener {
     }
 
 
-    public void setStartAngle(float startAngle) {
+    public void setStartAngle(int startAngle) {
         this.startAngle = startAngle;
         invalidate();
     }
@@ -944,29 +1080,29 @@ public class DashboardsView extends View implements View.OnClickListener {
         this.style = style;
     }
 
-    public float getMax() {
+    public int getMax() {
         return max;
     }
 
-    public void setMax(float max) {
+    public void setMax(int max) {
         this.max = max;
         invalidate();
     }
 
-    public float getMin() {
+    public int getMin() {
         return min;
     }
 
-    public void setMin(float min) {
+    public void setMin(int min) {
         this.min = min;
     }
 
-    public void setValue(float value) {
+    public void setValue(int value) {
         this.value = value;
         invalidate();
     }
 
-    public void setEndAngle(float endAngle) {
+    public void setEndAngle(int endAngle) {
         this.endAngle = endAngle;
         invalidate();
     }
@@ -979,5 +1115,317 @@ public class DashboardsView extends View implements View.OnClickListener {
     public void setColor_back_outer_color(String color_back_outer_color) {
         this.color_back_outer_color = color_back_outer_color;
         invalidate();
+    }
+
+
+    public void setColor_title_color(String color_title_color) {
+        this.color_title_color = color_title_color;
+        invalidate();
+    }
+
+
+    public void setTitle_text_size(int title_text_size) {
+        this.title_text_size = title_text_size;
+        invalidate();
+    }
+
+    public void setTitle_position(int title_position) {
+        this.title_position = title_position;
+        invalidate();
+    }
+
+    public void setColor_value(String color_value) {
+        this.color_value = color_value;
+        invalidate();
+    }
+
+    public void setValueshow(boolean valueshow) {
+        isValueshow = valueshow;
+        invalidate();
+    }
+
+    public void setValue_size(int value_size) {
+        this.value_size = value_size;
+        invalidate();
+    }
+
+    public void setValue_position(int value_position) {
+        this.value_position = value_position;
+        invalidate();
+    }
+
+    public void setUnits_color(String units_color) {
+        this.units_color = units_color;
+        invalidate();
+    }
+
+    public void setUnits_size(int units_size) {
+        this.units_size = units_size;
+        invalidate();
+    }
+
+    public void setMajor_width(int major_width) {
+        this.major_width = major_width;
+        invalidate();
+    }
+
+    public void setUnits_ver(int units_ver) {
+        this.units_ver = units_ver;
+        invalidate();
+    }
+
+    public void setUnits_hor(int units_hor) {
+        this.units_hor = units_hor;
+        invalidate();
+    }
+
+    public void setMajor_height(int major_height) {
+        this.major_height = major_height;
+        invalidate();
+    }
+
+    public void setMajor_color(String major_color) {
+        this.major_color = major_color;
+        invalidate();
+    }
+
+    public void setMinor_width(int minor_width) {
+        this.minor_width = minor_width;
+        invalidate();
+    }
+
+    public void setMinor_height(int minor_height) {
+        this.minor_height = minor_height;
+        invalidate();
+    }
+
+    public void setMinor_color(String minor_color) {
+        this.minor_color = minor_color;
+        invalidate();
+    }
+
+    public void setTextShow(boolean textShow) {
+        isTextShow = textShow;
+        invalidate();
+    }
+
+    public void setTextRotate(boolean textRotate) {
+        isTextRotate = textRotate;
+        invalidate();
+    }
+
+    public void setLable_size(int lable_size) {
+        this.lable_size = lable_size;
+        invalidate();
+    }
+
+    public void setLable_offset(int lable_offset) {
+        this.lable_offset = lable_offset;
+        invalidate();
+    }
+
+    public void setPointerShow(boolean pointerShow) {
+        isPointerShow = pointerShow;
+        invalidate();
+    }
+
+    public void setPoint_width(int point_width) {
+        this.point_width = point_width;
+        invalidate();
+    }
+
+    public void setPoint_length(int point_length) {
+        this.point_length = point_length;
+        invalidate();
+    }
+
+    public void setPoint_color(String point_color) {
+        this.point_color = point_color;
+        invalidate();
+    }
+
+    public void setPoint_rad(int point_rad) {
+        this.point_rad = point_rad;
+        invalidate();
+    }
+
+    public void setCenter_color(String center_color) {
+        this.center_color = center_color;
+        invalidate();
+    }
+
+    public void setRange_show(boolean range_show) {
+        this.range_show = range_show;
+        invalidate();
+    }
+
+    public void setRange_startrangle(int range_startrangle) {
+        this.range_startrangle = range_startrangle;
+        invalidate();
+    }
+
+    public void setRange_endrangle(int range_endrangle) {
+        this.range_endrangle = range_endrangle;
+        invalidate();
+    }
+
+    public void setRange_color(String range_color) {
+        this.range_color = range_color;
+        invalidate();
+    }
+
+    public void setStyle_two_back_color(String style_two_back_color) {
+        this.style_two_back_color = style_two_back_color;
+        invalidate();
+    }
+
+    public void setStyle_two_back_rad(int style_two_back_rad) {
+        this.style_two_back_rad = style_two_back_rad;
+        invalidate();
+    }
+
+    public void setStyle_two_title_color(String style_two_title_color) {
+        this.style_two_title_color = style_two_title_color;
+        invalidate();
+    }
+
+    public void setStyle_two_title_size(int style_two_title_size) {
+        this.style_two_title_size = style_two_title_size;
+        invalidate();
+    }
+
+    public void setStyle_two_title_position(int style_two_title_position) {
+        this.style_two_title_position = style_two_title_position;
+        invalidate();
+    }
+
+    public void setIs_two_value_show(boolean is_two_value_show) {
+        this.is_two_value_show = is_two_value_show;
+        invalidate();
+    }
+
+    public void setStyle_two_value_color(String style_two_value_color) {
+        this.style_two_value_color = style_two_value_color;
+        invalidate();
+    }
+
+    public void setStyle_two_value_size(int style_two_value_size) {
+        this.style_two_value_size = style_two_value_size;
+        invalidate();
+    }
+
+    public void setStyle_two_value_position(int style_two_value_position) {
+        this.style_two_value_position = style_two_value_position;
+        invalidate();
+    }
+
+    public void setStyle_two_units_color(String style_two_units_color) {
+        this.style_two_units_color = style_two_units_color;
+        invalidate();
+    }
+
+    public void setStyle_two_units_size(int style_two_units_size) {
+        this.style_two_units_size = style_two_units_size;
+        invalidate();
+    }
+
+    public void setStyle_two_units_position(int style_two_units_position) {
+        this.style_two_units_position = style_two_units_position;
+        invalidate();
+    }
+
+    public void setStyle_two_pointer_color(String style_two_pointer_color) {
+        this.style_two_pointer_color = style_two_pointer_color;
+        invalidate();
+    }
+
+    public void setStyle_two_pointer_width(int style_two_pointer_width) {
+        this.style_two_pointer_width = style_two_pointer_width;
+        invalidate();
+    }
+
+    public void setStyle_two_range_show(boolean style_two_range_show) {
+        this.style_two_range_show = style_two_range_show;
+        invalidate();
+    }
+
+
+    public void setStyle_two_range_color(String style_two_range_color) {
+        this.style_two_range_color = style_two_range_color;
+        invalidate();
+    }
+
+    public void setStyle_three_inner_color(String style_three_inner_color) {
+        this.style_three_inner_color = style_three_inner_color;
+        invalidate();
+    }
+
+    public void setStyle_three_outer_color(String style_three_outer_color) {
+        this.style_three_outer_color = style_three_outer_color;
+        invalidate();
+    }
+
+    public void setStyle_three_back_rad(int style_three_back_rad) {
+        this.style_three_back_rad = style_three_back_rad;
+        invalidate();
+    }
+
+    public void setStyle_three_title_color(String style_three_title_color) {
+        this.style_three_title_color = style_three_title_color;
+        invalidate();
+    }
+
+    public void setStyle_three_title_size(int style_three_title_size) {
+        this.style_three_title_size = style_three_title_size;
+        invalidate();
+    }
+
+    public void setStyle_three_title_position(int style_three_title_position) {
+        this.style_three_title_position = style_three_title_position;
+        invalidate();
+    }
+
+    public void setStyle_three_value_show(boolean style_three_value_show) {
+        this.style_three_value_show = style_three_value_show;
+        invalidate();
+    }
+
+    public void setStyle_three_value_color(String style_three_value_color) {
+        this.style_three_value_color = style_three_value_color;
+        invalidate();
+    }
+
+    public void setStyle_three_value_size(int style_three_value_size) {
+        this.style_three_value_size = style_three_value_size;
+        invalidate();
+    }
+
+    public void setStyle_three_value_position(int style_three_value_position) {
+        this.style_three_value_position = style_three_value_position;
+        invalidate();
+    }
+
+    public void setStyle_three_units_color(String style_three_units_color) {
+        this.style_three_units_color = style_three_units_color;
+        invalidate();
+    }
+
+    public void setStyle_three_units_size(int style_three_units_size) {
+        this.style_three_units_size = style_three_units_size;
+        invalidate();
+    }
+
+    public void setStyle_three_units_position(int style_three_units_position) {
+        this.style_three_units_position = style_three_units_position;
+        invalidate();
+    }
+
+    public void setStyle_three_frame_color(String style_three_frame_color) {
+        this.style_three_frame_color = style_three_frame_color;
+        invalidate();
+    }
+
+    public int getMyDisplayId() {
+        return myDisplayId;
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorOBDbackground"
     android:orientation="vertical"
-    tools:context="com.example.administrator.obdcheckerforaytophix10.dashboards.OBDStyleActivity">
+    tools:context="com.example.administrator.obdcheckerforaytophix10.dashboards.OBDOtherStyleActivity">
 
     <!--标题栏-->
     <RelativeLayout
@@ -17,7 +17,6 @@
 
 
         <ImageView
-            android:id="@+id/iv_finish"
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_marginLeft="@dimen/x15"
@@ -58,7 +57,7 @@
     <!--展示栏-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x237"
+        android:layout_height="@dimen/x186"
         android:background="@color/colorOBDbackground">
 
         <!-- Test   display-->
@@ -93,82 +92,14 @@
             android:thumb="@drawable/seekbar_thumb"/>
 
 
-        <RadioGroup
-            android:layout_width="@dimen/x317"
-            android:layout_height="@dimen/x24"
-            android:layout_marginLeft="@dimen/x29"
-            android:layout_marginTop="@dimen/x205"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/style_frame"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/buttonstyle_style_start"
-                android:button="@null"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/frame"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x13"/>
-
-            <RadioButton
-                android:id="@+id/style_axis"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/buttonstyle_style"
-                android:button="@null"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/axis"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x13"/>
-
-            <RadioButton
-                android:id="@+id/style_needle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/buttonstyle_style"
-                android:button="@null"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/needle"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x13"/>
-
-            <RadioButton
-                android:id="@+id/style_range"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/buttonstyle_style_end"
-                android:button="@null"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/range_new"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x13"/>
-
-        </RadioGroup>
-
     </RelativeLayout>
 
-    <!--下面是四种布局-->
-    <!--点击显示隐藏显示-->
-    <!--Frame-->
+    <!--Style 2-->
     <ScrollView
-        android:id="@+id/style_scroll_frame"
+        android:id="@+id/scroll_style_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorOBDbackground"
-        android:orientation="vertical">
+        android:background="@color/colorOBDbackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,113 +107,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="@dimen/x100"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/x24"
                 android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x15"
+                android:layout_marginTop="@dimen/x24"
                 android:singleLine="true"
-                android:text="@string/rangles"
+                android:text="@string/background_color"
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x14"/>
-
-            <!--最小的单元-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/start_angle"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_rangles_startangle"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_rangles_startangle"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <!--最小的单元-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/end_angle"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_rangles_endargle"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_rangles_endargle"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-
-            <TextView
-                android:layout_width="@dimen/x200"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x20"
-                android:singleLine="true"
-                android:text="@string/background_color"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-
-            <!--最小单元变色-->
+            <!--变色-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
@@ -296,14 +130,14 @@
                     android:layout_marginLeft="@dimen/x15"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/inner_color"
+                    android:text="@string/color"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
                 <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_back_color"
+                    android:id="@+id/et_two_back_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -327,7 +161,7 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_back_color"
+                    android:id="@+id/btn_two_back_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
@@ -341,55 +175,42 @@
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
 
-            <!--最小单元变色-->
+            <!--单元-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
+                android:layout_height="@dimen/x65"
                 android:background="@color/colorDialogBackGround">
 
                 <TextView
-                    android:layout_width="@dimen/x100"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/outer_color"
+                    android:text="@string/gradient_radius"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
-                <EditText
-                    android:id="@+id/et_back_out_color"
-                    android:layout_width="@dimen/x70"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x255"
-                    android:digits="1234567890abcdefABCDEF"
-                    android:focusableInTouchMode="true"
-                    android:gravity="center_vertical"
-                    android:maxLength="8"
-                    android:singleLine="true"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="@dimen/x13"
-                    app:theme="@style/MyEditText"/>
-
-                <!--两个 一个在下一个在上-->
-                <ImageView
-                    android:layout_width="@dimen/x30"
+                <TextView
+                    android:id="@+id/tv_two_back_rad"
+                    android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x330"
-                    android:layout_marginTop="@dimen/x7"
-                    android:background="@color/colorWhite"/>
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="-360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
 
-                <Button
-                    android:id="@+id/btn_back_out_color"
-                    android:layout_width="@dimen/x28"
-                    android:layout_height="@dimen/x28"
-                    android:layout_marginLeft="@dimen/x331"
-                    android:layout_marginTop="@dimen/x8"
-                    android:background="@color/colorDashboardsPointer"/>
+                <SeekBar
+                    android:id="@+id/seek_two_back_rad"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
 
             </RelativeLayout>
 
@@ -404,12 +225,12 @@
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x14"/>
 
-
-            <!--最小单元变色-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:layout_width="@dimen/x100"
@@ -422,9 +243,9 @@
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_title_color"
+                    android:id="@+id/et_two_title_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -448,21 +269,20 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_title_color"
+                    android:id="@+id/btn_two_title_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
                     android:layout_marginTop="@dimen/x8"
-                    android:background="@color/colorDashboardsPointer"/>
+                    android:background="@color/colorBlack"/>
 
             </RelativeLayout>
-
+            <!--线-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
 
-            <!--最小的单元-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x65"
@@ -479,7 +299,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_title_font"
+                    android:id="@+id/tv_two_title_font"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -490,7 +310,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_title_font"
+                    android:id="@+id/seek_two_title_font"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -506,7 +326,6 @@
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
 
-            <!--最小的单元-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x65"
@@ -523,7 +342,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_title_position"
+                    android:id="@+id/tv_two_title_position"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -534,7 +353,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_title_position"
+                    android:id="@+id/seek_two_title_position"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -557,7 +376,7 @@
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x14"/>
 
-            <!--最小带按钮-->
+            <!--按钮-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
@@ -577,7 +396,7 @@
 
                 <!--lv-->
                 <ch.ielse.view.SwitchView
-                    android:id="@+id/iosbtn_value_show"
+                    android:id="@+id/iosbtn_two_value_show"
                     android:layout_width="@dimen/x50"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x310"
@@ -594,7 +413,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:layout_width="@dimen/x100"
@@ -607,9 +428,9 @@
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_value_color"
+                    android:id="@+id/et_two_value_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -633,7 +454,309 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_value_color"
+                    android:id="@+id/btn_two_value_color"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x331"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/colorBlack"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/font_scale"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_two_value_size"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_two_value_size"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/position"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_two_value_position"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_two_value_position"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x20"
+                android:singleLine="true"
+                android:text="@string/units_label"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/units_color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--android:maxLength="8"-->
+                <EditText
+                    android:id="@+id/et_two_units_color"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x255"
+                    android:digits="1234567890abcdefABCDEF"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/x13"
+                    app:theme="@style/MyEditText"/>
+
+                <!--两个 一个在下一个在上-->
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x330"
+                    android:layout_marginTop="@dimen/x7"
+                    android:background="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btn_two_units_color"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x331"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/colorBlack"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/font_scale"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_two_units_size"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_two_units_size"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/position"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_two_units_position"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_two_units_position"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x20"
+                android:singleLine="true"
+                android:text="@string/poniter"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--android:maxLength="8"-->
+                <EditText
+                    android:id="@+id/et_two_pointer_dolor"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x255"
+                    android:digits="1234567890abcdefABCDEF"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/x13"
+                    app:theme="@style/MyEditText"/>
+
+                <!--两个 一个在下一个在上-->
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x330"
+                    android:layout_marginTop="@dimen/x7"
+                    android:background="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btn_two_pointer_dolor"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
@@ -658,14 +781,13 @@
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
                     android:singleLine="true"
-                    android:text="@string/font_scale"
+                    android:text="@string/width_new"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
                 <TextView
-                    android:id="@+id/tv_value_size"
+                    android:id="@+id/tv_two_pointer_width"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -676,7 +798,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_value_size"
+                    android:id="@+id/seek_two_pointer_width"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -687,58 +809,14 @@
 
             </RelativeLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/position"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_value_position"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_value_position"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-
+            <!--标题-->
             <TextView
                 android:layout_width="@dimen/x200"
                 android:layout_height="@dimen/x24"
                 android:layout_marginLeft="@dimen/x15"
                 android:layout_marginTop="@dimen/x20"
                 android:singleLine="true"
-                android:text="@string/units_label"
+                android:text="@string/range"
                 android:textAllCaps="false"
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x14"/>
@@ -749,20 +827,55 @@
                 android:layout_height="@dimen/x44"
                 android:background="@color/colorDialogBackGround">
 
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/fill_enabled"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--lv-->
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_two_range_show"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x310"
+                    android:layout_marginTop="@dimen/x7"/>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
                 <TextView
                     android:layout_width="@dimen/x100"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x15"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/units_color"
+                    android:text="@string/color"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_units_color"
+                    android:id="@+id/et_two_range_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -786,12 +899,259 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_units_color"
+                    android:id="@+id/btn_two_range_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
                     android:layout_marginTop="@dimen/x8"
-                    android:background="@color/colorDashboardsPointer"/>
+                    android:background="@color/colorBlack"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <!--Style 3-->
+    <ScrollView
+        android:id="@+id/scroll_style_three"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorOBDbackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x24"
+                android:singleLine="true"
+                android:text="@string/background_color"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/inner_color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--android:maxLength="8"-->
+                <EditText
+                    android:id="@+id/et_three_inner_color"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x255"
+                    android:digits="1234567890abcdefABCDEF"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/x13"
+                    app:theme="@style/MyEditText"/>
+
+                <!--两个 一个在下一个在上-->
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x330"
+                    android:layout_marginTop="@dimen/x7"
+                    android:background="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btn_three_inner_color"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x331"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/colorBlack"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/outer_color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--android:maxLength="8"-->
+                <EditText
+                    android:id="@+id/et_three_outer_color"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x255"
+                    android:digits="1234567890abcdefABCDEF"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/x13"
+                    app:theme="@style/MyEditText"/>
+
+                <!--两个 一个在下一个在上-->
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x330"
+                    android:layout_marginTop="@dimen/x7"
+                    android:background="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btn_three_outer_color"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x331"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/colorBlack"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/gradient_radius"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_three_back_rad"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="-360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_three_back_rad"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x20"
+                android:singleLine="true"
+                android:text="@string/title_label"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44"
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <!--android:maxLength="8"-->
+                <EditText
+                    android:id="@+id/et_three_title_color"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x255"
+                    android:digits="1234567890abcdefABCDEF"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    android:textSize="@dimen/x13"
+                    app:theme="@style/MyEditText"/>
+
+                <!--两个 一个在下一个在上-->
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x330"
+                    android:layout_marginTop="@dimen/x7"
+                    android:background="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btn_three_title_color"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x331"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/colorBlack"/>
 
             </RelativeLayout>
             <!--线-->
@@ -799,7 +1159,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -817,7 +1176,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_units_size"
+                    android:id="@+id/tv_three_title_size"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -828,7 +1187,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_units_size"
+                    android:id="@+id/seek_three_title_size"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -844,7 +1203,6 @@
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x65"
@@ -855,13 +1213,13 @@
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
                     android:singleLine="true"
-                    android:text="@string/vertical_position"
+                    android:text="@string/position"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_units_ver"
+                    android:id="@+id/tv_three_title_position"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -872,7 +1230,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_units_ver"
+                    android:id="@+id/seek_three_title_position"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -883,164 +1241,43 @@
 
             </RelativeLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/horizontal_position"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_units_hor"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_units_hor"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
+            <TextView
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x20"
+                android:singleLine="true"
+                android:text="@string/value_label"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
-                android:background="@color/colorTransparent"/>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <!--Axis-->
-    <ScrollView
-        android:id="@+id/style_scroll_axis"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorOBDbackground"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x15"
-                android:singleLine="true"
-                android:text="@string/major_ticks"
-                android:textAllCaps="true"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-
-            <!--最小的单元-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
                 android:background="@color/colorDialogBackGround">
+
 
                 <TextView
                     android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/width_new"
+                    android:text="@string/value_visible"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-                <TextView
-                    android:id="@+id/tv_major_width"
-                    android:layout_width="@dimen/x45"
+                <!--lv-->
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_three_value_show"
+                    android:layout_width="@dimen/x50"
                     android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
+                    android:layout_marginLeft="@dimen/x310"
+                    android:layout_marginTop="@dimen/x7"/>
 
-                <SeekBar
-                    android:id="@+id/seek_major_width"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/lenght"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_major_height"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_major_height"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
 
             </RelativeLayout>
 
@@ -1063,14 +1300,14 @@
                     android:layout_marginLeft="@dimen/x15"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/color"
+                    android:text="@string/value_color"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_mojor_color"
+                    android:id="@+id/et_three_value_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -1094,7 +1331,7 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_mojor_color"
+                    android:id="@+id/btn_three_value_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
@@ -1103,19 +1340,6 @@
 
             </RelativeLayout>
 
-
-            <TextView
-                android:layout_width="@dimen/x200"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x20"
-                android:singleLine="true"
-                android:text="@string/minor_ticks"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x65"
@@ -1126,57 +1350,13 @@
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
                     android:singleLine="true"
-                    android:text="@string/width_new"
+                    android:text="@string/font_scale"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_minor_width"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_minor_width"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/lenght"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_minor_height"
+                    android:id="@+id/tv_three_value_size"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -1187,7 +1367,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_minor_height"
+                    android:id="@+id/seek_three_value_size"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -1203,11 +1383,62 @@
                 android:layout_height="@dimen/x1"
                 android:src="@drawable/line_ui"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x65"
+                android:background="@color/colorDialogBackGround">
+
+                <TextView
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:singleLine="true"
+                    android:text="@string/position"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:id="@+id/tv_three_value_position"
+                    android:layout_width="@dimen/x45"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x327"
+                    android:singleLine="true"
+                    android:text="-360"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <SeekBar
+                    android:id="@+id/seek_three_value_position"
+                    android:layout_width="@dimen/x315"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/x29"
+                    android:maxHeight="@dimen/x2"
+                    android:progressDrawable="@drawable/seekbar_bg"
+                    android:thumb="@drawable/seekbar_thumb"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x24"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x20"
+                android:singleLine="true"
+                android:text="@string/units_label"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:layout_width="@dimen/x100"
@@ -1220,9 +1451,9 @@
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_minor_color"
+                    android:id="@+id/et_three_units_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -1246,7 +1477,7 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_minor_color"
+                    android:id="@+id/btn_three_units_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
@@ -1254,83 +1485,7 @@
                     android:background="@color/colorBlack"/>
 
             </RelativeLayout>
-
-
-            <TextView
-                android:layout_width="@dimen/x200"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x20"
-                android:singleLine="true"
-                android:text="@string/lables"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/visible"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <!--lv-->
-                <ch.ielse.view.SwitchView
-                    android:id="@+id/iosbtn_lables_show"
-                    android:layout_width="@dimen/x50"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x310"
-                    android:layout_marginTop="@dimen/x7"/>
-
-
-            </RelativeLayout>
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/rotate"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <!--lv-->
-                <ch.ielse.view.SwitchView
-                    android:id="@+id/iosbtn_lables_rotate"
-                    android:layout_width="@dimen/x50"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x310"
-                    android:layout_marginTop="@dimen/x7"/>
-
-
-            </RelativeLayout>
-
-
+            <!--线-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x1"
@@ -1352,7 +1507,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_lable_size"
+                    android:id="@+id/tv_three_units_size"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -1363,7 +1518,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_lable_size"
+                    android:id="@+id/seek_three_units_size"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -1389,13 +1544,13 @@
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
                     android:singleLine="true"
-                    android:text="@string/offest_form_tickline"
+                    android:text="@string/position"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:id="@+id/tv_lable_offset"
+                    android:id="@+id/tv_three_units_position"
                     android:layout_width="@dimen/x45"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x327"
@@ -1406,7 +1561,7 @@
                     android:textSize="@dimen/x16"/>
 
                 <SeekBar
-                    android:id="@+id/seek_lable_offset"
+                    android:id="@+id/seek_three_units_position"
                     android:layout_width="@dimen/x315"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -1414,211 +1569,6 @@
                     android:maxHeight="@dimen/x2"
                     android:progressDrawable="@drawable/seekbar_bg"
                     android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorTransparent"/>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <!--Needle-->
-    <ScrollView
-        android:id="@+id/style_scroll_needle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorOBDbackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x15"
-                android:singleLine="true"
-                android:text="@string/labels"
-                android:textAllCaps="true"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/visible"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <!--lv-->
-                <ch.ielse.view.SwitchView
-                    android:id="@+id/iosbtn_pointer_show"
-                    android:layout_width="@dimen/x50"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x310"
-                    android:layout_marginTop="@dimen/x7"/>
-
-
-            </RelativeLayout>
-
-            <!--线-->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/width_new"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_pointer_width"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_pointer_width"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/lenght"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_pointer_length"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_pointer_length"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/color"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-
-                <EditText
-                    android:id="@+id/et_pointer_color"
-                    android:layout_width="@dimen/x70"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x255"
-                    android:digits="1234567890abcdefABCDEF"
-                    android:focusableInTouchMode="true"
-                    android:gravity="center_vertical"
-                    android:maxLength="8"
-                    android:singleLine="true"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="@dimen/x13"
-                    app:theme="@style/MyEditText"/>
-
-                <!--两个 一个在下一个在上-->
-                <ImageView
-                    android:layout_width="@dimen/x30"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x330"
-                    android:layout_marginTop="@dimen/x7"
-                    android:background="@color/colorWhite"/>
-
-                <Button
-                    android:id="@+id/btn_pointer_color"
-                    android:layout_width="@dimen/x28"
-                    android:layout_height="@dimen/x28"
-                    android:layout_marginLeft="@dimen/x331"
-                    android:layout_marginTop="@dimen/x8"
-                    android:background="@color/colorBlack"/>
 
             </RelativeLayout>
 
@@ -1629,7 +1579,7 @@
                 android:layout_marginLeft="@dimen/x15"
                 android:layout_marginTop="@dimen/x20"
                 android:singleLine="true"
-                android:text="@string/knob"
+                android:text="@string/frame"
                 android:textAllCaps="false"
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x14"/>
@@ -1637,53 +1587,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/radius"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_pointer_rad"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_pointer_rad"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
+                android:background="@color/colorDialogBackGround"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:layout_width="@dimen/x100"
@@ -1691,14 +1598,14 @@
                     android:layout_marginLeft="@dimen/x15"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="@string/color"
+                    android:text="@string/frame_color"
                     android:textAllCaps="false"
                     android:textColor="@color/colorTextColorDemo"
                     android:textSize="@dimen/x16"/>
 
-
+                <!--android:maxLength="8"-->
                 <EditText
-                    android:id="@+id/et_center_color"
+                    android:id="@+id/et_three_frame_color"
                     android:layout_width="@dimen/x70"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x255"
@@ -1722,211 +1629,7 @@
                     android:background="@color/colorWhite"/>
 
                 <Button
-                    android:id="@+id/btn_center_color"
-                    android:layout_width="@dimen/x28"
-                    android:layout_height="@dimen/x28"
-                    android:layout_marginLeft="@dimen/x331"
-                    android:layout_marginTop="@dimen/x8"
-                    android:background="@color/colorDashboardsPointer"/>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorTransparent"/>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <!--Range-->
-    <ScrollView
-        android:id="@+id/style_scroll_range"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorOBDbackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x24"
-                android:layout_marginLeft="@dimen/x15"
-                android:layout_marginTop="@dimen/x15"
-                android:singleLine="true"
-                android:text="@string/fill"
-                android:textAllCaps="true"
-                android:textColor="@color/colorTextColorDemo"
-                android:textSize="@dimen/x14"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/enabled"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <!--lv-->
-                <ch.ielse.view.SwitchView
-                    android:id="@+id/iosbtn_range_show"
-                    android:layout_width="@dimen/x50"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x310"
-                    android:layout_marginTop="@dimen/x7"/>
-
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/start_angle"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_range_start"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_range_start"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x65"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x150"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:singleLine="true"
-                    android:text="@string/end_angle"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/tv_range_end"
-                    android:layout_width="@dimen/x45"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x327"
-                    android:singleLine="true"
-                    android:text="-360"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-                <SeekBar
-                    android:id="@+id/seek_range_end"
-                    android:layout_width="@dimen/x315"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x30"
-                    android:layout_marginTop="@dimen/x29"
-                    android:maxHeight="@dimen/x2"
-                    android:progressDrawable="@drawable/seekbar_bg"
-                    android:thumb="@drawable/seekbar_thumb"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:src="@drawable/line_ui"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorDialogBackGround">
-
-                <TextView
-                    android:layout_width="@dimen/x100"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="@string/color"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textSize="@dimen/x16"/>
-
-
-                <EditText
-                    android:id="@+id/et_range_color"
-                    android:layout_width="@dimen/x70"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/x255"
-                    android:digits="1234567890abcdefABCDEF"
-                    android:focusableInTouchMode="true"
-                    android:gravity="center_vertical"
-                    android:maxLength="8"
-                    android:singleLine="true"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorTextColorDemo"
-                    android:textCursorDrawable="@drawable/edittext_cursor"
-                    android:textSize="@dimen/x13"
-                    app:theme="@style/MyEditText"/>
-                <!--两个 一个在下一个在上-->
-                <ImageView
-                    android:layout_width="@dimen/x30"
-                    android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x330"
-                    android:layout_marginTop="@dimen/x7"
-                    android:background="@color/colorWhite"/>
-
-                <Button
-                    android:id="@+id/btn_range_color"
+                    android:id="@+id/btn_three_frame_color"
                     android:layout_width="@dimen/x28"
                     android:layout_height="@dimen/x28"
                     android:layout_marginLeft="@dimen/x331"
@@ -1936,10 +1639,6 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x44"
-                android:background="@color/colorTransparent"/>
 
         </LinearLayout>
     </ScrollView>

@@ -55,7 +55,10 @@
         <activity
             android:name=".dashboards.OBDStyleActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden|stateUnchanged" >
+            android:windowSoftInputMode="stateHidden|stateUnchanged">
+        </activity>
+        <activity android:name=".dashboards.OBDOtherStyleActivity"
+                  android:launchMode="singleTask">
         </activity>
     </application>
 

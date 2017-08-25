@@ -147,6 +147,8 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
 
 
+
+
                 //HUD模式
                 LinearLayout ll_hud = view_other.findViewById(R.id.dia_dashboards_othre_hud);
                 ll_hud.setOnClickListener(new View.OnClickListener() {
