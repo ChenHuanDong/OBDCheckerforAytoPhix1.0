@@ -27,4 +27,6 @@
     <color name="colorStyleOneDisplay">#18191c</color>
     <color name="colorStyleThreebottom">#202226</color>
     <color name="colorSeekbarSecond">#DDDDDD</color>
+    <color name="colorRomovePrompt">#E5E5E5</color>
+    <color name="colorDrawMove">#33fe9002</color>
 </resources>

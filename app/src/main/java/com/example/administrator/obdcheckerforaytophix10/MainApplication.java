@@ -28,6 +28,10 @@ public class MainApplication extends Application {
         SPUtil.put(this, "dashboardsisclassic", true);
 
 
+        //6个仪表盘Style
+        SPUtil.put(this, "display_style_1", 0);
+
+
         //6个仪表盘的初始大小位置设置     高度是占572.0f  的百分比
         SPUtil.put(this, "dashboardsdisplaysizeandlocationwidth_1", (int) 40);
         SPUtil.put(this, "dashboardsdisplaysizeandlocation_left_1", (float) 6.667);
@@ -525,6 +529,17 @@ public class MainApplication extends Application {
         SPUtil.put(this, "dashboardsdisplay_three_frame_color_4", "000000");
         SPUtil.put(this, "dashboardsdisplay_three_frame_color_5", "000000");
         SPUtil.put(this, "dashboardsdisplay_three_frame_color_6", "000000");
+
+        //是否Remove  Display
+        SPUtil.put(this, "display_isRemoveDisplay_1", false);
+        SPUtil.put(this, "display_isRemoveDisplay_2", false);
+        SPUtil.put(this, "display_isRemoveDisplay_3", false);
+        SPUtil.put(this, "display_isRemoveDisplay_4", false);
+        SPUtil.put(this, "display_isRemoveDisplay_5", false);
+        SPUtil.put(this, "display_isRemoveDisplay_6", false);
+
+
+
 
 
     }

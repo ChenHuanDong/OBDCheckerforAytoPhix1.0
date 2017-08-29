@@ -1,7 +1,10 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,7 +68,12 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
     private int displayId = 0;
 
     private SwitchView iosbtn_value_show, iosbtn_lables_show, iosbtn_lables_rotate, iosbtn_pointer_show, iosbtn_range_show;
+
     private ImageView iv_finish;
+    private TextView tv_cancel;
+    //假数据
+    private BroadcastReceiver br;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_obdstyle);
 
         initView();
+        display.setClickable(false);
         Intent intent = getIntent();
         displayId = intent.getIntExtra("DisplayId", 0);
         display.setStyle(0);
@@ -236,6 +245,24 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         display.setRange_color("#" + SPUtil.get(this, "dashboardsdisplay_range_color_" + displayId, ""));
         display.setMax((Integer) SPUtil.get(this, "dashboardsdisplaysizeandlocation_value_max_" + displayId, 0));
         display.setMin((Integer) SPUtil.get(this, "dashboardsdisplaysizeandlocation_value_min_" + displayId, 0));
+
+
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                int i = intent.getIntExtra("id" , 1);
+                display.setValue((int) (i*3.6f));
+                
+
+
+            }
+        };
+
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("jiashuju");
+        registerReceiver(br, intentFilter);
 
 
     }
@@ -523,7 +550,9 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         //
         iv_finish = (ImageView) findViewById(R.id.iv_finish);
         iv_finish.setOnClickListener(this);
-
+        //
+        tv_cancel = (TextView) findViewById(R.id.tv_style_cancel);
+        tv_cancel.setOnClickListener(this);
 
         //初始让四个Scrool隐藏
         scroll_frame.setVisibility(View.GONE);
@@ -538,6 +567,23 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_style_cancel:
+                //假数据    0~100 * 3.6f
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 100; i++) {
+                            try {
+                                Intent intent_cancel = new Intent("jiashuju");
+                                intent_cancel.putExtra("id", i);
+                                sendBroadcast(intent_cancel);
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
             case R.id.style_frame:
                 scroll_frame.setVisibility(View.VISIBLE);
                 scroll_axis.setVisibility(View.GONE);
@@ -689,6 +735,8 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                 break;
             //返回按钮
             case R.id.iv_finish:
+                Intent intent = new Intent("changeDisplay");
+                sendBroadcast(intent);
                 finish();
                 break;
         }
@@ -743,37 +791,37 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                 a = a.length() > 7 ? a :
                         a + "00000000".substring(0, 8 - a.length());
                 //点击外部取消的时候把数据存到SP里面了
-                SPUtil.put(OBDStyleActivity.this, initkey, a);
+                SPUtil.put(OBDStyleActivity.this, initkey + displayId, a);
                 if (et_style == 1) {
                     display.setColor_back_inner_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_innercolor_" + displayId, a);
+                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_innercolor_" + displayId, a);
                 } else if (et_style == 2) {
                     display.setColor_back_outer_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_outercolor_" + displayId, a);
+                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_outercolor_" + displayId, a);
                 } else if (et_style == 3) {
                     display.setColor_title_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_title_color_" + displayId, a);
+                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_title_color_" + displayId, a);
                 } else if (et_style == 4) {
                     display.setColor_value("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_value_color_" + displayId, a);
+                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_value_color_" + displayId, a);
                 } else if (et_style == 5) {
                     display.setUnits_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_units_color_" + displayId, a);
+                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_units_color_" + displayId, a);
                 } else if (et_style == 6) {
                     display.setMajor_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_major_color_" + displayId, a);
+                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_major_color_" + displayId, a);
                 } else if (et_style == 7) {
                     display.setMinor_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_minor_color_" + displayId, a);
+                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_minor_color_" + displayId, a);
                 } else if (et_style == 8) {
                     display.setPoint_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_pointer_color_" + displayId, a);
+                    //  SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_pointer_color_" + displayId, a);
                 } else if (et_style == 9) {
                     display.setCenter_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_center_color_" + displayId, a);
+                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_center_color_" + displayId, a);
                 } else if (et_style == 10) {
                     display.setRange_color("#" + a);
-                    SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_range_color_" + displayId, a);
+                    //  SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_range_color_" + displayId, a);
                 }
 
 

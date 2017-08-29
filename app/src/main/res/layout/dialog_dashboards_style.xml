@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="@dimen/x335"
+                android:layout_height="@dimen/x195"
+                android:background="@color/colorDialogBackGround">
+
+    <TextView
+        android:layout_width="@dimen/x320"
+        android:layout_height="@dimen/x60"
+        android:layout_marginLeft="@dimen/x15"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/number_of_decimals"
+        android:textAllCaps="false"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x18"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x60"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:layout_width="@dimen/x320"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x61"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/zero"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x105"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:layout_width="@dimen/x320"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x106"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/one"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <TextView
+        android:layout_width="@dimen/x320"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x151"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/three"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x150"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <Button
+        android:id="@+id/btn_style_ok"
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x196"
+        android:background="@color/colorDialogBackGround"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/ok"
+        android:textAllCaps="false"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x16"/>
+
+
+    <ImageView
+        android:id="@+id/iv_style_one"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x14"
+        android:layout_marginLeft="@dimen/x303"
+        android:layout_marginTop="@dimen/x76"
+        android:src="@drawable/dui"/>
+
+    <ImageView
+        android:id="@+id/iv_style_two"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x14"
+        android:layout_marginLeft="@dimen/x303"
+        android:layout_marginTop="@dimen/x121"
+        android:src="@drawable/dui"/>
+
+
+    <ImageView
+        android:id="@+id/iv_style_three"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x14"
+        android:layout_marginLeft="@dimen/x303"
+        android:layout_marginTop="@dimen/x166"
+        android:src="@drawable/dui"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x195"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_style_one"
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x61"
+        android:background="@color/colorTransparent"
+        android:orientation="vertical"/>
+
+    <LinearLayout
+        android:id="@+id/ll_style_two"
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x106"
+        android:background="@color/colorTransparent"
+        android:orientation="vertical"/>
+
+    <LinearLayout
+        android:id="@+id/ll_style_three"
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x151"
+        android:background="@color/colorTransparent"
+        android:orientation="vertical"/>
+
+
+</RelativeLayout>

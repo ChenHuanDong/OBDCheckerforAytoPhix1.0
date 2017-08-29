@@ -49,20 +49,21 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
 
     private EditText et_two_back_color, et_two_title_color, et_two_value_color, et_two_units_color, et_two_pointer_dolor,
             et_two_range_color, et_three_inner_color, et_three_outer_color, et_three_title_color, et_three_value_color,
-            et_three_units_color , et_three_frame_color;
+            et_three_units_color, et_three_frame_color;
     private Button btn_two_back_color, btn_two_title_color, btn_two_value_color, btn_two_units_color, btn_two_pointer_dolor,
             btn_two_range_color, btn_three_inner_color, btn_three_outer_color, btn_three_title_color, btn_three_value_color,
-            btn_three_units_color , btn_three_frame_color;
+            btn_three_units_color, btn_three_frame_color;
 
     private TextView tv_two_back_rad, tv_two_title_font, tv_two_title_position, tv_two_value_size, tv_two_value_position,
             tv_two_units_size, tv_two_units_position, tv_two_pointer_width, tv_three_back_rad, tv_three_title_size,
-            tv_three_title_position, tv_three_value_size, tv_three_value_position , tv_three_units_size,tv_three_units_position;
+            tv_three_title_position, tv_three_value_size, tv_three_value_position, tv_three_units_size, tv_three_units_position;
     private SeekBar seek_two_back_rad, seek_two_title_font, seek_two_title_position, seek_two_value_size, seek_two_value_position,
             seek_two_units_size, seek_two_units_position, seek_two_pointer_width, seek_value, seek_three_back_rad, seek_three_title_size,
-            seek_three_title_position, seek_three_value_size, seek_three_value_position , seek_three_units_size,seek_three_units_position;
+            seek_three_title_position, seek_three_value_size, seek_three_value_position, seek_three_units_size, seek_three_units_position;
 
     private SwitchView iosbtn_two_value_show, iosbtn_two_range_show, iosbtn_three_value_show;
 
+    private ImageView iv_finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         setContentView(R.layout.activity_obdother_style);
 
         initView();
+        display.setClickable(false);
         Intent intent = getIntent();
         displayId = intent.getIntExtra("DisplayId", 0);
         displayStyle = intent.getIntExtra("DisplayStyle", 0);
@@ -91,23 +93,18 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         //style 2 back color
         btn_two_back_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_back_color_" + displayId, "0")));
         et_two_back_color.setText((String) SPUtil.get(this, "dashboardsdisplay_two_back_color_" + displayId, "0"));
-        display.setStyle_two_back_color("#" + SPUtil.get(this, "dashboardsdisplay_two_back_color_" + displayId, "0"));
         //style 2 back rad
         seek_two_back_rad.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_back_rad_" + displayId, 60));
         tv_two_back_rad.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_back_rad_" + displayId, 60) + "");
-        display.setStyle_two_back_rad((Integer) SPUtil.get(this, "dashboardsdisplay_two_back_rad_" + displayId, 60));
         //style 2 title color
         btn_two_title_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_title_color_" + displayId, "0")));
         et_two_title_color.setText((String) SPUtil.get(this, "dashboardsdisplay_two_title_color_" + displayId, "0"));
-        display.setStyle_two_title_color("#" + SPUtil.get(this, "dashboardsdisplay_two_title_color_" + displayId, "0"));
         //style 2 title font
         seek_two_title_font.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_size_" + displayId, 8));
         tv_two_title_font.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_size_" + displayId, 8) + "");
-        display.setStyle_two_title_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_size_" + displayId, 8));
         //syule 2 title position
         seek_two_title_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_position_" + displayId, 40));
         tv_two_title_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_position_" + displayId, 40) + "");
-        display.setStyle_two_title_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_position_" + displayId, 40));
         //style 2 value  show
         if ((boolean) SPUtil.get(this, "dashboardsdisplay_two_value_show_" + displayId, true)) {
             iosbtn_two_value_show.setOpened(true);
@@ -115,35 +112,27 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         //style 2 value color
         btn_two_value_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_value_color_" + displayId, "0")));
         et_two_value_color.setText((String) SPUtil.get(this, "dashboardsdisplay_two_value_color_" + displayId, "0"));
-        display.setStyle_two_value_color("#" + SPUtil.get(this, "dashboardsdisplay_two_value_color_" + displayId, "0"));
         //style 2 calue
         seek_two_value_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_size_" + displayId, 18));
         tv_two_value_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_size_" + displayId, 18) + "");
-        display.setStyle_two_value_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_size_" + displayId, 18));
         //style 2 value position
         seek_two_value_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_position_" + displayId, 14));
         tv_two_value_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_position_" + displayId, 14) + "");
-        display.setStyle_two_value_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_position_" + displayId, 14));
         //style 2 unites color
         btn_two_units_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_units_color_" + displayId, "0")));
         et_two_units_color.setText((String) SPUtil.get(this, "dashboardsdisplay_two_units_color_" + displayId, "0"));
-        display.setStyle_two_units_color("#" + SPUtil.get(this, "dashboardsdisplay_two_units_color_" + displayId, "0"));
         //style 2 units size
         seek_two_units_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_size_" + displayId, 0));
         tv_two_units_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_size_" + displayId, 0) + "");
-        display.setStyle_two_units_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_size_" + displayId, 0));
         //style 2 units position
         seek_two_units_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_position_" + displayId, 0));
         tv_two_units_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_position_" + displayId, 0) + "");
-        display.setStyle_two_units_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_position_" + displayId, 0));
         //style 2 pointer color
         btn_two_pointer_dolor.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_pointer_color_" + displayId, "0")));
         et_two_pointer_dolor.setText((String) SPUtil.get(this, "dashboardsdisplay_two_pointer_color_" + displayId, "0"));
-        display.setStyle_two_pointer_color("#" + SPUtil.get(this, "dashboardsdisplay_two_pointer_color_" + displayId, "0"));
         //style 2 pointer width
         seek_two_pointer_width.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_two_pointer_width_" + displayId, 0));
         tv_two_pointer_width.setText((Integer) SPUtil.get(this, "dashboardsdisplay_two_pointer_width_" + displayId, 0) + "");
-        display.setStyle_two_pointer_width((Integer) SPUtil.get(this, "dashboardsdisplay_two_pointer_width_" + displayId, 0));
         //style 2 range show
         if ((boolean) SPUtil.get(this, "dashboardsdisplay_two_range_show_" + displayId, true)) {
             iosbtn_two_range_show.setOpened(true);
@@ -151,31 +140,24 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         //style 2 range color
         btn_two_range_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_two_range_color_" + displayId, "0")));
         et_two_range_color.setText((String) SPUtil.get(this, "dashboardsdisplay_two_range_color_" + displayId, "0"));
-        display.setStyle_two_range_color("#" + SPUtil.get(this, "dashboardsdisplay_two_range_color_" + displayId, "0"));
         //style 3 back inner
         btn_three_inner_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_inner_color_" + displayId, "0")));
         et_three_inner_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_inner_color_" + displayId, "0"));
-        display.setStyle_three_inner_color("#" + SPUtil.get(this, "dashboardsdisplay_three_inner_color_" + displayId, "0"));
         //style 3 back outer
         btn_three_outer_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_outer_color_" + displayId, "0")));
         et_three_outer_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_outer_color_" + displayId, "0"));
-        display.setStyle_three_outer_color("#" + SPUtil.get(this, "dashboardsdisplay_three_outer_color_" + displayId, "0"));
         //style 3 back rad
         seek_three_back_rad.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_back_rad_" + displayId, 100));
         tv_three_back_rad.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_back_rad_" + displayId, 100) + "");
-        display.setStyle_three_back_rad((Integer) SPUtil.get(this, "dashboardsdisplay_three_back_rad_" + displayId, 100));
         //style 3 title color
         btn_three_title_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_title_color_" + displayId, "0")));
         et_three_title_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_title_color_" + displayId, "0"));
-        display.setStyle_three_title_color("#" + SPUtil.get(this, "dashboardsdisplay_three_title_color_" + displayId, "0"));
         //style 3 title size
         seek_three_title_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_size_" + displayId, 14));
         tv_three_title_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_size_" + displayId, 14) + "");
-        display.setStyle_three_title_size((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_size_" + displayId, 14));
         //style 3 title position
         seek_three_title_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_position_" + displayId, 34));
         tv_three_title_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_position_" + displayId, 34) + "");
-        display.setStyle_three_title_position((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_position_" + displayId, 34));
         //style 3 value show
         if ((boolean) SPUtil.get(this, "dashboardsdisplay_three_value_show_" + displayId, true)) {
             iosbtn_three_value_show.setOpened(true);
@@ -183,31 +165,54 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         //style 3 value color
         btn_three_value_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_value_color_" + displayId, "0")));
         et_three_value_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_value_color_" + displayId, "0"));
-        display.setStyle_three_value_color("#" + SPUtil.get(this, "dashboardsdisplay_three_value_color_" + displayId, "0"));
         //style 3 value size
         seek_three_value_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_size_" + displayId, 23));
         tv_three_value_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_size_" + displayId, 23) + "");
-        display.setStyle_three_value_size((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_size_" + displayId, 23));
         //style 3 value position
         seek_three_value_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_position_" + displayId, 63));
         tv_three_value_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_position_" + displayId, 63) + "");
-        display.setStyle_three_value_position((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_position_" + displayId, 63));
         //style 3 units color
         btn_three_units_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_units_color_" + displayId, "0")));
         et_three_units_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_units_color_" + displayId, "0"));
-        display.setStyle_three_units_color("#" + SPUtil.get(this, "dashboardsdisplay_three_units_color_" + displayId, "0"));
         //style 3 units size
-        seek_three_units_size.setProgress((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_size_"+displayId , 14));
-        tv_three_units_size.setText((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_size_"+displayId , 14)+"");
-        display.setStyle_three_units_size((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_size_"+displayId , 14));
+        seek_three_units_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_size_" + displayId, 14));
+        tv_three_units_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_size_" + displayId, 14) + "");
         //style 3 units position
-        seek_three_units_position.setProgress((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_position_"+displayId , 80));
-        tv_three_units_position.setText((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_position_"+displayId , 80)+"");
-        display.setStyle_three_units_position((Integer) SPUtil.get(this , "dashboardsdisplay_three_units_position_"+displayId , 80));
+        seek_three_units_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_position_" + displayId, 80));
+        tv_three_units_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_position_" + displayId, 80) + "");
         //style 3 frame color
-        btn_three_frame_color.setBackgroundColor(Color.parseColor("#"+SPUtil.get(this , "dashboardsdisplay_three_frame_color_"+displayId,"")));
-        et_three_frame_color.setText((String)SPUtil.get(this , "dashboardsdisplay_three_frame_color_"+displayId,""));
-        display.setStyle_three_frame_color("#"+SPUtil.get(this , "dashboardsdisplay_three_frame_color_"+displayId,""));
+        btn_three_frame_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_three_frame_color_" + displayId, "")));
+        et_three_frame_color.setText((String) SPUtil.get(this, "dashboardsdisplay_three_frame_color_" + displayId, ""));
+
+        //初始化
+        display.setStyle_two_back_color("#" + SPUtil.get(this, "dashboardsdisplay_two_back_color_" + displayId, "0"));
+        display.setStyle_two_back_rad((Integer) SPUtil.get(this, "dashboardsdisplay_two_back_rad_" + displayId, 60));
+        display.setStyle_two_title_color("#" + SPUtil.get(this, "dashboardsdisplay_two_title_color_" + displayId, "0"));
+        display.setStyle_two_title_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_size_" + displayId, 8));
+        display.setStyle_two_title_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_title_position_" + displayId, 40));
+        display.setStyle_two_value_color("#" + SPUtil.get(this, "dashboardsdisplay_two_value_color_" + displayId, "0"));
+        display.setStyle_two_value_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_size_" + displayId, 18));
+        display.setStyle_two_value_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_value_position_" + displayId, 14));
+        display.setStyle_two_units_color("#" + SPUtil.get(this, "dashboardsdisplay_two_units_color_" + displayId, "0"));
+        display.setStyle_two_units_size((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_size_" + displayId, 0));
+        display.setStyle_two_units_position((Integer) SPUtil.get(this, "dashboardsdisplay_two_units_position_" + displayId, 0));
+        display.setStyle_two_pointer_color("#" + SPUtil.get(this, "dashboardsdisplay_two_pointer_color_" + displayId, "0"));
+        display.setStyle_two_pointer_width((Integer) SPUtil.get(this, "dashboardsdisplay_two_pointer_width_" + displayId, 0));
+        display.setStyle_two_range_color("#" + SPUtil.get(this, "dashboardsdisplay_two_range_color_" + displayId, "0"));
+        display.setStyle_three_inner_color("#" + SPUtil.get(this, "dashboardsdisplay_three_inner_color_" + displayId, "0"));
+        display.setStyle_three_outer_color("#" + SPUtil.get(this, "dashboardsdisplay_three_outer_color_" + displayId, "0"));
+        display.setStyle_three_back_rad((Integer) SPUtil.get(this, "dashboardsdisplay_three_back_rad_" + displayId, 100));
+        display.setStyle_three_title_color("#" + SPUtil.get(this, "dashboardsdisplay_three_title_color_" + displayId, "0"));
+        display.setStyle_three_title_size((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_size_" + displayId, 14));
+        display.setStyle_three_title_position((Integer) SPUtil.get(this, "dashboardsdisplay_three_title_position_" + displayId, 34));
+        display.setStyle_three_value_color("#" + SPUtil.get(this, "dashboardsdisplay_three_value_color_" + displayId, "0"));
+        display.setStyle_three_value_size((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_size_" + displayId, 23));
+        display.setStyle_three_value_position((Integer) SPUtil.get(this, "dashboardsdisplay_three_value_position_" + displayId, 63));
+        display.setStyle_three_units_color("#" + SPUtil.get(this, "dashboardsdisplay_three_units_color_" + displayId, "0"));
+        display.setStyle_three_units_size((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_size_" + displayId, 14));
+        display.setStyle_three_units_position((Integer) SPUtil.get(this, "dashboardsdisplay_three_units_position_" + displayId, 80));
+        display.setStyle_three_frame_color("#" + SPUtil.get(this, "dashboardsdisplay_three_frame_color_" + displayId, ""));
+
 
     }
 
@@ -218,34 +223,42 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
             case R.id.seek_two_back_rad:
                 tv_two_back_rad.setText(i + "");
                 display.setStyle_two_back_rad(i);
+                SPUtil.put(this, "dashboardsdisplay_two_back_rad_" + displayId, i);
                 break;
             case R.id.seek_two_title_font:
                 display.setStyle_two_title_size(i);
                 tv_two_title_font.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_two_title_size_" + displayId, i);
                 break;
             case R.id.seek_two_title_position:
                 display.setStyle_two_title_position(i);
                 tv_two_title_position.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_two_title_position_" + displayId, i);
                 break;
             case R.id.seek_two_value_size:
                 display.setStyle_two_value_size(i);
                 tv_two_value_size.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_two_value_size_" + displayId, i);
                 break;
             case R.id.seek_two_value_position:
                 tv_two_value_position.setText(i + "");
                 display.setStyle_two_value_position(i);
+                SPUtil.put(this, "dashboardsdisplay_two_value_position_" + displayId, i);
                 break;
             case R.id.seek_two_units_size:
                 display.setStyle_two_units_size(i);
                 tv_two_units_size.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_two_units_size_" + displayId, i);
                 break;
             case R.id.seek_two_units_position:
                 display.setStyle_two_units_position(i);
                 tv_two_units_position.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_two_units_position_" + displayId, i);
                 break;
             case R.id.seek_two_pointer_width:
                 tv_two_pointer_width.setText(i + "");
                 display.setStyle_two_pointer_width(i);
+                SPUtil.put(this, "dashboardsdisplay_two_pointer_width_" + displayId, i);
                 break;
             case R.id.seek_value:
                 display.setValue(i);
@@ -253,30 +266,37 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
             case R.id.seek_three_back_rad:
                 display.setStyle_three_back_rad(i);
                 tv_three_back_rad.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_three_back_rad_" + displayId, i);
                 break;
             case R.id.seek_three_title_size:
                 display.setStyle_three_title_size(i);
                 tv_three_title_size.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_three_title_size_" + displayId, i);
                 break;
             case R.id.seek_three_title_position:
                 display.setStyle_three_title_position(i);
                 tv_three_title_position.setText(i + "");
+                SPUtil.put(this, "dashboardsdisplay_three_title_position_" + displayId, i);
                 break;
             case R.id.seek_three_value_size:
                 tv_three_value_size.setText(i + "");
                 display.setStyle_three_value_size(i);
+                SPUtil.put(this, "dashboardsdisplay_three_value_size_" + displayId, i);
                 break;
             case R.id.seek_three_value_position:
                 tv_three_value_position.setText(i + "");
                 display.setStyle_three_value_position(i);
+                SPUtil.put(this, "dashboardsdisplay_three_value_position_" + displayId, i);
                 break;
             case R.id.seek_three_units_size:
-                tv_three_units_size.setText(i+"");
+                tv_three_units_size.setText(i + "");
                 display.setStyle_three_units_size(i);
+                SPUtil.put(this, "dashboardsdisplay_three_units_size_" + displayId, i);
                 break;
             case R.id.seek_three_units_position:
-                tv_three_units_position.setText(i+"");
+                tv_three_units_position.setText(i + "");
                 display.setStyle_three_units_position(i);
+                SPUtil.put(this, "dashboardsdisplay_three_units_position_" + displayId, i);
                 break;
         }
     }
@@ -427,6 +447,9 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         et_three_frame_color.addTextChangedListener(this);
         btn_three_frame_color = (Button) findViewById(R.id.btn_three_frame_color);
         btn_three_frame_color.setOnClickListener(this);
+        //
+        iv_finish = (ImageView) findViewById(R.id.iv_other_finish);
+        iv_finish.setOnClickListener(this);
 
     }
 
@@ -523,9 +546,15 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
                 et_style = 11;
                 break;
             case R.id.btn_three_frame_color:
-                showColorPickDialog("dashboardsdisplay_three_frame_color_"+displayId , btn_three_frame_color , et_three_frame_color);
+                showColorPickDialog("dashboardsdisplay_three_frame_color_" + displayId, btn_three_frame_color, et_three_frame_color);
                 et_three_frame_color.requestFocus();
                 et_style = 12;
+                break;
+            case R.id.iv_finish:
+                //这里要发送广播  然后重新绘制
+                Intent intent = new Intent("changeDisplay");
+                sendBroadcast(intent);
+                finish();
                 break;
         }
     }
@@ -579,7 +608,7 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
                 a = a.length() > 7 ? a :
                         a + "00000000".substring(0, 8 - a.length());
                 //点击外部取消的时候把数据存到SP里面了
-                SPUtil.put(OBDOtherStyleActivity.this, initkey, a);
+                SPUtil.put(OBDOtherStyleActivity.this, initkey + displayId, a);
                 if (et_style == 1) {
                     display.setStyle_two_back_color("#" + a);
                 } else if (et_style == 2) {
@@ -600,10 +629,10 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
                     display.setStyle_three_title_color("#" + a);
                 } else if (et_style == 10) {
                     display.setStyle_three_value_color("#" + a);
-                }else if (et_style == 11){
-                    display.setStyle_three_units_color("#"+a);
-                }else if (et_style == 12){
-                    display.setStyle_three_frame_color("#"+a);
+                } else if (et_style == 11) {
+                    display.setStyle_three_units_color("#" + a);
+                } else if (et_style == 12) {
+                    display.setStyle_three_frame_color("#" + a);
                 }
 
 
@@ -632,39 +661,51 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         if (et_two_back_color.hasFocus()) {
             btn_two_back_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_back_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_back_color_" + displayId, color_str);
         } else if (et_two_title_color.hasFocus()) {
             btn_two_title_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_title_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_title_color_" + displayId, color_str);
         } else if (et_two_value_color.hasFocus()) {
             btn_two_value_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_value_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_value_color_" + displayId, color_str);
         } else if (et_two_units_color.hasFocus()) {
             btn_two_units_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_units_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_units_color_" + displayId, color_str);
         } else if (et_two_pointer_dolor.hasFocus()) {
             btn_two_pointer_dolor.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_pointer_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_pointer_color_" + displayId, color_str);
         } else if (et_two_range_color.hasFocus()) {
             btn_two_range_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_two_range_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_two_range_color_" + displayId, color_str);
         } else if (et_three_inner_color.hasFocus()) {
             btn_three_inner_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_three_inner_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_inner_color_" + displayId, color_str);
         } else if (et_three_outer_color.hasFocus()) {
             btn_three_outer_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_three_outer_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_outer_color_" + displayId, color_str);
         } else if (et_three_title_color.hasFocus()) {
             btn_three_title_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_three_title_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_title_color_" + displayId, color_str);
         } else if (et_three_value_color.hasFocus()) {
             btn_three_value_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_three_value_color("#" + color_str);
-        }else if (et_three_units_color .hasFocus()){
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_value_color_" + displayId, color_str);
+        } else if (et_three_units_color.hasFocus()) {
             btn_three_units_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setStyle_three_units_color("#" + color_str);
-        }else if (et_three_frame_color.hasFocus()){
-            btn_three_frame_color.setBackgroundColor(Color.parseColor("#"+color_str));
-            display.setStyle_three_frame_color("#"+color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_units_color_" + displayId, color_str);
+        } else if (et_three_frame_color.hasFocus()) {
+            btn_three_frame_color.setBackgroundColor(Color.parseColor("#" + color_str));
+            display.setStyle_three_frame_color("#" + color_str);
+            SPUtil.put(OBDOtherStyleActivity.this, "dashboardsdisplay_three_frame_color_" + displayId, color_str);
         }
 
 
@@ -684,5 +725,11 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         win.setAttributes(lp);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        //这里要发送广播  然后重新绘制
+        Intent intent = new Intent("changeDisplay");
+        sendBroadcast(intent);
+        finish();
+    }
 }

@@ -43,6 +43,8 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
     private BroadcastReceiver br;
     private DashboardsView boards_one, boards_two, boards_three, boards_four, boards_five, boards_six;
 
+    private BroadcastReceiver br_bring_to_first;
+
 
     @Nullable
     @Override
@@ -66,18 +68,19 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
+
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 0);
+        boards_one = new DashboardsView(getActivity(), 1);
         initDisplay(boards_one);
-        boards_two = new DashboardsView(getActivity(), 2, 0);
+        boards_two = new DashboardsView(getActivity(), 2);
         initDisplay(boards_two);
-        boards_three = new DashboardsView(getActivity(), 3, 0);
+        boards_three = new DashboardsView(getActivity(), 3);
         initDisplay(boards_three);
-        boards_four = new DashboardsView(getActivity(), 4, 0);
+        boards_four = new DashboardsView(getActivity(), 4);
         initDisplay(boards_four);
-        boards_five = new DashboardsView(getActivity(), 5, 0);
+        boards_five = new DashboardsView(getActivity(), 5);
         initDisplay(boards_five);
-        boards_six = new DashboardsView(getActivity(), 6, 0);
+        boards_six = new DashboardsView(getActivity(), 6);
         initDisplay(boards_six);
 
         br = new BroadcastReceiver() {
@@ -92,18 +95,47 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
                 initDisplay(boards_six);
 
 
+            }
+        };
+
+        br_bring_to_first = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int disId = intent.getIntExtra("id", 0);
+                if (disId == 1) {
+                    boards_one.bringToFront();
+                } else if (disId == 2) {
+                    boards_two.bringToFront();
+                } else if (disId == 3) {
+                    boards_three.bringToFront();
+                } else if (disId == 4) {
+                    boards_four.bringToFront();
+                } else if (disId == 5) {
+                    boards_five.bringToFront();
+                } else if (disId == 6) {
+                    boards_six.bringToFront();
+                }
+
 
             }
         };
+
+
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("changeDisplay");
         getActivity().registerReceiver(br, intentFilter);
 
+        IntentFilter intent_bring = new IntentFilter();
+        intent_bring.addAction("bringToFirst");
+        getActivity().registerReceiver(br_bring_to_first, intent_bring);
+
+
     }
 
     private void initDisplay(DashboardsView display) {
         display.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        display.setStyle((Integer) SPUtil.get(getActivity(), "display_style_1", 0));
         display.setStartAngle((Integer) SPUtil.get(getActivity(), "dashboardsdisplayconfiguration_start_" + display.getMyDisplayId(), 0));
         display.setEndAngle((Integer) SPUtil.get(getActivity(), "dashboardsdisplayconfiguration_end_" + display.getMyDisplayId(), 0));
         display.setColor_back_inner_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_style_back_innercolor_" + display.getMyDisplayId(), "0"));
@@ -173,6 +205,8 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         display.setStyle_three_units_size((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_units_size_" + display.getMyDisplayId(), 0));
         display.setStyle_three_units_position((Integer) SPUtil.get(getActivity(), "dashboardsdisplay_three_units_position_" + display.getMyDisplayId(), 0));
         display.setStyle_three_frame_color("#" + SPUtil.get(getActivity(), "dashboardsdisplay_three_frame_color_" + display.getMyDisplayId(), "0"));
+        display.setRemoveDisplay((boolean) SPUtil.get(getActivity(), "display_isRemoveDisplay_" + display.getMyDisplayId(), false));
+
 
         mRe.addView(display,
                 //                   把传过来的数转化成Int型   然后  通过自定义方法变成x123  形式  变成百分比  乘以宽度x375

@@ -48,7 +48,7 @@ public class OBDDashboardsThirdPageFragment extends Fragment {
 
 
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 0);
+        boards_one = new DashboardsView(getActivity(), 1);
         boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,

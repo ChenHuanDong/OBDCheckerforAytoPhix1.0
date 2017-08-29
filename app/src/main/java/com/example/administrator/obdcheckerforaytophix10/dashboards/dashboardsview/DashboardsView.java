@@ -22,6 +22,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -68,7 +69,7 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int textStyle = 0;
 
     private int myDisplayId;
-    private int style = 1;
+    private int style = 0;
     private int max = 160;
     private int min = 0;
 
@@ -158,14 +159,21 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     private String style_three_frame_color = "#000000";
 
+    private boolean isRrmoveDisplay = false;
+    //拖拽
+    private boolean isDrawandMove = false;
+    private int x;
+    private int y;
+    private int lastX;
+    private int lastY;
 
-    public DashboardsView(Context context, int myId, int style) {
+
+    public DashboardsView(Context context, int myId) {
         super(context);
 
         this.setOnClickListener(this);
         mContext = context;
         myDisplayId = myId;
-        this.style = style;
         initView();
 
 
@@ -199,67 +207,77 @@ public class DashboardsView extends View implements View.OnClickListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if (style == 0) {
-            //绘制最外层黑色圆   带渐变
-            drawOutCircle(canvas);
+        //判断是否romove  Display
+        if (!isRrmoveDisplay) {
 
-            if (range_show) {
-                //绘制Range
-                drawRange(canvas);
-            }
+            if (style == 0) {
+                //绘制最外层黑色圆   带渐变
+                drawOutCircle(canvas);
 
-            //绘制四周的长短刻度   以及绘制文字
-            drawScale(canvas);
-            if (isPointerShow) {
-                //绘制中间的橘黄色指针
-                drawPointer(canvas);
-                //绘制中间的白色圆球
-                drawCenterCircle(canvas);
+                if (range_show) {
+                    //绘制Range
+                    drawRange(canvas);
+                }
+
+                //绘制四周的长短刻度   以及绘制文字
+                drawScale(canvas);
+                if (isPointerShow) {
+                    //绘制中间的橘黄色指针
+                    drawPointer(canvas);
+                    //绘制中间的白色圆球
+                    drawCenterCircle(canvas);
+                }
+                //绘制标题
+                drawTitle(canvas);
+                //绘制 矩形下方 下方数值
+                if (isValueshow) {
+                    drawBottomText(canvas);
+                }
+                //绘制单位
+                drawUnitslabel(canvas);
+            } else if (style == 1) {
+                //绘制底层表盘
+                drawDown_two(canvas);
+                //绘制渐变的圆
+                drawDradientCircle(canvas);
+                //绘制渐变圆上面的覆盖的两个图片
+                drawCoverBitmap(canvas);
+                //绘制MPH  标题文字
+                draw_two_title_text(canvas);
+                //绘制下面蓝色圆弧
+                drawTwoBottomArw(canvas);
+                //绘制灰色圆弧在蓝色圆弧上面   (这里注意 最后输入结果的时候需要注意一下)  而且画笔只变一下颜色就可以了
+                drawTwoTopArc(canvas);
+                //自定义字体文字
+                if (is_two_value_show) {
+                    drawValueText(canvas);
+                }
+                //绘制指针  三角和线
+                drawStyleTwoPointer(canvas);
+            } else if (style == 2) {
+                //绘制圆角阴影
+                drawCircleShadle(canvas);
+                //绘制底盘颜色
+                drawStyleThreeBottom(canvas);
+                //绘制里面的圆角矩形
+                drawStyleThreeCenter(canvas);
+                //绘制渐变圆
+                drawStyleThreeCircle(canvas);
+                //绘制文字Top And  Bottom
+                drawStyThreeTop(canvas);
+                //绘制中心数值
+                if (style_three_value_show) {
+                    drawStyThreeCenter(canvas);
+                }
             }
-            //绘制标题
-            drawTitle(canvas);
-            //绘制 矩形下方 下方数值
-            if (isValueshow) {
-                drawBottomText(canvas);
-            }
-            //绘制单位
-            drawUnitslabel(canvas);
-        } else if (style == 1) {
-            //绘制底层表盘
-            drawDown_two(canvas);
-            //绘制渐变的圆
-            drawDradientCircle(canvas);
-            //绘制渐变圆上面的覆盖的两个图片
-            drawCoverBitmap(canvas);
-            //绘制MPH  标题文字
-            draw_two_title_text(canvas);
-            //绘制下面蓝色圆弧
-            drawTwoBottomArw(canvas);
-            //绘制灰色圆弧在蓝色圆弧上面   (这里注意 最后输入结果的时候需要注意一下)  而且画笔只变一下颜色就可以了
-            drawTwoTopArc(canvas);
-            //自定义字体文字
-            if (is_two_value_show) {
-                drawValueText(canvas);
-            }
-            //绘制指针  三角和线
-            drawStyleTwoPointer(canvas);
-        } else if (style == 2) {
-            //绘制圆角阴影
-            drawCircleShadle(canvas);
-            //绘制底盘颜色
-            drawStyleThreeBottom(canvas);
-            //绘制里面的圆角矩形
-            drawStyleThreeCenter(canvas);
-            //绘制渐变圆
-            drawStyleThreeCircle(canvas);
-            //绘制文字Top And  Bottom
-            drawStyThreeTop(canvas);
-            //绘制中心数值
-            if (style_three_value_show) {
-                drawStyThreeCenter(canvas);
-            }
+        }
 
 
+        if (isDrawandMove) {
+            mPaint.setColor(getResources().getColor(R.color.colorDrawMove));
+            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setStrokeWidth(0);
+            canvas.drawRect(0, 0, getWidth(), getWidth(), mPaint);
         }
 
 
@@ -788,7 +806,7 @@ public class DashboardsView extends View implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //经典  自定义    if  后面加了！  试了为方便调试  最后要去掉！别忘了
-        if (!(boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
+        if ((boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
 
             //经典模式打开只有DC
             final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
@@ -822,6 +840,12 @@ public class DashboardsView extends View implements View.OnClickListener {
                     dia_dc.dismiss();
                     //点击确定发送广播 把初始值最终值发送
                     Intent intent = new Intent("changeDisplay");
+                    if (et_start.getText().length() == 0) {
+                        et_start.setText(0 + "");
+                    }
+                    if (et_end.getText().length() == 0) {
+                        et_end.setText(0 + "");
+                    }
                     SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
                     SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                     intent.putExtra("myId", myDisplayId);
@@ -859,31 +883,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                     et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_" + myDisplayId, 0) + "");
                     et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId, (float) 0) + "");
                     et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_" + myDisplayId, (float) 0) + "");
-//                    if (myDisplayId == 1) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_one", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_one", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_one", (float) 0) + "");
-//                    } else if (myDisplayId == 2) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_two", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_two", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_two", (float) 0) + "");
-//                    } else if (myDisplayId == 3) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_three", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_three", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_three", (float) 0) + "");
-//                    } else if (myDisplayId == 4) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_four", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_four", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_four", (float) 0) + "");
-//                    } else if (myDisplayId == 5) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_five", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_five", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_five", (float) 0) + "");
-//                    } else if (myDisplayId == 6) {
-//                        et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_six", 0) + "");
-//                        et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_six", (float) 0) + "");
-//                        et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_six", (float) 0) + "");
-//                    }
+
                     //下方确认按钮
                     Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
                     //点击OK修改设置  发送广播
@@ -898,12 +898,19 @@ public class DashboardsView extends View implements View.OnClickListener {
                                     MathUtil.stringToFloat(et_top.getText().toString()) <= (float) 100.0) {
 
                                 dia_sal.dismiss();
-                                Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                                intent.putExtra("identity", "SizeAndLocation");
-                                intent.putExtra("width", et_width.getText().toString());
-                                intent.putExtra("left", et_left.getText().toString());
-                                intent.putExtra("top", et_top.getText().toString());
-                                intent.putExtra("myId", myDisplayId);
+                                Intent intent = new Intent("changeDisplay");
+                                if (et_width.getText().length() == 0) {
+                                    et_width.setText(0 + "");
+                                }
+                                if (et_left.getText().length() == 0) {
+                                    et_left.setText(0 + "");
+                                }
+                                if (et_top.getText().length() == 0) {
+                                    et_top.setText(0 + "");
+                                }
+                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocationwidth_" + myDisplayId, Integer.parseInt(et_width.getText().toString()));
+                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
+                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
                                 mContext.sendBroadcast(intent);
 
                             } else {
@@ -967,6 +974,12 @@ public class DashboardsView extends View implements View.OnClickListener {
                         public void onClick(View view) {
                             dia_dc.dismiss();
                             Intent intent = new Intent("changeDisplay");
+                            if (et_start.getText().length() == 0) {
+                                et_start.setText(0 + "");
+                            }
+                            if (et_end.getText().length() == 0) {
+                                et_end.setText(0 + "");
+                            }
                             SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
                             SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                             mContext.sendBroadcast(intent);
@@ -1005,16 +1018,51 @@ public class DashboardsView extends View implements View.OnClickListener {
                 }
             });
 
+
             //Remove  Display
             ImageView iv_rd = view_dia.findViewById(R.id.display_edit_one_rd);
             iv_rd.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialog.dismiss();
-                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                    intent.putExtra("identity", "RemoveDisplay");
-                    intent.putExtra("myId", myDisplayId);
-                    mContext.sendBroadcast(intent);
+                    final OBDPopDialog dia_rd = new OBDPopDialog(mContext);
+                    View view_rd = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_remove_display, null);
+                    Button btn_ok = view_rd.findViewById(R.id.btn_display_remove_ok);
+                    Button btn_cancel = view_rd.findViewById(R.id.btn_display_remove_cancel);
+
+                    btn_ok.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dia_rd.dismiss();
+                            Intent intent = new Intent("changeDisplay");
+                            SPUtil.put(mContext, "display_isRemoveDisplay_" + myDisplayId, true);
+                            mContext.sendBroadcast(intent);
+                        }
+                    });
+                    btn_cancel.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dia_rd.dismiss();
+                        }
+                    });
+
+                    setPromptWin(dia_rd);
+                    dia_rd.setContentView(view_rd);
+                    dia_rd.setCanceledOnTouchOutside(true);
+                    dia_rd.show();
+
+
+                }
+            });
+
+            //Draw  and  Move
+            RelativeLayout re_draw_and_move = view_dia.findViewById(R.id.re_draw_and_move);
+            re_draw_and_move.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    isDrawandMove = true;
+                    invalidate();
+                    dialog.dismiss();
                 }
             });
 
@@ -1024,12 +1072,11 @@ public class DashboardsView extends View implements View.OnClickListener {
             iv_btf.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    dialog.dismiss();
                     //点击发送广播提醒  把这个ID的Display移到最前
-                    Intent intent = new Intent("dashboardsdisplaysizeandlocation");
-                    intent.putExtra("identity", "BringToFirst");
-                    intent.putExtra("myId", myDisplayId);
+                    Intent intent = new Intent("bringToFirst");
+                    intent.putExtra("id", myDisplayId);
                     mContext.sendBroadcast(intent);
+                    dialog.dismiss();
                 }
             });
 
@@ -1044,12 +1091,53 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (isDrawandMove) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    lastX = (int) event.getRawX();
+                    lastY = (int) event.getRawY();
+
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    x = (int) (event.getRawX() - lastX);
+                    y = (int) (event.getRawY() - lastY);
+                    LogUtil.fussenLog().d(event.getRawX()+"xxx");
+                    setX(x);
+                    setY(y);
+                    break;
+                case MotionEvent.ACTION_UP:
+
+//                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId,
+//                            ((((float) event.getRawX() / ScreenUtils.getScreenWidth(mContext)) * 100)));
+//
+//                    Intent intent = new Intent("changeDisplay");
+//                    mContext.sendBroadcast(intent);
+                    isDrawandMove = false;
+                    invalidate();
+                    break;
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
     private void setWin(OBDPopDialog dia) {
         Window win = dia.getWindow();
         WindowManager.LayoutParams lp = win.getAttributes();
         win.setGravity(Gravity.LEFT | Gravity.TOP);
         lp.x = (int) (ScreenUtils.getScreenWidth(mContext) * 0.053333);
         lp.y = (int) (ScreenUtils.getScreenHeight(mContext) * 0.123647);
+        win.setAttributes(lp);
+    }
+
+    private void setPromptWin(OBDPopDialog dia) {
+        Window win = dia.getWindow();
+        WindowManager.LayoutParams lp = win.getAttributes();
+        win.setGravity(Gravity.LEFT | Gravity.TOP);
+        lp.x = (int) (ScreenUtils.getScreenWidth(mContext) * 0.141333);
+        lp.y = (int) (ScreenUtils.getScreenHeight(mContext) * 0.293663);
         win.setAttributes(lp);
     }
 
@@ -1427,5 +1515,10 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     public int getMyDisplayId() {
         return myDisplayId;
+    }
+
+    public void setRemoveDisplay(boolean rrmoveDisplay) {
+        isRrmoveDisplay = rrmoveDisplay;
+        invalidate();
     }
 }

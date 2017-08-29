@@ -86,7 +86,10 @@
     <string name="fill_enabled">Fill Enabled</string>
     <string name="frame_scale">Frame Scale</string>
     <string name="frame_color">Frame Color</string>
-
+    <string name="customize">Customize</string>
+    <string name="are_you_sure_you_want_to_remove_this_item">Are you sure you want to remove this item?</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
 
     <string name="width">Diameter(10-100)</string>
     <string name="left">Left(0-100)</string>

@@ -47,7 +47,7 @@ public class OBDDashboardsSecondPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //新的Display   每次新建必须设置仪表盘id
-        boards_one = new DashboardsView(getActivity(), 1, 0);
+        boards_one = new DashboardsView(getActivity(), 1);
         boards_one.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_one.setStartAngle(0);
         mRe.addView(boards_one,
@@ -59,7 +59,7 @@ public class OBDDashboardsSecondPageFragment extends Fragment {
                         (float) (572.0f * (float) SPUtil.get(getActivity(), "dashboardsdisplaysizeandlocation_top_7", (float) 0.0) * 0.01)));
 
 
-        boards_two = new DashboardsView(getActivity(), 2, 0);
+        boards_two = new DashboardsView(getActivity(), 2);
         boards_two.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         boards_two.setStartAngle(0);
         mRe.addView(boards_two,
