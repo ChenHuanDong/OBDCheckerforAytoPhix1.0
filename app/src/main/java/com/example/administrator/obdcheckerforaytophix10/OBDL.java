@@ -15,13 +15,17 @@ public class OBDL {
     private String color;
     private int value;
     private boolean isTure;
-    @Generated(hash = 2089982802)
-    public OBDL(Long id, String key, String color, int value, boolean isTure) {
+    private float floValue;
+
+    @Generated(hash = 67291497)
+    public OBDL(Long id, String key, String color, int value, boolean isTure,
+                float floValue) {
         this.id = id;
         this.key = key;
         this.color = color;
         this.value = value;
         this.isTure = isTure;
+        this.floValue = floValue;
     }
 
     public OBDL(Long id, String key, String color) {
@@ -96,6 +100,13 @@ public class OBDL {
         this.isTure = isTure;
     }
 
+    public float getFloValue() {
+        return this.floValue;
+    }
+
+    public void setFloValue(float floValue) {
+        this.floValue = floValue;
+    }
 
 
 }

@@ -61,16 +61,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             LogUtil.fussenLog().d("空的");
             //第一次判断为空的时候把所有初始化全存进去   这个初始化是为了下次不再把数据二次存在数据库数据库
-            OBDL obdl = new OBDL(null , "isFirst" , true);
+            OBDL obdl = new OBDL(null, "isFirst", true);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsisclassic").setTure(true);
             DBTool.getOutInstance().insertBean(obdl);
-        }
-        List<OBDL> list = DBTool.getOutInstance().queryAll();
-        for (OBDL o : list) {
-            LogUtil.fussenLog().d(o.getId() + o.getKey() + o.getValue() + o.getColor() + o.getIsTure());
+            obdl.setId(null).setKey("display_style_1").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_1").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_1").setFloValue(6.667f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_1").setFloValue(1.748f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_2").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+
+
+
         }
 
+
+        List<OBDL> list = DBTool.getOutInstance().queryAll();
+        for (OBDL o : list) {
+            LogUtil.fussenLog().d("\n" + o.getId() + "\n" +
+                    o.getKey() + "\n" + o.getValue() + "\n" + o.getColor() + "\n" +
+                    o.getIsTure() + "\n" + o.getFloValue());
+        }
 
 
     }
