@@ -253,7 +253,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
 
                 int i = intent.getIntExtra("id" , 1);
                 display.setValue((int) (i*3.6f));
-                
+                display.setStyle_one_text((float) i);
 
 
             }

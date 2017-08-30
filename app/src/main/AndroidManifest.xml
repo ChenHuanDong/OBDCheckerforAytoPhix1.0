@@ -16,7 +16,7 @@
 
         <!-- 先改成这个  以后再换回来 -->
         <activity
-            android:name=".dashboards.OBDDashboardsActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!-- <activity -->
-        <!-- android:name=".dashboards.OBDDashboardsActivity" -->
-        <!-- android:launchMode="singleTask"> -->
-        <!-- </activity> -->
+         <activity
+         android:name=".dashboards.OBDDashboardsActivity"
+         android:launchMode="singleTask">
+         </activity>
         <activity
             android:name=".diagnostics.OBDDiagnosticsActivity"
             android:launchMode="singleTask">

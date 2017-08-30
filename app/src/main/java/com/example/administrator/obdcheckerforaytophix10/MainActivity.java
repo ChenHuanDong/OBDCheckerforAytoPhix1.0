@@ -20,9 +20,11 @@ import android.widget.RadioButton;
 import com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
+import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //底部三个RadioButton
@@ -33,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPersionalFragment mPersionalFragment;
     //判断现在是在哪一页
     private int page = 1;
-
-
 
 
     @Override
@@ -54,6 +54,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRadioButton_obd.performClick();
         //设置第一个按钮不可点击
         mRadioButton_obd.setClickable(false);
+
+
+        if (DBTool.getOutInstance().isSave("isFirst")) {
+            LogUtil.fussenLog().d("不为空");
+        } else {
+            LogUtil.fussenLog().d("空的");
+            //第一次判断为空的时候把所有初始化全存进去   这个初始化是为了下次不再把数据二次存在数据库数据库
+            OBDL obdl = new OBDL(null , "isFirst" , true);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsisclassic").setTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+        }
+        List<OBDL> list = DBTool.getOutInstance().queryAll();
+        for (OBDL o : list) {
+            LogUtil.fussenLog().d(o.getId() + o.getKey() + o.getValue() + o.getColor() + o.getIsTure());
+        }
+
 
 
     }

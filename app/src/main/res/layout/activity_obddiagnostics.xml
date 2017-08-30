@@ -5,8 +5,253 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOBDbackground"
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.diagnostics.OBDDiagnosticsActivity">
 
+    <!--标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground">
+
+        <!--最底层的TextView-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/diagnostics"
+            android:textAllCaps="false"
+            android:textColor="@color/colorConnectDetail"
+            android:textSize="@dimen/x18"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x14"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+        <ImageView
+            android:src="@drawable/shuaxin_diagnostics"
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x22"
+            android:layout_marginLeft="@dimen/x338"
+            android:layout_marginTop="@dimen/x11"
+            android:scaleType="fitXY"/>
+
+
+        <!--点击返回的透明按钮-->
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorTransparent"/>
+        <!--点击刷新透明按钮-->
+        <ImageView
+            android:layout_width="@dimen/x37"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x338"/>
+
+    </RelativeLayout>
+
+    <!--四个中间的展示层-->
+    <LinearLayout
+        android:id="@+id/ll_mid_trouble_code"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y558"
+        android:background="#91bef0">
+
+        <ListView
+            android:id="@+id/lv_diagnostic_trouble_code"
+            android:divider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mid_freeze_frame"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y558"
+        android:background="#1212">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mid_readiness_rest"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y558"
+        android:background="#546890">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mid_report"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y558"
+        android:background="#09564a">
+    </LinearLayout>
+
+
+
+
+    <!--下方-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45"
+        android:orientation="horizontal">
+
+        <!--Trouble   Code-->
+        <RelativeLayout
+            android:id="@+id/re_diagnostic_trouble_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorDialogBackGround">
+
+            <ImageView
+                android:src="@drawable/guzhang_b"
+                android:id="@+id/iv_diagnostic_trouble_code"
+                android:layout_width="@dimen/x24"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x35"
+                android:layout_marginTop="@dimen/x4"
+                android:background="@color/colorTransparent"/>
+
+            <!--另一个颜色   colorDashboardsPointer-->
+            <TextView
+                android:id="@+id/tv_diagnostic_trouble_code"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x15"
+                android:layout_marginTop="@dimen/x27"
+                android:gravity="center"
+                android:text="@string/trouble_code"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x10"/>
+
+            <Button
+                android:layout_marginLeft="@dimen/x61"
+                android:layout_marginTop="@dimen/x4"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="15"
+                android:layout_width="@dimen/x14"
+                android:layout_height="@dimen/x14"
+                android:background="@drawable/btn_diagnosticscircle"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/x8"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/x1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_shu_ui"/>
+        <!--Freeze Frame-->
+        <RelativeLayout
+            android:id="@+id/re_diagnostic_freeze_frame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorDialogBackGround">
+
+            <ImageView
+                android:id="@+id/iv_diagnostic_freeze_frame"
+                android:src="@drawable/freeze_b"
+                android:layout_width="@dimen/x24"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x35"
+                android:layout_marginTop="@dimen/x4"
+                android:background="@color/colorTransparent"/>
+
+            <TextView
+                android:id="@+id/tv_diagnostic_freeze_frame"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x15"
+                android:layout_marginTop="@dimen/x27"
+                android:gravity="center"
+                android:text="@string/freeze_frame"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x10"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/x1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_shu_ui"/>
+
+        <!--Readiness Test-->
+        <RelativeLayout
+            android:id="@+id/re_diagnostic_readiness_test"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorDialogBackGround">
+
+            <ImageView
+                android:id="@+id/iv_diagnostic_readiness_test"
+                android:src="@drawable/readiness_b"
+                android:layout_width="@dimen/x24"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x35"
+                android:layout_marginTop="@dimen/x4"
+                android:background="@color/colorTransparent"/>
+
+            <TextView
+                android:id="@+id/tv_diagnostic_readiness_test"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x15"
+                android:layout_marginTop="@dimen/x27"
+                android:gravity="center"
+                android:text="@string/readiness_test"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x10"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/x1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/line_shu_ui"/>
+
+        <!--Report-->
+        <RelativeLayout
+            android:id="@+id/re_diagnostic_report"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorDialogBackGround">
+
+            <ImageView
+                android:id="@+id/iv_diagnostic_report"
+                android:src="@drawable/report_balck"
+                android:layout_width="@dimen/x24"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x35"
+                android:layout_marginTop="@dimen/x4"
+                android:background="@color/colorTransparent"/>
+
+            <TextView
+                android:id="@+id/tv_diagnostic_report"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x15"
+                android:layout_marginTop="@dimen/x27"
+                android:gravity="center"
+                android:text="@string/report"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x10"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

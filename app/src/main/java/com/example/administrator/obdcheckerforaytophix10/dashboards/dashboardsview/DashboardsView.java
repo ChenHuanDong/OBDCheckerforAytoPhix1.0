@@ -167,6 +167,8 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int lastX;
     private int lastY;
 
+    private float style_one_text = 0.0f;
+
 
     public DashboardsView(Context context, int myId) {
         super(context);
@@ -594,11 +596,13 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
 
-
         mPaint.setTextSize((float) ((value_size * getWidth()) / 150.0));
 
-        canvas.drawText("N/A", getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
-
+        if (style_one_text == 0.0f) {
+            canvas.drawText( "N/A" , getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
+        } else {
+            canvas.drawText(style_one_text + "", getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
+        }
     }
 
     //绘制标题
@@ -1104,7 +1108,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                 case MotionEvent.ACTION_MOVE:
                     x = (int) (event.getRawX() - lastX);
                     y = (int) (event.getRawY() - lastY);
-                    LogUtil.fussenLog().d(event.getRawX()+"xxx");
+                    LogUtil.fussenLog().d(event.getRawX() + "xxx");
                     setX(x);
                     setY(y);
                     break;
@@ -1519,6 +1523,11 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     public void setRemoveDisplay(boolean rrmoveDisplay) {
         isRrmoveDisplay = rrmoveDisplay;
+        invalidate();
+    }
+
+    public void setStyle_one_text(float style_one_text) {
+        this.style_one_text = style_one_text;
         invalidate();
     }
 }

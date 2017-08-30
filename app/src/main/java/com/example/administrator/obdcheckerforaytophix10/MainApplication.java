@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
+import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by CHD on 2017/8/7.
@@ -17,10 +19,15 @@ import java.io.File;
 
 public class MainApplication extends Application {
 
+    private static Context sContext;
+    private static DaoMaster sDaoMaster;
+    private static DaoSession sDaoSession;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sContext = this;
 
         SPUtil.put(this, "screenWidth", ScreenUtils.getScreenWidth(this));
         SPUtil.put(this, "screenHeight", ScreenUtils.getScreenHeight(this));
@@ -538,10 +545,25 @@ public class MainApplication extends Application {
         SPUtil.put(this, "display_isRemoveDisplay_5", false);
         SPUtil.put(this, "display_isRemoveDisplay_6", false);
 
+    }
 
+    //对外提供获取DaoMaster
+    public static DaoMaster getDaoMaster() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(sContext, "Settings.db", null);
+        sDaoMaster = new DaoMaster(helper.getWritableDb());
+        return sDaoMaster;
+    }
 
+    public static DaoSession getDaoSession() {
 
+        if (sDaoSession == null) {
+            if (sDaoMaster == null) {
+                sDaoMaster = getDaoMaster();
+            }
+        }
+        sDaoSession = sDaoMaster.newSession();
 
+        return sDaoSession;
     }
 
 
