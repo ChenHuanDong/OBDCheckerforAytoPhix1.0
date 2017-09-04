@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x35"
+        android:background="@color/colorOBDbackground"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:singleLine="true"
+        android:layout_width="@dimen/x260"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x57"
+        android:gravity="center"
+        android:text="@string/clear_fault_codes"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_clear_code"
+        android:textSize="@dimen/x16"/>
+
+    <Button
+        android:id="@+id/btn_diagnostic_historical"
+        android:layout_marginTop="@dimen/x16"
+        android:textAllCaps="false"
+        android:singleLine="true"
+        android:layout_width="@dimen/x260"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x57"
+        android:gravity="center"
+        android:text="@string/historical_trouble_code"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_historical_code"
+        android:textSize="@dimen/x16"/>
+        
+    
+    <ImageView
+        android:background="@color/colorTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x36"/>
+
+</LinearLayout>

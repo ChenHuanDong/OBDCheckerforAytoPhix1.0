@@ -106,6 +106,18 @@ public class DBTool {
         }
     }
 
+    public void upDateFloatByKey(String key , float value){
+        OBDL obdl = sOBDLDao.queryBuilder()
+                .where(OBDLDao.Properties.Key.eq(key))
+                .build().unique();
+        if (obdl == null) {
+            LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自DBTool");
+        } else {
+            obdl.setFloValue(value);
+            sOBDLDao.update(obdl);
+        }
+    }
+
     //根据Key 查返回
     public void upDateIsTrueByKey(String key , boolean istrue){
         OBDL obdl = sOBDLDao.queryBuilder()

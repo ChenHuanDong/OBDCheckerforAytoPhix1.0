@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/x133"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x23"
+        android:layout_marginLeft="@dimen/x19"
+        android:layout_marginTop="@dimen/x23"
+        android:singleLine="true"
+        android:text="@string/freeze_frame_dtc"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x12"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:background="@color/colorDialogBackGround"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x29"
+            android:layout_marginTop="@dimen/x10"
+            android:scaleType="fitXY"
+            android:src="@drawable/guzhang_y"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x23"
+            android:layout_marginLeft="@dimen/x12"
+            android:layout_marginTop="@dimen/x10"
+            android:singleLine="true"
+            android:text="@string/p0103"
+            android:textColor="@color/colorConnectDetail"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x23"
+        android:layout_marginLeft="@dimen/x19"
+        android:layout_marginTop="@dimen/x24"
+        android:singleLine="true"
+        android:text="@string/freeze_frame_Big"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x12"/>
+
+
+</LinearLayout>

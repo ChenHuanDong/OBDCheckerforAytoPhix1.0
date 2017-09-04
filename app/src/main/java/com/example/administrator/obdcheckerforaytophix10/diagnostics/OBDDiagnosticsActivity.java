@@ -1,33 +1,71 @@
 package com.example.administrator.obdcheckerforaytophix10.diagnostics;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
+import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe.AdapterDiagnosticFreeze;
+import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe.BeanDiagnosticFreezeFrame;
+import com.example.administrator.obdcheckerforaytophix10.diagnostics.readinesstest.AdapterReadinessCommon;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.troublecode.AdapterDiagnoticsTrouble;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.troublecode.BeanDiagnoticsTroubleCode;
+import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.MyListView;
 
 import java.util.ArrayList;
 
 public class OBDDiagnosticsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //下面四个可切换的Re
+    //下面四个可切换的Re  中间四个设置隐藏显示  Iv Te 是图标
     private RelativeLayout re_trouble_code, re_freeze_frame, re_readiness_test, re_report;
-    private ImageView iv_trouble_code , iv_freeze_frame, iv_readiness_test, iv_report;
-    private TextView tv_trouble_code , tv_freeze_frame, tv_readiness_test, tv_report;
-    private LinearLayout ll_trouble_code , ll_freeze_frame , ll_readiness_test , ll_report;
-
+    private ImageView iv_trouble_code, iv_freeze_frame, iv_readiness_test, iv_report;
+    private TextView tv_trouble_code, tv_freeze_frame, tv_readiness_test, tv_report;
+    private LinearLayout ll_trouble_code, ll_freeze_frame, ll_readiness_test, ll_report;
+    //Trouble  Code
     private ListView lv_trouble_code;
     private ArrayList<BeanDiagnoticsTroubleCode> data_trouble_code;
     private AdapterDiagnoticsTrouble myAdapterTroubleCode;
+    private TextView tv_progress;
+    private View view_troublecode_head;
+    //Readiness Test
+    private MyListView lv_readiness_complete, lv_readiness_undfinished, lv_readiness_notsupport;
+    private AdapterReadinessCommon myAdapterReadinessComplete, myAdapterReadinessUndfinished, myAdapterReadinessNotSupport;
+    private ArrayList<String> data_readiness_complete, data_readiness_undfinished, data_readiness_notsupport;
+    //Freeze  Frame
+    private ListView lv_freeze_frame;
+    private AdapterDiagnosticFreeze myAdapterFreezeFrame;
+    private ArrayList<BeanDiagnosticFreezeFrame> dataFreezeFrame;
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == 0) {
+                tv_progress.setText(((int)(msg.obj) * 10 + 10) + "%");
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +80,91 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
 
         initView();
         re_trouble_code.performClick();
+
+        //  Trouble Code 初始化
+        MyTroubleCode();
+        //  Readiness Test 初始化
+        MyReadinessTest();
+        //Freeze  Frame
+        MyFreezeFrame();
+
+    }
+
+    private void MyFreezeFrame() {
+        //lv_freeze_frame   myAdapterFreezeFrame    dataFreezeFrame
+        BeanDiagnosticFreezeFrame bean = new BeanDiagnosticFreezeFrame();
+        for (int i = 0; i < 30; i++) {
+            bean.setUpData("Number of trouble code, MIL indicator on...").setBottomData("MIL on,# Trouble codes4,Misfire: Available=False");
+            dataFreezeFrame.add(bean);
+        }
+        myAdapterFreezeFrame.setData(dataFreezeFrame);
+        lv_freeze_frame.setAdapter(myAdapterFreezeFrame);
+        View view = LayoutInflater.from(this).inflate(R.layout.lvhead_diagnostic_freeze_frame, null);
+        lv_freeze_frame.addHeaderView(view);
+
+
+    }
+
+    private void MyReadinessTest() {
+//lv_readiness_complete  myAdapterReadinessComplete   data_readiness_complete
+        data_readiness_complete.add("NMHC Catalyst Monitor");
+        myAdapterReadinessComplete.setData(data_readiness_complete);
+        lv_readiness_complete.setAdapter(myAdapterReadinessComplete);
+        View view = LayoutInflater.from(this).inflate(R.layout.lvhead_diagnostic_readiness_complete, null);
+        lv_readiness_complete.addHeaderView(view);
+//lv_readiness_undfinished  myAdapterReadinessUndfinished   data_readiness_undfinished
+        data_readiness_undfinished.add("Heated Catalyst Monitor");
+        myAdapterReadinessUndfinished.setData(data_readiness_undfinished);
+        lv_readiness_undfinished.setAdapter(myAdapterReadinessUndfinished);
+//lv_readiness_notsupport   myAdapterReadinessNotSupport  data_readiness_notsupport
+        for (int i = 0; i < 30; i++) {
+            data_readiness_notsupport.add("Misfire minitor");
+        }
+        myAdapterReadinessNotSupport.setData(data_readiness_notsupport);
+        lv_readiness_notsupport.setAdapter(myAdapterReadinessNotSupport);
+
+
+    }
+
+    private void MyTroubleCode() {
         BeanDiagnoticsTroubleCode bean = new BeanDiagnoticsTroubleCode();
         for (int i = 0; i < 50; i++) {
-            bean.setTitle("P0103").setItem("02---"+(i+1)).setRed(true);
+            bean.setTitle("P0103").setItem("02---" + (i + 1)).setRed(true);
             data_trouble_code.add(bean);
         }
         myAdapterTroubleCode.setData(data_trouble_code);
         lv_trouble_code.setAdapter(myAdapterTroubleCode);
+        final ProgressBar pb = view_troublecode_head.findViewById(R.id.pb_diagnostic_troublecode);
 
+        //添加加的数据
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    pb.setProgress(i * 10 + 10);
+                    Message msg = new Message();
+                    msg.what = 0;
+                    msg.obj = i;
+                    mHandler.sendMessage(msg);
+                }
+            }
+        }).start();
+        //为底部橘色圆环添加动画
+        ImageView iv_troublecode_wait = view_troublecode_head.findViewById(R.id.iv_diagno_trouble_wait);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv_troublecode_wait, "rotation", 0, 360);
+        animator.setDuration(5000);
+        animator.setRepeatCount(-1);
+        animator.start();
+        lv_trouble_code.addHeaderView(view_troublecode_head);
+        View view_troublecode_foot = LayoutInflater.from(this).inflate(R.layout.lvfoot_diagnostic_tiouble_code, null);
+        Button btn_historical = view_troublecode_foot.findViewById(R.id.btn_diagnostic_historical);
+        btn_historical.setOnClickListener(this);
+        lv_trouble_code.addFooterView(view_troublecode_foot);
 
 
     }
@@ -79,12 +194,28 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         lv_trouble_code = (ListView) findViewById(R.id.lv_diagnostic_trouble_code);
         myAdapterTroubleCode = new AdapterDiagnoticsTrouble(this);
         data_trouble_code = new ArrayList<>();
+        view_troublecode_head = LayoutInflater.from(this).inflate(R.layout.lvhead_diagnostic_tiouble_code, null);
+        tv_progress = view_troublecode_head.findViewById(R.id.tv_diagnostic_trouble_code_progressbar);
 
+        //Readiness Test
+        lv_readiness_complete = (MyListView) findViewById(R.id.mylv_complete);
+        myAdapterReadinessComplete = new AdapterReadinessCommon(this);
+        data_readiness_complete = new ArrayList<>();
+        lv_readiness_undfinished = (MyListView) findViewById(R.id.mylv_undfinished);
+        myAdapterReadinessUndfinished = new AdapterReadinessCommon(this);
+        data_readiness_undfinished = new ArrayList<>();
+        lv_readiness_notsupport = (MyListView) findViewById(R.id.mylv_notsupport);
+        myAdapterReadinessNotSupport = new AdapterReadinessCommon(this);
+        data_readiness_notsupport = new ArrayList<>();
+        //Freeze  Frame
+        lv_freeze_frame = (ListView) findViewById(R.id.lv_diagnostic_freeze_frame);
+        myAdapterFreezeFrame = new AdapterDiagnosticFreeze(this);
+        dataFreezeFrame = new ArrayList<>();
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.re_diagnostic_trouble_code:
                 ll_trouble_code.setVisibility(View.VISIBLE);
                 ll_freeze_frame.setVisibility(View.GONE);
@@ -141,6 +272,12 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 tv_readiness_test.setTextColor(getResources().getColor(R.color.colorTextColorDemo));
                 tv_report.setTextColor(getResources().getColor(R.color.colorDashboardsPointer));
                 break;
+            case R.id.btn_diagnostic_historical:
+                Intent intent = new Intent(OBDDiagnosticsActivity.this, OBDDiagnosticHistoricalActivity.class);
+                startActivity(intent);
+                break;
+
+
         }
     }
 }

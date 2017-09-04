@@ -30,4 +30,8 @@
     <color name="colorRomovePrompt">#E5E5E5</color>
     <color name="colorDrawMove">#33fe9002</color>
     <color name="colorTroubleBack">#18191D</color>
+    <color name="colorloaddefaulttext">#E5E5E5</color>
+    <color name="color_btn_back">#9e9e9e</color>
+
+
 </resources>

@@ -61,7 +61,7 @@
         android:layout_marginTop="@dimen/x151"
         android:gravity="center_vertical"
         android:singleLine="true"
-        android:text="@string/three"
+        android:text="@string/two"
         android:textAllCaps="false"
         android:textColor="@color/colorTextColorDemo"
         android:textSize="@dimen/x16"/>

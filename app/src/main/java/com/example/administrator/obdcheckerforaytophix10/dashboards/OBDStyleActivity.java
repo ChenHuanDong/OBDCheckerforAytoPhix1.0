@@ -22,13 +22,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsView;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
+import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
+import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
@@ -74,6 +78,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
     //假数据
     private BroadcastReceiver br;
 
+    private RelativeLayout mRe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,164 +94,201 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_obdstyle);
 
         initView();
-        display.setClickable(false);
         Intent intent = getIntent();
         displayId = intent.getIntExtra("DisplayId", 0);
+
+        display = new DashboardsView(this , displayId);
+
+        display.setClickable(false);
+
+
         display.setStyle(0);
         //设置Value  按照角度比输入   旋转角度 = （最大-最小）/ 分度
         //seekBar  是按照百分比
         seek_value.setProgress(0);
 
-        seek_rangles_startangle.setProgress((int) ((Integer) SPUtil.get(this, "dashboardsdisplayconfiguration_start_" + displayId, (int) 0) / 3.6f));
-        seek_rangles_endargle.setProgress((int) ((Integer) SPUtil.get(this, "dashboardsdisplayconfiguration_end_" + displayId, (int) 0) / 3.6f));
+        seek_rangles_startangle.setProgress((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplayconfiguration_start_" + displayId).getValue()/ 3.6f));
+        seek_rangles_endargle.setProgress((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplayconfiguration_end_" + displayId).getValue() / 3.6f));
+
         //给seekbar   右上角的Tv设置文字
         tv_rangles_startangle.setText((int) (seek_rangles_startangle.getProgress() * 3.6f) + "");
         tv_rangles_endargle.setText((int) (seek_rangles_endargle.getProgress() * 3.6f) + "");
         display.setValue((int) (0 * 3.6f));
         //
-        et_back_color.setText((String) SPUtil.get(this, "dashboardsdisplay_style_back_innercolor_" + displayId, "0"));
-        et_back_out_color.setText((String) SPUtil.get(this, "dashboardsdisplay_style_back_outercolor_" + displayId, "0"));
-        btn_back_color.setBackgroundColor(Color.parseColor("#" + (String) SPUtil.get(this, "dashboardsdisplay_style_back_innercolor_" + displayId, "0")));
-        btn_back_out_color.setBackgroundColor(Color.parseColor("#" + (String) SPUtil.get(this, "dashboardsdisplay_style_back_outercolor_" + displayId, "0")));
+        et_back_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_innercolor_" + displayId).getColor());
+        et_back_out_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_outercolor_" + displayId).getColor());
+
+        btn_back_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_innercolor_" + displayId).getColor()));
+        btn_back_out_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_outercolor_" + displayId).getColor()));
+
         //Title
-        et_title_color.setText((String) SPUtil.get(this, "dashboardsdisplay_title_color_" + displayId, "00000000"));
-        btn_title_color.setBackgroundColor(Color.parseColor("#" + (String) SPUtil.get(this, "dashboardsdisplay_title_color_" + displayId, "0")));
+        et_title_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_color_" + displayId).getColor());
+        btn_title_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_color_" + displayId).getColor()));
+
         //title font
-        seek_title_font.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_title_size_" + displayId, 0));
-        tv_title_font.setText((Integer) SPUtil.get(this, "dashboardsdisplay_title_size_" + displayId, 0) + "");
+        seek_title_font.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_size_" + displayId).getValue());
+        tv_title_font.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_size_" + displayId).getValue() + "");
+
         //title position
-        seek_title_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_title_position_" + displayId, 0));
-        tv_title_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_title_position_" + displayId, 0) + "");
+        seek_title_position.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_position_" + displayId).getValue());
+        tv_title_position.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_position_" + displayId).getValue() + "");
+
         //calue visible
-        if ((boolean) SPUtil.get(this, "dashboardsdisplay_value_show_" + displayId, true)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_show_" + displayId).getIsTure()) {
             iosbtn_value_show.setOpened(true);
         }
         //value color
-        btn_value_color.setBackgroundColor(Color.parseColor("#" + (String) SPUtil.get(this, "dashboardsdisplay_value_color_" + displayId, "0")));
-        et_value_color.setText((String) SPUtil.get(this, "dashboardsdisplay_value_color_" + displayId, "0"));
+        btn_value_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_color_" + displayId).getColor()));
+        et_value_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_color_" + displayId).getColor());
+
         //value  size     默认是12
-        seek_value_size.setProgress((int) (Integer) SPUtil.get(this, "dashboardsdisplay_value_size_" + displayId, 0));
-        tv_value_size.setText((int) (Integer) SPUtil.get(this, "dashboardsdisplay_value_size_" + displayId, 0) + "");
+        seek_value_size.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_size_" + displayId).getValue());
+        tv_value_size.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_size_" + displayId).getValue() + "");
+
         //value  position
-        seek_value_position.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_value_position_" + displayId, 0));
-        tv_value_position.setText((Integer) SPUtil.get(this, "dashboardsdisplay_value_position_" + displayId, 0) + "");
+        seek_value_position.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_position_" + displayId).getValue());
+        tv_value_position.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_position_" + displayId).getValue() + "");
+
         //units  color   三个
-        btn_units_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_units_color_" + displayId, "0")));
-        et_units_color.setText((String) SPUtil.get(this, "dashboardsdisplay_units_color_" + displayId, "0"));
+        btn_units_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_color_" + displayId).getColor()));
+        et_units_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_color_" + displayId).getColor());
+
         //units size
-        seek_units_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_units_size_" + displayId, 0));
-        tv_units_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_units_size_" + displayId, 0) + "");
+        seek_units_size.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_size_" + displayId).getValue());
+        tv_units_size.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_size_" + displayId).getValue() + "");
+
         //units ver
-        seek_units_ver.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_units_ver_" + displayId, 0));
-        tv_units_ver.setText((Integer) SPUtil.get(this, "dashboardsdisplay_units_ver_" + displayId, 0) + "");
+        seek_units_ver.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_ver_" + displayId).getValue());
+        tv_units_ver.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_ver_" + displayId).getValue() + "");
+
         //units hor
-        seek_units_hor.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_units_hor_" + displayId, 0));
-        tv_units_hor.setText((Integer) SPUtil.get(this, "dashboardsdisplay_units_hor_" + displayId, 0) + "");
+        seek_units_hor.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_hor_" + displayId).getValue());
+        tv_units_hor.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_hor_" + displayId).getValue() + "");
+
         //major width
-        seek_major_width.setProgress((int) SPUtil.get(this, "dashboardsdisplay_major_width_" + displayId, (int) 0));
-        tv_major_width.setText((int) SPUtil.get(this, "dashboardsdisplay_major_width_" + displayId, (int) 0) + "");
+        seek_major_width.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_width_" + displayId).getValue());
+        tv_major_width.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_width_" + displayId).getValue() + "");
+
         //maijor  height   37
-        seek_major_height.setProgress((int) SPUtil.get(this, "dashboardsdisplay_major_height_" + displayId, 0));
-        tv_major_height.setText((int) SPUtil.get(this, "dashboardsdisplay_major_height_" + displayId, 0) + "");
+        seek_major_height.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_height_" + displayId).getValue());
+        tv_major_height.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_height_" + displayId).getValue() + "");
+
         //major color
-        btn_mojor_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_major_color_" + displayId, "0")));
-        et_mojor_color.setText((String) SPUtil.get(this, "dashboardsdisplay_major_color_" + displayId, "0"));
+        btn_mojor_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_color_" + displayId).getColor()));
+        et_mojor_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_color_" + displayId).getColor());
+
         //minor width
-        seek_minor_width.setProgress((int) SPUtil.get(this, "dashboardsdisplay_minor_width_" + displayId, (int) 0));
-        tv_minor_width.setText((int) SPUtil.get(this, "dashboardsdisplay_minor_width_" + displayId, (int) 0) + "");
+        seek_minor_width.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_width_" + displayId).getValue());
+        tv_minor_width.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_width_" + displayId).getValue() + "");
+
         //minor height
-        seek_minor_height.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_minor_height_" + displayId, 0));
-        tv_minor_height.setText((Integer) SPUtil.get(this, "dashboardsdisplay_minor_height_" + displayId, 0) + "");
+        seek_minor_height.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_height_" + displayId).getValue());
+        tv_minor_height.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_height_" + displayId).getValue() + "");
+
         //minor color
-        btn_minor_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_minor_color_" + displayId, "0")));
-        et_minor_color.setText((String) SPUtil.get(this, "dashboardsdisplay_minor_color_" + displayId, "0"));
+        btn_minor_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_color_" + displayId).getColor()));
+        et_minor_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_color_" + displayId).getColor());
+
         //lables  visible
-        if ((boolean) SPUtil.get(this, "dashboardsdisplay_lable_show_" + displayId, true)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_show_" + displayId).getIsTure()) {
             iosbtn_lables_show.setOpened(true);
         }
         //lables rotate
-        if ((boolean) SPUtil.get(this, "dashboardsdisplay_lable_rotate_" + displayId, true)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_rotate_" + displayId).getIsTure()) {
             iosbtn_lables_rotate.setOpened(true);
         }
         //lable size
-        seek_lable_size.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_lable_size_" + displayId, 0));
-        tv_lable_size.setText((Integer) SPUtil.get(this, "dashboardsdisplay_lable_size_" + displayId, 0) + "");
+        seek_lable_size.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_size_" + displayId).getValue());
+        tv_lable_size.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_size_" + displayId).getValue() + "");
+
         //lable offset
-        seek_lable_offset.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_lable_offset_" + displayId, 85));
-        tv_lable_offset.setText((Integer) SPUtil.get(this, "dashboardsdisplay_lable_offset_" + displayId, 85) + "");
+        seek_lable_offset.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_offset_" + displayId).getValue());
+        tv_lable_offset.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_offset_" + displayId).getValue() + "");
+
         //pointer show
-        if ((boolean) SPUtil.get(this, "dashboardsdisplay_pointer_show_" + displayId, true)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_show_" + displayId).getIsTure()) {
             iosbtn_pointer_show.setOpened(true);
         }
         //pointer width
-        seek_pointer_width.setProgress((int) SPUtil.get(this, "dashboardsdisplay_pointer_width_" + displayId, 2));
-        tv_pointer_width.setText((int) SPUtil.get(this, "dashboardsdisplay_pointer_width_" + displayId, 2) + "");
+        seek_pointer_width.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_width_" + displayId).getValue());
+        tv_pointer_width.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_width_" + displayId).getValue() + "");
+
         //pointer length
-        seek_pointer_length.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_length_" + displayId, 40));
-        tv_pointer_length.setText((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_length_" + displayId, 40) + "");
+        seek_pointer_length.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_length_" + displayId).getValue());
+        tv_pointer_length.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_length_" + displayId).getValue() + "");
+
         //pointer  color
-        btn_pointer_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_pointer_color_" + displayId, "0")));
-        et_pointer_color.setText((String) SPUtil.get(this, "dashboardsdisplay_pointer_color_" + displayId, "0"));
+        btn_pointer_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_color_" + displayId).getColor()));
+        et_pointer_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_color_" + displayId).getColor());
+
         //point  rad
-        seek_pointer_rad.setProgress((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_rad_" + displayId, 5));
-        tv_pointer_rad.setText((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_rad_" + displayId, 5) + "");
+        seek_pointer_rad.setProgress(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_rad_" + displayId).getValue());
+        tv_pointer_rad.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_rad_" + displayId).getValue() + "");
+
         //center color
-        btn_center_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_center_color_" + displayId, "0")));
-        et_center_color.setText((String) SPUtil.get(this, "dashboardsdisplay_center_color_" + displayId, "0"));
+        btn_center_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_center_color_" + displayId).getColor()));
+        et_center_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_center_color_" + displayId).getColor());
+
         //range visible
-        if ((boolean) SPUtil.get(this, "dashboardsdisplay_range_visible_" + displayId, false)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_visible_" + displayId).getIsTure()) {
             iosbtn_range_show.setOpened(true);
         }
         //range startangle
-        seek_range_start.setProgress((int) ((int) SPUtil.get(this, "dashboardsdisplay_range_startAngle_" + displayId, 0) / 3.6f));
-        tv_range_start.setText((int) ((int) SPUtil.get(this, "dashboardsdisplay_range_startAngle_" + displayId, 0) / 3.6f) + "");
+        seek_range_start.setProgress((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_startAngle_" + displayId).getValue() / 3.6f));
+        tv_range_start.setText((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_startAngle_" + displayId).getValue() / 3.6f) + "");
+
         //range endargle
-        seek_range_end.setProgress((int) ((Integer) SPUtil.get(this, "dashboardsdisplay_range_endAngle_" + displayId, 0) / 3.6f));
-        tv_range_end.setText((int) ((Integer) SPUtil.get(this, "dashboardsdisplay_range_endAngle_" + displayId, 0) / 3.6f) + "");
+        seek_range_end.setProgress((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_endAngle_" + displayId).getValue() / 3.6f));
+        tv_range_end.setText((int) (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_endAngle_" + displayId).getValue() / 3.6f) + "");
+
         //range  color
-        btn_range_color.setBackgroundColor(Color.parseColor("#" + SPUtil.get(this, "dashboardsdisplay_range_color_" + displayId, "0")));
-        et_range_color.setText((String) SPUtil.get(this, "dashboardsdisplay_range_color_" + displayId, "0"));
+        btn_range_color.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_color_" + displayId).getColor()));
+        et_range_color.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_color_" + displayId).getColor());
+
+        display.setStartAngle(DBTool.getOutInstance().getQueryKey("dashboardsdisplayconfiguration_start_" + displayId).getValue());
+        display.setEndAngle(DBTool.getOutInstance().getQueryKey("dashboardsdisplayconfiguration_end_" + displayId).getValue());
+        display.setColor_back_inner_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_innercolor_" + displayId).getColor());
+        display.setColor_back_outer_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_outercolor_" + displayId).getColor());
+        display.setColor_title_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_color_" + displayId).getColor());
+        display.setTitle_text_size(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_size_" + displayId).getValue());
+        display.setTitle_position(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_title_position_" + displayId).getValue());
+        display.setValueshow(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_show_" + displayId).getIsTure());
+        display.setColor_value("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_color_" + displayId).getColor());
+        display.setValue_size(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_size_" + displayId).getValue());
+        display.setValue_position(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_position_" + displayId).getValue());
+        display.setUnits_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_color_" + displayId).getColor());
+        display.setUnits_size(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_size_" + displayId).getValue());
+        display.setUnits_ver(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_ver_" + displayId).getValue());
+        display.setUnits_hor(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_units_hor_" + displayId).getValue());
+        display.setMajor_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_color_" + displayId).getColor());
+        display.setMajor_width(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_width_" + displayId).getValue());
+        display.setMajor_height(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_height_" + displayId).getValue());
+        display.setMinor_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_major_color_" + displayId).getColor());
+        display.setMinor_width(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_width_" + displayId).getValue());
+        display.setMinor_height(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_minor_height_" + displayId).getValue());
+        display.setTextShow(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_show_" + displayId).getIsTure());
+        display.setTextRotate(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_rotate_" + displayId).getIsTure());
+        display.setLable_size(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_size_" + displayId).getValue());
+        display.setLable_offset(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_offset_" + displayId).getValue());
+        display.setPointerShow(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_show_" + displayId).getIsTure());
+        display.setPoint_width(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_width_" + displayId).getValue());
+        display.setPoint_length(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_length_" + displayId).getValue());
+        display.setPoint_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_color_" + displayId).getColor());
+        display.setPoint_rad(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_pointer_rad_" + displayId).getValue());
+        display.setCenter_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_center_color_" + displayId).getColor());
+        display.setRange_show(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_visible_" + displayId).getIsTure());
+        display.setRange_startrangle(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_startAngle_" + displayId).getValue());
+        display.setRange_endrangle(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_endAngle_" + displayId).getValue());
+        display.setRange_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_color_" + displayId).getColor());
+        display.setMax(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_max_" + displayId).getValue());
+        display.setMin(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_min_" + displayId).getValue());
+
+        mRe.addView(display);
 
 
-        display.setStartAngle((int) ((Integer) SPUtil.get(this, "dashboardsdisplayconfiguration_start_" + displayId, 0)));
-        display.setEndAngle((int) ((Integer) SPUtil.get(this, "dashboardsdisplayconfiguration_end_" + displayId, 0)));
-        display.setColor_back_inner_color("#" + SPUtil.get(this, "dashboardsdisplay_style_back_innercolor_" + displayId, "0"));
-        display.setColor_back_outer_color("#" + SPUtil.get(this, "dashboardsdisplay_style_back_outercolor_" + displayId, "0"));
-        display.setColor_title_color("#" + SPUtil.get(this, "dashboardsdisplay_title_color_" + displayId, "0"));
-        display.setTitle_text_size((Integer) SPUtil.get(this, "dashboardsdisplay_title_size_" + displayId, 0));
-        display.setTitle_position((Integer) SPUtil.get(this, "dashboardsdisplay_title_position_" + displayId, 0));
-        display.setValueshow((Boolean) SPUtil.get(this, "dashboardsdisplay_value_show_" + displayId, true));
-        display.setColor_value("#" + SPUtil.get(this, "dashboardsdisplay_value_color_" + displayId, "0"));
-        display.setValue_size((Integer) SPUtil.get(this, "dashboardsdisplay_value_size_" + displayId, 0));
-        display.setValue_position((Integer) SPUtil.get(this, "dashboardsdisplay_value_position_" + displayId, 0));
-        display.setUnits_color("#" + SPUtil.get(this, "dashboardsdisplay_units_color_" + displayId, "0"));
-        display.setUnits_size((Integer) SPUtil.get(this, "dashboardsdisplay_units_size_" + displayId, 0));
-        display.setUnits_ver((Integer) SPUtil.get(this, "dashboardsdisplay_units_ver_" + displayId, 0));
-        display.setUnits_hor((Integer) SPUtil.get(this, "dashboardsdisplay_units_hor_" + displayId, 0));
-        display.setMajor_color("#" + SPUtil.get(this, "dashboardsdisplay_major_color_" + displayId, "0"));
-        display.setMajor_width((Integer) SPUtil.get(this, "dashboardsdisplay_major_width_" + displayId, 0));
-        display.setMajor_height((Integer) SPUtil.get(this, "dashboardsdisplay_major_height_" + displayId, 0));
-        display.setMinor_color("#" + SPUtil.get(this, "dashboardsdisplay_major_color_" + displayId, "0"));
-        display.setMinor_width((Integer) SPUtil.get(this, "dashboardsdisplay_minor_width_" + displayId, 0));
-        display.setMinor_height((Integer) SPUtil.get(this, "dashboardsdisplay_minor_height_" + displayId, 0));
-        display.setTextShow((Boolean) SPUtil.get(this, "dashboardsdisplay_lable_show_" + displayId, true));
-        display.setTextRotate((Boolean) SPUtil.get(this, "dashboardsdisplay_lable_rotate_" + displayId, false));
-        display.setLable_size((Integer) SPUtil.get(this, "dashboardsdisplay_lable_size_" + displayId, 0));
-        display.setLable_offset((Integer) SPUtil.get(this, "dashboardsdisplay_lable_offset_" + displayId, 85));
-        display.setPointerShow((Boolean) SPUtil.get(this, "dashboardsdisplay_pointer_show_" + displayId, true));
-        display.setPoint_width((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_width_" + displayId, 0));
-        display.setPoint_length((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_length_" + displayId, 0));
-        display.setPoint_color("#" + SPUtil.get(this, "dashboardsdisplay_pointer_color_" + displayId, "0"));
-        display.setPoint_rad((Integer) SPUtil.get(this, "dashboardsdisplay_pointer_rad_" + displayId, 0));
-        display.setCenter_color("#" + SPUtil.get(this, "dashboardsdisplay_center_color_" + displayId, "0"));
-        display.setRange_show((Boolean) SPUtil.get(this, "dashboardsdisplay_range_visible_" + displayId, false));
-        display.setRange_startrangle((Integer) SPUtil.get(this, "dashboardsdisplay_range_startAngle_" + displayId, 0));
-        display.setRange_endrangle((Integer) SPUtil.get(this, "dashboardsdisplay_range_endAngle_" + displayId, 0));
-        display.setRange_color("#" + SPUtil.get(this, "dashboardsdisplay_range_color_" + displayId, ""));
-        display.setMax((Integer) SPUtil.get(this, "dashboardsdisplaysizeandlocation_value_max_" + displayId, 0));
-        display.setMin((Integer) SPUtil.get(this, "dashboardsdisplaysizeandlocation_value_min_" + displayId, 0));
 
 
+        //添加假数据
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -278,102 +320,102 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                 display.setStartAngle((int) (i * 3.6f));
                 tv_rangles_startangle.setText((int) (i * 3.6f) + "");
                 //把数据存到SP里面
-                SPUtil.put(this, "dashboardsdisplayconfiguration_start_" + displayId, (int) (i * 3.6f));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_" + displayId, (int) (i * 3.6f));
                 break;
             case R.id.seek_rangles_endargle:
                 display.setEndAngle((int) (i * 3.6f));
                 tv_rangles_endargle.setText((int) (i * 3.6f) + "");
-                SPUtil.put(this, "dashboardsdisplayconfiguration_end_" + displayId, (int) (i * 3.6f));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_" + displayId, (int) (i * 3.6f));
                 break;
             case R.id.seek_title_font:
                 display.setTitle_text_size(i);
                 tv_title_font.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_title_size_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_" + displayId, i);
                 break;
             case R.id.seek_title_position:
                 display.setTitle_position(i);
                 tv_title_position.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_title_position_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_" + displayId, i);
                 break;
             case R.id.seek_value_size:
                 display.setValue_size(i);
                 tv_value_size.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_value_size_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_" + displayId, i);
                 break;
             case R.id.seek_value_position:
                 display.setValue_position(i);
                 tv_value_position.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_value_position_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_" + displayId, i);
                 break;
             case R.id.seek_units_size:
                 display.setUnits_size(i);
                 tv_units_size.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_units_size_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_" + displayId, i);
                 break;
             case R.id.seek_units_ver:
                 display.setUnits_ver(i);
                 tv_units_ver.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_units_ver_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_" + displayId, i);
                 break;
             case R.id.seek_units_hor:
                 display.setUnits_hor(i);
                 tv_units_hor.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_units_hor_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_" + displayId, i);
                 break;
             case R.id.seek_major_width:
                 tv_major_width.setText(i + "");
                 display.setMajor_width(i);
-                SPUtil.put(this, "dashboardsdisplay_major_width_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_" + displayId, i);
                 break;
             case R.id.seek_major_height:
                 display.setMajor_height(i);
                 tv_major_height.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_major_height_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_" + displayId, i);
                 break;
             case R.id.seek_minor_width:
                 tv_minor_width.setText(i + "");
                 display.setMinor_width(i);
-                SPUtil.put(this, "dashboardsdisplay_minor_width_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_" + displayId, i);
                 break;
             case R.id.seek_minor_height:
                 display.setMinor_height(i);
                 tv_minor_height.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_minor_height_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_" + displayId, i);
                 break;
             case R.id.seek_lable_size:
                 display.setLable_size(i);
                 tv_lable_size.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_lable_size_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_" + displayId, i);
                 break;
             case R.id.seek_lable_offset:
                 display.setLable_offset(i);
                 tv_lable_offset.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_lable_offset_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_" + displayId, i);
                 break;
             case R.id.seek_pointer_width:
                 display.setPoint_width(i);
                 tv_pointer_width.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_pointer_width_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_" + displayId, i);
                 break;
             case R.id.seek_pointer_length:
                 display.setPoint_length(i);
                 tv_pointer_length.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_pointer_length_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_" + displayId, i);
                 break;
             case R.id.seek_pointer_rad:
                 display.setPoint_rad(i);
                 tv_pointer_rad.setText(i + "");
-                SPUtil.put(this, "dashboardsdisplay_pointer_rad_" + displayId, i);
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_" + displayId, i);
                 break;
             case R.id.seek_range_start:
                 display.setRange_startrangle((int) (i * 3.6f));
                 tv_range_start.setText((int) (i * 3.6f) + "");
-                SPUtil.put(this, "dashboardsdisplay_range_startAngle_" + displayId, (int) (i * 3.6f));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_" + displayId, (int) (i * 3.6f));
                 break;
             case R.id.seek_range_end:
                 display.setRange_endrangle((int) (i * 3.6f));
                 tv_range_end.setText((int) (i * 3.6f) + "");
-                SPUtil.put(this, "dashboardsdisplay_range_endAngle_" + displayId, (int) (i * 3.6f));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_" + displayId, (int) (i * 3.6f));
                 break;
         }
     }
@@ -390,6 +432,10 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void initView() {
+        mRe = (RelativeLayout) findViewById(R.id.re_obdstyle_display);
+//        display = (DashboardsView) findViewById(R.id.display_test);
+
+
         btn_frame = (RadioButton) findViewById(R.id.style_frame);
         btn_axis = (RadioButton) findViewById(R.id.style_axis);
         btn_needle = (RadioButton) findViewById(R.id.style_needle);
@@ -402,7 +448,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         scroll_axis = (ScrollView) findViewById(R.id.style_scroll_axis);
         scroll_needle = (ScrollView) findViewById(R.id.style_scroll_needle);
         scroll_range = (ScrollView) findViewById(R.id.style_scroll_range);
-        display = (DashboardsView) findViewById(R.id.display_test);
+
         seek_value = (SeekBar) findViewById(R.id.seek_value);
         seek_rangles_startangle = (SeekBar) findViewById(R.id.seek_rangles_startangle);
         seek_rangles_endargle = (SeekBar) findViewById(R.id.seek_rangles_endargle);
@@ -654,57 +700,57 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                 et_units_color.requestFocus();
                 break;
             case R.id.iosbtn_value_show:
-                if ((boolean) SPUtil.get(this, "dashboardsdisplay_value_show_" + displayId, true)) {
+                if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_value_show_" + displayId).getIsTure()) {
                     iosbtn_value_show.setOpened(false);
-                    SPUtil.put(this, "dashboardsdisplay_value_show_" + displayId, false);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_" + displayId, false);
                     display.setValueshow(false);
                 } else {
                     iosbtn_value_show.setOpened(true);
-                    SPUtil.put(this, "dashboardsdisplay_value_show_" + displayId, true);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_" + displayId, true);
                     display.setValueshow(true);
                 }
                 break;
             case R.id.iosbtn_lables_show:
-                if ((boolean) SPUtil.get(this, "dashboardsdisplay_lable_show_" + displayId, true)) {
+                if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_show_" + displayId).getIsTure()) {
                     iosbtn_lables_show.setOpened(false);
-                    SPUtil.put(this, "dashboardsdisplay_lable_show_" + displayId, false);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_" + displayId, false);
                     display.setTextShow(false);
                 } else {
                     iosbtn_lables_show.setOpened(true);
-                    SPUtil.put(this, "dashboardsdisplay_lable_show_" + displayId, true);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_" + displayId, true);
                     display.setTextShow(true);
                 }
                 break;
             case R.id.iosbtn_lables_rotate:
-                if ((boolean) SPUtil.get(this, "dashboardsdisplay_lable_rotate_" + displayId, false)) {
+                if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_lable_rotate_" + displayId).getIsTure()) {
                     iosbtn_lables_rotate.setOpened(false);
-                    SPUtil.put(this, "dashboardsdisplay_lable_rotate_" + displayId, false);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_" + displayId, false);
                     display.setTextRotate(false);
                 } else {
                     iosbtn_lables_rotate.setOpened(true);
-                    SPUtil.put(this, "dashboardsdisplay_lable_rotate_" + displayId, true);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_" + displayId, true);
                     display.setTextRotate(true);
                 }
                 break;
             case R.id.iosbtn_pointer_show:
-                if ((boolean) SPUtil.get(this, "dashboardsdisplay_pointer_show_" + displayId, true)) {
+                if (DBTool.getOutInstance().getQueryKey( "dashboardsdisplay_pointer_show_" + displayId).getIsTure()) {
                     iosbtn_pointer_show.setOpened(false);
                     display.setPointerShow(false);
-                    SPUtil.put(this, "dashboardsdisplay_pointer_show_" + displayId, false);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_" + displayId, false);
                 } else {
-                    SPUtil.put(this, "dashboardsdisplay_pointer_show_" + displayId, true);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_" + displayId, true);
                     display.setPointerShow(true);
                     iosbtn_pointer_show.setOpened(true);
                 }
                 break;
             case R.id.iosbtn_range_show:
-                if ((boolean) SPUtil.get(this, "dashboardsdisplay_range_visible_" + displayId, false)) {
+                if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_range_visible_" + displayId).getIsTure()) {
                     iosbtn_range_show.setOpened(false);
-                    SPUtil.put(this, "dashboardsdisplay_range_visible_" + displayId, false);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_" + displayId, false);
                     display.setRange_show(false);
                 } else {
                     iosbtn_range_show.setOpened(true);
-                    SPUtil.put(this, "dashboardsdisplay_range_visible_" + displayId, true);
+                    DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_" + displayId, true);
                     display.setRange_show(true);
                 }
                 break;
@@ -749,16 +795,15 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         LightnessSlider lightnessSlider = view_dia.findViewById(R.id.lightnessSlider);
         final ImageView iv_show = view_dia.findViewById(R.id.iv_show);
         //设置默认右下角展示图片
-        iv_show.setBackgroundColor(Color.parseColor("#" + (String) SPUtil.get(this, initkey,
-                "00000000")));
+        iv_show.setBackgroundColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey(initkey).getColor()));
+
         //find colorPickerView   设置属性
         ColorPickerView colorpick = view_dia.findViewById(R.id.colorpick);
         lightnessSlider.setColorPicker(colorpick);
         alphaSlider.setColorPicker(colorpick);
         colorpick.setDensity(12);
         //设置默认颜色
-        colorpick.setInitialColor(Color.parseColor("#" + (String) SPUtil.get(this, initkey,
-                "00000000")), true);
+        colorpick.setInitialColor(Color.parseColor("#" + DBTool.getOutInstance().getQueryKey(initkey).getColor()), true);
 
         colorpick.setSelected(true);
         colorpick.setAlphaSlider(alphaSlider);
@@ -791,37 +836,27 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                 a = a.length() > 7 ? a :
                         a + "00000000".substring(0, 8 - a.length());
                 //点击外部取消的时候把数据存到SP里面了
-                SPUtil.put(OBDStyleActivity.this, initkey + displayId, a);
+                DBTool.getOutInstance().upDateColorByKey(initkey + displayId, a);
                 if (et_style == 1) {
                     display.setColor_back_inner_color("#" + a);
-                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_innercolor_" + displayId, a);
                 } else if (et_style == 2) {
                     display.setColor_back_outer_color("#" + a);
-                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_outercolor_" + displayId, a);
                 } else if (et_style == 3) {
                     display.setColor_title_color("#" + a);
-                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_title_color_" + displayId, a);
                 } else if (et_style == 4) {
                     display.setColor_value("#" + a);
-                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_value_color_" + displayId, a);
                 } else if (et_style == 5) {
                     display.setUnits_color("#" + a);
-                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_units_color_" + displayId, a);
                 } else if (et_style == 6) {
                     display.setMajor_color("#" + a);
-                    //SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_major_color_" + displayId, a);
                 } else if (et_style == 7) {
                     display.setMinor_color("#" + a);
-                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_minor_color_" + displayId, a);
                 } else if (et_style == 8) {
                     display.setPoint_color("#" + a);
-                    //  SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_pointer_color_" + displayId, a);
                 } else if (et_style == 9) {
                     display.setCenter_color("#" + a);
-                    // SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_center_color_" + displayId, a);
                 } else if (et_style == 10) {
                     display.setRange_color("#" + a);
-                    //  SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_range_color_" + displayId, a);
                 }
 
 
@@ -860,7 +895,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
             btn_back_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setColor_back_inner_color("#" + color_str);
             //存SP里面
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_innercolor_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_" + displayId, color_str);
         } else if (et_back_out_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -868,7 +903,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_back_out_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setColor_back_outer_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_style_back_outercolor_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_" + displayId, color_str);
         } else if (et_title_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -876,7 +911,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_title_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setColor_title_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_title_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_" + displayId, color_str);
         } else if (et_value_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -884,7 +919,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_value_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setColor_value("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_value_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_" + displayId, color_str);
         } else if (et_units_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -892,7 +927,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_units_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setUnits_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_units_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_" + displayId, color_str);
         } else if (et_mojor_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -900,7 +935,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_mojor_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setMajor_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_major_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_" + displayId, color_str);
         } else if (et_minor_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -908,7 +943,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_minor_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setMinor_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_minor_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_" + displayId, color_str);
         } else if (et_pointer_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -916,7 +951,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_pointer_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setPoint_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_pointer_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_" + displayId, color_str);
         } else if (et_center_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -924,7 +959,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_center_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setCenter_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_center_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_" + displayId, color_str);
         } else if (et_range_color.hasFocus()) {
             String color_str = charSequence.toString();
             String replace = "00000000";
@@ -932,7 +967,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
                     color_str + replace.substring(0, 8 - color_str.length());
             btn_range_color.setBackgroundColor(Color.parseColor("#" + color_str));
             display.setRange_color("#" + color_str);
-            SPUtil.put(OBDStyleActivity.this, "dashboardsdisplay_range_color_" + displayId, color_str);
+            DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_" + displayId, color_str);
         }
 
 
@@ -952,6 +987,7 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
         sendBroadcast(intent);
         finish();
     }
+
 
 
 }

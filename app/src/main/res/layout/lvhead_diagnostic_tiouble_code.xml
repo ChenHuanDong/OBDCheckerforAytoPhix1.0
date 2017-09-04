@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/x200"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x116">
+
+        <ImageView
+            android:id="@+id/iv_diagno_trouble_wait"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x8"
+            android:src="@mipmap/diagno_wait"/>
+
+        <TextView
+            android:id="@+id/tv_diagnostic_trouble_code_progressbar"
+            android:text="0%"
+            android:singleLine="true"
+            android:layout_width="@dimen/x28"
+            android:layout_height="@dimen/x23"
+            android:layout_marginLeft="@dimen/x51"
+            android:layout_marginTop="@dimen/x44"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x10"/>
+
+        <TextView
+            android:layout_width="@dimen/x210"
+            android:layout_height="@dimen/x46"
+            android:layout_marginLeft="@dimen/x150"
+            android:layout_marginTop="@dimen/x32"
+            android:text="@string/wait_detail"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_diagnostic_troublecode"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x4"
+        android:background="@color/colorConnectDetail"
+        android:max="100"
+        android:maxHeight="@dimen/x4"
+        android:min="0"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar_style"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x20"
+        android:background="@color/colorTransparent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:background="@color/colorTroubleBack"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x47"
+            android:layout_marginTop="@dimen/x5"
+            android:src="@drawable/guzhang_y"/>
+
+        <TextView
+            android:layout_width="@dimen/x51"
+            android:layout_height="@dimen/x30"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/total"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x30"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="01"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <ImageView
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x47"
+            android:layout_marginTop="@dimen/x5"
+            android:src="@drawable/guzhang_red"/>
+
+        <TextView
+            android:layout_width="@dimen/x85"
+            android:layout_height="@dimen/x30"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/important"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x30"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="01"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:background="@color/colorOBDbackground"/>
+
+
+</LinearLayout>

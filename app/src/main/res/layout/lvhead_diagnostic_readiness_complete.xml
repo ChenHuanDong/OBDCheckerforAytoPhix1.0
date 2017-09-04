@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/x90"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+    <!--装三个小球的  Ll-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x20"
+        android:layout_marginTop="@dimen/x18"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x114"
+            android:scaleType="fitXY"
+            android:src="@drawable/green"/>
+
+        <ImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x43"
+            android:scaleType="fitXY"
+            android:src="@drawable/red"/>
+
+        <ImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x43"
+            android:scaleType="fitXY"
+            android:src="@drawable/black"/>
+
+
+    </LinearLayout>
+
+    <!--绿球 + Complete-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x20"
+        android:layout_marginTop="@dimen/x27"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x20"
+            android:scaleType="fitXY"
+            android:src="@drawable/green"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x3"
+            android:singleLine="true"
+            android:text="@string/complete"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x14"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x5"
+        android:background="@color/colorTransparent"/>
+
+</LinearLayout>

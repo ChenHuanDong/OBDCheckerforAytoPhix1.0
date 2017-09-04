@@ -61,13 +61,14 @@
         android:layout_height="@dimen/x186"
         android:background="@color/colorOBDbackground">
 
-        <!-- Test   display-->
-        <com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsView
-            android:id="@+id/display_test"
-            android:layout_width="@dimen/x150"
-            android:layout_height="@dimen/x163"
+
+        <RelativeLayout
+            android:id="@+id/re_other_style_display"
             android:layout_marginLeft="@dimen/x30"
-            android:layout_marginTop="@dimen/x23"/>
+            android:layout_marginTop="@dimen/x23"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/x163"/>
+
 
 
         <TextView

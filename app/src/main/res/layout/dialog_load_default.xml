@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/x270"
+              android:layout_height="@dimen/x170"
+              android:background="@color/colorDialogBackGround"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="@dimen/x252"
+        android:layout_height="@dimen/x26"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginTop="@dimen/x20"
+        android:singleLine="true"
+        android:text="@string/load_default_dashboards"
+        android:textAllCaps="false"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x18"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x11"
+        android:background="@color/colorDashboardsPointer"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x252"
+        android:layout_height="@dimen/x60"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginTop="@dimen/x15"
+        android:text="@string/load_warring"
+        android:textColor="@color/colorloaddefaulttext"
+        android:textSize="@dimen/x12"/>
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <LinearLayout
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x45"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_load_default_cancel"
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x45"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            android:textColor="@color/colorConnectDetail"
+            android:textSize="@dimen/x16"/>
+
+        <ImageView
+            android:layout_width="@dimen/x1"
+            android:layout_height="@dimen/x45"
+            android:src="@drawable/line_shu_ui"/>
+
+        <Button
+            android:id="@+id/btn_load_default_ok"
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x45"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            android:textColor="@color/colorConnectDetail"
+            android:textSize="@dimen/x16"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

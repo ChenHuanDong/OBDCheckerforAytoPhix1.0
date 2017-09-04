@@ -40,6 +40,7 @@ import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboard
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDOtherStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
+import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LcndUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.MathUtil;
@@ -200,8 +201,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(0);
         mPaint.setColor(getResources().getColor(R.color.colorWhite));
-
-
+        mPaint.setAntiAlias(true);
     }
 
 
@@ -599,7 +599,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setTextSize((float) ((value_size * getWidth()) / 150.0));
 
         if (style_one_text == 0.0f) {
-            canvas.drawText( "N/A" , getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
+            canvas.drawText("N/A", getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
         } else {
             canvas.drawText(style_one_text + "", getWidth() / 2, (float) ((value_position * getHeight()) / 100.0), mPaint);
         }
@@ -782,6 +782,13 @@ public class DashboardsView extends View implements View.OnClickListener {
     private void drawOutCircle(Canvas canvas) {
 
         mPaint.setColor(getResources().getColor(R.color.colorStyleOneDisplay));
+
+        //如果取的颜色 都是透明  则变成透明画笔
+        if (DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_innercolor_" + myDisplayId).getColor().equals("00000000") &&
+                DBTool.getOutInstance().getQueryKey("dashboardsdisplay_style_back_outercolor_" + myDisplayId).getColor().equals("00000000")) {
+            mPaint.setColor(getResources().getColor(R.color.colorTransparent));
+        }
+
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(0);
 
@@ -810,7 +817,7 @@ public class DashboardsView extends View implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //经典  自定义    if  后面加了！  试了为方便调试  最后要去掉！别忘了
-        if ((boolean) SPUtil.get(mContext, "dashboardsisclassic", true)) {
+        if (DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
 
             //经典模式打开只有DC
             final OBDPopDialog dia_dc = new OBDPopDialog(mContext);
@@ -833,8 +840,8 @@ public class DashboardsView extends View implements View.OnClickListener {
             final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
             final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
             //这里做不同仪表盘ID的判断
-            et_start.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, (int) 0) + "");
-            et_end.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, (int) 0) + "");
+            et_start.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId).getValue() + "");
+            et_end.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId).getValue() + "");
 
 
             Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
@@ -850,9 +857,8 @@ public class DashboardsView extends View implements View.OnClickListener {
                     if (et_end.getText().length() == 0) {
                         et_end.setText(0 + "");
                     }
-                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
-                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
-                    intent.putExtra("myId", myDisplayId);
+                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                     mContext.sendBroadcast(intent);
                 }
             });
@@ -884,9 +890,9 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final EditText et_left = view_sal.findViewById(R.id.display_sal_left_et);
                     final EditText et_top = view_sal.findViewById(R.id.display_sal_top_et);
                     //这里做不同仪表盘的判断
-                    et_width.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocationwidth_" + myDisplayId, 0) + "");
-                    et_left.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId, (float) 0) + "");
-                    et_top.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_top_" + myDisplayId, (float) 0) + "");
+                    et_width.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + myDisplayId).getValue() + "");
+                    et_left.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() + "");
+                    et_top.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() + "");
 
                     //下方确认按钮
                     Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
@@ -912,9 +918,10 @@ public class DashboardsView extends View implements View.OnClickListener {
                                 if (et_top.getText().length() == 0) {
                                     et_top.setText(0 + "");
                                 }
-                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocationwidth_" + myDisplayId, Integer.parseInt(et_width.getText().toString()));
-                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
-                                SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
+                                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + myDisplayId, Integer.parseInt(et_width.getText().toString()));
+                                DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
+                                DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
+
                                 mContext.sendBroadcast(intent);
 
                             } else {
@@ -968,9 +975,8 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final EditText et_start = view_dc.findViewById(R.id.display_configuration_et_start);
                     final EditText et_end = view_dc.findViewById(R.id.display_configuration_et_end);
                     //这里做不同仪表盘ID的判断
-                    et_start.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, (int) 0) + "");
-                    et_end.setText(SPUtil.get(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, (int) 0) + "");
-
+                    et_start.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId).getValue() + "");
+                    et_end.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId).getValue() + "");
 
                     Button btn_ok = view_dc.findViewById(R.id.display_dc_ok_btn);
                     btn_ok.setOnClickListener(new OnClickListener() {
@@ -984,8 +990,9 @@ public class DashboardsView extends View implements View.OnClickListener {
                             if (et_end.getText().length() == 0) {
                                 et_end.setText(0 + "");
                             }
-                            SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
-                            SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
+                            DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                            DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
+
                             mContext.sendBroadcast(intent);
                         }
                     });
@@ -1005,7 +1012,7 @@ public class DashboardsView extends View implements View.OnClickListener {
             iv_style.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    dialog.dismiss();
                     //跳转的时候把参数传过去   根据Style  判断调到那个页面   Style0   Style12
                     if (style == 0) {
                         //这里只用把id传过去
@@ -1019,6 +1026,8 @@ public class DashboardsView extends View implements View.OnClickListener {
                         intent.putExtra("DisplayStyle", style);
                         mContext.startActivity(intent);
                     }
+
+
                 }
             });
 
@@ -1039,7 +1048,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                         public void onClick(View view) {
                             dia_rd.dismiss();
                             Intent intent = new Intent("changeDisplay");
-                            SPUtil.put(mContext, "display_isRemoveDisplay_" + myDisplayId, true);
+                            DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_" + myDisplayId, true);
                             mContext.sendBroadcast(intent);
                         }
                     });
@@ -1108,7 +1117,6 @@ public class DashboardsView extends View implements View.OnClickListener {
                 case MotionEvent.ACTION_MOVE:
                     x = (int) (event.getRawX() - lastX);
                     y = (int) (event.getRawY() - lastY);
-                    LogUtil.fussenLog().d(event.getRawX() + "xxx");
                     setX(x);
                     setY(y);
                     break;

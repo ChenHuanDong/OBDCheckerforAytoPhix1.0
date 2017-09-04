@@ -91,10 +91,29 @@
     <string name="no">NO</string>
     <string name="yes">YES</string>
     <string name="trouble_code">Trouble Code</string>
+    <string name="trouble_codes">Trouble Codes</string>
     <string name="freeze_frame">Freeze Frame</string>
     <string name="readiness_test">Readiness Test</string>
     <string name="report">Report</string>
-
+    <string name="load_warring">This will delete all of the existing dashboards and load the default set of dashboards . Do you want to continue?</string>
+    <string name="wait_detail">Checking the power system, please wait ...</string>
+    <string name="total">Total :</string>
+    <string name="important">Important :</string>
+    <string name="clear_fault_codes">Clear fault codes</string>
+    <string name="historical_trouble_code">Historical trouble code</string>
+    <string name="complete">Complete</string>
+    <string name="undfinished">Undfinished</string>
+    <string name="not_support">Not Support</string>
+    <string name="diagnostic_report">Diagnostic Report</string>
+    <string name="monitor">Monitor</string>
+    <string name="oxyzen_sensorsmode05">Oxygen Sensors(Modes $05)</string>
+    <string name="om_board_monitoringmode05">Om-Board Monitoring(Modes $06)</string>
+    <string name="vehicle_infomantionmode09">Vehicle Information(Modes $09)</string>
+    <string name="freeze_frame_dtc">FREEZE FRAME DTC</string>
+    <string name="p0103">P0103</string>
+    <string name="freeze_frame_Big">FREEZE FRAME</string>
+    <string name="history_codes">History Codes</string>
+    <string name="ford">FORD</string>
 
 
     <string name="width">Diameter(10-100)</string>

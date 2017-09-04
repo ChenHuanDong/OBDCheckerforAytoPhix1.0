@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-         <activity
-         android:name=".dashboards.OBDDashboardsActivity"
-         android:launchMode="singleTask">
-         </activity>
+        <activity
+            android:name=".dashboards.OBDDashboardsActivity"
+            android:launchMode="singleTask">
+        </activity>
         <activity
             android:name=".diagnostics.OBDDiagnosticsActivity"
             android:launchMode="singleTask">
@@ -57,8 +57,13 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|stateUnchanged">
         </activity>
-        <activity android:name=".dashboards.OBDOtherStyleActivity"
-                  android:launchMode="singleTask">
+        <activity
+            android:name=".dashboards.OBDOtherStyleActivity"
+            android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".diagnostics.OBDDiagnosticHistoricalActivity"
+            android:launchMode="singleTask">
         </activity>
     </application>
 

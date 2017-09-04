@@ -18,7 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    greendao{
+    greendao {
         schemaVersion 1
         targetGenDir 'src/main/Java'
     }
@@ -34,6 +34,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'ch.ielse:switchbutton:1.0.0'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
-    testCompile 'junit:junit:4.12'
     compile 'org.greenrobot:greendao:3.2.0'
+    testCompile 'junit:junit:4.12'
 }

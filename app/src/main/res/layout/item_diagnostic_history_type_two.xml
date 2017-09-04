@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@color/colorDialogBackGround"
+                android:layout_height="@dimen/x40"
+                android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/tv_diagnostic_history_two_title"
+        android:layout_width="@dimen/x60"
+        android:layout_height="@dimen/x23"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/x5"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <TextView
+        android:id="@+id/tv_diagnostic_history_two_content"
+        android:layout_width="@dimen/x230"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x87"
+        android:layout_marginTop="@dimen/x5"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_diagnostic_history_two_red"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/x20"
+        android:layout_marginLeft="@dimen/x327"
+        android:layout_marginTop="@dimen/x10"
+        android:scaleType="fitXY"
+        android:src="@drawable/guzhang_red"/>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_diagnostic_history_two_yellow"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/x20"
+        android:layout_marginLeft="@dimen/x327"
+        android:layout_marginTop="@dimen/x10"
+        android:scaleType="fitXY"
+        android:src="@drawable/guzhang_y"/>
+
+</RelativeLayout>
