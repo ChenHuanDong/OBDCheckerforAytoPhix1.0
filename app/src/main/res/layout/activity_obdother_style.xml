@@ -17,12 +17,18 @@
 
 
         <ImageView
-            android:id="@+id/iv_other_finish"
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_marginLeft="@dimen/x15"
             android:layout_marginTop="@dimen/x13"
             android:src="@drawable/return_ui"/>
+
+        <ImageView
+            android:id="@+id/iv_other_finish"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorTransparent"/>
+
 
         <!--cancel-->
         <TextView
@@ -64,11 +70,10 @@
 
         <RelativeLayout
             android:id="@+id/re_other_style_display"
-            android:layout_marginLeft="@dimen/x30"
-            android:layout_marginTop="@dimen/x23"
             android:layout_width="@dimen/x150"
-            android:layout_height="@dimen/x163"/>
-
+            android:layout_height="@dimen/x163"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/x23"/>
 
 
         <TextView
@@ -1639,7 +1644,6 @@
                     android:background="@color/colorBlack"/>
 
             </RelativeLayout>
-
 
 
         </LinearLayout>

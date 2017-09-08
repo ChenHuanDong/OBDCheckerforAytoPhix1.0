@@ -163,12 +163,13 @@ public class DashboardsView extends View implements View.OnClickListener {
     private boolean isRrmoveDisplay = false;
     //拖拽
     private boolean isDrawandMove = false;
-    private int x;
-    private int y;
-    private int lastX;
-    private int lastY;
+
 
     private float style_one_text = 0.0f;
+    private int lastX;
+    private int lastY;
+    private int totalX = 0;
+    private int totalY = 0;
 
 
     public DashboardsView(Context context, int myId) {
@@ -213,6 +214,8 @@ public class DashboardsView extends View implements View.OnClickListener {
         if (!isRrmoveDisplay) {
 
             if (style == 0) {
+
+
                 //绘制最外层黑色圆   带渐变
                 drawOutCircle(canvas);
 
@@ -848,7 +851,6 @@ public class DashboardsView extends View implements View.OnClickListener {
             btn_ok.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    dia_dc.dismiss();
                     //点击确定发送广播 把初始值最终值发送
                     Intent intent = new Intent("changeDisplay");
                     if (et_start.getText().length() == 0) {
@@ -857,9 +859,15 @@ public class DashboardsView extends View implements View.OnClickListener {
                     if (et_end.getText().length() == 0) {
                         et_end.setText(0 + "");
                     }
-                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
-                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
-                    mContext.sendBroadcast(intent);
+                    if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString()) ){
+                        Toast.makeText(mContext, getResources().getString(R.string.minmorethanmax),
+                                Toast.LENGTH_SHORT).show();
+                    }else {
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
+                        mContext.sendBroadcast(intent);
+                        dia_dc.dismiss();
+                    }
                 }
             });
 
@@ -982,7 +990,6 @@ public class DashboardsView extends View implements View.OnClickListener {
                     btn_ok.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dia_dc.dismiss();
                             Intent intent = new Intent("changeDisplay");
                             if (et_start.getText().length() == 0) {
                                 et_start.setText(0 + "");
@@ -990,10 +997,16 @@ public class DashboardsView extends View implements View.OnClickListener {
                             if (et_end.getText().length() == 0) {
                                 et_end.setText(0 + "");
                             }
-                            DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
-                            DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
+                            if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString()) ){
+                                Toast.makeText(mContext, getResources().getString(R.string.minmorethanmax),
+                                        Toast.LENGTH_SHORT).show();
+                            }else {
+                                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
+                                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
+                                mContext.sendBroadcast(intent);
+                                dia_dc.dismiss();
+                            }
 
-                            mContext.sendBroadcast(intent);
                         }
                     });
 
@@ -1076,6 +1089,9 @@ public class DashboardsView extends View implements View.OnClickListener {
                     isDrawandMove = true;
                     invalidate();
                     dialog.dismiss();
+                    Intent intent = new Intent("viewpagerIsScrool");
+                    intent.putExtra("scrool", false);
+                    mContext.sendBroadcast(intent);
                 }
             });
 
@@ -1107,31 +1123,62 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         if (isDrawandMove) {
+
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+
+
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    lastX = (int) event.getRawX();
-                    lastY = (int) event.getRawY();
-
+                    lastX = x;
+                    lastY = y;
+                    totalX = 0;
+                    totalY = 0;
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    x = (int) (event.getRawX() - lastX);
-                    y = (int) (event.getRawY() - lastY);
-                    setX(x);
-                    setY(y);
+                    int offX = x - lastX;
+                    int offY = y - lastY;
+
+                    totalX = totalX + offX;
+                    totalY = totalY + offY;
+
+                    offsetLeftAndRight(offX);
+                    offsetTopAndBottom(offY);
+
                     break;
                 case MotionEvent.ACTION_UP:
 
-//                    SPUtil.put(mContext, "dashboardsdisplaysizeandlocation_left_" + myDisplayId,
-//                            ((((float) event.getRawX() / ScreenUtils.getScreenWidth(mContext)) * 100)));
-//
-//                    Intent intent = new Intent("changeDisplay");
-//                    mContext.sendBroadcast(intent);
+                    float left = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() +
+                            (((float) totalX * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenWidth", 0) + 0.0f)));
+                    LogUtil.fussenLog().d("left=" + left);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_"+myDisplayId , left);
+
+                    float top = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() +
+                            (((float) totalY * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenHeight", 0) + 0.0f)));
+                    LogUtil.fussenLog().d("top=" + top);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_"+myDisplayId , top);
+
+                    Intent intent = new Intent("changeDisplay");
+                    mContext.sendBroadcast(intent);
+
+
+
                     isDrawandMove = false;
                     invalidate();
+                    //向Aty传值   可以滑动ViewPager
+                    Intent intentVP = new Intent("viewpagerIsScrool");
+                    intentVP.putExtra("scrool", true);
+                    mContext.sendBroadcast(intentVP);
+
                     break;
             }
+
+
+            return true;
         }
+
         return super.onTouchEvent(event);
     }
 

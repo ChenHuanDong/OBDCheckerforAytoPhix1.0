@@ -5,9 +5,218 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOBDbackground"
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.logs.OBDLogsActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:orientation="horizontal">
+
+        <!--底部Tv  LogS-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/logs"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+        <!--返回图标-->
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x14"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+        <!--右上角 Other按钮-->
+        <ImageView
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x15"
+            android:layout_marginLeft="@dimen/x340"
+            android:layout_marginTop="@dimen/x17"
+            android:scaleType="fitXY"
+            android:src="@drawable/other_ui"/>
+
+
+        <!--透明的返回按钮-->
+        <ImageView
+            android:layout_width="@dimen/x35"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+        <!--右上角Other按钮-->
+        <ImageView
+            android:layout_width="@dimen/x40"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTransparent"/>
+
+
+    </RelativeLayout>
+
+    <!--线-->
+    <ImageView
+        android:src="@drawable/line_ui"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"/>
+
+    <FrameLayout
+        android:id="@+id/replace_logs_main"
+        android:background="@color/colorTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y557"/>
+
+    <!--下面是相对布局    底层是Iv + Tv   上层透明RadioGroup  RadioButton-->
+    <RelativeLayout
+        android:background="@color/colorDialogBackGround"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45">
+
+        <!--底层展示-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!--三个展示小布局之一-->
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_logs_graphs_bottom"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/graphs_b"
+                    android:layout_marginTop="@dimen/x6"
+                    android:layout_width="@dimen/x25"
+                    android:layout_height="@dimen/x21"/>
+
+                <TextView
+                    android:id="@+id/tv_logs_graphs_bottom"
+                    android:text="@string/graphs"
+                    android:textAllCaps="false"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x10"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"/>
+
+            </RelativeLayout>
+
+            <!--线-->
+            <ImageView
+                android:src="@drawable/line_shu_ui"
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_logs_trip_bottom"
+                    android:src="@drawable/trips_b"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x4"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="@dimen/x23"/>
+
+                <TextView
+                    android:id="@+id/tv_logs_trip_bottom"
+                    android:text="@string/trips"
+                    android:textAllCaps="false"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x10"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"/>
+
+            </RelativeLayout>
+
+            <!--线-->
+            <ImageView
+                android:src="@drawable/line_shu_ui"
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_logs_files_bottom"
+                    android:layout_marginTop="@dimen/x4"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/file_b"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x23"/>
+
+                <TextView
+                    android:id="@+id/tv_logs_files_bottom"
+                    android:text="@string/files"
+                    android:textAllCaps="false"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x10"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"/>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+        <!--顶层tou透明RadGruop   RadButton-->
+        <RadioGroup
+            android:orientation="horizontal"
+            android:background="@color/colorTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radbtn_logs_graphs"
+                android:background="@color/colorTransparent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:button="@null"
+                android:layout_height="match_parent"/>
+
+            <RadioButton
+                android:id="@+id/radbtn_logs_trips"
+                android:background="@color/colorTransparent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:button="@null"
+                android:layout_height="match_parent"/>
+
+            <RadioButton
+                android:id="@+id/radbtn_logs_files"
+                android:background="@color/colorTransparent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:button="@null"
+                android:layout_height="match_parent"/>
+
+
+        </RadioGroup>
+
+
+   </RelativeLayout>
 
 
 

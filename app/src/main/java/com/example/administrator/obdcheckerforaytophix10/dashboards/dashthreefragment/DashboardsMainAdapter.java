@@ -26,6 +26,11 @@ public class DashboardsMainAdapter extends FragmentPagerAdapter  {
         this.data = data;
     }
 
+    public void setData(ArrayList<Fragment> data) {
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
     @Override
     public Fragment getItem(int position) {
         return data.get(position);

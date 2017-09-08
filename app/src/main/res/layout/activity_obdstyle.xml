@@ -17,12 +17,18 @@
 
 
         <ImageView
-            android:id="@+id/iv_finish"
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_marginLeft="@dimen/x15"
             android:layout_marginTop="@dimen/x13"
             android:src="@drawable/return_ui"/>
+
+        <ImageView
+            android:id="@+id/iv_finish"
+            android:background="@color/colorTransparent"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"/>
+
 
         <!--cancel-->
         <TextView
@@ -68,14 +74,8 @@
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginTop="@dimen/x23"
             android:layout_width="@dimen/x150"
-            android:layout_height="@dimen/x163"></RelativeLayout>
-        <!--&lt;!&ndash; Test   display&ndash;&gt;-->
-        <!--<com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsView-->
-            <!--android:id="@+id/display_test"-->
-            <!--android:layout_width="@dimen/x150"-->
-            <!--android:layout_height="@dimen/x163"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:layout_marginTop="@dimen/x23"/>-->
+            android:layout_height="@dimen/x163"/>
+
 
 
         <TextView

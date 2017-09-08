@@ -1,6 +1,9 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +28,9 @@ import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActi
 import com.example.administrator.obdcheckerforaytophix10.OBDL;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsMainPoint;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.MyViewPager;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.DashboardsMainAdapter;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsCustomizeFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsHUDFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsSecondPageFragment;
@@ -43,17 +48,22 @@ import java.util.List;
 
 public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
-    private ViewPager vp;
+    private MyViewPager vp;
     private DashboardsMainAdapter mAdapter;
     private ArrayList<Fragment> data;
     //三个Fragment
     private OBDDashboardsFirstPageFragment fFirst;
     private OBDDashboardsSecondPageFragment fSecond;
     private OBDDashboardsThirdPageFragment fThird;
+    private OBDDashboardsCustomizeFragment fCustomize;
+
+    private DashboardsMainPoint mPointCustomize;
 
 
     private ArrayList<DashboardsMainPoint> points;
     private LinearLayout ll;
+
+    private BroadcastReceiver br;
 
     //上方返回和右上角Other按钮
     private ImageView iv_retuen, iv_other;
@@ -79,20 +89,46 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         data.add(fFirst);
         data.add(fSecond);
         data.add(fThird);
+
+        if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()){
+            data.add(fCustomize);
+            mPointCustomize.setVisibility(View.VISIBLE);
+        }else {
+            mPointCustomize.setVisibility(View.GONE);
+        }
+
         mAdapter = new DashboardsMainAdapter(getSupportFragmentManager(), data);
         vp.setAdapter(mAdapter);
+
+
         //设置监听
         vp.addOnPageChangeListener(this);
+
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                   if (intent.getBooleanExtra("scrool" , true)){
+                        vp.setIsCanScroll(true);
+                   }else {
+                       vp.setIsCanScroll(false);
+                   }
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("viewpagerIsScrool");
+        registerReceiver(br , intentFilter);
 
 
     }
 
     private void initView() {
-        vp = (ViewPager) findViewById(R.id.dashboards_main_vp);
+        vp = (MyViewPager) findViewById(R.id.dashboards_main_vp);
         data = new ArrayList<>();
         fFirst = new OBDDashboardsFirstPageFragment();
         fSecond = new OBDDashboardsSecondPageFragment();
         fThird = new OBDDashboardsThirdPageFragment();
+        fCustomize = new OBDDashboardsCustomizeFragment();
         points = new ArrayList<>();
         ll = (LinearLayout) findViewById(R.id.dashboards_mian_bootom_ll);
         iv_retuen = (ImageView) findViewById(R.id.dashboards_main_iv_return);
@@ -101,6 +137,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         iv_other.setOnClickListener(this);
         width = (int) SPUtil.get(this, "screenWidth", 0);
         height = (int) SPUtil.get(this, "screenHeight", 0);
+        mPointCustomize = (DashboardsMainPoint) findViewById(R.id.point_obddashboards);
     }
 
     //下面三个VP监听
@@ -113,10 +150,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     public void onPageSelected(int position) {
         ll.removeAllViews();
         //1080   1776
-        LogUtil.fussenLog().d(data.size() + "滑动时data的size");
         for (int i = 0; i < data.size(); i++) {
-
-            LogUtil.fussenLog().d("进入For");
 
             DashboardsMainPoint point = new DashboardsMainPoint(this);
 
@@ -125,7 +159,6 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
             } else {
                 point.setSelected(false);
             }
-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) ConversionUtil.myWantValue(width, (float) 19.44),
                     (int) ConversionUtil.myWantValue(width, (float) 19.44));
             params.leftMargin = 0;
@@ -273,6 +306,12 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateIsTrueByKey("dashboardsisclassic", false);
                                 }
                                 dia_mode.dismiss();
+
+                                Intent intent = getIntent();
+                                overridePendingTransition(0, 0);
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(intent);
                             }
                         });
                         getPromptWin(dia_mode);
@@ -344,10 +383,26 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                             public void onClick(View view) {
                                 if (ii == 0) {
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_2", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_3", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_4", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_5", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_6", 0);
                                 } else if (ii == 1) {
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_2", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_3", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_4", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_5", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_6", 1);
                                 } else if (ii == 2) {
+
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_2", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_3", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_4", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_5", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_6", 2);
                                 }
                                 Intent intent = new Intent("changeDisplay");
                                 sendBroadcast(intent);
@@ -366,12 +421,15 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 ll_add_display.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        LogUtil.fussenLog().d(vp.getCurrentItem()+"这个是当前页数");
+
                         //获取到 仪表盘数量  然后加1
                         dialog.dismiss();
                         int display_count = DBTool.getOutInstance().getQueryKey("display_count").getValue() + 1;
                         DBTool.getOutInstance().upDateValueByKey("display_count", display_count);
                         //自定义添加仪表盘数据库
-                        addMyDisplay(display_count);
+                        addMyDisplay(display_count , vp.getCurrentItem() );
                         Intent intent = new Intent("changeDisplay");
                         sendBroadcast(intent);
                     }
@@ -443,9 +501,16 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         }
     }
 
-    //自定义添加仪表盘数据库
-    private void addMyDisplay(int display_count) {
+    //自定义添加仪表盘数据库          新的仪表盘  需要有一个属性
+    private void addMyDisplay(int display_count , int whatFragment) {
         OBDL obdl = new OBDL(null, "dashboardsdisplaysizeandlocationwidth_" + display_count, 40);
+        DBTool.getOutInstance().insertBean(obdl);
+
+        //这个是添加新的仪表盘要多添加的   提醒是在哪个Fragment的新增Display
+        obdl.setId(null).setKey("display_in_fragment_" + display_count).setValue(whatFragment);
+        DBTool.getOutInstance().insertBean(obdl);
+
+        obdl.setId(null).setKey("display_style_" + display_count).setValue(0);
         DBTool.getOutInstance().insertBean(obdl);
         obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_" + display_count).setFloValue(i + 0.1f);
         DBTool.getOutInstance().insertBean(obdl);
@@ -590,6 +655,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
     }
 
+    //下面三个都是设置Dialog出现的  win 设置
     private void getMyWin(OBDPopDialog d) {
         Window win = d.getWindow();
         WindowManager.LayoutParams lp = win.getAttributes();
@@ -1061,16 +1127,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
     }
 
-//    private Fragment getVisibleFragment() {
-//        FragmentManager fm = OBDDashboardsActivity.this.getSupportFragmentManager();
-//        List<Fragment> fragments = fm.getFragments();
-//        for (Fragment f : fragments) {
-//            if (f != null && f.isVisible()) {
-//                return f;
-//            }
-//        }
-//        return null;
-//    }
+
 
 
 }

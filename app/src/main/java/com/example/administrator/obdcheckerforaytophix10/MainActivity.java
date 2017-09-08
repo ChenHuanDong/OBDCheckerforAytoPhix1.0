@@ -73,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (DBTool.getOutInstance().isSave("isFirst")) {
             //LogUtil.fussenLog().d("不为空");
         } else {
-           // LogUtil.fussenLog().d("空的");
+            // LogUtil.fussenLog().d("空的");
             //第一次判断为空的时候把所有初始化全存进去   这个初始化是为了下次不再把数据二次存在数据库数据库
+            //这里还需要把默认的除了第一页的六个仪表盘之外的  789  三个给存到数据库里面
             OBDL obdl = new OBDL(null, "isFirst", true);
             DBTool.getOutInstance().insertBean(obdl);
             //保存一共仪表盘的个数
@@ -85,7 +86,278 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("display_style_1").setValue(0);
             DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_2").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_3").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_4").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_5").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_6").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
 
+            //变成经典的还要存一遍    大小位置九个单独存   其他九个只存一遍
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_1_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_1_default").setFloValue(6.667f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_1_default").setFloValue(1.748f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_2_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_2_default").setFloValue(53.333f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_2_default").setFloValue(1.748f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_3_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_3_default").setFloValue(6.667f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_3_default").setFloValue(34.266f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_4_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_4_default").setFloValue(53.333f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_4_default").setFloValue(34.266f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_5_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_5_default").setFloValue(6.667f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_5_default").setFloValue(66.783f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_6_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_6_default").setFloValue(53.333f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_6_default").setFloValue(66.783f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_7_default").setValue(59);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_7_default").setFloValue(20.5333f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_7_default").setFloValue(3.1469f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_8_default").setValue(59);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_8_default").setFloValue(20.5333f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_8_default").setFloValue(51.7483f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_9_default").setValue(80);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_9_default").setFloValue(9.8667f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_9_default").setFloValue(15.3846f);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_min_1_default").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_1_default").setValue(160);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_style_back_innercolor_1_default").setColor("00000000");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_style_back_outercolor_1_default").setColor("ff000000");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplayconfiguration_start_1_default").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplayconfiguration_end_1_default").setValue(360);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_title_color_1_default").setColor("fe9002");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_title_size_1_default").setValue(10);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_title_position_1_default").setValue(35);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_value_color_1_default").setColor("fe9002");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_value_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_value_size_1_default").setValue(12);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_value_position_1_default").setValue(100);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_units_color_1_default").setColor("fe9002");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_units_size_1_default").setValue(7);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_units_ver_1_default").setValue(50);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_units_hor_1_default").setValue(75);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_major_width_1_default").setValue(10);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_major_height_1_default").setValue(74);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_major_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_minor_width_1_default").setValue(10);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_minor_height_1_default").setValue(80);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_minor_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_lable_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_lable_rotate_1_default").setIsTure(false);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_lable_size_1_default").setValue(8);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_lable_offset_1_default").setValue(85);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_pointer_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_pointer_width_1_default").setValue(4);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_pointer_length_1_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_pointer_color_1_default").setColor("fe9002");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_pointer_rad_1_default").setValue(5);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_center_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_range_visible_1_default").setIsTure(false);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_range_startAngle_1_default").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_range_endAngle_1_default").setValue(360);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_range_color_1_default").setColor("d63636");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_back_color_1_default").setColor("00a6ff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_back_rad_1_default").setValue(60);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_title_color_1_default").setColor("757476");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_title_size_1_default").setValue(8);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_title_position_1_default").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_value_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_value_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_value_size_1_default").setValue(18);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_value_position_1_default").setValue(60);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_units_color_1_default").setColor("757476");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_units_size_1_default").setValue(8);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_units_position_1_default").setValue(73);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_pointer_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_pointer_width_1_default").setValue(2);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_range_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_two_range_color_1_default").setColor("00a6ff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_inner_color_1_default").setColor("000000");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_outer_color_1_default").setColor("000000");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_back_rad_1_default").setValue(100);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_title_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_title_size_1_default").setValue(14);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_title_position_1_default").setValue(34);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_value_show_1_default").setIsTure(true);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_value_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_value_size_1_default").setValue(23);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_value_position_1_default").setValue(63);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_units_color_1_default").setColor("ffffffff");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_units_size_1_default").setValue(14);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_units_position_1_default").setValue(80);
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("dashboardsdisplay_three_frame_color_1_default").setColor("000000");
+            DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("display_isRemoveDisplay_1_default").setIsTure(false);
+            DBTool.getOutInstance().insertBean(obdl);
+
+
+//--------------------------------------------------------------------------------------------------------------
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_1").setValue(40);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_1").setFloValue(6.667f);
@@ -956,11 +1228,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("display_isRemoveDisplay_6").setIsTure(false);
             DBTool.getOutInstance().insertBean(obdl);
+
+            initDisplaysixtonine(7);
+            initDisplaysixtonine(8);
+            initDisplaysixtonine(9);
+
+
         }
     }
-
-
-
 
 
     @Override
@@ -1053,6 +1328,151 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.frame_main_replace, fragment);
         transaction.commit();
+    }
+
+    //自定义添加仪表盘数据库          新的仪表盘  需要有一个属性
+    private static void initDisplaysixtonine(int display_count) {
+        OBDL obdl = new OBDL();
+        //        //还要再多一个Style   display_style_
+        obdl.setId(null).setKey("display_style_" + display_count).setValue(0);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_min_" + display_count).setValue(0);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_" + display_count).setValue(160);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_style_back_innercolor_" + display_count).setColor("00000000");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_style_back_outercolor_" + display_count).setColor("ff000000");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplayconfiguration_start_" + display_count).setValue(0);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplayconfiguration_end_" + display_count).setValue(360);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_title_color_" + display_count).setColor("fe9002");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_title_size_" + display_count).setValue(10);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_title_position_" + display_count).setValue(35);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_value_color_" + display_count).setColor("fe9002");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_value_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_value_size_" + display_count).setValue(12);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_value_position_" + display_count).setValue(100);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_units_color_" + display_count).setColor("fe9002");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_units_size_" + display_count).setValue(7);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_units_ver_" + display_count).setValue(50);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_units_hor_" + display_count).setValue(75);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_major_width_" + display_count).setValue(10);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_major_height_" + display_count).setValue(74);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_major_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_minor_width_" + display_count).setValue(10);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_minor_height_" + display_count).setValue(80);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_minor_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_lable_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_lable_rotate_" + display_count).setIsTure(false);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_lable_size_" + display_count).setValue(8);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_lable_offset_" + display_count).setValue(85);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_pointer_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_pointer_width_" + display_count).setValue(4);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_pointer_length_" + display_count).setValue(40);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_pointer_color_" + display_count).setColor("fe9002");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_pointer_rad_" + display_count).setValue(5);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_center_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_range_visible_" + display_count).setIsTure(false);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_range_startAngle_" + display_count).setValue(0);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_range_endAngle_" + display_count).setValue(360);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_range_color_" + display_count).setColor("d63636");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_back_color_" + display_count).setColor("00a6ff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_back_rad_" + display_count).setValue(60);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_title_color_" + display_count).setColor("757476");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_title_size_" + display_count).setValue(8);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_title_position_" + display_count).setValue(40);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_value_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_value_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_value_size_" + display_count).setValue(18);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_value_position_" + display_count).setValue(60);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_units_color_" + display_count).setColor("757476");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_units_size_" + display_count).setValue(8);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_units_position_" + display_count).setValue(73);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_pointer_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_pointer_width_" + display_count).setValue(2);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_range_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_two_range_color_" + display_count).setColor("00a6ff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_inner_color_" + display_count).setColor("000000");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_outer_color_" + display_count).setColor("000000");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_back_rad_" + display_count).setValue(100);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_title_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_title_size_" + display_count).setValue(14);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_title_position_" + display_count).setValue(34);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_value_show_" + display_count).setIsTure(true);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_value_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_value_size_" + display_count).setValue(23);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_value_position_" + display_count).setValue(63);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_units_color_" + display_count).setColor("ffffffff");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_units_size_" + display_count).setValue(14);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_units_position_" + display_count).setValue(80);
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("dashboardsdisplay_three_frame_color_" + display_count).setColor("000000");
+        DBTool.getOutInstance().insertBean(obdl);
+        obdl.setId(null).setKey("display_isRemoveDisplay_" + display_count).setIsTure(false);
+        DBTool.getOutInstance().insertBean(obdl);
+
     }
 
 

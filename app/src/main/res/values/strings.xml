@@ -24,6 +24,7 @@
     <string name="dashboards_style">Dashboards Style</string>
     <string name="add_display">Add Display</string>
     <string name="add_dashboars">Add Dashboards</string>
+    <string name="add_dashboar">Add Dashboard</string>
     <string name="remove_dashboards">Remove Dashboards</string>
     <string name="load_default_dashboards">Load Default Dashboards</string>
     <string name="toggle_hud_mode">Toggle HUD Mode</string>
@@ -114,8 +115,11 @@
     <string name="freeze_frame_Big">FREEZE FRAME</string>
     <string name="history_codes">History Codes</string>
     <string name="ford">FORD</string>
-
-
+    <string name="minmorethanmax">The minimum value you enter can not be greater than the maximum value</string>
+    <string name="graphs">Graphs</string>
+    <string name="trips">Trips</string>
+    <string name="files">Files</string>
+    
     <string name="width">Diameter(10-100)</string>
     <string name="left">Left(0-100)</string>
     <string name="top">Top(0-100)</string>
