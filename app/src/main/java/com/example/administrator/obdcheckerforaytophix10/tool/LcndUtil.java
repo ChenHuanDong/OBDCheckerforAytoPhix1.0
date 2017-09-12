@@ -12,14 +12,14 @@ import java.io.File;
 
 public class LcndUtil {
 
-    public static Typeface getfont(Context c) {
 
+    public static Typeface getfont(Context c) {
         final String FONT_DIGITAL_7 = "fonts" + File.separator
                 + "lcnd.ttf";//定义字体文件路径。
         AssetManager assets = c.getAssets();
         Typeface font = Typeface.createFromAsset(assets, FONT_DIGITAL_7);
         return font;
-
     }
+
 
 }

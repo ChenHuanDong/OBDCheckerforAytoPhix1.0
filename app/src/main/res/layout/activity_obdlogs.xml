@@ -8,7 +8,8 @@
     android:background="@color/colorOBDbackground"
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.logs.OBDLogsActivity">
-
+    <!--上面的按钮-->
+    <!--三种模式   右上角的有变化-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y44"
@@ -34,8 +35,9 @@
             android:scaleType="fitXY"
             android:src="@drawable/return_ui"/>
 
-        <!--右上角 Other按钮-->
+        <!--Graphs 右上角 Other按钮-->
         <ImageView
+            android:id="@+id/iv_logs_show_graphs"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x15"
             android:layout_marginLeft="@dimen/x340"
@@ -43,15 +45,30 @@
             android:scaleType="fitXY"
             android:src="@drawable/other_ui"/>
 
+        <!--File 右上角 Edit TextView-->
+        <TextView
+            android:id="@+id/tv_logs_show_file"
+            android:text="@string/edit"
+            android:textAllCaps="false"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/colorTextColorDemo"
+            android:layout_marginLeft="@dimen/x331"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
 
         <!--透明的返回按钮-->
         <ImageView
-            android:layout_width="@dimen/x35"
+            android:id="@+id/iv_logs_main_return"
+            android:layout_width="@dimen/x45"
             android:layout_height="match_parent"
             android:background="@color/colorTransparent"/>
 
         <!--右上角Other按钮-->
         <ImageView
+            android:id="@+id/iv_logs_main_other"
             android:layout_width="@dimen/x40"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -68,7 +85,7 @@
 
     <FrameLayout
         android:id="@+id/replace_logs_main"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorOBDbackground"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y557"/>
 

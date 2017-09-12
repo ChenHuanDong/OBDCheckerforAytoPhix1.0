@@ -119,7 +119,21 @@
     <string name="graphs">Graphs</string>
     <string name="trips">Trips</string>
     <string name="files">Files</string>
-    
+    <string name="graphitem1">Graph Item 1</string>
+    <string name="graphitem2">Graph Item 2</string>
+    <string name="graphitem3">Graph Item 3</string>
+    <string name="graphitem4">Graph Item 4</string>
+    <string name="select">Select</string>
+    <string name="smoothing">Smoothing</string>
+    <string name="edit">Edit</string>
+    <string name="distance">Distance</string>
+    <string name="fuel">Fuel</string>
+    <string name="fuel_economy">Fuel Economy</string>
+    <string name="reset">Reset</string>
+
+
+
+
     <string name="width">Diameter(10-100)</string>
     <string name="left">Left(0-100)</string>
     <string name="top">Top(0-100)</string>

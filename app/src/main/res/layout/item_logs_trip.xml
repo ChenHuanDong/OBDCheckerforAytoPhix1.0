@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+    <!--上面的标题-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x64">
+
+        <TextView
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x34"
+            android:id="@+id/tv_logs_trip_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x25"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+    </RelativeLayout>
+
+    <!--下面四行-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x179"
+        android:background="@color/colorDialogBackGround">
+
+        <!--第一行-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="@string/distance"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:id="@+id/tv_logs_trip_distance"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x286"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <!--线-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginTop="@dimen/x44"
+            android:src="@drawable/line_ui"/>
+
+        <!--第二行-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x45"
+            android:gravity="center_vertical"
+            android:text="@string/fuel"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:id="@+id/tv_logs_trip_fuel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x302"
+            android:layout_marginTop="@dimen/x45"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <!--线-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginTop="@dimen/x89"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--第三行-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x90"
+            android:gravity="center_vertical"
+            android:text="@string/fuel_economy"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:id="@+id/tv_logs_trip_economy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginLeft="@dimen/x302"
+            android:layout_marginTop="@dimen/x90"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <!--线-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginTop="@dimen/x134"
+            android:src="@drawable/line_ui"/>
+
+
+        <TextView
+            android:id="@+id/tv_logs_trip_reset"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginTop="@dimen/x135"
+            android:gravity="center"
+            android:text="@string/reset"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

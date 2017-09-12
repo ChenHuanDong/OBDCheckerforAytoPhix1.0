@@ -163,7 +163,7 @@
         android:layout_marginLeft="@dimen/x62"
         android:layout_marginTop="@dimen/y279"
         android:scaleType="fitXY"
-        android:src="@drawable/logs_ui"/>
+        android:src="@drawable/montiors_ui"/>
 
     <!--Logs()-->
     <TextView

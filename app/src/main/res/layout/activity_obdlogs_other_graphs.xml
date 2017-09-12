@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorOBDbackground"
+    tools:context="com.example.administrator.obdcheckerforaytophix10.logs.othersetting.OBDLogsOtherGraphs">
+
+    <!--最外面的LL-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--上面标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y44"
+            android:orientation="horizontal">
+
+            <!--底部Tv  LogS-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/logs"
+                android:textAllCaps="false"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+            <!--返回图标-->
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x14"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+            <!--透明的返回按钮-->
+            <ImageView
+                android:id="@+id/iv_logs_other_graphs_return"
+                android:layout_width="@dimen/x45"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+
+        </RelativeLayout>
+
+        <!--红色方块加Tv-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x64">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x35"
+                android:background="@color/colorDisConnect"/>
+
+
+            <TextView
+                android:layout_width="@dimen/x294"
+                android:layout_height="@dimen/x25"
+                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginTop="@dimen/x34"
+                android:singleLine="true"
+                android:text="@string/graphitem1"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x18"/>
+
+        </RelativeLayout>
+
+        <!--红色方块的下面三个选项-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDialogBackGround"
+            android:orientation="vertical">
+            <!--Selet-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/select"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:layout_width="@dimen/x340"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x35"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:text="Accel X"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x16"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x18"
+                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginTop="@dimen/x13"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/enter"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_ui"/>
+            <!--Enabled-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/enabled"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_enabled_one"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+            <!--Smoothing-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/smoothing"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                   android:id="@+id/iosbtn_logs_other_graph_smoothing_one"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--绿色方块加TV-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x31"
+                android:background="@color/colorHUDtextColor"/>
+
+
+            <TextView
+                android:layout_width="@dimen/x294"
+                android:layout_height="@dimen/x25"
+                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginTop="@dimen/x30"
+                android:singleLine="true"
+                android:text="@string/graphitem2"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x18"/>
+
+        </RelativeLayout>
+        <!--绿色方块的下面三个选项-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDialogBackGround"
+            android:orientation="vertical">
+            <!--Selet-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/select"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:layout_width="@dimen/x340"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x35"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:text="Mass air flow rate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x16"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x18"
+                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginTop="@dimen/x13"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/enter"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_ui"/>
+            <!--Enabled-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/enabled"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_enabled_two"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+            <!--Smoothing-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/smoothing"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_smoothing_two"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--蓝色方块加TV-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x31"
+                android:background="@color/colorPrimary"/>
+
+
+            <TextView
+                android:layout_width="@dimen/x294"
+                android:layout_height="@dimen/x25"
+                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginTop="@dimen/x30"
+                android:singleLine="true"
+                android:text="@string/graphitem3"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x18"/>
+
+        </RelativeLayout>
+        <!--蓝色方块的下面三个选项-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDialogBackGround"
+            android:orientation="vertical">
+            <!--Selet-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/select"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:layout_width="@dimen/x340"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x35"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:text="Accel X"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x16"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x18"
+                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginTop="@dimen/x13"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/enter"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_ui"/>
+            <!--Enabled-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/enabled"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_enabled_three"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+            <!--Smoothing-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/smoothing"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_smoothing_three"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <!--黄色方块加TV-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x31"
+                android:background="@color/colorDashboardsPointer"/>
+
+
+            <TextView
+                android:layout_width="@dimen/x294"
+                android:layout_height="@dimen/x25"
+                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginTop="@dimen/x30"
+                android:singleLine="true"
+                android:text="@string/graphitem4"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x18"/>
+
+        </RelativeLayout>
+        <!--黄色方块的下面三个选项-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDialogBackGround"
+            android:orientation="vertical">
+            <!--Selet-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/select"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <TextView
+                    android:layout_width="@dimen/x340"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x35"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:text="Accel Z"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x16"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x10"
+                    android:layout_height="@dimen/x18"
+                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginTop="@dimen/x13"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/enter"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_ui"/>
+            <!--Enabled-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/enabled"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_enabled_four"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+            <!--线-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:src="@drawable/line_ui"/>
+            <!--Smoothing-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x44">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/smoothing"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+                <ch.ielse.view.SwitchView
+                    android:id="@+id/iosbtn_logs_other_graph_smoothing_four"
+                    android:layout_width="@dimen/x44"
+                    android:layout_height="@dimen/x22"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x316"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--底下空白的-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x53"
+            android:background="@color/colorTransparent"/>
+
+
+    </LinearLayout>
+</ScrollView>
