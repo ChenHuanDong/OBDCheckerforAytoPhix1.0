@@ -130,7 +130,19 @@
     <string name="fuel">Fuel</string>
     <string name="fuel_economy">Fuel Economy</string>
     <string name="reset">Reset</string>
-
+    <string name="delete">Delete</string>
+    <string name="delete_file_dia">Are you sure you wang to delete all log files ?</string>
+    <string name="monitortests">Monitor Tests</string>
+    <string name="osenstors">O2 Sensors</string>
+    <string name="modesix">Mode $06</string>
+    <string name="modenine">Mode $09</string>
+    <string name="summary">Summary</string>
+    <string name="testresults">Test Results</string>
+    <string name="available">Available</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="units">Units</string>
+    <string name="banksensor">Bank 1 - Sensor 3</string>
 
 
 

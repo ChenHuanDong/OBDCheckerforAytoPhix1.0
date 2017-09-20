@@ -20,6 +20,7 @@ import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsGr
 import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsTripsFragment;
 import com.example.administrator.obdcheckerforaytophix10.logs.othersetting.OBDLogsOtherGraphs;
 import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 
 public class OBDLogsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -158,7 +159,10 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
                     Intent intent = new Intent(OBDLogsActivity.this, OBDLogsOtherGraphs.class);
                     startActivity(intent);
                 } else if (position == 3) {
-
+                    Intent intent = new Intent("logsFilesEdit");
+                    sendBroadcast(intent);
+                    //把存的状态取反  存起来
+                    SPUtil.put(OBDLogsActivity.this , "OBDLogsEditStatus" , !(boolean)SPUtil.get(OBDLogsActivity.this , "OBDLogsEditStatus" , false));
                 }
                 break;
             case R.id.iv_logs_main_return:

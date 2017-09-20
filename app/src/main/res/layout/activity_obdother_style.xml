@@ -32,6 +32,7 @@
 
         <!--cancel-->
         <TextView
+            android:id="@+id/tv_other_style_cancel"
             android:layout_width="@dimen/x66"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x309"

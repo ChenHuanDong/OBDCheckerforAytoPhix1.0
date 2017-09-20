@@ -1,41 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/x45"
+              android:background="@color/colorDialogBackGround"
+              android:orientation="vertical">
+
+    <!--最外层  不加线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <!--左边区域-->
+        <LinearLayout
+            android:layout_width="@dimen/x200"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_marginTop="@dimen/x13"
+                android:id="@+id/iv_logs_item_file_del"
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
+                android:layout_marginLeft="@dimen/x12"
+                android:src="@drawable/logfiledel"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/tv_logs_item_file_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x45"
-                android:background="@color/colorDialogBackGround">
+                android:layout_height="@dimen/x44"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tv_logs_item_file_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x44"
-        android:layout_marginLeft="@dimen/x15"
-        android:gravity="center_vertical"
-        android:textColor="@color/colorTextColorDemo"
-        android:textSize="@dimen/x16"/>
+        <TextView
+            android:id="@+id/tv_logs_item_file_pid"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/x44"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
 
-    <TextView
-        android:id="@+id/tv_logs_item_file_pid"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x44"
-        android:layout_marginLeft="@dimen/x200"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:textColor="@color/colorDashboardsPointer"
-        android:textSize="@dimen/x16"/>
+        <ImageView
+            android:layout_marginTop="@dimen/x13"
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:scaleType="fitXY"
+            android:src="@drawable/enter"/>
 
+
+
+    </LinearLayout>
+
+    <!--线-->
     <ImageView
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x350"
-        android:scaleType="fitXY"
-        android:src="@drawable/enter"
-        android:layout_width="@dimen/x10"
-        android:layout_height="@dimen/x18"/>
-
-    <ImageView
-        android:src="@drawable/line_ui"
-        android:layout_marginTop="@dimen/x44"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"/>
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
 
-</RelativeLayout>
+</LinearLayout>

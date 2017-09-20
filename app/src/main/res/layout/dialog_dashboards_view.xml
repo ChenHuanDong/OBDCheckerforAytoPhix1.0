@@ -116,6 +116,7 @@
         android:src="@drawable/line_ui"/>
 
 
+    <!--Style-->
     <RelativeLayout
         android:layout_width="@dimen/x335"
         android:layout_height="@dimen/x44"
@@ -150,13 +151,56 @@
 
     </RelativeLayout>
 
+
     <ImageView
         android:layout_width="@dimen/x335"
         android:layout_height="@dimen/x1"
         android:scaleType="fitXY"
         android:src="@drawable/line_ui"/>
 
-<!--Remove Display-->
+    <!--Dashboards  Style-->
+    <RelativeLayout
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/dashboardsMode"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x306"
+            android:layout_marginTop="@dimen/x13"
+            android:scaleType="fitXY"
+            android:src="@drawable/enter"/>
+
+
+        <ImageView
+            android:id="@+id/display_edit_one_dashboard_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="@dimen/x335"
+        android:layout_height="@dimen/x1"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+    <!--Remove Display-->
     <RelativeLayout
         android:layout_width="@dimen/x335"
         android:layout_height="@dimen/x44">
@@ -186,7 +230,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/line_ui"/>
 
-
+    <!--Draw and Move-->
     <RelativeLayout
         android:id="@+id/re_draw_and_move"
         android:layout_width="@dimen/x335"
@@ -204,6 +248,8 @@
             android:textSize="@dimen/x16"/>
 
     </RelativeLayout>
+
+
 
     <ImageView
         android:layout_width="@dimen/x335"

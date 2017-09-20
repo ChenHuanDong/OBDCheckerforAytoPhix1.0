@@ -58,7 +58,8 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
 
     private TextView tv_two_back_rad, tv_two_title_font, tv_two_title_position, tv_two_value_size, tv_two_value_position,
             tv_two_units_size, tv_two_units_position, tv_two_pointer_width, tv_three_back_rad, tv_three_title_size,
-            tv_three_title_position, tv_three_value_size, tv_three_value_position, tv_three_units_size, tv_three_units_position;
+            tv_three_title_position, tv_three_value_size, tv_three_value_position, tv_three_units_size, tv_three_units_position,
+            tv_cancel;
     private SeekBar seek_two_back_rad, seek_two_title_font, seek_two_title_position, seek_two_value_size, seek_two_value_position,
             seek_two_units_size, seek_two_units_position, seek_two_pointer_width, seek_value, seek_three_back_rad, seek_three_title_size,
             seek_three_title_position, seek_three_value_size, seek_three_value_position, seek_three_units_size, seek_three_units_position;
@@ -237,7 +238,6 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         display.setStyle_two_pointer_width(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_pointer_width_" + displayId).getValue());
         display.setStyle_two_range_show(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_range_show_" + displayId).getIsTure());
         display.setStyle_two_range_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_range_color_" + displayId).getColor());
-
         //Style 2
         display.setStyle_three_inner_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_inner_color_" + displayId).getColor());
         display.setStyle_three_outer_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_outer_color_" + displayId).getColor());
@@ -253,6 +253,38 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         display.setStyle_three_units_size(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_units_size_" + displayId).getValue());
         display.setStyle_three_units_position(DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_units_position_" + displayId).getValue());
         display.setStyle_three_frame_color("#" + DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_frame_color_" + displayId).getColor());
+
+        //把Style1  2   进来的数据存进
+        SPUtil.put(this, "dashboardsdisplay_two_back_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_back_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_two_back_rad_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_back_rad_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_title_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_title_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_two_title_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_title_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_title_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_title_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_value_show_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_value_show_" + displayId).getIsTure());
+        SPUtil.put(this, "dashboardsdisplay_two_value_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_value_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_two_value_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_value_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_value_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_value_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_units_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_units_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_two_units_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_units_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_units_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_units_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_pointer_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_pointer_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_two_pointer_width_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_pointer_width_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_two_range_show_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_range_show_" + displayId).getIsTure());
+        SPUtil.put(this, "dashboardsdisplay_two_range_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_two_range_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_inner_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_inner_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_outer_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_outer_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_back_rad_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_back_rad_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_title_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_title_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_title_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_title_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_title_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_title_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_value_show_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_value_show_" + displayId).getIsTure());
+        SPUtil.put(this, "dashboardsdisplay_three_value_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_value_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_value_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_value_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_value_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_value_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_units_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_units_color_" + displayId).getColor());
+        SPUtil.put(this, "dashboardsdisplay_three_units_size_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_units_size_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_units_position_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_units_position_" + displayId).getValue());
+        SPUtil.put(this, "dashboardsdisplay_three_frame_color_" + displayId, DBTool.getOutInstance().getQueryKey("dashboardsdisplay_three_frame_color_" + displayId).getColor());
 
         mRe.addView(display);
 
@@ -496,12 +528,48 @@ public class OBDOtherStyleActivity extends AppCompatActivity implements TextWatc
         iv_finish = (ImageView) findViewById(R.id.iv_other_finish);
         iv_finish.setOnClickListener(this);
 
+        tv_cancel = (TextView) findViewById(R.id.tv_other_style_cancel);
+        tv_cancel.setOnClickListener(this);
+
     }
 
     //点击事件
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_other_style_cancel:
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_" + displayId, (String) SPUtil.get(this, "dashboardsdisplay_two_back_color_" + displayId, "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_" + displayId, (int) SPUtil.get(this, "dashboardsdisplay_two_back_rad_" + displayId, 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_" + displayId, (String) SPUtil.get(this, "dashboardsdisplay_two_title_color_" + displayId, "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_" + displayId, (int) SPUtil.get(this, "dashboardsdisplay_two_title_size_" + displayId, 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_" + displayId, (int) SPUtil.get(this, "dashboardsdisplay_two_title_position_" + displayId, 0));
+                DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_" + displayId, (boolean) SPUtil.get(this, "dashboardsdisplay_two_value_show_" + displayId, false));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_two_value_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_two_value_size_" + displayId , 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_" + displayId , (int)SPUtil.get(this,"dashboardsdisplay_two_value_position_" + displayId , 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_two_units_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_two_units_size_" + displayId , 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_two_units_position_" + displayId , 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_" + displayId , (String) SPUtil.get(this , "dashboardsdisplay_two_pointer_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_two_pointer_width_" + displayId , 0));
+                DBTool.getOutInstance().upDateIsTrueByKey( "dashboardsdisplay_two_range_show_" + displayId , (boolean)SPUtil.get(this ,  "dashboardsdisplay_two_range_show_" + displayId , false));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_two_range_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_" + displayId , (String) SPUtil.get(this , "dashboardsdisplay_three_inner_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_three_outer_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey( "dashboardsdisplay_three_back_rad_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_back_rad_" + displayId , 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_three_title_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_title_size_" + displayId , 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_title_position_" + displayId , 0));
+                DBTool.getOutInstance().upDateIsTrueByKey( "dashboardsdisplay_three_value_show_" + displayId , (boolean)SPUtil.get(this ,  "dashboardsdisplay_three_value_show_" + displayId , false));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_three_value_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_value_size_" + displayId , 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_value_position_" + displayId , 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_three_units_color_" + displayId , "12"));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_units_size_" + displayId , 0));
+                DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_" + displayId , (int)SPUtil.get(this , "dashboardsdisplay_three_units_position_" + displayId , 0));
+                DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_" + displayId , (String)SPUtil.get(this , "dashboardsdisplay_three_frame_color_" + displayId , "12"));
+                finish();
+                break;
             case R.id.btn_two_back_color:
                 showColorPickDialog("dashboardsdisplay_two_back_color_" + displayId, btn_two_back_color, et_two_back_color);
                 et_two_back_color.requestFocus();

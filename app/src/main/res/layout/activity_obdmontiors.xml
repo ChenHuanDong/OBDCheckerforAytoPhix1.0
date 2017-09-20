@@ -5,10 +5,234 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOBDbackground"
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.montiors.OBDMontiorsActivity">
 
+    <!--上面的标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:orientation="horizontal">
+
+        <!--底部Tv  LogS-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/montiors"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+        <!--返回图标-->
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x14"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+        <!--Monitors Test  右上角刷新按钮-->
+        <ImageView
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x22"
+            android:layout_marginLeft="@dimen/x338"
+            android:layout_marginTop="@dimen/x11"
+            android:src="@drawable/shuaxin_diagnostics"/>
 
 
+        <!--透明的返回按钮-->
+        <ImageView
+            android:id="@+id/iv_monitors_main_return"
+            android:layout_width="@dimen/x45"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+        <!--透明 右上角Other按钮-->
+        <ImageView
+            android:id="@+id/iv_monitors_main_other"
+            android:layout_width="@dimen/x40"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTransparent"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:src="@drawable/line_ui"/>
+
+
+    <FrameLayout
+        android:id="@+id/replace_monitors_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y557"
+        android:background="@color/colorOBDbackground"/>
+
+    <!--下面是展示底层的   下层是Iv+Tv   上层是透明RadGroup+RadButton-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45"
+        android:background="@color/colorDialogBackGround">
+
+        <!--底层展示-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!--四个展示小布局之一-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_monitors_test_bottom"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="@dimen/x23"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x4"/>
+
+                <TextView
+                    android:id="@+id/tv_monitors_test_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/monitortests"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/x10"/>
+
+            </RelativeLayout>
+
+            <!--四个展示小布局之二-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_monitors_o_bottom"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="@dimen/x23"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x4"/>
+
+                <TextView
+                    android:id="@+id/tv_monitors_o_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/osenstors"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/x10"/>
+
+            </RelativeLayout>
+
+            <!--四个展示小布局之三-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_monitors_modesix_bottom"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="@dimen/x23"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x4"/>
+
+                <TextView
+                    android:id="@+id/tv_monitors_modesix_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/modesix"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/x10"/>
+
+            </RelativeLayout>
+
+            <!--四个展示小布局之四-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_monitors_modenine_bottom"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="@dimen/x23"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x4"/>
+
+                <TextView
+                    android:id="@+id/tv_monitors_modenine_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x15"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/modenine"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/x10"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!--上面的透明-->
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radbtn_monitors_test"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:button="@null"/>
+
+            <RadioButton
+                android:id="@+id/radbtn_monitors_otwo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:button="@null"/>
+
+            <RadioButton
+                android:id="@+id/radbtn_monitors_modesix"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:button="@null"/>
+
+            <RadioButton
+                android:id="@+id/radbtn_monitors_modenine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:button="@null"/>
+
+
+
+
+        </RadioGroup>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

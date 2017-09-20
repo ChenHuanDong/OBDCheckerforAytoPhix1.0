@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:background="@color/colorDialogBackGround"
+                android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_monitors_test_result"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x20"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <ImageView
+        android:id="@+id/iv_monitors_test_available"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x252"
+        android:layout_width="@dimen/x22"
+        android:layout_height="@dimen/x22"/>
+
+    <ImageView
+        android:id="@+id/iv_monitors_test_complete"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x320"
+        android:layout_width="@dimen/x22"
+        android:layout_height="@dimen/x22"/>
+
+
+
+</RelativeLayout>

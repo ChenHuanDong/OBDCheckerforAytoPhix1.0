@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x131"
+                android:background="@color/colorDialogBackGround"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_monitors_otwo_item_title"
+        android:layout_width="@dimen/x292"
+        android:layout_height="@dimen/x50"
+        android:layout_marginLeft="@dimen/x20"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <!--Min-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginTop="@dimen/x76"
+        android:text="@string/min"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+
+    <!--Min 2-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x87"
+        android:layout_marginTop="@dimen/x76"
+        android:text="@string/min"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <!--Max-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginTop="@dimen/x76"
+        android:layout_marginLeft="@dimen/x160"
+        android:text="@string/max"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+
+    <!--Units-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginTop="@dimen/x76"
+        android:layout_marginLeft="@dimen/x234"
+        android:text="@string/units"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:id="@+id/tv_monitors_otwo_item_min"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginTop="@dimen/x51"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <TextView
+        android:id="@+id/tv_monitors_otwo_item_minn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x85"
+        android:layout_marginTop="@dimen/x51"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <TextView
+        android:id="@+id/tv_monitors_otwo_item_max"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x155"
+        android:layout_marginTop="@dimen/x51"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+
+    <TextView
+        android:id="@+id/tv_monitors_otwo_item_units"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x238"
+        android:layout_marginTop="@dimen/x51"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x26"
+        android:layout_height="@dimen/x19"
+        android:layout_marginLeft="@dimen/x334"
+        android:layout_marginTop="@dimen/x77"
+        android:src="@drawable/monitors_yes_gurren"/>
+
+
+    <ImageView
+        android:background="@color/colorOBDbackground"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="@dimen/x30"/>
+
+
+
+</RelativeLayout>

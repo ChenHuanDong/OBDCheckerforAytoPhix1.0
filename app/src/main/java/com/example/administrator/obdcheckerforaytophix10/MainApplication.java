@@ -29,8 +29,11 @@ public class MainApplication extends Application {
         super.onCreate();
         sContext = this;
 
+        //记录屏幕宽高  不能删
         SPUtil.put(this, "screenWidth", ScreenUtils.getScreenWidth(this));
         SPUtil.put(this, "screenHeight", ScreenUtils.getScreenHeight(this));
+        //记录Logs的File 的 Edit 的状态
+        SPUtil.put(this , "OBDLogsEditStatus" , false);
 
 
         //6个仪表盘的初始大小位置设置     高度是占572.0f  的百分比

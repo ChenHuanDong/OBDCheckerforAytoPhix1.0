@@ -7,15 +7,16 @@
 
 
     <TextView
+        android:id="@+id/tv_delete_title"
         android:layout_width="@dimen/x252"
         android:layout_height="@dimen/x28"
         android:layout_marginLeft="@dimen/x18"
         android:layout_marginTop="@dimen/x20"
         android:singleLine="true"
         android:text="@string/remove_dashboards"
-        android:textAllCaps="false"
         android:textColor="@color/colorDashboardsPointer"
         android:textSize="@dimen/x18"/>
+
 
     <ImageView
         android:layout_width="@dimen/x270"
@@ -25,12 +26,12 @@
 
 
     <TextView
+        android:id="@+id/tv_delete_content"
         android:layout_width="@dimen/x225"
         android:layout_height="@dimen/x40"
         android:layout_marginLeft="@dimen/x17"
         android:layout_marginTop="@dimen/x77"
         android:text="@string/are_you_sure_you_want_to_remove_this_item"
-        android:textAllCaps="false"
         android:textColor="@color/colorRomovePrompt"
         android:textSize="@dimen/x12"/>
 

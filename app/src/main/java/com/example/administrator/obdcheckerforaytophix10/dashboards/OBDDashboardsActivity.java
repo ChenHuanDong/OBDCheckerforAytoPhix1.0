@@ -90,10 +90,10 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         data.add(fSecond);
         data.add(fThird);
 
-        if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()){
+        if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
             data.add(fCustomize);
             mPointCustomize.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mPointCustomize.setVisibility(View.GONE);
         }
 
@@ -107,17 +107,17 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                   if (intent.getBooleanExtra("scrool" , true)){
-                        vp.setIsCanScroll(true);
-                   }else {
-                       vp.setIsCanScroll(false);
-                   }
+                if (intent.getBooleanExtra("scrool", true)) {
+                    vp.setIsCanScroll(true);
+                } else {
+                    vp.setIsCanScroll(false);
+                }
             }
         };
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("viewpagerIsScrool");
-        registerReceiver(br , intentFilter);
+        registerReceiver(br, intentFilter);
 
 
     }
@@ -388,6 +388,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 0);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 0);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 0);
                                 } else if (ii == 1) {
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_2", 1);
@@ -395,6 +398,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 1);
                                 } else if (ii == 2) {
 
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 2);
@@ -403,6 +409,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 2);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 2);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 2);
                                 }
                                 Intent intent = new Intent("changeDisplay");
                                 sendBroadcast(intent);
@@ -422,14 +431,14 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                     @Override
                     public void onClick(View view) {
 
-                        LogUtil.fussenLog().d(vp.getCurrentItem()+"这个是当前页数");
+                        LogUtil.fussenLog().d(vp.getCurrentItem() + "这个是当前页数");
 
                         //获取到 仪表盘数量  然后加1
                         dialog.dismiss();
                         int display_count = DBTool.getOutInstance().getQueryKey("display_count").getValue() + 1;
                         DBTool.getOutInstance().upDateValueByKey("display_count", display_count);
                         //自定义添加仪表盘数据库
-                        addMyDisplay(display_count , vp.getCurrentItem() );
+                        addMyDisplay(display_count, vp.getCurrentItem());
                         Intent intent = new Intent("changeDisplay");
                         sendBroadcast(intent);
                     }
@@ -439,7 +448,6 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 ll_add_dashboards.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //LogUtil.fussenLog().d(getVisibleFragment().getId() + "------");
                     }
                 });
 
@@ -462,15 +470,38 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                         btn_ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //自定义更改方法
-                                //load_default();
-                                //清空数据库调用MainActivity  重新存数据
-                                DBTool.getOutInstance().deleteAll();
-                                MainActivity.initGreedDaoData();
-
-                                Intent intent = new Intent("changeDisplay");
-                                sendBroadcast(intent);
                                 dialog_load_default.dismiss();
+
+                                final OBDPopDialog dia_wait = new OBDPopDialog(OBDDashboardsActivity.this);
+                                View view_wait = LayoutInflater.from(OBDDashboardsActivity.this).inflate(R.layout.dialog_wait_progressbar, null);
+
+                                getWaitWin(dia_wait);
+                                dia_wait.setContentView(view_wait);
+                                dia_wait.setCanceledOnTouchOutside(false);
+                                dia_wait.show();
+
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //清空数据库调用MainActivity  重新存数据
+                                        DBTool.getOutInstance().deleteAll();
+                                        MainActivity.initGreedDaoData();
+
+                                        Intent intent = new Intent("changeDisplay");
+                                        sendBroadcast(intent);
+
+                                        try {
+                                            Thread.sleep(5);
+                                            dia_wait.dismiss();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }).start();
+
+
+
+
                             }
                         });
 
@@ -502,7 +533,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     }
 
     //自定义添加仪表盘数据库          新的仪表盘  需要有一个属性
-    private void addMyDisplay(int display_count , int whatFragment) {
+    private void addMyDisplay(int display_count, int whatFragment) {
         OBDL obdl = new OBDL(null, "dashboardsdisplaysizeandlocationwidth_" + display_count, 40);
         DBTool.getOutInstance().insertBean(obdl);
 
@@ -683,451 +714,14 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         win.setAttributes(lp);
     }
 
-
-    private void load_default() {
-        DBTool.getOutInstance().upDateValueByKey("display_style_1", 0);
-        //一共仪表盘的数量
-        DBTool.getOutInstance().upDateValueByKey("display_count", 9);
-
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_1", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_1", 6.667f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_1", 1.748f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_2", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_2", 53.333f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_2", 1.748f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_3", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_3", 6.667f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_3", 34.266f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_4", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_4", 53.333f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_4", 34.266f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_5", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_5", 6.667f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_5", 66.783f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_6", 40);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_6", 53.333f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_6", 66.783f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_7", 59);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_7", 20.5333f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_7", 3.1469f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_8", 59);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_8", 20.5333f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_8", 51.7483f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_9", 80);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_9", 9.8667f);
-        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_9", 15.3846f);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_1", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_2", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_3", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_4", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_5", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_6", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_1", 160);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_2", 160);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_3", 160);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_4", 160);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_5", 160);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_6", 160);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_1", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_2", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_3", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_4", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_5", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_innercolor_6", "00000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_1", "ff000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_2", "ff000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_3", "ff000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_4", "ff000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_5", "ff000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_style_back_outercolor_6", "ff000000");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_1", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_2", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_3", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_4", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_5", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_start_6", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_1", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_2", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_3", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_4", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_5", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplayconfiguration_end_6", 360);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_1", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_2", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_3", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_4", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_5", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_title_color_6", "fe9002");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_1", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_2", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_3", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_4", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_5", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_size_6", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_1", 35);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_2", 35);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_3", 35);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_4", 35);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_5", 35);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_title_position_6", 35);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_1", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_2", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_3", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_4", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_5", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_value_color_6", "fe9002");
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_value_show_6", true);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_1", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_2", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_3", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_4", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_5", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_size_6", 12);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_1", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_2", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_3", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_4", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_5", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_value_position_6", 100);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_1", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_2", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_3", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_4", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_5", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_units_color_6", "fe9002");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_1", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_2", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_3", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_4", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_5", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_size_6", 7);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_1", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_2", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_3", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_4", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_5", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_ver_6", 50);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_1", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_2", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_3", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_4", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_5", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_units_hor_6", 75);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_1", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_2", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_3", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_4", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_5", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_width_6", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_1", 74);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_2", 74);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_3", 74);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_4", 74);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_5", 74);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_major_height_6", 74);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_major_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_1", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_2", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_3", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_4", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_5", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_width_6", 10);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_1", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_2", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_3", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_4", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_5", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_minor_height_6", 80);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_minor_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_show_6", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_1", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_2", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_3", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_4", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_5", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_lable_rotate_6", false);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_1", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_2", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_3", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_4", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_5", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_size_6", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_1", 85);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_2", 85);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_3", 85);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_4", 85);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_5", 85);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_lable_offset_6", 85);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_pointer_show_6", true);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_1", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_2", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_3", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_4", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_5", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_width_6", 4);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_1", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_2", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_3", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_4", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_5", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_length_6", 40);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_1", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_2", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_3", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_4", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_5", "fe9002");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_pointer_color_6", "fe9002");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_1", 5);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_2", 5);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_3", 5);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_4", 5);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_5", 5);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_pointer_rad_6", 5);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_center_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_1", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_2", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_3", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_4", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_5", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_range_visible_6", false);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_1", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_2", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_3", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_4", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_5", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_startAngle_6", 0);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_1", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_2", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_3", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_4", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_5", 360);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_range_endAngle_6", 360);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_1", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_2", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_3", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_4", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_5", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_range_color_6", "d63636");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_1", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_2", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_3", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_4", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_5", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_back_color_6", "00a6ff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_1", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_2", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_3", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_4", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_5", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_back_rad_6", 60);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_1", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_2", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_3", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_4", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_5", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_title_color_6", "757476");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_1", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_2", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_3", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_4", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_5", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_size_6", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_1", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_2", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_3", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_4", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_5", 40);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_title_position_6", 40);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_value_show_6", true);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_value_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_1", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_2", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_3", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_4", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_5", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_size_6", 18);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_1", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_2", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_3", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_4", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_5", 60);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_value_position_6", 60);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_1", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_2", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_3", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_4", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_5", "757476");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_units_color_6", "757476");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_1", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_2", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_3", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_4", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_5", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_size_6", 8);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_1", 73);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_2", 73);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_3", 73);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_4", 73);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_5", 73);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_units_position_6", 73);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_pointer_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_1", 2);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_2", 2);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_3", 2);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_4", 2);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_5", 2);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_two_pointer_width_6", 2);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_two_range_show_6", true);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_1", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_2", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_3", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_4", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_5", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_two_range_color_6", "00a6ff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_1", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_2", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_3", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_4", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_5", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_inner_color_6", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_1", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_2", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_3", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_4", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_5", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_outer_color_6", "000000");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_1", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_2", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_3", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_4", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_5", 100);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_back_rad_6", 100);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_title_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_1", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_2", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_3", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_4", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_5", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_size_6", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_1", 34);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_2", 34);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_3", 34);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_4", 34);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_5", 34);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_title_position_6", 34);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_1", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_2", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_3", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_4", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_5", true);
-        DBTool.getOutInstance().upDateIsTrueByKey("dashboardsdisplay_three_value_show_6", true);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_value_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_1", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_2", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_3", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_4", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_5", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_size_6", 23);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_1", 63);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_2", 63);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_3", 63);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_4", 63);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_5", 63);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_value_position_6", 63);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_1", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_2", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_3", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_4", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_5", "ffffffff");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_units_color_6", "ffffffff");
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_1", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_2", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_3", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_4", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_5", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_size_6", 14);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_1", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_2", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_3", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_4", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_5", 80);
-        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplay_three_units_position_6", 80);
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_1", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_2", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_3", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_4", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_5", "000000");
-        DBTool.getOutInstance().upDateColorByKey("dashboardsdisplay_three_frame_color_6", "000000");
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_1", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_2", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_3", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_4", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_5", false);
-        DBTool.getOutInstance().upDateIsTrueByKey("display_isRemoveDisplay_6", false);
-
+    private void getWaitWin(OBDPopDialog d) {
+        Window win = d.getWindow();
+        WindowManager.LayoutParams lp = win.getAttributes();
+        win.setGravity(Gravity.LEFT | Gravity.TOP);
+        lp.x = (int) SPUtil.get(this, "screenWidth", 0);
+        lp.y = (int) SPUtil.get(this, "screenHeight", 0);
+        win.setAttributes(lp);
     }
-
-
 
 
 }

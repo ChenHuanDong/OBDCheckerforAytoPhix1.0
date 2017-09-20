@@ -6,6 +6,16 @@ package com.example.administrator.obdcheckerforaytophix10.logs.fragment;
 
 public class BeanLogsFile {
     private String title , pid ;
+    private Boolean isShow = false ;
+
+    public Boolean getShow() {
+        return isShow;
+    }
+
+    public BeanLogsFile setShow(Boolean show) {
+        isShow = show;
+        return this;
+    }
 
     public String getTitle() {
         return title;

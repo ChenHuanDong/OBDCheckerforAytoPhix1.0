@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -170,6 +171,7 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int lastY;
     private int totalX = 0;
     private int totalY = 0;
+    private int dashboard_mode_style;
 
 
     public DashboardsView(Context context, int myId) {
@@ -203,6 +205,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setStrokeWidth(0);
         mPaint.setColor(getResources().getColor(R.color.colorWhite));
         mPaint.setAntiAlias(true);
+        mPaint.setTypeface(null);
     }
 
 
@@ -353,6 +356,8 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         canvas.drawText("0.00", getWidth() / 2, (float) ((style_three_value_position / 100.0) * getWidth()), mPaint);
 
+        mPaint.setTypeface(null);
+
     }
 
     //绘制文字Top And  Bottom
@@ -482,6 +487,7 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         canvas.drawText("2500", (float) ((60.0 / 300.0) * getWidth()), (float) ((style_two_value_position / 100.0) * getWidth()), mPaint);
 
+        mPaint.setTypeface(null);
 
         canvas.restore();
 
@@ -859,10 +865,10 @@ public class DashboardsView extends View implements View.OnClickListener {
                     if (et_end.getText().length() == 0) {
                         et_end.setText(0 + "");
                     }
-                    if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString()) ){
+                    if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString())) {
                         Toast.makeText(mContext, getResources().getString(R.string.minmorethanmax),
                                 Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
                         DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                         mContext.sendBroadcast(intent);
@@ -997,10 +1003,10 @@ public class DashboardsView extends View implements View.OnClickListener {
                             if (et_end.getText().length() == 0) {
                                 et_end.setText(0 + "");
                             }
-                            if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString()) ){
+                            if (Integer.parseInt(et_start.getText().toString()) >= Integer.parseInt(et_end.getText().toString())) {
                                 Toast.makeText(mContext, getResources().getString(R.string.minmorethanmax),
                                         Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_min_" + myDisplayId, Integer.parseInt(et_start.getText().toString()));
                                 DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocation_value_max_" + myDisplayId, Integer.parseInt(et_end.getText().toString()));
                                 mContext.sendBroadcast(intent);
@@ -1041,6 +1047,87 @@ public class DashboardsView extends View implements View.OnClickListener {
                     }
 
 
+                }
+            });
+
+            //Dashboards  Style
+            ImageView iv_dashboardsstyle = view_dia.findViewById(R.id.display_edit_one_dashboard_style);
+            iv_dashboardsstyle.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    final OBDPopDialog dialog_dashboardsstyle = new OBDPopDialog(mContext);
+                    View view_dasboardsstyle = LayoutInflater.from(mContext).inflate(R.layout.dialog_dashboards_style, null);
+                    LinearLayout ll_one = view_dasboardsstyle.findViewById(R.id.ll_style_one);
+                    LinearLayout ll_two = view_dasboardsstyle.findViewById(R.id.ll_style_two);
+                    LinearLayout ll_three = view_dasboardsstyle.findViewById(R.id.ll_style_three);
+                    final ImageView iv_one = view_dasboardsstyle.findViewById(R.id.iv_style_one);
+                    final ImageView iv_two = view_dasboardsstyle.findViewById(R.id.iv_style_two);
+                    final ImageView iv_three = view_dasboardsstyle.findViewById(R.id.iv_style_three);
+                    //把记录Style 的提出去了
+                    dashboard_mode_style = DBTool.getOutInstance().getQueryKey("display_style_"+myDisplayId).getValue();
+                    //根据数据库存的 判断那个橙色对号显示
+                    if (dashboard_mode_style == 0){
+                        iv_one.setVisibility(VISIBLE);
+                        iv_two.setVisibility(GONE);
+                        iv_three.setVisibility(GONE);
+                    }else if (dashboard_mode_style == 1){
+                        iv_one.setVisibility(GONE);
+                        iv_two.setVisibility(VISIBLE);
+                        iv_three.setVisibility(GONE);
+                    }else {
+                        iv_one.setVisibility(GONE);
+                        iv_two.setVisibility(GONE);
+                        iv_three.setVisibility(VISIBLE);
+                    }
+                    ll_one.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dashboard_mode_style = 0 ;
+                            iv_one.setVisibility(VISIBLE);
+                            iv_two.setVisibility(GONE);
+                            iv_three.setVisibility(GONE);
+                        }
+                    });
+                    ll_two.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dashboard_mode_style = 1 ;
+                            iv_one.setVisibility(GONE);
+                            iv_two.setVisibility(VISIBLE);
+                            iv_three.setVisibility(GONE);
+                        }
+                    });
+                    ll_three.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dashboard_mode_style = 2 ;
+                            iv_one.setVisibility(GONE);
+                            iv_two.setVisibility(GONE);
+                            iv_three.setVisibility(VISIBLE);
+                        }
+                    });
+                    Button btn_ok = view_dasboardsstyle.findViewById(R.id.btn_style_ok);
+                    btn_ok.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (dashboard_mode_style  == 0){
+                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 0);
+                            }else if (dashboard_mode_style  == 1){
+                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 1);
+                            }else {
+                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 2);
+                            }
+                            Intent intent = new Intent("changeDisplay");
+                            mContext.sendBroadcast(intent);
+                            dialog_dashboardsstyle.dismiss();
+                        }
+                    });
+
+                    setWin(dialog_dashboardsstyle);
+                    dialog_dashboardsstyle.setContentView(view_dasboardsstyle);
+                    dialog_dashboardsstyle.setCanceledOnTouchOutside(true);
+                    dialog_dashboardsstyle.show();
                 }
             });
 
@@ -1153,16 +1240,15 @@ public class DashboardsView extends View implements View.OnClickListener {
                     float left = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() +
                             (((float) totalX * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenWidth", 0) + 0.0f)));
                     LogUtil.fussenLog().d("left=" + left);
-                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_"+myDisplayId , left);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, left);
 
                     float top = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() +
                             (((float) totalY * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenHeight", 0) + 0.0f)));
                     LogUtil.fussenLog().d("top=" + top);
-                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_"+myDisplayId , top);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, top);
 
                     Intent intent = new Intent("changeDisplay");
                     mContext.sendBroadcast(intent);
-
 
 
                     isDrawandMove = false;

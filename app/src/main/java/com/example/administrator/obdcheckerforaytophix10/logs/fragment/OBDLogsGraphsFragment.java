@@ -32,8 +32,6 @@ import java.util.ArrayList;
  * Created by CHD on 2017/9/8.
  */
 
-
-
 public class OBDLogsGraphsFragment extends Fragment {
 
     private LineChart mChart_zero, mChart_one;
@@ -62,7 +60,6 @@ public class OBDLogsGraphsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //mChart_zero = view.findViewById(R.id.chart_logs_zero);
         yValue_zero = new ArrayList<>();
         yValue_one = new ArrayList<>();
         yValue_two = new ArrayList<>();
@@ -171,7 +168,7 @@ public class OBDLogsGraphsFragment extends Fragment {
         mDataSet_one = new LineDataSet(yValue_one, "PIDoneTitle");
         mDataSet_two = new LineDataSet(yValue_two, "PIDtwoTitle");
         mDataSet_three = new LineDataSet(yValue_three, "PIDthreeTitle");
-        //设置下方描述的小方块的颜色   设置透明 消失
+        //设置下方描述的小方块的颜色   设置透明则线也消失消失
         mDataSet_zero.setColor(getResources().getColor(R.color.colorDisConnect));
         mDataSet_one.setColor(getResources().getColor(R.color.colorHUDtextColor));
         mDataSet_two.setColor(getResources().getColor(R.color.colorPrimary));
@@ -208,7 +205,7 @@ public class OBDLogsGraphsFragment extends Fragment {
         params_bottom.topMargin = (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 279f);
         params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-//----------------------------广播要变的    下面四组判断  *  2 ------------------------
+//----------------------------广播要变的    下面四组判断  *  2 ---------------------------
         //设置曲线变圆滑
         if (DBTool.getOutInstance().getQueryKey("logs_graphs_smoothing_1").getIsTure()) {
             mDataSet_zero.setDrawCubic(true);
@@ -295,7 +292,6 @@ public class OBDLogsGraphsFragment extends Fragment {
         //设置X轴出现刻度的间距
         xAxis.setSpaceBetweenLabels(1);
         xAxis_bottom.setSpaceBetweenLabels(1);
-
 
         //Y轴
         YAxis left_yAxis = mChart_zero.getAxisLeft();
