@@ -77,13 +77,13 @@ public class OBDLogsGraphsFragment extends Fragment {
 
 
         //为Y轴添数据
-        for (int i = 0; i < 31; i++) {
-            yValue_zero.add(new Entry(i + 1, i));
-            yValue_one.add(new Entry(2000, i));
-            yValue_two.add(new Entry(100 - i, i));
-            yValue_three.add(new Entry(70, i));
-            xValue.add(i + "");
-        }
+//        for (int i = 0; i < 31; i++) {
+//            yValue_zero.add(new Entry(i + 1, i));
+//            yValue_one.add(new Entry(2000, i));
+//            yValue_two.add(new Entry(100 - i, i));
+//            yValue_three.add(new Entry(70, i));
+//            xValue.add(i + "");
+//        }
 
 
         //提出去 省的看着麻烦
@@ -332,6 +332,16 @@ public class OBDLogsGraphsFragment extends Fragment {
         right_yAxis_bottom.setAxisLineColor(getResources().getColor(R.color.colorDashboardsPointer));
         right_yAxis_bottom.setAxisLineWidth(1f);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(br);
+    }
+
+
+
+
 
 
 }

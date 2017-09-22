@@ -168,6 +168,13 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(br);
+        getActivity().unregisterReceiver(br_bring_to_first);
+    }
+
     //自定义  模式下调整仪表盘
     private void initGreenDaoDisplay(DashboardsView display) {
         display.setBackgroundColor(getResources().getColor(R.color.colorTransparent));

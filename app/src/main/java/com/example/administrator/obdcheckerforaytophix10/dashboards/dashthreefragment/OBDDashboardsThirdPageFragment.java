@@ -115,6 +115,14 @@ public class OBDDashboardsThirdPageFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(br);
+        getActivity().unregisterReceiver(br_bring_to_first);
+    }
+
     private void initGreenDaoDisplay(DashboardsView display) {
         display.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         display.setStyle(DBTool.getOutInstance().getQueryKey("display_style_"+display.getMyDisplayId()).getValue());

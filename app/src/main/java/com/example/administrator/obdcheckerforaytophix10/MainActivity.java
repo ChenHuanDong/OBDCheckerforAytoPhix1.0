@@ -21,9 +21,11 @@ import com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
 import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.FileLTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
 
 
         //初始化

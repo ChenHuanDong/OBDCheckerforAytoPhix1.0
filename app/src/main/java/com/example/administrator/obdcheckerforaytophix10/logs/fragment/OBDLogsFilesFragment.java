@@ -73,6 +73,7 @@ public class OBDLogsFilesFragment extends Fragment {
 
 
 
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("logsFilesEdit");
         getActivity().registerReceiver(br, intentFilter);
