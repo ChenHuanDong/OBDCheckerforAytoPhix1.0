@@ -22,14 +22,19 @@ public class FileL {
 
     @NotNull
     private String key;
+    private int value;
+    private boolean isTure;
 
     @Convert(columnType = String.class, converter = IntegerConverter.class)
     private List<Integer> datas;
 
-    @Generated(hash = 1452823494)
-    public FileL(Long id, @NotNull String key, List<Integer> datas) {
+    @Generated(hash = 1740173592)
+    public FileL(Long id, @NotNull String key, int value, boolean isTure,
+            List<Integer> datas) {
         this.id = id;
         this.key = key;
+        this.value = value;
+        this.isTure = isTure;
         this.datas = datas;
     }
 
@@ -38,28 +43,55 @@ public class FileL {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
-    public void setId(Long id) {
+    public FileL setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getKey() {
-        return this.key;
+        return key;
     }
 
-    public void setKey(String key) {
+    public FileL setKey(String key) {
         this.key = key;
+        return this;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public FileL setValue(int value) {
+        this.value = value;
+        return this;
+    }
+
+    public boolean getisTure() {
+        return isTure;
+    }
+
+    public FileL setTure(boolean ture) {
+        isTure = ture;
+        return this;
     }
 
     public List<Integer> getDatas() {
-        return this.datas;
+        return datas;
     }
 
-    public void setDatas(List<Integer> datas) {
+    public FileL setDatas(List<Integer> datas) {
         this.datas = datas;
+        return this;
     }
 
+    public boolean getIsTure() {
+        return this.isTure;
+    }
 
+    public void setIsTure(boolean isTure) {
+        this.isTure = isTure;
+    }
 }

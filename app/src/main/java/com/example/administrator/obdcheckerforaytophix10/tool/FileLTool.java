@@ -13,6 +13,8 @@ import java.util.List;
  * Created by CHD on 2017/9/21.
  */
 //单例可操作的类
+//存了HUD的颜色
+
 public class FileLTool {
 
     private static FileLTool outInstance = new FileLTool();
@@ -95,6 +97,31 @@ public class FileLTool {
             sFileLDao.update(fileL);
         }
     }
+    //改变  value
+    public void upDateValueByKey(String key , int a){
+        FileL fileL = sFileLDao.queryBuilder()
+                .where(FileLDao.Properties.Key.eq(key))
+                .build().unique();
+        if (fileL == null){
+            LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
+        }else {
+            fileL.setValue(a);
+            sFileLDao.update(fileL);
+        }
+    }
+    //改变  boolean
+    public void upDateIsTureByKey(String key , boolean a){
+        FileL fileL = sFileLDao.queryBuilder()
+                .where(FileLDao.Properties.Key.eq(key))
+                .build().unique();
+        if (fileL == null){
+            LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
+        }else {
+            fileL.setIsTure(a);
+            sFileLDao.update(fileL);
+        }
+    }
+
 
 
 }

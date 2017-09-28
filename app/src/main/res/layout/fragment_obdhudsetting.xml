@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:clickable="true"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44">
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/hud"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+
+        <ImageView
+            android:id="@+id/iv_return_hud_setting"
+            android:layout_width="@dimen/x35"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x34"
+        android:text="@string/seletecolor"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x16"/>
+
+    <!--单元-->
+    <RelativeLayout
+        android:id="@+id/re_hud_setting_green"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <ImageView
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/x32"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@color/colorWhite"/>
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/colorHUDtextColor"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="center_vertical"
+            android:text="@string/green"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:id="@+id/iv_hud_dui_green"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x340"
+            android:src="@drawable/dui"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <!--单元-->
+    <RelativeLayout
+        android:id="@+id/re_hud_setting_lightblue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <ImageView
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/x32"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@color/colorWhite"/>
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_loght_bule"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="center_vertical"
+            android:text="@string/lightbule"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:id="@+id/iv_hud_dui_lightblue"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x340"
+            android:src="@drawable/dui"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <!--单元-->
+    <RelativeLayout
+        android:id="@+id/re_hud_setting_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <ImageView
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/x32"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@color/colorWhite"/>
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/colorWhite"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="center_vertical"
+            android:text="@string/white"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:id="@+id/iv_hud_dui_white"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x340"
+            android:src="@drawable/dui"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <!--单元-->
+    <RelativeLayout
+        android:id="@+id/re_hud_setting_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <ImageView
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/x32"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@color/colorWhite"/>
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_yellow"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="center_vertical"
+            android:text="@string/yellow"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:id="@+id/iv_hud_dui_yellow"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x340"
+            android:src="@drawable/dui"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <!--单元-->
+    <RelativeLayout
+        android:id="@+id/re_hud_setting_blue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+        <ImageView
+            android:layout_width="@dimen/x32"
+            android:layout_height="@dimen/x32"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@color/colorWhite"/>
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_blue"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="center_vertical"
+            android:text="@string/blue"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <ImageView
+            android:id="@+id/iv_hud_dui_blue"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x340"
+            android:src="@drawable/dui"/>
+
+
+    </RelativeLayout>
+    <!--线-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+
+</LinearLayout>

@@ -4,14 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +16,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.obdcheckerforaytophix10.MainActivity;
-import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.OBDL;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsMainPoint;
@@ -32,7 +26,6 @@ import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsvi
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.DashboardsMainAdapter;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsCustomizeFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsFirstPageFragment;
-import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsHUDFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsSecondPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment.OBDDashboardsThirdPageFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
@@ -42,9 +35,7 @@ import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
@@ -448,6 +439,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                 ll_add_dashboards.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                     }
                 });
 
@@ -518,7 +510,8 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                     @Override
                     public void onClick(View view) {
                         //点击带值跳转到公共替换Fragment的Aty
-                        Intent intent = new Intent(OBDDashboardsActivity.this, MainFragmentReplaceActivity.class);
+                        dialog.dismiss();
+                        Intent intent = new Intent(OBDDashboardsActivity.this, OBDHUDActivity.class);
                         intent.putExtra("obdreplacefragment", 1);
                         startActivity(intent);
                     }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@color/colorDialogBackGround"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/x45">
+
+    <TextView
+        android:id="@+id/tv_item_personal_year"
+        android:textColor="@color/colorTextColorDemo"
+        android:text="@string/onenineninesix"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"/>
+
+    <ImageView
+        android:id="@+id/iv_item_personal_year"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/x340"
+        android:layout_centerVertical="true"
+        android:src="@drawable/dui"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x14"/>
+
+
+</RelativeLayout>

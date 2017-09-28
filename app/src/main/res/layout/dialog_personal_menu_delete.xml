@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="@dimen/x270"
+                android:layout_height="@dimen/x144"
+                android:orientation="vertical">
+
+    <Button
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x144"
+        android:background="@drawable/btn_circlecorn"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x26"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x19"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@color/color_dialog_title"
+        android:textSize="@dimen/x17"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x37"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x47"
+        android:gravity="center"
+        android:text="@string/areyousureyouwantdelete"
+        android:textColor="@color/color_dialog_title"
+        android:textSize="@dimen/x13"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x99"
+        android:src="@drawable/line_ui"/>
+
+
+    <Button
+        android:layout_width="@dimen/x135"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x100"
+        android:background="@drawable/btn_dialog_cancel"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/color_personal_selectvehicle"
+        android:textSize="@dimen/x17"/>
+
+    <Button
+        android:layout_width="@dimen/x135"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x135"
+        android:layout_marginTop="@dimen/x100"
+        android:background="@drawable/btn_dialog_ok"
+        android:text="@string/ok"
+        android:textAllCaps="false"
+        android:textColor="@color/color_personal_selectvehicle"
+        android:textSize="@dimen/x17"/>
+
+    <!--两个按钮分割的线-->
+    <ImageView
+        android:layout_width="@dimen/x1"
+        android:layout_height="@dimen/x44"
+        android:layout_marginLeft="@dimen/x135"
+        android:layout_marginTop="@dimen/x100"
+        android:src="@drawable/line_shu_ui"/>
+
+
+</RelativeLayout>

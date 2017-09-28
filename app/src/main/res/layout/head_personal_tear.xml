@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x49"
+    android:background="@color/colorOBDbackground">
+
+
+    <TextView
+        android:id="@+id/tv_head_personal_title"
+        android:layout_marginTop="@dimen/x24"
+        android:text="@string/year"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+
+</RelativeLayout>

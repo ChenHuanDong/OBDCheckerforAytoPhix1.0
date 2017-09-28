@@ -1,24 +1,17 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.graphics.Typeface;
 import android.support.annotation.Nullable;
-import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,11 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.administrator.obdcheckerforaytophix10.MainActivity;
-import com.example.administrator.obdcheckerforaytophix10.MainApplication;
-import com.example.administrator.obdcheckerforaytophix10.MainFragmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
-import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDDashboardsActivity;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDOtherStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDStyleActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
@@ -47,8 +36,6 @@ import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.MathUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
-
-import java.io.File;
 
 /**
  * Created by CHD on 2017/8/7.

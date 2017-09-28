@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44">
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+
+        <TextView
+            android:id="@+id/tv_personal_othertitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/year"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
+
+        <TextView
+            android:id="@+id/tv_personal_othercancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x309"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/colorTextColorDemo"/>
+        
+        <ImageView
+            android:id="@+id/iv_personal_otherreturn"
+            android:background="@color/colorTransparent"
+            android:layout_width="@dimen/x40"
+            android:layout_height="match_parent"/>
+        
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+    <!--下面可滑动的-->
+    <ListView
+        android:id="@+id/mylv_personal_year"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+</LinearLayout>

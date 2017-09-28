@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <Button
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x175"
+        android:background="@drawable/btn_circlecorn"/>
+
+    <TextView
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x21"
+        android:layout_marginTop="@dimen/x31"
+        android:gravity="center"
+        android:text="@string/menudialog"
+        android:textColor="@color/color_personal_menu"
+        android:textSize="@dimen/x13"/>
+
+    <ImageView
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x60"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:id="@+id/tv_personal_menu_delete"
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x28"
+        android:layout_marginTop="@dimen/x72"
+        android:gravity="center"
+        android:text="@string/deletevehicle"
+        android:textColor="@color/color_personal_deletevehicle"
+        android:textSize="@dimen/x20"/>
+
+    <ImageView
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x110"
+        android:src="@drawable/line_ui"/>
+
+    <TextView
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x28"
+        android:layout_marginTop="@dimen/x127"
+        android:gravity="center"
+        android:text="@string/selectvehicle"
+        android:textColor="@color/color_personal_selectvehicle"
+        android:textSize="@dimen/x20"/>
+
+    <Button
+        android:layout_width="@dimen/x354"
+        android:layout_height="@dimen/x57"
+        android:layout_marginTop="@dimen/x183"
+        android:background="@drawable/btn_circle"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/color_personal_selectvehicle"
+        android:textSize="@dimen/x20"/>
+
+
+
+</RelativeLayout>

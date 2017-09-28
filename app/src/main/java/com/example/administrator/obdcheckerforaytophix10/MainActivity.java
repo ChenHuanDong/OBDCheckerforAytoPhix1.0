@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPersionalFragment mPersionalFragment;
     //判断现在是在哪一页
     private int page = 1;
+    private Fragment current_fragment;
 
 
     @Override
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-
         //初始化
         initView();
         mRadioButton_obd.performClick();
@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //自定义初始化数据库
         initGreedDaoData();
+        //自定义初始化第一个表
+        if (FileLTool.getOutInstance().isSave("isFirst")) {
+        } else {
+            initFileGreenDao();
+        }
+
 
 //        List<OBDL> list = DBTool.getOutInstance().queryAll();
 //        for (OBDL o : list) {
@@ -68,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    o.getIsTure() + "\n" + o.getFloValue());
 //        }
 
+    }
+
+    private void initFileGreenDao() {
+        FileL fileL = new FileL();
+        fileL.setId(null).setKey("isFirst").setTure(true);
+        FileLTool.getOutInstance().insertBean(fileL);
+        fileL.setId(null).setKey("obdHudcolor").setValue(1);
+        FileLTool.getOutInstance().insertBean(fileL);
 
     }
 
@@ -1264,7 +1278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSpecialFragment = new MainSpecialFragment();
         mPersionalFragment = new MainPersionalFragment();
         //初始页面设置为OBD页面
-        change_fragment_noanim(mOBDFragment);
+        startFragmentAdd(mOBDFragment);
     }
 
     @Override
@@ -1276,7 +1290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mRadioButton_special.setClickable(true);
                 mRadioButton_persional.setClickable(true);
 
-                change_fragment_obd(mOBDFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
+                startFragmentAdd(mOBDFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
 
                 //设置页数在第一页
                 page = 1;
@@ -1288,10 +1302,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mRadioButton_persional.setClickable(true);
 
                 if (page == 1) {
-                    change_fragment_obd(mSpecialFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
+                    startFragmentAdd(mSpecialFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
                 }
                 if (page == 3) {
-                    change_fragment_obd(mSpecialFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
+                    startFragmentAdd(mSpecialFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
                 }
 
 
@@ -1304,7 +1318,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mRadioButton_special.setClickable(true);
                 mRadioButton_persional.setClickable(false);
 
-                change_fragment_obd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
+                startFragmentAdd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
 
 
                 //设置页数在第三页
@@ -1312,26 +1326,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
     //替换fragment方法 带动画
-    private void change_fragment_obd(Fragment fragment, int anim_in, int anim_out) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+    private void startFragmentAdd(Fragment fragment, int anim_in, int anim_out) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
         //设置动画  必须要在add  remove  replace 之前调用
-        transaction.setCustomAnimations(anim_in, anim_out);
-        transaction.replace(R.id.frame_main_replace, fragment);
-        //加入到BackStack
-        transaction.addToBackStack(null);
-        transaction.commit();
+        fragmentTransaction.setCustomAnimations(anim_in, anim_out);
+        if (current_fragment == null) {
+            fragmentTransaction.add(R.id.frame_main_replace, fragment).commit();
+            current_fragment = fragment;
+        }
+        if (current_fragment != fragment) {
+            // 先判断是否被add过
+            if (!fragment.isAdded()) {
+                // 隐藏当前的fragment，add下一个到Activity中
+                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commit();
+            } else {
+                // 隐藏当前的fragment，显示下一个
+                fragmentTransaction.hide(current_fragment).show(fragment).commit();
+            }
+            current_fragment = fragment;
+        }
     }
 
-    //没有动画的切换fragment
-    public void change_fragment_noanim(Fragment fragment) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.frame_main_replace, fragment);
-        transaction.commit();
+
+    //替换fragment方法 不带动画
+    private void startFragmentAdd(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+        if (current_fragment == null) {
+            fragmentTransaction.add(R.id.frame_main_replace, fragment).commit();
+            current_fragment = fragment;
+        }
+        if (current_fragment != fragment) {
+            // 先判断是否被add过
+            if (!fragment.isAdded()) {
+                // 隐藏当前的fragment，add下一个到Activity中
+                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commit();
+            } else {
+                // 隐藏当前的fragment，显示下一个
+                fragmentTransaction.hide(current_fragment).show(fragment).commit();
+            }
+            current_fragment = fragment;
+        }
     }
+
+
+
 
     //自定义添加仪表盘数据库          新的仪表盘  需要有一个属性
     private static void initDisplaysixtonine(int display_count) {

@@ -3,6 +3,7 @@
                 android:id="@+id/parent_obd_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
                 android:background="@color/colorOBDbackground"
                 tools:context="com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment">
 
