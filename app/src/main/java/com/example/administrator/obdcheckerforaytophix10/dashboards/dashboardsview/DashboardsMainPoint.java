@@ -1,5 +1,6 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;

@@ -41,6 +41,7 @@
         android:src="@drawable/line_ui"/>
 
     <TextView
+        android:id="@+id/tv_personal_menu_select"
         android:layout_width="@dimen/x354"
         android:layout_height="@dimen/x28"
         android:layout_marginTop="@dimen/x127"

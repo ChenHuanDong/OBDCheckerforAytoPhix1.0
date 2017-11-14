@@ -11,6 +11,7 @@
         android:background="@color/colorOBDbackground"/>
 
     <Button
+        android:id="@+id/btn_diagnostic_clearcode"
         android:textAllCaps="false"
         android:singleLine="true"
         android:layout_width="@dimen/x260"

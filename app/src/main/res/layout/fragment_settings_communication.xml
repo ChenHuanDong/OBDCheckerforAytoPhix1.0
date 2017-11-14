@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:clickable="true"
+              android:orientation="vertical">
+
+
+    <!--Communications-->
+    <LinearLayout
+        android:id="@+id/ll_settings_communication"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/communications"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+
+            <!--上方透明的按钮-->
+            <ImageView
+                android:id="@+id/iv_settings_communication_finish"
+                android:layout_width="@dimen/x50"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+        </RelativeLayout>
+        <!--line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--WI-FI SETTINGS-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x34"
+            android:text="@string/wifisettings"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x14"/>
+
+        <!--device-->
+        <RelativeLayout
+            android:id="@+id/re_setting_comm_device"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/device"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x350"
+                android:src="@drawable/enter"/>
+
+
+            <!--橘色的字-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x35"
+                android:gravity="center_vertical|right"
+                android:text="@string/obdcheckmxwifi"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--OBD-II PROTOCOL-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x30"
+            android:text="@string/obdllprotocol"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x14"/>
+
+
+        <!--Protocol-->
+        <RelativeLayout
+            android:id="@+id/re_setting_comm_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/protocol"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x350"
+                android:src="@drawable/enter"/>
+
+
+            <!--橘色的字-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x35"
+                android:gravity="center_vertical|right"
+                android:text="@string/automatic"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--带按钮的单元-->
+        <!--Start with Last Connected Protocol-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/protocol"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <ch.ielse.view.SwitchView
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x30"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x310"
+                app:isOpened="true"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--General-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x30"
+            android:text="@string/general"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x14"/>
+        <!--Connection-->
+        <RelativeLayout
+            android:id="@+id/re_setting_comm_connection"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/connection"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x350"
+                android:src="@drawable/enter"/>
+
+
+            <!--橘色的字-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x35"
+                android:gravity="center_vertical|right"
+                android:text="@string/manual"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--带按钮的单元-->
+        <!--Connect Silently-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/connectsilently"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <ch.ielse.view.SwitchView
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x30"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x310"
+                app:isOpened="false"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+    </LinearLayout>
+
+
+    <!--Device-->
+    <LinearLayout
+        android:id="@+id/ll_settings_device"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/device"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+
+            <!--上方透明的按钮-->
+            <ImageView
+                android:id="@+id/iv_settings_device_finish"
+                android:layout_width="@dimen/x50"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+        </RelativeLayout>
+        <!--line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--OBDCHECK MX Wi-Fi-->
+        <RelativeLayout
+            android:layout_marginTop="@dimen/x34"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/obdcheckmxwifi"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--OBDCHECK Wi-Fi-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/obdcheckwifi"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Custom-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/custom"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+
+
+    </LinearLayout>
+
+
+    <!--Protocol-->
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_settings_protocol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/protocol"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+
+            <!--上方透明的按钮-->
+            <ImageView
+                android:id="@+id/iv_settings_protocol_finish"
+                android:layout_width="@dimen/x50"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+        </RelativeLayout>
+        <!--line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Amtomaic-->
+        <RelativeLayout
+            android:layout_marginTop="@dimen/x34"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/amtomaic"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--saepwm-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/saepwm"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--saevpw-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/saevpw"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--iso91412-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso91412"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--iso142304-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso142304"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+
+        <!--iso142304kwp-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso142304kwp"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--iso157654can-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso157654can"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--iso157654can29-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso157654can29"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+
+        <!--iso157654can11-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso157654can11"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--iso157654can250-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/iso157654can250"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--usecan125-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/usecan125"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+
+        <!--usecan50-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/usecan50"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+    </LinearLayout>
+
+
+    <!--Connection-->
+    <LinearLayout
+        android:id="@+id/ll_settings_connection"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/connection"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+
+            <!--上方透明的按钮-->
+            <ImageView
+                android:id="@+id/iv_settings_connection_finish"
+                android:layout_width="@dimen/x50"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+        </RelativeLayout>
+        <!--line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--manual-->
+        <RelativeLayout
+            android:layout_marginTop="@dimen/x34"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/manual"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--automatic-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/automatic"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x14"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x340"
+                android:scaleType="fitXY"
+                android:src="@drawable/dui"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

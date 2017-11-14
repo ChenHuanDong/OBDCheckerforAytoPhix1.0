@@ -1,5 +1,6 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.administrator.obdcheckerforaytophix10.MainFregmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.tool.FileLTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 /**
  * Created by CHD on 2017/9/25.
@@ -139,5 +142,22 @@ public class OBDHUDSettingFragment extends Fragment implements View.OnClickListe
         getActivity().finish();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(getActivity() instanceof MainFregmentReplaceActivity){
+            ((MainFregmentReplaceActivity)getActivity()).setBackListener(this);
+            ((MainFregmentReplaceActivity)getActivity()).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getActivity() instanceof MainFregmentReplaceActivity){
+            ((MainFregmentReplaceActivity)getActivity()).setBackListener(null);
+            ((MainFregmentReplaceActivity)getActivity()).setInterception(false);
+        }
+    }
 }
 

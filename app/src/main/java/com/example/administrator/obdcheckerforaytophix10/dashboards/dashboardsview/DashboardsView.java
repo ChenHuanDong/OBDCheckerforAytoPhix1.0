@@ -1,7 +1,9 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -161,13 +163,61 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int dashboard_mode_style;
 
 
-    public DashboardsView(Context context, int myId) {
+    //接收数据的广播
+//    private BroadcastReceiver mBR;
+
+
+    public DashboardsView(Context context, final int myId) {
         super(context);
 
         this.setOnClickListener(this);
         mContext = context;
         myDisplayId = myId;
         initView();
+
+
+        //只改前四个仪表
+
+        //先试试不在这里接收广播   有点卡 在Fragment里面试试
+//        mBR = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                //所有数据处理都在发送时就处理好了   展示的代码应该每条都一样
+//                switch (getMyDisplayId()) {
+//                    case 1:
+//                        //还要一个判断   这个只要是发送广播都会接收    最后里面再加一个switch  case
+//                        if (intent.getStringExtra("key").equals("车速")) {
+//                            //(int) ((intent.getIntExtra("data", -1) / (boards_one.getMax() - boards_one.getMin() + 0.0f)) *
+//                            // (boards_one.getEndAngle() - boards_one.getStartAngle()))
+//                            value = (int) ((intent.getIntExtra("车速", 0) / (max - min + 0.0f)) * (endAngle - startAngle));
+//                            invalidate();
+//                        }
+//                        break;
+//                    case 2:
+//                        if (intent.getStringExtra("key").equals("水温")) {
+//                            value = (int) ((intent.getIntExtra("水温", 0) / (max - min + 0.0f)) * (endAngle - startAngle));
+//                            invalidate();
+//                        }
+//                        break;
+//                    case 3:
+//                        if (intent.getStringExtra("key").equals("转速")) {
+//                            value = (int) ((intent.getIntExtra("转速", 0) / (max - min + 0.0f)) * (endAngle - startAngle));
+//                            invalidate();
+//                        }
+//                        break;
+//                    case 4:
+//                        if (intent.getStringExtra("key").equals("节气")) {
+//                            value = (int) ((intent.getIntExtra("节气", 0) / (max - min + 0.0f)) * (endAngle - startAngle));
+//                            invalidate();
+//                        }
+//                        break;
+//                }
+//
+//            }
+//        };
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction("bluetoothBT---data");
+//        mContext.registerReceiver(mBR, intentFilter);
 
 
     }
@@ -204,7 +254,6 @@ public class DashboardsView extends View implements View.OnClickListener {
         if (!isRrmoveDisplay) {
 
             if (style == 0) {
-
 
                 //绘制最外层黑色圆   带渐变
                 drawOutCircle(canvas);
@@ -462,7 +511,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         canvas.save();
 
-
         mPaint.setTypeface(LcndUtil.getfont(mContext));
         mPaint.setTextSize((float) ((style_two_value_size / 100.0) * getWidth()));
         mPaint.setColor(Color.parseColor(style_two_value_color));
@@ -576,12 +624,9 @@ public class DashboardsView extends View implements View.OnClickListener {
     }
 
     private void drawDown_two(Canvas canvas) {
-
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.style_two);
         RectF rectF = new RectF(0, 0, getWidth(), getWidth());
         canvas.drawBitmap(bitmap, null, rectF, mPaint);
-
-
     }
 
     //绘制下方数值
@@ -1052,17 +1097,17 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final ImageView iv_two = view_dasboardsstyle.findViewById(R.id.iv_style_two);
                     final ImageView iv_three = view_dasboardsstyle.findViewById(R.id.iv_style_three);
                     //把记录Style 的提出去了
-                    dashboard_mode_style = DBTool.getOutInstance().getQueryKey("display_style_"+myDisplayId).getValue();
+                    dashboard_mode_style = DBTool.getOutInstance().getQueryKey("display_style_" + myDisplayId).getValue();
                     //根据数据库存的 判断那个橙色对号显示
-                    if (dashboard_mode_style == 0){
+                    if (dashboard_mode_style == 0) {
                         iv_one.setVisibility(VISIBLE);
                         iv_two.setVisibility(GONE);
                         iv_three.setVisibility(GONE);
-                    }else if (dashboard_mode_style == 1){
+                    } else if (dashboard_mode_style == 1) {
                         iv_one.setVisibility(GONE);
                         iv_two.setVisibility(VISIBLE);
                         iv_three.setVisibility(GONE);
-                    }else {
+                    } else {
                         iv_one.setVisibility(GONE);
                         iv_two.setVisibility(GONE);
                         iv_three.setVisibility(VISIBLE);
@@ -1070,7 +1115,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                     ll_one.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dashboard_mode_style = 0 ;
+                            dashboard_mode_style = 0;
                             iv_one.setVisibility(VISIBLE);
                             iv_two.setVisibility(GONE);
                             iv_three.setVisibility(GONE);
@@ -1079,7 +1124,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                     ll_two.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dashboard_mode_style = 1 ;
+                            dashboard_mode_style = 1;
                             iv_one.setVisibility(GONE);
                             iv_two.setVisibility(VISIBLE);
                             iv_three.setVisibility(GONE);
@@ -1088,7 +1133,7 @@ public class DashboardsView extends View implements View.OnClickListener {
                     ll_three.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dashboard_mode_style = 2 ;
+                            dashboard_mode_style = 2;
                             iv_one.setVisibility(GONE);
                             iv_two.setVisibility(GONE);
                             iv_three.setVisibility(VISIBLE);
@@ -1098,12 +1143,12 @@ public class DashboardsView extends View implements View.OnClickListener {
                     btn_ok.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (dashboard_mode_style  == 0){
-                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 0);
-                            }else if (dashboard_mode_style  == 1){
-                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 1);
-                            }else {
-                                DBTool.getOutInstance().upDateValueByKey("display_style_"+myDisplayId , 2);
+                            if (dashboard_mode_style == 0) {
+                                DBTool.getOutInstance().upDateValueByKey("display_style_" + myDisplayId, 0);
+                            } else if (dashboard_mode_style == 1) {
+                                DBTool.getOutInstance().upDateValueByKey("display_style_" + myDisplayId, 1);
+                            } else {
+                                DBTool.getOutInstance().upDateValueByKey("display_style_" + myDisplayId, 2);
                             }
                             Intent intent = new Intent("changeDisplay");
                             mContext.sendBroadcast(intent);
@@ -1657,5 +1702,13 @@ public class DashboardsView extends View implements View.OnClickListener {
     public void setStyle_one_text(float style_one_text) {
         this.style_one_text = style_one_text;
         invalidate();
+    }
+
+    public int getStartAngle() {
+        return startAngle;
+    }
+
+    public int getEndAngle() {
+        return endAngle;
     }
 }

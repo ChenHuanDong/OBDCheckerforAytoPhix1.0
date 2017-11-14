@@ -25,7 +25,7 @@ import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 public class MainPersionalFragment extends Fragment implements View.OnClickListener {
 
     private TextView tv_menu;
-    private RelativeLayout re_year, re_make, re_model, re_type;
+    private RelativeLayout re_year, re_make, re_model, re_type , re_fueltype , re_calculation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +46,10 @@ public class MainPersionalFragment extends Fragment implements View.OnClickListe
         re_model.setOnClickListener(this);
         re_type = view.findViewById(R.id.re_personal_type);
         re_type.setOnClickListener(this);
+        re_fueltype = view.findViewById(R.id.re_personal_fuel_type);
+        re_fueltype.setOnClickListener(this);
+        re_calculation = view.findViewById(R.id.re_personal_cakculation);
+        re_calculation.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +78,17 @@ public class MainPersionalFragment extends Fragment implements View.OnClickListe
                         dia_delete.setContentView(view_delete);
                         dia_delete.setCanceledOnTouchOutside(true);
                         dia_delete.show();
+                    }
+                });
+                //蓝色选择车辆
+                TextView tv_select = view_dialog.findViewById(R.id.tv_personal_menu_select);
+                tv_select.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        Intent intent_calculation= new Intent(getActivity(), MainFregmentReplaceActivity.class);
+                        intent_calculation.putExtra("intentKey", 8);
+                        startActivity(intent_calculation);
                     }
                 });
 
@@ -105,6 +120,18 @@ public class MainPersionalFragment extends Fragment implements View.OnClickListe
                 Intent intent_type = new Intent(getActivity(), MainFregmentReplaceActivity.class);
                 intent_type.putExtra("intentKey", 5);
                 startActivity(intent_type);
+                break;
+            case R.id.re_personal_fuel_type:
+                //Fuel Type
+                Intent intent_fueltype= new Intent(getActivity(), MainFregmentReplaceActivity.class);
+                intent_fueltype.putExtra("intentKey", 6);
+                startActivity(intent_fueltype);
+                break;
+            case R.id.re_personal_cakculation:
+                //Calculation
+                Intent intent_calculation= new Intent(getActivity(), MainFregmentReplaceActivity.class);
+                intent_calculation.putExtra("intentKey", 7);
+                startActivity(intent_calculation);
                 break;
         }
 

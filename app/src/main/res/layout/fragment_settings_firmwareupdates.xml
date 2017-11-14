@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:clickable="true"
+              android:orientation="vertical">
+
+    <!--标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/firmwareupdates"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+
+        <!--上方透明的按钮-->
+        <ImageView
+            android:id="@+id/iv_settings_firmware_finish"
+            android:layout_width="@dimen/x50"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+    </RelativeLayout>
+    <!--line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x34"
+        android:text="@string/obdcheck"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x14"/>
+
+    <!--Firmware Version-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="@string/firmwareversion"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <!--橘色的字-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/x15"
+            android:gravity="center_vertical|right"
+            android:text="1.0.0"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x16"/>
+
+
+    </RelativeLayout>
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+
+    <!--Serial Number-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:background="@color/colorDialogBackGround">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="@string/serialnumber"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+
+        <!--橘色的字-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/x15"
+            android:gravity="center_vertical|right"
+            android:text="201707190001"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x16"/>
+
+
+    </RelativeLayout>
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+
+    <!--Automatically check for updates-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x30"
+        android:background="@color/colorDialogBackGround">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="@string/automaticallycheckforupdates"
+            android:textColor="@color/colorTextColorDemo"
+            android:textSize="@dimen/x16"/>
+
+        <ch.ielse.view.SwitchView
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x310"
+            app:isOpened="true"/>
+
+
+    </RelativeLayout>
+    <!--Line-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:src="@drawable/line_ui"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x44"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x30"
+        android:gravity="center"
+        android:text="@string/checkforupdates"
+        android:textColor="@color/colorDashboardsPointer"
+        android:textSize="@dimen/x16"/>
+
+
+</LinearLayout>

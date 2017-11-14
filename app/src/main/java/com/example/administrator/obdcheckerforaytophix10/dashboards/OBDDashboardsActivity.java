@@ -113,6 +113,12 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(br);
+    }
+
     private void initView() {
         vp = (MyViewPager) findViewById(R.id.dashboards_main_vp);
         data = new ArrayList<>();

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorOBDbackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--beginning time-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginTop="@dimen/x17"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/beginningtime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="2017-07-27 15:21:48"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--end time-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/endtime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="2017-07-27 15:21:48"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--drive time-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/drivetime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="00:00:00"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--mileage-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/mileage"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 Mile"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Fuel Cost-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/fuelcost"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 G"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--Charge-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/charge"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 USD"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--max speed-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/maxspeed"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 MPH"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Average Speed-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/averagespeed"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 MPH"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Overspeed Times-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/overspeedtimes"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--Overspeed Time-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/overspeedtime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="00:00:00"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--idle Time-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/idletime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="00:00:00"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--score-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorDialogBackGround">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/score"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="100"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <ImageView
+            android:background="@color/colorOBDbackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x20"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

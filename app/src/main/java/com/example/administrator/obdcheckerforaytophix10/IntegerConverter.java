@@ -21,7 +21,7 @@ public class IntegerConverter implements PropertyConverter<List<Integer>, String
         mGson = new Gson();
     }
 
-    @Override
+    @Override  
     public List<Integer> convertToEntityProperty(String databaseValue) {
         Type type = new TypeToken<ArrayList<Integer>>() {
         }.getType();

@@ -15,6 +15,8 @@ import java.util.List;
 //单例可操作的类
 //存了HUD的颜色
 
+//所有数据库的增  都在MainActivity  里面进行
+
 public class FileLTool {
 
     private static FileLTool outInstance = new FileLTool();
@@ -36,7 +38,7 @@ public class FileLTool {
 
     //下面是对数据库进行操作的方法
     //增
-    public void insertBean(FileL fileL){
+    public void insertBean(FileL fileL) {
         sFileLDao.insert(fileL);
     }
 
@@ -55,22 +57,22 @@ public class FileLTool {
         FileL fileL = sFileLDao.queryBuilder()
                 .where(FileLDao.Properties.Key.eq(key))
                 .build().unique();
-        if (fileL == null){
+        if (fileL == null) {
             LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
-        }else {
+        } else {
             sFileLDao.delete(fileL);
         }
     }
 
     //根据Key值获得fileL
-    public FileL getQueryKey(String key){
+    public FileL getQueryKey(String key) {
         FileL fileL = sFileLDao.queryBuilder()
                 .where(FileLDao.Properties.Key.eq(key))
                 .build().unique();
-        if (fileL == null){
+        if (fileL == null) {
             LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
             return null;
-        }else {
+        } else {
             return fileL;
         }
     }
@@ -86,42 +88,43 @@ public class FileLTool {
     //根据Key  更改内容
 
     //改变  List<Integer>
-    public void upDateColorByKey(String key , ArrayList<Integer> data){
+    public void upDateColorByKey(String key, ArrayList<Integer> data) {
         FileL fileL = sFileLDao.queryBuilder()
                 .where(FileLDao.Properties.Key.eq(key))
                 .build().unique();
-        if (fileL == null){
+        if (fileL == null) {
             LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
-        }else {
+        } else {
             fileL.setDatas(data);
             sFileLDao.update(fileL);
         }
     }
+
     //改变  value
-    public void upDateValueByKey(String key , int a){
+    public void upDateValueByKey(String key, int a) {
         FileL fileL = sFileLDao.queryBuilder()
                 .where(FileLDao.Properties.Key.eq(key))
                 .build().unique();
-        if (fileL == null){
+        if (fileL == null) {
             LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
-        }else {
+        } else {
             fileL.setValue(a);
             sFileLDao.update(fileL);
         }
     }
+
     //改变  boolean
-    public void upDateIsTureByKey(String key , boolean a){
+    public void upDateIsTureByKey(String key, boolean a) {
         FileL fileL = sFileLDao.queryBuilder()
                 .where(FileLDao.Properties.Key.eq(key))
                 .build().unique();
-        if (fileL == null){
+        if (fileL == null) {
             LogUtil.fussenLog().d("Key值为" + key + "的数据是空的------来自FileLTool");
-        }else {
+        } else {
             fileL.setIsTure(a);
             sFileLDao.update(fileL);
         }
     }
-
 
 
 }

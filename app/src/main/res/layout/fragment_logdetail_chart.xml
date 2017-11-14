@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorOBDbackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--上面灰色的-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x10"
+            android:text="@string/timemileage"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x14"/>
+
+
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+
+        <!--橘色时间   里程数-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x35"
+            android:layout_marginTop="@dimen/x22">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x53"
+                android:text="0:00:00"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x24"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x246"
+                android:text="0km"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x24"/>
+
+        </RelativeLayout>
+
+        <!--显示上面的单位-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x23">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x75"
+                android:text="@string/time"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x248"
+                android:text="@string/mileage"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:layout_marginTop="@dimen/x20"
+            android:src="@drawable/line_ui"/>
+
+        <!--上面灰色的-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x14"
+            android:text="@string/playback"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x14"/>
+
+        <!--这个最后用图表代替-->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart_logdetail_one"
+            android:layout_width="@dimen/x345"
+            android:layout_height="@dimen/x164"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/colorBlack"/>
+
+
+        <!--这个最后用图表代替-->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart_logdetail_two"
+            android:layout_width="@dimen/x345"
+            android:layout_height="@dimen/x164"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x15"
+            android:background="@color/colorBlack"/>
+
+        <!--上面两条线加PID-->
+        <RelativeLayout
+            android:layout_marginTop="@dimen/x6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x16">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x2"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:background="@color/colorDisConnect"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x40"
+                android:text="Accel X"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x12"/>
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x2"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x180"
+                android:background="@color/colorHUDtextColor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x210"
+                android:text="Accel X"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x12"/>
+
+
+        </RelativeLayout>
+
+        <!--上面两条线加PID-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x16"
+            android:layout_marginTop="@dimen/x6">
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x2"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:background="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x40"
+                android:text="Accel X"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x12"/>
+
+            <ImageView
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x2"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x180"
+                android:background="@color/colorDashboardsPointer"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x210"
+                android:text="Accel X"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x12"/>
+
+
+        </RelativeLayout>
+
+
+        <!--上面灰色的-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x27"
+            android:text="@string/info"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x14"/>
+
+        <!--橘色-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x35"
+            android:layout_marginTop="@dimen/x22">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x27"
+                android:text="7.6L/100km"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x24"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x234"
+                android:text="78.6km/h"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x24"/>
+
+        </RelativeLayout>
+
+        <!--显示上面的单位-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x23">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x28"
+                android:text="@string/averageeconomy"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x229"
+                android:text="@string/averagespeed"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+
+        </RelativeLayout>
+
+        <!--上面灰色的-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x25"
+            android:text="@string/maxspeed"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x14"/>
+
+        <!--下面的进度条-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x23">
+
+            <!--黑条-->
+            <ImageView
+                android:layout_width="@dimen/x345"
+                android:layout_height="@dimen/x25"
+                android:layout_marginLeft="@dimen/x15"
+                android:background="@color/colorStyleOneDisplay"/>
+
+
+            <!--红条-->
+            <ImageView
+                android:background="@color/colorred"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/x1"
+                android:layout_width="@dimen/x220"
+                android:layout_height="@dimen/x23"/>
+
+
+            <TextView
+                android:text="120km/h"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x14"
+                android:layout_marginLeft="@dimen/x297"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_marginTop="@dimen/x26"
+            android:src="@drawable/line_ui"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

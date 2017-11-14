@@ -1,13 +1,16 @@
 package com.example.administrator.obdcheckerforaytophix10.dashboards.dashthreefragment;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsView;
+import com.example.administrator.obdcheckerforaytophix10.main.servierbt.BluetoothService;
 import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LcndUtil;
@@ -44,7 +48,10 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
     private BroadcastReceiver br;
     private DashboardsView boards_one, boards_two, boards_three, boards_four, boards_five, boards_six;
 
-    private BroadcastReceiver br_bring_to_first;
+    private BroadcastReceiver br_bring_to_first , br_data;
+
+    private ServiceConnection mConnection;
+    private BluetoothService.MyBinder mBinder;
 
 
     @Nullable
@@ -90,7 +97,7 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
                     }
                 }
             }
-        }else {
+        } else {
             initGreenDaoDisplayClassic(boards_one);
             initGreenDaoDisplayClassic(boards_two);
             initGreenDaoDisplayClassic(boards_three);
@@ -156,6 +163,47 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
             }
         };
 
+        mConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                mBinder = (BluetoothService.MyBinder) service;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+
+
+        br_data = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch (intent.getStringExtra("key")){
+                    case "车速":
+                        boards_one.setValue((int) ((intent.getIntExtra("车速", 0) / (boards_one.getMax() - boards_one.getMin() + 0.0f)) * (boards_one.getEndAngle() - boards_one.getStartAngle())));
+                        break;
+                    case "水温":
+                        boards_two.setValue((int) ((intent.getIntExtra("水温", 0) / (boards_two.getMax() - boards_two.getMin() + 0.0f)) * (boards_two.getEndAngle() - boards_two.getStartAngle())));
+                        break;
+                    case "转速":
+                        boards_three.setValue((int) ((intent.getIntExtra("转速", 0) / (boards_three.getMax() - boards_three.getMin() + 0.0f)) * (boards_three.getEndAngle() - boards_three.getStartAngle())));
+                        break;
+                    case "节气":
+                        boards_four.setValue((int) ((intent.getIntExtra("节气", 0) / (boards_four.getMax() - boards_four.getMin() + 0.0f)) * (boards_four.getEndAngle() - boards_four.getStartAngle())));
+                        break;
+                }
+            }
+        };
+
+        //绑定数据广播
+        IntentFilter intentData = new IntentFilter();
+        intentData.addAction("bluetoothBT---data");
+        getActivity().registerReceiver(br_data , intentData);
+
+        //绑定服务
+        Intent intent1 = new Intent(getActivity(), BluetoothService.class);
+        getActivity().bindService(intent1, mConnection, getActivity().BIND_AUTO_CREATE);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("changeDisplay");
@@ -166,6 +214,26 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         getActivity().registerReceiver(br_bring_to_first, intent_bring);
 
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    //这里要先获取是否连接然后再发送
+                    SPUtil.put(getActivity(), "test", 4);
+                    mBinder.setIsFinishLog(false);
+                    mBinder.writeData(new byte[]{0x30, 0x31, 0x30, 0x64, (byte) 0x0D});
+                    //new byte[]{0x30, 0x31, 0x30, 0x35, (byte) 0x0D}       水温
+                    //new byte[]{0x30, 0x31, 0x30, 0x63, (byte) 0x0D}       转速
+                    //new byte[]{0x30, 0x31, 0x31, 0x31, (byte) 0x0D}       节气门
+//                    mBinder.writeData(new byte[]{0x30, 0x31, 0x30, 0x35, (byte) 0x0D});
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
     }
 
     @Override
@@ -173,6 +241,9 @@ public class OBDDashboardsFirstPageFragment extends Fragment {
         super.onDestroy();
         getActivity().unregisterReceiver(br);
         getActivity().unregisterReceiver(br_bring_to_first);
+        getActivity().unbindService(mConnection);
+        getActivity().unregisterReceiver(br_data);
+        mBinder.setIsFinishLog(true);
     }
 
     //自定义  模式下调整仪表盘

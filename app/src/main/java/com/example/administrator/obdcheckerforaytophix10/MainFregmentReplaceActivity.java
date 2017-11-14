@@ -11,19 +11,27 @@ import android.view.WindowManager;
 
 import com.example.administrator.obdcheckerforaytophix10.dashboards.FragmentBackListener;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDHUDSettingFragment;
+import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsFileDetailFragment;
+import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalCalculationFragment;
+import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalFuelTypeFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalMakeFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalModelragment;
+import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalSelectVehicleFragment;
+import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalTypeFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.personal.PersonalYearFragment;
+import com.example.administrator.obdcheckerforaytophix10.settings.other.OBDSettingsFirmwareUpdatesFragment;
+import com.example.administrator.obdcheckerforaytophix10.settings.other.OBDSettingsInformationFragmnet;
+import com.example.administrator.obdcheckerforaytophix10.settings.preferences.OBDSettingsCommunicaFragment;
+import com.example.administrator.obdcheckerforaytophix10.settings.preferences.OBDSettingsPreferencesFragment;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 
 public class MainFregmentReplaceActivity extends AppCompatActivity {
 
     private Fragment current_fragment;
 
-    //该新建Fragment了   照着左边的来  布局一样  id一样  就是  有一些String
-    //和添加的数据不一样
-    private Fragment hud_setting , personal_year , personal_make , personal_model
-            , personal_type;
+    private Fragment hud_setting, personal_year, personal_make, personal_model, personal_type, personal_fueltype, personal_canculation, personal_selectvehicle
+            ,log_filedetail , settings_preferences , settings_communication ,
+            settings_information , settings_firmwareupdates;
 
     private FragmentBackListener backListener;
     private boolean isInterception = false;
@@ -37,24 +45,52 @@ public class MainFregmentReplaceActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_fregment_replaceother);
 
-        hud_setting = new OBDHUDSettingFragment();
-        personal_year = new PersonalYearFragment();
-        personal_make = new PersonalMakeFragment();
-        personal_model = new PersonalModelragment();
-
 
         Intent intent = getIntent();
-        int i =  intent.getIntExtra("intentKey" , 0);
-        if (i == 0){
-        }else if (i == 1){
+        int i = intent.getIntExtra("intentKey", 0);
+
+        if (i == 0) {
+        } else if (i == 1) {
+            hud_setting = new OBDHUDSettingFragment();
             startFragmentAdd(hud_setting);
-        }else if(i == 2){
+        } else if (i == 2) {
+            personal_year = new PersonalYearFragment();
             startFragmentAdd(personal_year);
-        }else if (i == 3){
+        } else if (i == 3) {
+            personal_make = new PersonalMakeFragment();
             startFragmentAdd(personal_make);
-        }else if (i == 4){
+        } else if (i == 4) {
+            personal_model = new PersonalModelragment();
             startFragmentAdd(personal_model);
+        } else if (i == 5) {
+            personal_type = new PersonalTypeFragment();
+            startFragmentAdd(personal_type);
+        } else if (i == 6) {
+            personal_fueltype = new PersonalFuelTypeFragment();
+            startFragmentAdd(personal_fueltype);
+        } else if (i == 7) {
+            personal_canculation = new PersonalCalculationFragment();
+            startFragmentAdd(personal_canculation);
+        } else if (i == 8) {
+            personal_selectvehicle = new PersonalSelectVehicleFragment();
+            startFragmentAdd(personal_selectvehicle);
+        } else if (i == 9) {
+            log_filedetail = new OBDLogsFileDetailFragment();
+            startFragmentAdd(log_filedetail);
+        }else if (i == 10){
+            settings_preferences = new OBDSettingsPreferencesFragment();
+            startFragmentAdd(settings_preferences);
+        }else if (i == 11){
+            settings_communication = new OBDSettingsCommunicaFragment();
+            startFragmentAdd(settings_communication);
+        }else if (i == 12){
+            settings_information = new OBDSettingsInformationFragmnet();
+            startFragmentAdd(settings_information);
+        }else if (i == 13){
+            settings_firmwareupdates = new OBDSettingsFirmwareUpdatesFragment();
+            startFragmentAdd(settings_firmwareupdates);
         }
+
 
 
     }
@@ -84,10 +120,13 @@ public class MainFregmentReplaceActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
             if (isInterception()) {
+
                 if (backListener != null) {
+
                     backListener.onbackForward();
                     return false;
                 }

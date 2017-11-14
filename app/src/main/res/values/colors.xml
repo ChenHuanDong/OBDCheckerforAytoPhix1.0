@@ -39,7 +39,10 @@
     <color name="color_personal_deletevehicle">#fe3824</color>
     <color name="color_personal_selectvehicle">#0076ff</color>
     <color name="color_dialog_title">#030303</color>
-
-
+    <color name="textcolortime">#918e8e</color>
+    <color name="colorred">#ff000f</color>
+    <color name="colorBule">#0E09ED</color>
+    <color name="performanceBack">#18181C</color>
+    <color name="mainobdback">#1E2026</color>
 
 </resources>

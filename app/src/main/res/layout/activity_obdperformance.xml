@@ -5,10 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOBDbackground"
+    android:clickable="true"
     android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.performance.OBDPerformanceActivity">
 
+    <!--上面标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/performance"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>

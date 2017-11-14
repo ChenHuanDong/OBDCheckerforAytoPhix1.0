@@ -3,8 +3,8 @@
                 android:id="@+id/parent_obd_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
                 android:background="@color/colorOBDbackground"
+                android:clickable="true"
                 tools:context="com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment">
 
     <!--两个显示链接状态的文字的字体颜色还没有具体给出，要具体的话别忘了去Java代码里面改-->
@@ -30,14 +30,6 @@
         android:textSize="@dimen/x18"
         android:textStyle="bold"/>
 
-    <!--左上角图标-->
-    <ImageView
-        android:layout_width="@dimen/x20"
-        android:layout_height="@dimen/x19"
-        android:layout_marginLeft="@dimen/x15"
-        android:layout_marginTop="@dimen/y12"
-        android:src="@drawable/upload_buttom_ui"/>
-
     <!--点击弹出PopupWindow-->
     <Button
         android:id="@+id/obd_btn_title_connect"
@@ -46,6 +38,24 @@
         android:layout_marginLeft="@dimen/x233"
         android:layout_marginTop="@dimen/y19"
         android:background="@drawable/xiala_ui"/>
+
+    <!--覆盖在上面的-->
+    <ImageView
+        android:id="@+id/obd_iv_title_connecttra"
+        android:layout_width="@dimen/x120"
+        android:layout_height="@dimen/y44"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorTransparent"/>
+
+
+    <!--左上角图标-->
+    <ImageView
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x19"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/y12"
+        android:src="@drawable/upload_buttom_ui"/>
+
 
     <!--右上角图片-->
     <ImageView

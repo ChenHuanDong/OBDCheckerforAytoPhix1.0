@@ -303,6 +303,7 @@
             android:textSize="@dimen/x14"/>
 
         <RelativeLayout
+            android:id="@+id/re_personal_fuel_type"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x44"
             android:background="@color/colorDialogBackGround">
@@ -453,6 +454,7 @@
             android:textSize="@dimen/x14"/>
 
         <RelativeLayout
+            android:id="@+id/re_personal_cakculation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x44"
             android:background="@color/colorDialogBackGround">

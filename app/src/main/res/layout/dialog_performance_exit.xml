@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="@dimen/x270"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDialogBackGround"
+                android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x200"
+        android:background="@color/colorDialogBackGround"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x26"
+        android:layout_marginTop="@dimen/x19"
+        android:gravity="center"
+        android:text="@string/startingspeed"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x17"/>
+
+
+    <TextView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x52"
+        android:layout_marginTop="@dimen/x47"
+        android:gravity="center"
+        android:text="@string/pleaseenteravalueforthestartingspeed"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x17"/>
+
+
+    <EditText
+        android:layout_width="@dimen/x238"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/x108"
+        android:hint="0"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x13"/>
+
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/x149"
+        android:src="@drawable/line_ui"/>
+
+    <RelativeLayout
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x50"
+        android:layout_marginTop="@dimen/x150">
+
+        <TextView
+            android:layout_width="@dimen/x135"
+            android:layout_height="@dimen/x50"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/color_personal_selectvehicle"
+            android:textSize="@dimen/x17"/>
+
+        <TextView
+            android:layout_width="@dimen/x135"
+            android:layout_height="@dimen/x50"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/ok"
+            android:textColor="@color/color_personal_selectvehicle"
+            android:textSize="@dimen/x17"/>
+
+        <ImageView
+            android:layout_width="@dimen/x1"
+            android:layout_height="@dimen/x50"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/line_shu_ui"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

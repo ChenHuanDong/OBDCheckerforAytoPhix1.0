@@ -1,7 +1,13 @@
 package com.example.administrator.obdcheckerforaytophix10.logs;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,8 +25,16 @@ import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsFi
 import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsGraphsFragment;
 import com.example.administrator.obdcheckerforaytophix10.logs.fragment.OBDLogsTripsFragment;
 import com.example.administrator.obdcheckerforaytophix10.logs.othersetting.OBDLogsOtherGraphs;
+import com.example.administrator.obdcheckerforaytophix10.main.servierbt.BluetoothService;
 import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.FileLTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
+
+import java.util.ArrayList;
+
+//回放的Fragment   LogsDetailChartFragment
+
 
 public class OBDLogsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +59,23 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
     //File   右上角才会出现的Tv
     private TextView tv_show_file;
 
+    //标题栏底部是文字还是开始暂停按钮  和上面覆盖的真实按钮
+    private TextView tv_title;
+    private ImageView iv_start, iv_stop, iv_real_start, iv_real_stop;
+
+    //测试添加假数据的线程
+    private ThreadSafe adddataThread;
+
+    //接收图表的数据
+    private BroadcastReceiver br;
+    private int yValue = 0;
+    private ArrayList<Integer> data;
+
+    //绑定服务
+    private ServiceConnection mConnection;
+    private BluetoothService.MyBinder mBinder;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +93,46 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
         initView();
         radbtn_graphs.performClick();
 
+        mConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                mBinder = (BluetoothService.MyBinder) service;
+            }
 
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+
+
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                yValue = intent.getIntExtra("yValue", 0);
+                data.add(yValue);
+
+            }
+        };
+
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("changeChartData");
+        registerReceiver(br, intentFilter);
+
+        //绑定服务
+        Intent intent1 = new Intent(OBDLogsActivity.this, BluetoothService.class);
+        bindService(intent1, mConnection, BIND_AUTO_CREATE);
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(br);
+        unbindService(mConnection);
     }
 
     private void initGrenDaoData() {
@@ -112,6 +182,20 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
         iv_return.setOnClickListener(this);
         iv_show_graphs = (ImageView) findViewById(R.id.iv_logs_show_graphs);
         tv_show_file = (TextView) findViewById(R.id.tv_logs_show_file);
+        tv_title = (TextView) findViewById(R.id.tv_logs_main_title);
+        iv_start = (ImageView) findViewById(R.id.iv_logs_mian_start);
+        iv_stop = (ImageView) findViewById(R.id.iv_logs_mian_stop);
+        iv_real_start = (ImageView) findViewById(R.id.iv_logs_start_real);
+        iv_real_stop = (ImageView) findViewById(R.id.iv_logs_stop_real);
+        iv_real_start.setClickable(false);
+        iv_real_stop.setClickable(false);
+        iv_real_start.setOnClickListener(this);
+        iv_real_stop.setOnClickListener(this);
+        //线程初始化在这里
+//        adddataThread = new ThreadSafe();
+//        adddataThread.setContext(OBDLogsActivity.this);
+        //
+        data = new ArrayList<>();
     }
 
     @Override
@@ -128,6 +212,11 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
                 position = 1;
                 iv_show_graphs.setVisibility(View.VISIBLE);
                 tv_show_file.setVisibility(View.GONE);
+                tv_title.setVisibility(View.GONE);
+                iv_start.setVisibility(View.VISIBLE);
+                iv_stop.setVisibility(View.VISIBLE);
+                iv_real_start.setClickable(true);
+                iv_real_stop.setClickable(true);
                 break;
             case R.id.radbtn_logs_trips:
                 startFragmentAdd(trips_fragment);
@@ -140,6 +229,11 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
                 position = 2;
                 iv_show_graphs.setVisibility(View.GONE);
                 tv_show_file.setVisibility(View.GONE);
+                tv_title.setVisibility(View.VISIBLE);
+                iv_start.setVisibility(View.GONE);
+                iv_stop.setVisibility(View.GONE);
+                iv_real_start.setClickable(false);
+                iv_real_stop.setClickable(false);
                 break;
             case R.id.radbtn_logs_files:
                 startFragmentAdd(file_fragment);
@@ -152,6 +246,11 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
                 position = 3;
                 iv_show_graphs.setVisibility(View.GONE);
                 tv_show_file.setVisibility(View.VISIBLE);
+                tv_title.setVisibility(View.VISIBLE);
+                iv_start.setVisibility(View.GONE);
+                iv_stop.setVisibility(View.GONE);
+                iv_real_start.setClickable(false);
+                iv_real_stop.setClickable(false);
                 break;
             case R.id.iv_logs_main_other:
                 //根据不同位置右上角进入的页面不同
@@ -162,11 +261,32 @@ public class OBDLogsActivity extends AppCompatActivity implements View.OnClickLi
                     Intent intent = new Intent("logsFilesEdit");
                     sendBroadcast(intent);
                     //把存的状态取反  存起来
-                    SPUtil.put(OBDLogsActivity.this , "OBDLogsEditStatus" , !(boolean)SPUtil.get(OBDLogsActivity.this , "OBDLogsEditStatus" , false));
+                    SPUtil.put(OBDLogsActivity.this, "OBDLogsEditStatus", !(boolean) SPUtil.get(OBDLogsActivity.this, "OBDLogsEditStatus", false));
                 }
                 break;
             case R.id.iv_logs_main_return:
                 finish();
+                break;
+            //点击开始获取数据并且发送广播
+            case R.id.iv_logs_start_real:
+                //在这里添加假数据
+                //初始化在initView里面
+//                adddataThread.start();
+
+                iv_real_start.setClickable(false);
+                SPUtil.put(OBDLogsActivity.this, "test", 13);
+                mBinder.setIsFinishLog(false);
+                mBinder.writeData(new byte[]{0x30, 0x31, 0x30, 0x64, (byte) 0x0D});
+                break;
+            //点击结束本次动态数据
+            case R.id.iv_logs_stop_real:
+                iv_real_start.setClickable(true);
+
+//                adddataThread.setExit(true);
+                //这个是存储  不过现在真是数据的话不在这里了
+//                FileLTool.getOutInstance().upDateColorByKey("testList", data);;
+                mBinder.setIsFinishLog(true);
+
                 break;
         }
     }

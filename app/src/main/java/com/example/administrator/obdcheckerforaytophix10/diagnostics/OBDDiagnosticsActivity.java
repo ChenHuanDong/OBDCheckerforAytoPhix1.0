@@ -2,8 +2,14 @@ package com.example.administrator.obdcheckerforaytophix10.diagnostics;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +27,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe.AdapterDiagnosticFreeze;
@@ -28,8 +35,10 @@ import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.readinesstest.AdapterReadinessCommon;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.troublecode.AdapterDiagnoticsTrouble;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.troublecode.BeanDiagnoticsTroubleCode;
+import com.example.administrator.obdcheckerforaytophix10.main.servierbt.BluetoothService;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.MyListView;
+import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 
 import java.util.ArrayList;
 
@@ -61,11 +70,24 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
             super.handleMessage(msg);
 
             if (msg.what == 0) {
-                tv_progress.setText(((int)(msg.obj) * 10 + 10) + "%");
+                tv_progress.setText(((int) (msg.obj) * 10 + 10) + "%");
             }
 
         }
     };
+
+    //接收故障码的广播
+    private BroadcastReceiver mBR;
+
+    //用 int型代表四种 的状态
+    private int stateDiagnoic = 1;
+    //右上角的刷新按钮
+    private ImageView iv_flash;
+
+
+    private ServiceConnection mConnection;
+    private BluetoothService.MyBinder mBinder;
+//    private BeanDiagnoticsTroubleCode mBeanTroubleCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +110,69 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         //Freeze  Frame
         MyFreezeFrame();
 
+
+        //初始化服务
+        mConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                mBinder = (BluetoothService.MyBinder) service;
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+
+        //绑定服务
+        Intent intent1 = new Intent(OBDDiagnosticsActivity.this, BluetoothService.class);
+        bindService(intent1, mConnection, BIND_AUTO_CREATE);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    //这里要先获取是否连接然后再发送
+                    SPUtil.put(OBDDiagnosticsActivity.this, "test", 8);
+                    mBinder.writeData(new byte[]{0x30, 0x33, (byte) 0x0D});
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        mBR = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch (intent.getIntExtra("state" , 0)){
+                    case 1:
+                        data_trouble_code.add(new BeanDiagnoticsTroubleCode(intent.getStringExtra("key") + "", "-----", intent.getBooleanExtra("red", true)));
+                        myAdapterTroubleCode.setData(data_trouble_code);
+                        break;
+                    case 2:
+                        Toast.makeText(OBDDiagnosticsActivity.this , "清除故障码成功" , Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+
+            }
+        };
+
+
+        //注册接收故障码的广播
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("bluetoothBT---errorcode");
+        registerReceiver(mBR, intentFilter);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mConnection);
+        unregisterReceiver(mBR);
     }
 
     private void MyFreezeFrame() {
@@ -101,7 +186,6 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         lv_freeze_frame.setAdapter(myAdapterFreezeFrame);
         View view = LayoutInflater.from(this).inflate(R.layout.lvhead_diagnostic_freeze_frame, null);
         lv_freeze_frame.addHeaderView(view);
-
 
     }
 
@@ -127,13 +211,15 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
     }
 
     private void MyTroubleCode() {
-        BeanDiagnoticsTroubleCode bean = new BeanDiagnoticsTroubleCode();
-        for (int i = 0; i < 50; i++) {
-            bean.setTitle("P0103").setItem("02---" + (i + 1)).setRed(true);
-            data_trouble_code.add(bean);
-        }
+//        mBeanTroubleCode = new BeanDiagnoticsTroubleCode();
+        //这个是添加的假数据现在不用了
+//        for (int i = 0; i < 50; i++) {
+//            bean.setTitle("P0103").setItem("02---" + (i + 1)).setRed(true);
+//            data_trouble_code.add(bean);
+//        }
         myAdapterTroubleCode.setData(data_trouble_code);
         lv_trouble_code.setAdapter(myAdapterTroubleCode);
+
         final ProgressBar pb = view_troublecode_head.findViewById(R.id.pb_diagnostic_troublecode);
 
         //添加加的数据
@@ -162,7 +248,9 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         animator.start();
         lv_trouble_code.addHeaderView(view_troublecode_head);
         View view_troublecode_foot = LayoutInflater.from(this).inflate(R.layout.lvfoot_diagnostic_tiouble_code, null);
+        Button btn_clearcode = view_troublecode_foot.findViewById(R.id.btn_diagnostic_clearcode);
         Button btn_historical = view_troublecode_foot.findViewById(R.id.btn_diagnostic_historical);
+        btn_clearcode.setOnClickListener(this);
         btn_historical.setOnClickListener(this);
         lv_trouble_code.addFooterView(view_troublecode_foot);
 
@@ -211,12 +299,17 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         lv_freeze_frame = (ListView) findViewById(R.id.lv_diagnostic_freeze_frame);
         myAdapterFreezeFrame = new AdapterDiagnosticFreeze(this);
         dataFreezeFrame = new ArrayList<>();
+
+        //右上角刷新按钮
+        iv_flash = (ImageView) findViewById(R.id.iv_diagno_flash);
+        iv_flash.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.re_diagnostic_trouble_code:
+                stateDiagnoic = 1;
                 ll_trouble_code.setVisibility(View.VISIBLE);
                 ll_freeze_frame.setVisibility(View.GONE);
                 ll_readiness_test.setVisibility(View.GONE);
@@ -231,6 +324,7 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 tv_report.setTextColor(getResources().getColor(R.color.colorTextColorDemo));
                 break;
             case R.id.re_diagnostic_freeze_frame:
+                stateDiagnoic = 2;
                 ll_trouble_code.setVisibility(View.GONE);
                 ll_freeze_frame.setVisibility(View.VISIBLE);
                 ll_readiness_test.setVisibility(View.GONE);
@@ -245,6 +339,7 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 tv_report.setTextColor(getResources().getColor(R.color.colorTextColorDemo));
                 break;
             case R.id.re_diagnostic_readiness_test:
+                stateDiagnoic = 3;
                 ll_trouble_code.setVisibility(View.GONE);
                 ll_freeze_frame.setVisibility(View.GONE);
                 ll_readiness_test.setVisibility(View.VISIBLE);
@@ -259,6 +354,7 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 tv_report.setTextColor(getResources().getColor(R.color.colorTextColorDemo));
                 break;
             case R.id.re_diagnostic_report:
+                stateDiagnoic = 4;
                 ll_trouble_code.setVisibility(View.GONE);
                 ll_freeze_frame.setVisibility(View.GONE);
                 ll_readiness_test.setVisibility(View.GONE);
@@ -276,7 +372,27 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 Intent intent = new Intent(OBDDiagnosticsActivity.this, OBDDiagnosticHistoricalActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.btn_diagnostic_clearcode:
+                //清除故障码
+                SPUtil.put(OBDDiagnosticsActivity.this, "test", 12);
+                mBinder.writeData(new byte[]{0x30, 0x34, (byte) 0x0D});
+                break;
+            case R.id.iv_diagno_flash:
+                switch (stateDiagnoic){
+                    case 1:
+                        data_trouble_code.clear();
+                        myAdapterTroubleCode.setData(data_trouble_code);
+                        SPUtil.put(OBDDiagnosticsActivity.this, "test", 8);
+                        mBinder.writeData(new byte[]{0x30, 0x33, (byte) 0x0D});
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+                break;
 
         }
     }

@@ -14,98 +14,87 @@
         android:background="@color/colorOBDbackground"/>
 
 
-    <!--&lt;!&ndash;图标文字&ndash;&gt;-->
-    <!--<RelativeLayout-->
-    <!--android:background="@color/colorOBDbackground"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/y49"-->
-    <!--android:layout_alignParentBottom="true">-->
-    <!--&lt;!&ndash;obd&ndash;&gt;-->
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/x80"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y6"-->
-    <!--android:layout_marginLeft="@dimen/x22"-->
-    <!--android:background="@color/colorTransparent"-->
-    <!--android:gravity="bottom|center_horizontal"-->
-    <!--android:text="@string/main_tv_obd"-->
-    <!--android:textSize="@dimen/x12"/>-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/x45"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y7"-->
-    <!--android:layout_marginLeft="@dimen/x39"/>-->
-
-
-    <!--&lt;!&ndash;special&ndash;&gt;-->
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/x80"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y6"-->
-    <!--android:layout_marginLeft="@dimen/x148"-->
-    <!--android:background="@color/colorTransparent"-->
-    <!--android:gravity="bottom|center_horizontal"-->
-    <!--android:text="@string/main_tv_special"-->
-    <!--android:textSize="@dimen/x12"/>-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/x45"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y7"-->
-    <!--android:layout_marginLeft="@dimen/x165"/>-->
-
-
-    <!--&lt;!&ndash;Persional&ndash;&gt;-->
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/x80"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y6"-->
-    <!--android:layout_marginLeft="@dimen/x270"-->
-    <!--android:background="@color/colorTransparent"-->
-    <!--android:gravity="bottom|center_horizontal"-->
-    <!--android:text="@string/main_tv_persional"-->
-    <!--android:textSize="@dimen/x12"/>-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/x45"-->
-    <!--android:layout_height="@dimen/y45"-->
-    <!--android:layout_marginBottom="@dimen/y7"-->
-    <!--android:layout_marginLeft="@dimen/x285"/>-->
-
-    <!--</RelativeLayout>-->
-
-
     <!--上方透明按钮（最上层）-->
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y49"
+        android:layout_height="@dimen/y45"
         android:layout_alignParentBottom="true"
         android:background="@color/colorTransparent"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/btn_main_obd"
-            android:layout_width="@dimen/x123"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_main_obd_sel"
-            android:button="@null"/>
+        <!--            android:background="@drawable/btn_main_obd_sel"
+-->
+
+        <!--            android:background="@drawable/btn_main_persional_sel"
+-->
 
         <RadioButton
-            android:id="@+id/btn_main_special"
-            android:layout_width="@dimen/x129"
+            android:id="@+id/btn_main_obd"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_main_special_sel"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
             android:button="@null"/>
+
 
         <RadioButton
             android:id="@+id/btn_main_persional"
-            android:layout_width="@dimen/x123"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_main_persional_sel"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
             android:button="@null"/>
 
     </RadioGroup>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y39"
+        android:layout_alignParentBottom="true"
+        android:background="@color/mainobdback">
+
+        <ImageView
+            android:id="@+id/iv_mainobd_obd"
+            android:layout_width="@dimen/x182"
+            android:layout_height="@dimen/x34"
+            android:layout_marginLeft="@dimen/x5"
+            android:background="@mipmap/mainobdobdb"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/iv_mainobd_personal"
+            android:layout_width="@dimen/x182"
+            android:layout_height="@dimen/x34"
+            android:layout_marginLeft="@dimen/x188"
+            android:background="@mipmap/mainobdpersonalb"
+            android:scaleType="fitXY"/>
+        <!--187 - 55 -->
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="@dimen/x132"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x55"
+            android:layout_marginTop="@dimen/x8"
+            android:singleLine="true"
+            android:text="@string/obdfeatures"
+            android:textColor="@color/mainobdback"
+            android:textSize="@dimen/x12"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x20"
+            android:layout_marginLeft="@dimen/x231"
+            android:layout_marginTop="@dimen/x8"
+            android:singleLine="true"
+            android:text="@string/vehicleinformation"
+            android:textColor="@color/mainobdback"
+            android:textSize="@dimen/x12"/>
+
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

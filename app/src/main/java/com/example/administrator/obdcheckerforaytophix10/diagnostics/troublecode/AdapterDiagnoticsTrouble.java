@@ -60,8 +60,10 @@ public class AdapterDiagnoticsTrouble extends BaseAdapter {
         holder.tv_item.setText(data.get(i).getItem());
         if (data.get(i).isRed()){
             holder.iv_red.setVisibility(View.VISIBLE);
+            holder.iv_yellow.setVisibility(View.GONE);
         }else {
             holder.iv_yellow.setVisibility(View.VISIBLE);
+            holder.iv_red.setVisibility(View.GONE);
         }
         return view;
     }

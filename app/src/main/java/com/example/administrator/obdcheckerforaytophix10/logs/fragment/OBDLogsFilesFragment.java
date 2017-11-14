@@ -20,7 +20,8 @@ import java.util.ArrayList;
 /**
  * Created by CHD on 2017/9/8.
  */
-
+//Adapter里面有跳转   跳转到公共的MainReplaceActivity
+    //然后到  OBDLogsFileDetailFragment
 public class OBDLogsFilesFragment extends Fragment {
 
     private ListView lv;

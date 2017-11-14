@@ -59,6 +59,7 @@ public class PersonalMakeFragment extends Fragment implements View.OnClickListen
         initData(getResources().getString(R.string.alpina), false);
         initData(getResources().getString(R.string.ariel), false);
 
+
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.head_personal_tear, null);
         TextView tv = view.findViewById(R.id.tv_head_personal_title);
         tv.setText(getResources().getString(R.string.make));

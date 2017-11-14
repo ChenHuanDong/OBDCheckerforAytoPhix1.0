@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorOBDbackground"
+              android:clickable="true"
+              android:orientation="vertical">
+
+    <!--上面标题-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:orientation="horizontal">
+
+        <!--底部Tv  LogS-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/files"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x18"/>
+
+        <!--返回图标-->
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x14"
+            android:scaleType="fitXY"
+            android:src="@drawable/return_ui"/>
+
+
+        <!--透明的返回按钮-->
+        <ImageView
+            android:id="@+id/iv_logs_main_return"
+            android:layout_width="@dimen/x45"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"/>
+
+        <!--右上角Other按钮-->
+        <ImageView
+            android:id="@+id/iv_logs_main_other"
+            android:layout_width="@dimen/x40"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTransparent"/>
+
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_logsdetail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_logdetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.tool.ConversionUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.DBTool;
+import com.example.administrator.obdcheckerforaytophix10.tool.FileLTool;
 import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 import com.github.mikephil.charting.charts.LineChart;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
  * Created by CHD on 2017/9/8.
  */
 
+//回放的Fragment   LogsDetailChartFragment
+
 public class OBDLogsGraphsFragment extends Fragment {
 
     private LineChart mChart_zero, mChart_one;
@@ -45,10 +49,27 @@ public class OBDLogsGraphsFragment extends Fragment {
 
     private ArrayList<LineDataSet> dataSets, dataSets_one;
 
-    private BroadcastReceiver br;
+    private BroadcastReceiver br, brdata;
     private RelativeLayout.LayoutParams params_top;
     private RelativeLayout.LayoutParams params_bottom;
     private RelativeLayout.LayoutParams params;
+
+    //计数
+    private int i = 0;
+    private int yValue = 0;
+    private int yValueTwo = 0;
+    private int yValueThree = 0;
+    private int yValueFour = 0;
+    private ArrayList<Integer> dataFileOne , dataFileTwo , dataFileThree , dataFileFour;
+
+
+
+    //存数据的ArrayList
+    private ArrayList<Integer> data;
+
+
+
+
 
     @Nullable
     @Override
@@ -68,12 +89,15 @@ public class OBDLogsGraphsFragment extends Fragment {
         mRe = view.findViewById(R.id.re_logs_graphs);
         dataSets = new ArrayList<>();
         dataSets_one = new ArrayList<>();
+        dataFileOne = new ArrayList<>();
+        dataFileTwo = new ArrayList<>();
+        dataFileThree = new ArrayList<>();
+        dataFileFour = new ArrayList<>();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
 
         //为Y轴添数据
@@ -86,8 +110,72 @@ public class OBDLogsGraphsFragment extends Fragment {
 //        }
 
 
+        initView();
+
         //提出去 省的看着麻烦
         initSettingMyCharts();
+
+
+        //这个是数据改变的广播
+        brdata = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //这个是记录传回来的次数
+                i = intent.getIntExtra("count", 0);
+                data = intent.getIntegerArrayListExtra("key");
+
+                yValue = data.get(0);
+                yValueTwo = data.get(1);
+                yValueThree = data.get(2);
+                yValueFour = data.get(3);
+
+                dataFileOne.add(yValue);
+                dataFileTwo.add(yValueTwo);
+                dataFileThree.add(yValueThree);
+                dataFileFour.add(yValueFour);
+
+                //判断如果是就储存到数据库里面
+                if (intent.getBooleanExtra("finish" , false)){
+                    //更改数据库   之前先存一个空的
+                    FileLTool.getOutInstance().upDateColorByKey("testListOne" , dataFileOne);
+                    FileLTool.getOutInstance().upDateColorByKey("testListTwo" , dataFileTwo);
+                    FileLTool.getOutInstance().upDateColorByKey("testListThree" , dataFileThree);
+                    FileLTool.getOutInstance().upDateColorByKey("testListFour" , dataFileFour);
+                }
+
+
+//                //可以在这里改变数据库  也可以在 OBDLogsActivity  里面新建广播来
+                mChart_zero.setVisibleXRangeMaximum(10);
+                mChart_one.setVisibleXRangeMaximum(10);
+                if (i>10){
+                    mChart_zero.moveViewToX(i - 10);
+                    mChart_one.moveViewToX(i - 10);
+                }
+
+                yValue_zero.add(new Entry(yValue, yValue_zero.size()));
+                yValue_one.add(new Entry(yValueTwo , yValue_one.size()));
+                yValue_two.add(new Entry(yValueThree , yValue_two.size()));
+                yValue_three.add(new Entry(yValueFour , yValue_three.size()));
+
+
+                xValue.add(xValue.size() + "");
+
+                mDataSet_zero.notifyDataSetChanged();
+                mDataSet_one.notifyDataSetChanged();
+                mDataSet_two.notifyDataSetChanged();
+                mDataSet_three.notifyDataSetChanged();
+
+                mData.notifyDataChanged();
+                mData_one.notifyDataChanged();
+
+                mChart_zero.notifyDataSetChanged();
+                mChart_zero.invalidate();
+                mChart_one.notifyDataSetChanged();
+                mChart_one.invalidate();
+
+
+            }
+        };
 
 
         br = new BroadcastReceiver() {
@@ -99,7 +187,6 @@ public class OBDLogsGraphsFragment extends Fragment {
 //                而且这个最好放在最下面。。。。
 //                mChart_zero.setVisibleXRangeMaximum(10);
 //                mChart_zero.moveViewToX(15);
-
 
                 if (DBTool.getOutInstance().getQueryKey("logs_graphs_smoothing_1").getIsTure()) {
                     mDataSet_zero.setDrawCubic(true);
@@ -139,7 +226,7 @@ public class OBDLogsGraphsFragment extends Fragment {
                 }
                 mRe.removeAllViews();
 
-                mData = new LineData(xValue , dataSets);
+                mData = new LineData(xValue, dataSets);
                 mData_one = new LineData(xValue, dataSets_one);
 
                 mChart_zero.setData(mData);
@@ -153,14 +240,23 @@ public class OBDLogsGraphsFragment extends Fragment {
                 }
 
 
-
             }
         };
 
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("changeLogsChart");
-        getActivity().registerReceiver(br , intentFilter);
+        getActivity().registerReceiver(br, intentFilter);
 
+        IntentFilter intent_data = new IntentFilter();
+        intent_data.addAction("bluetoothBT---logdata");
+        getActivity().registerReceiver(brdata, intent_data);
+
+
+    }
+
+    private void initView() {
+        data = new ArrayList<>();
     }
 
     private void initSettingMyCharts() {
@@ -337,10 +433,8 @@ public class OBDLogsGraphsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(br);
+        getActivity().unregisterReceiver(brdata);
     }
-
-
-
 
 
 

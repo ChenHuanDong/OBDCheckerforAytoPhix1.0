@@ -2,6 +2,7 @@ package com.example.administrator.obdcheckerforaytophix10.logs.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.obdcheckerforaytophix10.MainFregmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.main.obd.OBDPopDialog;
+import com.example.administrator.obdcheckerforaytophix10.tool.LogUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  * Created by CHD on 2017/9/12.
  */
 
-public class AdapterLogsFiles extends BaseAdapter {
+public class AdapterLogsFiles extends BaseAdapter implements View.OnClickListener {
 
     private ArrayList<BeanLogsFile> data;
     private Context mContext;
@@ -107,8 +110,18 @@ public class AdapterLogsFiles extends BaseAdapter {
 
             }
         });
-
+        //右边两个的点击事件   跳转到 回放
+        holder.tv_pid.setOnClickListener(this);
+        holder.iv_del.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        //点击跳转到公共替换Aty
+        Intent intent = new Intent(mContext , MainFregmentReplaceActivity.class);
+        intent.putExtra("intentKey" , 9 );
+        mContext.startActivity(intent);
     }
 
     class ViewHolder {

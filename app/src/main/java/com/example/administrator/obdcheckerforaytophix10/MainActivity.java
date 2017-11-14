@@ -13,10 +13,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.example.administrator.obdcheckerforaytophix10.dashboards.FragmentBackListener;
 import com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
@@ -28,9 +31,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//我在这里变最大值最小值
+//搜索上面的话  找到  在哪里改变的最大值最小值
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //底部三个RadioButton
-    private RadioButton mRadioButton_obd, mRadioButton_special, mRadioButton_persional;
+    private RadioButton mRadioButton_obd, mRadioButton_persional;
     //三个页面的Fragment
     private MainOBDFragment mOBDFragment;
     private MainSpecialFragment mSpecialFragment;
@@ -38,6 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //判断现在是在哪一页
     private int page = 1;
     private Fragment current_fragment;
+    //让Fragment也可以有物理返回按钮
+    private FragmentBackListener backListener;
+    private boolean isInterception = false;
+
+    private ImageView iv_bottom_left , iv_bottom_right;
 
 
     @Override
@@ -74,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    o.getIsTure() + "\n" + o.getFloValue());
 //        }
 
+
     }
+
 
     private void initFileGreenDao() {
         FileL fileL = new FileL();
@@ -82,7 +95,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FileLTool.getOutInstance().insertBean(fileL);
         fileL.setId(null).setKey("obdHudcolor").setValue(1);
         FileLTool.getOutInstance().insertBean(fileL);
-
+        ArrayList da = new ArrayList();
+        da.add(0);
+        fileL.setId(null).setKey("testListOne").setDatas(da);
+        FileLTool.getOutInstance().insertBean(fileL);
+        fileL.setId(null).setKey("testListTwo").setDatas(da);
+        FileLTool.getOutInstance().insertBean(fileL);
+        fileL.setId(null).setKey("testListThree").setDatas(da);
+        FileLTool.getOutInstance().insertBean(fileL);
+        fileL.setId(null).setKey("testListFour").setDatas(da);
+        FileLTool.getOutInstance().insertBean(fileL);
     }
 
 
@@ -441,13 +463,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_min_6").setValue(0);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_1").setValue(160);
+            //我在这里变最大值最小值
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_1").setValue(270);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_2").setValue(160);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_2").setValue(270);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_3").setValue(160);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_3").setValue(16000);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_4").setValue(160);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_4").setValue(100);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_5").setValue(160);
             DBTool.getOutInstance().insertBean(obdl);
@@ -1268,17 +1291,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         mRadioButton_obd = (RadioButton) findViewById(R.id.btn_main_obd);
-        mRadioButton_special = (RadioButton) findViewById(R.id.btn_main_special);
         mRadioButton_persional = (RadioButton) findViewById(R.id.btn_main_persional);
         mRadioButton_obd.setOnClickListener(this);
-        mRadioButton_special.setOnClickListener(this);
         mRadioButton_persional.setOnClickListener(this);
         //Fragment初始化
         mOBDFragment = new MainOBDFragment();
         mSpecialFragment = new MainSpecialFragment();
         mPersionalFragment = new MainPersionalFragment();
+        iv_bottom_left = (ImageView) findViewById(R.id.iv_mainobd_obd);
+        iv_bottom_right = (ImageView) findViewById(R.id.iv_mainobd_personal);
+
         //初始页面设置为OBD页面
         startFragmentAdd(mOBDFragment);
+
     }
 
     @Override
@@ -1287,45 +1312,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_main_obd:
                 //第一个不可点后两个可以点击
                 mRadioButton_obd.setClickable(false);
-                mRadioButton_special.setClickable(true);
                 mRadioButton_persional.setClickable(true);
-
                 startFragmentAdd(mOBDFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
-
                 //设置页数在第一页
                 page = 1;
-                break;
-            case R.id.btn_main_special:
-                //第二个不可点后两个可以点击
-                mRadioButton_obd.setClickable(true);
-                mRadioButton_special.setClickable(false);
-                mRadioButton_persional.setClickable(true);
 
-                if (page == 1) {
-                    startFragmentAdd(mSpecialFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
-                }
-                if (page == 3) {
-                    startFragmentAdd(mSpecialFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
-                }
+                iv_bottom_left.setImageResource(R.mipmap.mainobdobdc);
+                iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalb);
 
 
-                //设置页数在第二页
-                page = 2;
                 break;
             case R.id.btn_main_persional:
                 //第三个不可点后两个可以点击
                 mRadioButton_obd.setClickable(true);
-                mRadioButton_special.setClickable(true);
                 mRadioButton_persional.setClickable(false);
-
                 startFragmentAdd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
-
-
                 //设置页数在第三页
                 page = 3;
+
+                iv_bottom_left.setImageResource(R.mipmap.mainobdobdb);
+                iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalc);
+
                 break;
         }
     }
+
     //替换fragment方法 带动画
     private void startFragmentAdd(Fragment fragment, int anim_in, int anim_out) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -1372,8 +1383,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             current_fragment = fragment;
         }
     }
-
-
 
 
     //自定义添加仪表盘数据库          新的仪表盘  需要有一个属性
@@ -1521,5 +1530,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            if (isInterception()) {
+                if (backListener != null) {
+                    backListener.onbackForward();
+                    return false;
+                }
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public FragmentBackListener getBackListener() {
+        return backListener;
+    }
+
+    public void setBackListener(FragmentBackListener backListener) {
+        this.backListener = backListener;
+    }
+
+    public boolean isInterception() {
+        return isInterception;
+    }
+
+    public void setInterception(boolean interception) {
+        isInterception = interception;
+    }
 
 }
