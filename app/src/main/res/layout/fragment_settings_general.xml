@@ -73,7 +73,8 @@
                 android:layout_width="@dimen/x50"
                 android:layout_height="@dimen/x30"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x310"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 app:isOpened="true"/>
 
 
@@ -107,7 +108,8 @@
                 android:layout_width="@dimen/x10"
                 android:layout_height="@dimen/x18"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x350"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/enter"/>
 
 
@@ -151,7 +153,8 @@
                 android:layout_width="@dimen/x50"
                 android:layout_height="@dimen/x30"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x310"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 app:isOpened="true"/>
 
 
@@ -334,7 +337,8 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/x14"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x340"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/dui"/>
 
@@ -368,7 +372,8 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/x14"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x340"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/dui"/>
 
@@ -401,7 +406,8 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/x14"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x340"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/dui"/>
 
@@ -434,7 +440,8 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/x14"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x340"
+                android:layout_marginRight="@dimen/x30"
+                android:layout_alignParentRight="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/dui"/>
 

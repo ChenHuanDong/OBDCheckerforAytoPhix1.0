@@ -42,7 +42,6 @@
         android:layout_height="@dimen/x1"
         android:src="@drawable/line_ui"/>
 
-
     <!--Communications-->
     <RelativeLayout
         android:id="@+id/re_settings_communic"
@@ -66,7 +65,8 @@
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x350"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             android:src="@drawable/enter"/>
 
 
@@ -99,7 +99,8 @@
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x350"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             android:src="@drawable/enter"/>
 
 
@@ -132,7 +133,8 @@
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x350"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             android:src="@drawable/enter"/>
 
 

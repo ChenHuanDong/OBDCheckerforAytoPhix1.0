@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,9 +37,10 @@
 
         <!--Monitors Test  右上角刷新按钮-->
         <ImageView
+            android:layout_marginRight="@dimen/x15"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/x22"
             android:layout_height="@dimen/x22"
-            android:layout_marginLeft="@dimen/x338"
             android:layout_marginTop="@dimen/x11"
             android:src="@drawable/shuaxin_diagnostics"/>
 
@@ -47,14 +48,14 @@
         <!--透明的返回按钮-->
         <ImageView
             android:id="@+id/iv_monitors_main_return"
-            android:layout_width="@dimen/x45"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@color/colorTransparent"/>
 
         <!--透明 右上角Other按钮-->
         <ImageView
             android:id="@+id/iv_monitors_main_other"
-            android:layout_width="@dimen/x40"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="@color/colorTransparent"/>
@@ -63,19 +64,23 @@
     </RelativeLayout>
     <!--线-->
     <ImageView
+        android:layout_marginTop="@dimen/y44"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
         android:src="@drawable/line_ui"/>
 
 
     <FrameLayout
+        android:layout_marginTop="@dimen/x45"
+        android:layout_marginBottom="@dimen/y45"
         android:id="@+id/replace_monitors_main"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y557"
+        android:layout_height="match_parent"
         android:background="@color/colorOBDbackground"/>
 
     <!--下面是展示底层的   下层是Iv+Tv   上层是透明RadGroup+RadButton-->
     <RelativeLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y45"
         android:background="@color/colorDialogBackGround">
@@ -235,4 +240,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

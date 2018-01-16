@@ -8,12 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -29,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.obdcheckerforaytophix10.MainActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe.AdapterDiagnosticFreeze;
 import com.example.administrator.obdcheckerforaytophix10.diagnostics.freezeframe.BeanDiagnosticFreezeFrame;
@@ -89,6 +94,11 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
     private BluetoothService.MyBinder mBinder;
 //    private BeanDiagnoticsTroubleCode mBeanTroubleCode;
 
+    //横屏相关
+    private MyOrientationEventListener mListener;
+    private int orientation;
+    private int countcount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +145,7 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                     Thread.sleep(1000);
                     //这里要先获取是否连接然后再发送
                     SPUtil.put(OBDDiagnosticsActivity.this, "test", 8);
+                    //03
                     mBinder.writeData(new byte[]{0x30, 0x33, (byte) 0x0D});
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -146,13 +157,14 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         mBR = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                switch (intent.getIntExtra("state" , 0)){
+                switch (intent.getIntExtra("state", 0)) {
                     case 1:
+                        //那个“----” 是详细的故障码
                         data_trouble_code.add(new BeanDiagnoticsTroubleCode(intent.getStringExtra("key") + "", "-----", intent.getBooleanExtra("red", true)));
                         myAdapterTroubleCode.setData(data_trouble_code);
                         break;
                     case 2:
-                        Toast.makeText(OBDDiagnosticsActivity.this , "清除故障码成功" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OBDDiagnosticsActivity.this, "清除故障码成功", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -165,6 +177,14 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("bluetoothBT---errorcode");
         registerReceiver(mBR, intentFilter);
+
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
 
     }
 
@@ -211,12 +231,6 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
     }
 
     private void MyTroubleCode() {
-//        mBeanTroubleCode = new BeanDiagnoticsTroubleCode();
-        //这个是添加的假数据现在不用了
-//        for (int i = 0; i < 50; i++) {
-//            bean.setTitle("P0103").setItem("02---" + (i + 1)).setRed(true);
-//            data_trouble_code.add(bean);
-//        }
         myAdapterTroubleCode.setData(data_trouble_code);
         lv_trouble_code.setAdapter(myAdapterTroubleCode);
 
@@ -242,6 +256,30 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
         }).start();
         //为底部橘色圆环添加动画
         ImageView iv_troublecode_wait = view_troublecode_head.findViewById(R.id.iv_diagno_trouble_wait);
+
+//        //下面是暂时写的以后要删除的
+//        countcount = 0;
+//        iv_troublecode_wait.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (countcount == 0) {
+//                    //发07
+//                    mBinder.writeData(new byte[]{0x30, 0x37, (byte) 0x0D});
+//                    countcount = 1;
+//                } else if (countcount == 1) {
+//                    //发0a
+//                    mBinder.writeData(new byte[]{0x30, 0x41, (byte) 0x0D});
+//                    countcount = 2;
+//                } else if (countcount == 2) {
+//                    //发04  清除故障码
+//                    mBinder.writeData(new byte[]{0x30, 0x34, (byte) 0x0D});
+//                    countcount = 3;
+//                }
+//
+//            }
+//        });
+
+
         ObjectAnimator animator = ObjectAnimator.ofFloat(iv_troublecode_wait, "rotation", 0, 360);
         animator.setDuration(5000);
         animator.setRepeatCount(-1);
@@ -257,7 +295,57 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
 
     }
 
+    //继承OrientationEventListener类监听手机的旋转
+    public class MyOrientationEventListener extends OrientationEventListener {
+
+        public MyOrientationEventListener(Context context) {
+            super(context);
+        }
+
+        public MyOrientationEventListener(Context context, int rate) {
+            super(context, rate);
+        }
+
+        @Override
+        public void onOrientationChanged(int i) {
+            //i  表示偏移角度  -1的话是水平放置  0~359  手机逆时针旋转的话是 慢慢增加的
+            int screenOrientation = getResources().getConfiguration().orientation;
+            if (((i >= 0) && (i < 45)) || (i > 315)) {
+                //设置竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                        && i != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            } else if (i > 255 && i < 315) {
+                //设置横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+            } else if (i > 45 && i < 135) {
+                //设置反向横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                }
+            } else if (i > 135 && i < 225) {
+                //反向竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                }
+            }
+
+
+        }
+    }
+
+
     private void initView() {
+        orientation = getResources().getConfiguration().orientation;
+        mListener = new MyOrientationEventListener(this);
+        boolean autoRotateOn = (Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+        if (autoRotateOn) {
+            mListener.enable();
+        }
         re_trouble_code = (RelativeLayout) findViewById(R.id.re_diagnostic_trouble_code);
         re_freeze_frame = (RelativeLayout) findViewById(R.id.re_diagnostic_freeze_frame);
         re_readiness_test = (RelativeLayout) findViewById(R.id.re_diagnostic_readiness_test);
@@ -378,12 +466,12 @@ public class OBDDiagnosticsActivity extends AppCompatActivity implements View.On
                 mBinder.writeData(new byte[]{0x30, 0x34, (byte) 0x0D});
                 break;
             case R.id.iv_diagno_flash:
-                switch (stateDiagnoic){
+                switch (stateDiagnoic) {
                     case 1:
-                        data_trouble_code.clear();
-                        myAdapterTroubleCode.setData(data_trouble_code);
-                        SPUtil.put(OBDDiagnosticsActivity.this, "test", 8);
-                        mBinder.writeData(new byte[]{0x30, 0x33, (byte) 0x0D});
+//                        data_trouble_code.clear();
+//                        myAdapterTroubleCode.setData(data_trouble_code);
+//                        SPUtil.put(OBDDiagnosticsActivity.this, "test", 8);
+//                        mBinder.writeData(new byte[]{0x30, 0x33, (byte) 0x0D});
                         break;
                     case 2:
                         break;

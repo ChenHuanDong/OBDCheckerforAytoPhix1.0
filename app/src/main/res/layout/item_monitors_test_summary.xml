@@ -18,9 +18,11 @@
         android:id="@+id/iv_item_monitors_summary"
         android:layout_width="@dimen/x24"
         android:layout_height="@dimen/x20"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x336"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_centerVertical="true"/>
 
+    <!--线-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x1"

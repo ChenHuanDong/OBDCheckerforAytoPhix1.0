@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorOBDbackground"
+            android:clickable="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--上面标题栏-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:background="@color/colorOBDbackground">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/report"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x18"/>
+
+
+            <ImageView
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:scaleType="fitXY"
+                android:src="@drawable/return_ui"/>
+
+
+            <!--上方透明的返回按钮-->
+            <ImageView
+                android:id="@+id/iv_finish_performance_report"
+                android:layout_width="@dimen/x60"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"/>
+
+
+        </RelativeLayout>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+        <!--Time Max Speed-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/x34"
+            android:text="@string/timemaxspeed"
+            android:textColor="@color/textcolortime"
+            android:textSize="@dimen/x14"/>
+
+        <!--Time & MaxSpeed-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x58"
+            android:layout_marginTop="@dimen/x22"
+            android:orientation="horizontal">
+
+            <!--Time-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_per_title_timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:gravity="center"
+                    android:text="00:00:00"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x23"
+                    android:gravity="center"
+                    android:text="@string/time"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+            </LinearLayout>
+
+            <!--MaxSpeed-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_per_title_maxSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:gravity="center"
+                    android:text="0 km/h"
+                    android:textColor="@color/colorDashboardsPointer"
+                    android:textSize="@dimen/x24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x23"
+                    android:gravity="center"
+                    android:text="@string/maxspeed"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x16"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--Accelerated testing-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x38"
+            android:text="@string/acceleratedtesting"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
+
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginTop="@dimen/x9">
+
+            <TextView
+                android:id="@+id/tv_per_accle_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/zerotoonekmh"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/tv_per_accle_result"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0.0s"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <!--Braking-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x39"
+            android:text="@string/braking"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
+
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginTop="@dimen/x9">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/brakingdistance"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/tv_per_brake_dis"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0m"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/brakingtime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/tv_per_brake_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0.0s"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <!--Miscellaneous-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x30"
+            android:text="@string/miscellanous"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x16"/>
+
+        <!--Max Speed-->
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44"
+            android:layout_marginTop="@dimen/x9">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/maxspeed"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/tv_per_brake_maxSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 km/h"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--Max Acceleration-->
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/maxacceleration"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 G's"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--Peak Horsepower-->
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/peakhorsepower"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0 HP"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <!--0-100m 时间-->
+        <RelativeLayout
+            android:background="@color/colorDialogBackGround"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x44">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="@string/zerotoonemtime"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/tv_per_zerotoone_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x15"
+                android:gravity="center_vertical|right"
+                android:text="0s"
+                android:textColor="@color/colorTextColorDemo"
+                android:textSize="@dimen/x16"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:background="@color/colorTransparent"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

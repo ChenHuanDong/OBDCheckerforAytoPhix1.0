@@ -76,7 +76,6 @@ public class OBDStyleActivity extends AppCompatActivity implements View.OnClickL
     private ImageView iv_finish;
     private TextView tv_cancel;
 
-
     private RelativeLayout mRe;
 
     @Override

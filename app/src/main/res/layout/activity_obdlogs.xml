@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOBDbackground"
-    android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.logs.OBDLogsActivity">
     <!--上面的按钮-->
     <!--三种模式   右上角的有变化-->
@@ -27,25 +26,66 @@
             android:textColor="@color/colorDashboardsPointer"
             android:textSize="@dimen/x18"/>
 
-        <!--开始和结束按钮-->
-        <ImageView
-            android:id="@+id/iv_logs_mian_start"
-            android:layout_width="@dimen/x16"
-            android:layout_height="@dimen/x18"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x152"
-            android:scaleType="fitXY"
-            android:src="@drawable/logsstart"/>
+        <!--这个是装两个按钮 加 透明按钮的-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_logs_mian_stop"
-            android:layout_width="@dimen/x18"
-            android:layout_height="@dimen/x18"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x205"
-            android:scaleType="fitXY"
-            android:src="@drawable/logsstop"/>
+            <!--左边-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
+                <!--开始按钮-->
+                <ImageView
+                    android:id="@+id/iv_logs_mian_start"
+                    android:layout_width="@dimen/x16"
+                    android:layout_height="@dimen/x18"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x15"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logsstart"/>
+
+                <!--开始按钮(透明)-->
+                <ImageView
+                    android:id="@+id/iv_logs_start_real"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/colorTransparent"/>
+
+            </RelativeLayout>
+            <!--左边-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <!--结束按钮-->
+                <ImageView
+                    android:id="@+id/iv_logs_mian_stop"
+                    android:layout_width="@dimen/x18"
+                    android:layout_height="@dimen/x18"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logsstop"/>
+
+                <!--结束按钮(透明)-->
+                <ImageView
+                    android:id="@+id/iv_logs_stop_real"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:background="@color/colorTransparent"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <!--返回图标-->
         <ImageView
@@ -61,7 +101,8 @@
             android:id="@+id/iv_logs_show_graphs"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x15"
-            android:layout_marginLeft="@dimen/x340"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x15"
             android:layout_marginTop="@dimen/x17"
             android:scaleType="fitXY"
             android:src="@drawable/other_ui"/>
@@ -69,9 +110,10 @@
         <!--File 右上角 Edit TextView-->
         <TextView
             android:id="@+id/tv_logs_show_file"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x331"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x15"
             android:gravity="center_vertical"
             android:singleLine="true"
             android:text="@string/edit"
@@ -83,33 +125,18 @@
         <!--透明的返回按钮-->
         <ImageView
             android:id="@+id/iv_logs_main_return"
-            android:layout_width="@dimen/x45"
+            android:layout_width="@dimen/x80"
             android:layout_height="match_parent"
             android:background="@color/colorTransparent"/>
 
         <!--右上角Other按钮-->
         <ImageView
             android:id="@+id/iv_logs_main_other"
-            android:layout_width="@dimen/x40"
+            android:layout_width="@dimen/x80"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="@color/colorTransparent"/>
 
-        <!--开始按钮-->
-        <ImageView
-            android:id="@+id/iv_logs_start_real"
-            android:layout_width="@dimen/x60"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x127"
-            android:background="@color/colorTransparent"/>
-
-        <!--结束按钮-->
-        <ImageView
-            android:id="@+id/iv_logs_stop_real"
-            android:layout_width="@dimen/x60"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x188"
-            android:background="@color/colorTransparent"/>
 
     </RelativeLayout>
 
@@ -117,18 +144,21 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/y1"
+        android:layout_marginTop="@dimen/y44"
         android:src="@drawable/line_ui"/>
 
     <FrameLayout
         android:id="@+id/replace_logs_main"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y557"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y45"
         android:background="@color/colorOBDbackground"/>
 
     <!--下面是相对布局    底层是Iv + Tv   上层透明RadioGroup  RadioButton-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y45"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorDialogBackGround">
 
         <!--底层展示-->
@@ -272,4 +302,4 @@
     </RelativeLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

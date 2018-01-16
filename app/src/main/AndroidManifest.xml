@@ -6,7 +6,15 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--<uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+    <!--这两个权限是 三星S7 之后的手机需要添加的 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
     <application
         android:name=".MainApplication"
@@ -18,11 +26,13 @@
         android:theme="@style/AppTheme">
 
         <!-- 先改成这个  以后再换回来 -->
+        <!--        有这个就是说明只要竖屏
+                    android:screenOrientation="portrait"
+        -->
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -30,81 +40,78 @@
         </activity>
         <activity
             android:name=".dashboards.OBDDashboardsActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            >
         </activity>
         <activity
             android:name=".diagnostics.OBDDiagnosticsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".montiors.OBDMontiorsActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".logs.OBDLogsActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".performance.OBDPerformanceActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".settings.OBDSettingsActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".dashboards.OBDHUDActivity"
-            android:launchMode="singleTask"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".dashboards.OBDStyleActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateUnchanged"
-            android:configChanges="orientation|screenSize">
+            android:windowSoftInputMode="stateHidden|stateUnchanged">
         </activity>
         <activity
             android:name=".dashboards.OBDOtherStyleActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".diagnostics.OBDDiagnosticHistoricalActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".logs.othersetting.OBDLogsOtherGraphs"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".MainFregmentReplaceActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".settings.OBDSettingsReplaceAty"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
         </activity>
 
         <service android:name=".main.servierbt.BluetoothService"/>

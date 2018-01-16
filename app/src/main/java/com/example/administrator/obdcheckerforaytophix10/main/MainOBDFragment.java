@@ -1,6 +1,7 @@
 package com.example.administrator.obdcheckerforaytophix10.main;
 
 
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -49,11 +51,12 @@ import com.example.administrator.obdcheckerforaytophix10.tool.SPUtil;
 import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-//
+
 public class MainOBDFragment extends Fragment implements View.OnClickListener {
 
     //上方显示连接状态栏          中间偏上详细信息
@@ -75,6 +78,10 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
 
     //这个是中间链接中的动画
     private ImageView mAnim_iv;
+    private PopupWindow loadingPopwindow;
+    //这个是点击连接出现的 装蓝牙设备名字的data
+    private ArrayList<String> mDataDevice;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,9 +151,27 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                     SPUtil.put(getActivity(), "test", 1);
                     mBinder.writeData(new byte[]{0x41, 0x54, 0x48, 0x31, (byte) 0x0D});
                     LogUtil.chunyLog().d("连接成功");
-                    Toast.makeText(getActivity() , "连接成功" , Toast.LENGTH_SHORT).show();
-                }else if (intent.getStringExtra("msg").equals("解析完成")){
-                    mAnim_iv.performClick();
+                    Toast.makeText(getActivity(), "连接成功", Toast.LENGTH_SHORT).show();
+                } else if (intent.getStringExtra("msg").equals("解析完成")) {
+                    //这里旋转屏幕会崩溃？
+                    if (mAnim_iv != null){
+                        mAnim_iv.performClick();
+                    }
+                    mBinder.setConnect(true);
+                } else if (intent.getStringExtra("msg").equals("断开连接")) {
+                    iv_title.performClick();
+                    mBinder.setConnect(false);
+//                    setMainBtnCli(true);
+//                    // 这里还应该有一个把  动画变成信号的
+//                    tv_title.setText(getActivity().getResources().getString(R.string.main_obd_connect));
+//                    tv_title.setTextColor(getActivity().getResources().getColor(R.color.colorOBDbackground));
+//                    tv_detail.setTextColor(getActivity().getResources().getColor(R.color.colorDashboardsPointer));
+//                    tv_detail.setText(getActivity().getResources().getString(R.string.main_tv_obd_connectdetail_not));
+//                    //连接状态变成已连接
+//                    isConnect = false;
+                } else if (intent.getStringExtra("msg").equals("连接失败")) {
+                    loadingPopwindow.dismiss();
+                    Toast.makeText(getActivity(), "连接失败", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -162,6 +187,8 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
         intentFilterBR.addAction("bluetoothBT---state");
         getActivity().registerReceiver(mStateBr, intentFilterBR);
 
+
+
     }
 
     @Override
@@ -175,7 +202,9 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.obd_iv_title_connecttra:
+
                 if (!isConnect) {
+                    mBinder.openBluetooth(getActivity());
                     //下面三个   上面两个  中间六个  全部不能点
                     setMainBtnCli(false);
 
@@ -185,36 +214,43 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                     //LS
                     ListView lv = search_device.findViewById(R.id.obd_pop_ls_device);
                     MainOBDPopLsAdapter mAdapter = new MainOBDPopLsAdapter(getActivity());
-                    final ArrayList<String> data = new ArrayList<>();
-                    //假数据
-                    data.add("OBDCHECK");
-                    data.add("OBDLINK");
-                    data.add("V100");
-                    mAdapter.setData(data);
+                    mDataDevice = new ArrayList<>();
+                    Set<BluetoothDevice> devices = mBinder.getSetBT();
+                    //遍历
+                    for (BluetoothDevice d : devices){
+                        mDataDevice.add(d.getName());
+                    }
+                    mAdapter.setData(mDataDevice);
                     lv.setAdapter(mAdapter);
+
 
                     //lv点击item连接对应蓝牙
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             //点击item  连接
-                            mBinder.openBluetooth(getActivity());
-                            mBinder.connectDevice();
+                            //调用方法连接  传入item的i  然后在哪里For循环  连接
+                                mBinder.connectDevice(mDataDevice.get(i));
 
+//                            if (i == 0) {
+//                                mBinder.connectDevice();
+//                            } else if (i == 2) {
+//                                mBinder.connectDeviceCarApp100();
+//                            }
 
                             //Popup  消失
                             dialog.dismiss();
                             //弹出Dialog
-                            final PopupWindow popLoading = new PopupWindow(getActivity());
-                            popLoading.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                            popLoading.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                            loadingPopwindow = new PopupWindow(getActivity());
+                            loadingPopwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                            loadingPopwindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
                             View view_load = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_after_obd_pop, null);
                             mAnim_iv = view_load.findViewById(R.id.dia_pop_anim_iv);
                             mAnim_iv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     //正常应该是加动画  现在先设置一个点击事件
-                                    popLoading.dismiss();
+                                    loadingPopwindow.dismiss();
                                     //3 + 2 + 6 个按钮全部可以点击
                                     setMainBtnCli(true);
 
@@ -226,9 +262,9 @@ public class MainOBDFragment extends Fragment implements View.OnClickListener {
                                     isConnect = true;
                                 }
                             });
-                            popLoading.setContentView(view_load);
-                            popLoading.setOutsideTouchable(false);
-                            popLoading.showAsDropDown(tv_title);
+                            loadingPopwindow.setContentView(view_load);
+                            loadingPopwindow.setOutsideTouchable(false);
+                            loadingPopwindow.showAsDropDown(tv_title);
 
 
                         }

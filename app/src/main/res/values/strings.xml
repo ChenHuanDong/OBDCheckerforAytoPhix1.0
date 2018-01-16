@@ -298,8 +298,42 @@
     <string name="pleaseenteravalueforthestartingspeed">Please enter a value for the starting speed.</string>
     <string name="obdfeatures">OBD Features</string>
     <string name="vehicleinformation">Vehicle Information</string>
-
-
+    <string name="timeper">Time:</string>
+    <string name="zerozerozerozero">00:00:00</string>
+    <string name="zerozerozerom">0m</string>
+    <string name="distanceper">Distance:</string>
+    <string name="speed">Speed</string>
+    <string name="hpBig">HP</string>
+    <string name="testitems">Test Items</string>
+    <string name="speedupthetestrange">Speed up the test range</string>
+    <string name="startspeed">Start speed</string>
+    <string name="endspeed">End speed</string>
+    <string name="zerokmh">0 km/h</string>
+    <string name="onehundredkmh">100 km/h</string>
+    <string name="zeroonehundredspeed">0-100 Speed</string>
+    <string name="braking">Braking</string>
+    <string name="acceleration">Acceleration</string>
+    <string name="pleaseenterthestartspeed">Please enter the start speed!</string>
+    <string name="password">Password</string>
+    <string name="timem">Time:</string>
+    <string name="kmh">km/h</string>
+    <string name="rmin">r/min</string>
+    <string name="testRange">Test Range</string>
+    <string name="speedupthefesatrange">Speed up the test range</string>
+    <string name="brakingdistance">Braking distance</string>
+    <string name="m">m</string>
+    <string name="distancetest">Distance test</string>
+    <string name="timemaxspeed">Time/Max Speed</string>
+    <string name="acceleratedtesting">Accelerated testing</string>
+    <string name="zerotoonekmh">0-100 km/h</string>
+    <string name="brakingtime">Braking Time</string>
+    <string name="miscellanous">Miscellanous</string>
+    <string name="maxacceleration">Max Acceleration</string>
+    <string name="peakhorsepower">Peak Horsepower</string>
+    <string name="zerotoonemtime">0-100m time</string>
+    <string name="pleaseturnthescreentoportrait">Please turn the screen to portrait</string>
+    <string name="pleaseconnectdevicefirst">Please Connect Device First</string>
+    <string name="endspeedmustmorethanspeed">End Speed Must More Than Start Speed</string>
 
     <string name="width">Diameter(10-100)</string>
     <string name="left">Left(0-100)</string>

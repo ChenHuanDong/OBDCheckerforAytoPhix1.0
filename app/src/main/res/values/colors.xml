@@ -44,5 +44,8 @@
     <color name="colorBule">#0E09ED</color>
     <color name="performanceBack">#18181C</color>
     <color name="mainobdback">#1E2026</color>
+    <color name="edittexthind">#c7c7cd</color>
+    <color name="performance_text">#101010</color>
+
 
 </resources>

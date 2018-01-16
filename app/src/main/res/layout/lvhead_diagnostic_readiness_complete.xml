@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="@dimen/x90"
               android:background="@color/colorOBDbackground"
               android:orientation="vertical">
 
-    <!--装三个小球的  Ll-->
+    <!--装三个小球的  ListHead-->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/x20"
         android:layout_marginTop="@dimen/x18"
         android:orientation="horizontal">
@@ -15,7 +16,6 @@
         <ImageView
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x20"
-            android:layout_marginLeft="@dimen/x114"
             android:scaleType="fitXY"
             android:src="@drawable/green"/>
 
@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/x20"
-        android:layout_marginTop="@dimen/x27"
+        android:layout_marginTop="@dimen/x65"
         android:orientation="horizontal">
 
         <ImageView
@@ -62,9 +62,5 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
-        android:background="@color/colorTransparent"/>
 
-</LinearLayout>
+</RelativeLayout>

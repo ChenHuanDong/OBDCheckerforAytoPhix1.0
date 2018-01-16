@@ -4,12 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.obdcheckerforaytophix10.MainActivity;
 import com.example.administrator.obdcheckerforaytophix10.OBDL;
@@ -37,6 +42,9 @@ import com.example.administrator.obdcheckerforaytophix10.tool.ScreenUtils;
 
 import java.util.ArrayList;
 
+//变横屏那个  需要在 Aty 切换横竖屏的时候 变数据库然后  发送广播。。。。要不然 当前页面切换 然后换到其他页面会不一样，。，。，，
+//今天还要把Log页面的 改好  退出时 想当于按了Stop按钮
+
 public class OBDDashboardsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private MyViewPager vp;
@@ -48,7 +56,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     private OBDDashboardsThirdPageFragment fThird;
     private OBDDashboardsCustomizeFragment fCustomize;
 
-    private DashboardsMainPoint mPointCustomize;
+//    private DashboardsMainPoint mPointCustomize;
 
 
     private ArrayList<DashboardsMainPoint> points;
@@ -61,6 +69,11 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     private int width, height;
     private int i;
     private int ii;
+
+    //横屏相关
+    private MyOrientationEventListener mListener;
+    private int orientation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +96,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
 
         if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
             data.add(fCustomize);
-            mPointCustomize.setVisibility(View.VISIBLE);
+            //mPointCustomize.setVisibility(View.VISIBLE);
         } else {
-            mPointCustomize.setVisibility(View.GONE);
+            //mPointCustomize.setVisibility(View.GONE);
         }
 
         mAdapter = new DashboardsMainAdapter(getSupportFragmentManager(), data);
@@ -95,6 +108,7 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         //设置监听
         vp.addOnPageChangeListener(this);
 
+        //通过广播设置是否可以滑动VP
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -116,10 +130,146 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        orientation = getResources().getConfiguration().orientation;
+        if (orientation == 2) {
+            if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
+                for (int i = 1; i < 10; i++) {
+                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i).getValue() + 10);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i).getFloValue() - 10f);
+                }
+            } else {
+                for (int i = 1; i < 10; i++) {
+                    DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default").getValue() + 10);
+                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i + "_default").getFloValue() - 10f);
+                }
+            }
+        }
         unregisterReceiver(br);
     }
 
+    //继承OrientationEventListener类监听手机的旋转
+    public class MyOrientationEventListener extends OrientationEventListener {
+
+        public MyOrientationEventListener(Context context) {
+            super(context);
+        }
+
+        public MyOrientationEventListener(Context context, int rate) {
+            super(context, rate);
+        }
+
+        @Override
+        public void onOrientationChanged(int i) {
+            //i  表示偏移角度  -1的话是水平放置  0~359  手机逆时针旋转的话是 慢慢增加的
+            int screenOrientation = getResources().getConfiguration().orientation;
+            if (((i >= 0) && (i < 45)) || (i > 315)) {
+                //设置竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                        && i != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            } else if (i > 255 && i < 315) {
+                //设置横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+            } else if (i > 45 && i < 135) {
+                //设置反向横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                }
+            } else if (i > 135 && i < 225) {
+                //反向竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                }
+            }
+
+
+        }
+
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        //在这里发送广播   三个Fragment 接收   这里边数据库
+        //四种情况  竖屏-竖屏 竖屏-横屏 横屏-竖屏 横屏-横屏
+        //这个 只要不等于0  就是横变竖灹竖变横
+        //横屏是2  竖屏是1
+        int a = getResources().getConfiguration().orientation - orientation;
+        orientation = getResources().getConfiguration().orientation;
+
+        if (a != 0) {
+            if (a > 0) {
+                //竖屏变横屏  要把小变小
+
+                //这里变了要把 Top 变一下  变成   100 - 大小 - left
+                //在Fragment 相对布局添加控件的时候做了left top 调换
+                //把left  变一下看看  100 - NW - L ?
+                if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
+                    //自定义
+                    for (int i = 1; i < 10; i++) {                      //   DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + i).getFloValue()
+                        //这个先就要变回来在后面
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + i, 100 - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i).getValue() - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + i).getFloValue() - 5);
+
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i).getValue() - 10);
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i).getFloValue() + 10f);
+
+                    }
+                } else {
+                    //经典
+                    //dashboardsdisplaysizeandlocationwidth_1_default
+                    for (int i = 1; i < 10; i++) {
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + i + "_default", 100 - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default").getValue() - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + i + "_default").getFloValue() - 5);
+
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default").getValue() - 10);
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i + "_default").getFloValue() + 10f);
+                    }
+                }
+
+
+            } else {
+                //横屏变竖屏  要把大变小
+                if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
+                    for (int i = 1; i < 10; i++) {
+
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i).getValue() + 10);
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i, DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i).getFloValue() - 10f);
+                        //上面先就要这个在后面
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + i, 100 - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i).getValue() - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + i).getFloValue() - 5);
+                    }
+                } else {
+                    for (int i = 1; i < 10; i++) {
+                        DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default").getValue() + 10);
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + i + "_default", DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + i + "_default").getFloValue() - 10f);
+
+                        DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + i + "_default", 100 - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + i + "_default").getValue() - DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + i + "_default").getFloValue() - 5);
+                    }
+                }
+
+            }
+        }
+
+        //发送广播
+        Intent intent = new Intent("Screen_Orientation_Change");
+        sendBroadcast(intent);
+
+
+    }
+
     private void initView() {
+        orientation = getResources().getConfiguration().orientation;
+        mListener = new MyOrientationEventListener(this);
+        boolean autoRotateOn = (Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+        if (autoRotateOn) {
+            mListener.enable();
+        }
+
+
         vp = (MyViewPager) findViewById(R.id.dashboards_main_vp);
         data = new ArrayList<>();
         fFirst = new OBDDashboardsFirstPageFragment();
@@ -134,7 +284,8 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
         iv_other.setOnClickListener(this);
         width = (int) SPUtil.get(this, "screenWidth", 0);
         height = (int) SPUtil.get(this, "screenHeight", 0);
-        mPointCustomize = (DashboardsMainPoint) findViewById(R.id.point_obddashboards);
+        //mPointCustomize = (DashboardsMainPoint) findViewById(R.id.point_obddashboards);
+
     }
 
     //下面三个VP监听
@@ -147,7 +298,14 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
     public void onPageSelected(int position) {
         ll.removeAllViews();
         //1080   1776
-        for (int i = 0; i < data.size(); i++) {
+        int page = 0;
+        if (!DBTool.getOutInstance().getQueryKey("dashboardsisclassic").getIsTure()) {
+            page = 4;
+        } else {
+            page = 3;
+        }
+        LogUtil.fussenLog().d("position = " + position);
+        for (int i = 0; i < page; i++) {
 
             DashboardsMainPoint point = new DashboardsMainPoint(this);
 
@@ -385,9 +543,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 0);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 0);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 0);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 0);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 0);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other7", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other8", 0);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other9", 0);
                                 } else if (ii == 1) {
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_2", 1);
@@ -395,9 +553,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 1);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 1);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 1);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 1);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other7", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other8", 1);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other9", 1);
                                 } else if (ii == 2) {
 
                                     DBTool.getOutInstance().upDateValueByKey("display_style_1", 2);
@@ -406,9 +564,9 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                                     DBTool.getOutInstance().upDateValueByKey("display_style_4", 2);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_5", 2);
                                     DBTool.getOutInstance().upDateValueByKey("display_style_6", 2);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_7", 2);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_8", 2);
-                                    DBTool.getOutInstance().upDateValueByKey("display_style_9", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other7", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other8", 2);
+                                    DBTool.getOutInstance().upDateValueByKey("display_style_other9", 2);
                                 }
                                 Intent intent = new Intent("changeDisplay");
                                 sendBroadcast(intent);
@@ -470,35 +628,37 @@ public class OBDDashboardsActivity extends AppCompatActivity implements ViewPage
                             public void onClick(View view) {
                                 dialog_load_default.dismiss();
 
-                                final OBDPopDialog dia_wait = new OBDPopDialog(OBDDashboardsActivity.this);
-                                View view_wait = LayoutInflater.from(OBDDashboardsActivity.this).inflate(R.layout.dialog_wait_progressbar, null);
+                                //只有竖屏能恢复初始
+                                orientation = getResources().getConfiguration().orientation;
+                                if (orientation == 1) {
+                                    final OBDPopDialog dia_wait = new OBDPopDialog(OBDDashboardsActivity.this);
+                                    View view_wait = LayoutInflater.from(OBDDashboardsActivity.this).inflate(R.layout.dialog_wait_progressbar, null);
+                                    getWaitWin(dia_wait);
+                                    dia_wait.setContentView(view_wait);
+                                    dia_wait.setCanceledOnTouchOutside(false);
+                                    dia_wait.show();
 
-                                getWaitWin(dia_wait);
-                                dia_wait.setContentView(view_wait);
-                                dia_wait.setCanceledOnTouchOutside(false);
-                                dia_wait.show();
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //清空数据库调用MainActivity  重新存数据
+                                            DBTool.getOutInstance().deleteAll();
+                                            MainActivity.initGreedDaoData(orientation);
 
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //清空数据库调用MainActivity  重新存数据
-                                        DBTool.getOutInstance().deleteAll();
-                                        MainActivity.initGreedDaoData();
+                                            Intent intent = new Intent("changeDisplay");
+                                            sendBroadcast(intent);
 
-                                        Intent intent = new Intent("changeDisplay");
-                                        sendBroadcast(intent);
-
-                                        try {
-                                            Thread.sleep(5);
-                                            dia_wait.dismiss();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
+                                            try {
+                                                Thread.sleep(5);
+                                                dia_wait.dismiss();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    }
-                                }).start();
-
-
-
+                                    }).start();
+                                } else {
+                                    Toast.makeText(OBDDashboardsActivity.this, getResources().getString(R.string.pleaseturnthescreentoportrait), Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                         });

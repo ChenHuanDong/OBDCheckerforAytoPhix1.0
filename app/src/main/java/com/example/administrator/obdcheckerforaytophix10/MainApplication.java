@@ -29,6 +29,9 @@ public class MainApplication extends Application {
         super.onCreate();
         sContext = this;
 
+//        Bugtags.start("f98d497747c9e91df9db3591d12320b9" , this , Bugtags.BTGInvocationEventBubble);
+
+
         //记录屏幕宽高  不能删
         SPUtil.put(this, "screenWidth", ScreenUtils.getScreenWidth(this));
         SPUtil.put(this, "screenHeight", ScreenUtils.getScreenHeight(this));

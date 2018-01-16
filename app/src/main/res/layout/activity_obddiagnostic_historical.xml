@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorOBDbackground"
+    android:orientation="vertical"
     tools:context="com.example.administrator.obdcheckerforaytophix10.diagnostics.OBDDiagnosticHistoricalActivity">
 
     <!--标题栏-->
@@ -35,9 +35,10 @@
             android:src="@drawable/return_ui"/>
 
         <ImageView
+            android:layout_marginRight="@dimen/x15"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/x22"
             android:layout_height="@dimen/x22"
-            android:layout_marginLeft="@dimen/x338"
             android:layout_marginTop="@dimen/x11"
             android:scaleType="fitXY"
             android:src="@drawable/shuaxin_diagnostics"/>
@@ -45,14 +46,16 @@
 
         <!--点击返回的透明按钮-->
         <ImageView
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="@dimen/x44"
             android:background="@color/colorTransparent"/>
+
         <!--点击刷新透明按钮-->
         <ImageView
-            android:layout_width="@dimen/x37"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x338"/>
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTransparent"
+            android:layout_width="@dimen/x75"
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 

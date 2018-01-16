@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.administrator.obdcheckerforaytophix10.MainActivity;
 import com.example.administrator.obdcheckerforaytophix10.MainFregmentReplaceActivity;
 import com.example.administrator.obdcheckerforaytophix10.R;
 import com.example.administrator.obdcheckerforaytophix10.dashboards.dashboardsview.DashboardsHUDView;
@@ -87,10 +89,12 @@ public class OBDHUDActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        unregisterReceiver(br);
-        unregisterReceiver(br_color);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        setContentView(R.layout.activity_main_fragment_replace);
+        initView();
+
     }
 
     private void initView() {
@@ -129,6 +133,8 @@ public class OBDHUDActivity extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         mListener.disable();
+        unregisterReceiver(br);
+        unregisterReceiver(br_color);
     }
 
     @Override
@@ -177,9 +183,8 @@ public class OBDHUDActivity extends AppCompatActivity implements View.OnClickLis
         set.setDuration(500).start();
     }
 
-
     //继承OrientationEventListener类监听手机的旋转
-    class MyOrientationEventListener extends OrientationEventListener {
+    public class MyOrientationEventListener extends OrientationEventListener {
 
         public MyOrientationEventListener(Context context) {
             super(context);
@@ -219,6 +224,7 @@ public class OBDHUDActivity extends AppCompatActivity implements View.OnClickLis
 
         }
     }
+
 
 
 }

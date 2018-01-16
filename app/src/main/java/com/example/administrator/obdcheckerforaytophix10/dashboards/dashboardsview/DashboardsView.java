@@ -150,6 +150,7 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     private String style_three_frame_color = "#000000";
 
+    //这个removeDispaly  不行因为外面都添加进去了，所以
     private boolean isRrmoveDisplay = false;
     //拖拽
     private boolean isDrawandMove = false;
@@ -161,6 +162,9 @@ public class DashboardsView extends View implements View.OnClickListener {
     private int totalX = 0;
     private int totalY = 0;
     private int dashboard_mode_style;
+
+    //判断是横屏还是竖屏
+    private int orientation;
 
 
     //接收数据的广播
@@ -243,6 +247,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         mPaint.setColor(getResources().getColor(R.color.colorWhite));
         mPaint.setAntiAlias(true);
         mPaint.setTypeface(null);
+        orientation = getResources().getConfiguration().orientation;
     }
 
 
@@ -327,7 +332,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     //绘制渐变圆
     private void drawStyleThreeCircle(Canvas canvas) {
 
@@ -348,7 +352,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     //绘制Range
     private void drawRange(Canvas canvas) {
 
@@ -368,7 +371,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     //绘制单位
     private void drawUnitslabel(Canvas canvas) {
 
@@ -381,7 +383,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
 
     }
-
 
     //绘制中心数值
     private void drawStyThreeCenter(Canvas canvas) {
@@ -412,7 +413,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
 
     }
-
 
     //绘制里面的圆角矩形
     private void drawStyleThreeCenter(Canvas canvas) {
@@ -471,7 +471,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     //绘制指针  三角和线
     private void drawStyleTwoPointer(Canvas canvas) {
 
@@ -527,7 +526,6 @@ public class DashboardsView extends View implements View.OnClickListener {
         canvas.restore();
 
     }
-
 
     //绘制灰色圆弧在蓝色圆弧上面   (这里注意 最后输入结果的时候需要注意一下)  而且画笔只变一下颜色就可以了
     private void drawTwoTopArc(Canvas canvas) {
@@ -600,7 +598,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     //绘制渐变的圆
     private void drawDradientCircle(Canvas canvas) {
 
@@ -662,7 +659,6 @@ public class DashboardsView extends View implements View.OnClickListener {
 
         canvas.restore();
     }
-
 
     //绘制中间的白色圆球
     private void drawCenterCircle(Canvas canvas) {
@@ -854,7 +850,7 @@ public class DashboardsView extends View implements View.OnClickListener {
         initView();
     }
 
-
+    //点击  以后变成长按
     @Override
     public void onClick(View view) {
         //经典  自定义    if  后面加了！  试了为方便调试  最后要去掉！别忘了
@@ -927,7 +923,8 @@ public class DashboardsView extends View implements View.OnClickListener {
             iv_sal.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    //根据不同的横竖屏  判断出现的不同的，其实就是把left和top的
+                    orientation = getResources().getConfiguration().orientation;
                     dialog.dismiss();
                     final OBDPopDialog dia_sal = new OBDPopDialog(mContext);
                     View view_sal = LayoutInflater.from(mContext).inflate(R.layout.dialog_display_edit__sal, null);
@@ -936,11 +933,17 @@ public class DashboardsView extends View implements View.OnClickListener {
                     final EditText et_left = view_sal.findViewById(R.id.display_sal_left_et);
                     final EditText et_top = view_sal.findViewById(R.id.display_sal_top_et);
                     //这里做不同仪表盘的判断
+                    //根据横竖屏输入不同的内容 1竖屏  2横屏
                     et_width.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocationwidth_" + myDisplayId).getValue() + "");
-                    et_left.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() + "");
-                    et_top.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() + "");
+                    if (orientation == 1) {
+                        et_left.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() + "");
+                        et_top.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() + "");
+                    } else {
+                        et_left.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() + "");
+                        et_top.setText(DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() + "");
+                    }
 
-                    //下方确认按钮
+                    //下方确认按钮 也要按照横竖屏的来  只有最后存数据库的时候用   别忘了上面拖动的时候也要
                     Button btn_ok = view_sal.findViewById(R.id.display_sal_ok_btn);
                     //点击OK修改设置  发送广播
                     btn_ok.setOnClickListener(new OnClickListener() {
@@ -965,8 +968,13 @@ public class DashboardsView extends View implements View.OnClickListener {
                                     et_top.setText(0 + "");
                                 }
                                 DBTool.getOutInstance().upDateValueByKey("dashboardsdisplaysizeandlocationwidth_" + myDisplayId, Integer.parseInt(et_width.getText().toString()));
-                                DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
-                                DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
+                                if (orientation == 1) {
+                                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
+                                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
+                                }else {
+                                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, Float.parseFloat(et_left.getText().toString()));
+                                    DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, Float.parseFloat(et_top.getText().toString()));
+                                }
 
                                 mContext.sendBroadcast(intent);
 
@@ -1239,15 +1247,12 @@ public class DashboardsView extends View implements View.OnClickListener {
 
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (isDrawandMove) {
-
             int x = (int) event.getX();
             int y = (int) event.getY();
-
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -1268,35 +1273,26 @@ public class DashboardsView extends View implements View.OnClickListener {
 
                     break;
                 case MotionEvent.ACTION_UP:
-
                     float left = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId).getFloValue() +
                             (((float) totalX * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenWidth", 0) + 0.0f)));
                     LogUtil.fussenLog().d("left=" + left);
                     DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_left_" + myDisplayId, left);
-
                     float top = DBTool.getOutInstance().getQueryKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId).getFloValue() +
                             (((float) totalY * 100.0f) / ((float) ((int) SPUtil.get(mContext, "screenHeight", 0) + 0.0f)));
                     LogUtil.fussenLog().d("top=" + top);
                     DBTool.getOutInstance().upDateFloatByKey("dashboardsdisplaysizeandlocation_top_" + myDisplayId, top);
-
                     Intent intent = new Intent("changeDisplay");
                     mContext.sendBroadcast(intent);
-
-
                     isDrawandMove = false;
                     invalidate();
                     //向Aty传值   可以滑动ViewPager
                     Intent intentVP = new Intent("viewpagerIsScrool");
                     intentVP.putExtra("scrool", true);
                     mContext.sendBroadcast(intentVP);
-
                     break;
             }
-
-
             return true;
         }
-
         return super.onTouchEvent(event);
     }
 
@@ -1317,7 +1313,6 @@ public class DashboardsView extends View implements View.OnClickListener {
         lp.y = (int) (ScreenUtils.getScreenHeight(mContext) * 0.293663);
         win.setAttributes(lp);
     }
-
 
     public void setStartAngle(int startAngle) {
         this.startAngle = startAngle;

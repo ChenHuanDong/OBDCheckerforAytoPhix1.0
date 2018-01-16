@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="@dimen/x270"
+                android:layout_height="@dimen/x170"
+                android:background="@color/colorDialogBackGround">
+
+    <ImageView
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x170"
+        android:background="@color/colorDialogBackGround"/>
+
+    <LinearLayout
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x170"
+        android:orientation="vertical">
+
+
+        <!--Title-->
+        <TextView
+            android:layout_width="@dimen/x240"
+            android:layout_height="@dimen/x26"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/x19"
+            android:gravity="center"
+            android:text="@string/endspeed"
+            android:textColor="@color/colorDashboardsPointer"
+            android:textSize="@dimen/x17"/>
+        <!--content-->
+        <TextView
+            android:layout_width="@dimen/x240"
+            android:layout_height="@dimen/x15"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/x1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/pleaseenterthestartspeed"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/x13"/>
+        <!--高度要自适应   不然不会显示-->
+        <EditText
+            android:layout_width="@dimen/x238"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/x23"
+            android:digits="0123456789"
+            android:hint="@string/password"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/edittexthind"
+            android:textSize="@dimen/x13"
+            app:theme="@style/MyEditText"/>
+        <!--Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:src="@drawable/line_ui"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_performance_endspeed_cancel"
+                android:textColor="@color/color_personal_selectvehicle"
+                android:background="@color/colorTransparent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColorLink="@color/color_personal_selectvehicle"
+                android:textSize="@dimen/x17"/>
+
+            <ImageView
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"
+                android:src="@drawable/line_shu_ui"/>
+
+            <Button
+                android:id="@+id/btn_performance_endspeed_ok"
+                android:textColor="@color/color_personal_selectvehicle"
+                android:background="@color/colorTransparent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ok"
+                android:textAllCaps="false"
+                android:textColorLink="@color/color_personal_selectvehicle"
+                android:textSize="@dimen/x17"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

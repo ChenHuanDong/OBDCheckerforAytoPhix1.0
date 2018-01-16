@@ -17,18 +17,19 @@
 
     <ImageView
         android:id="@+id/iv_monitors_test_available"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x252"
         android:layout_width="@dimen/x22"
-        android:layout_height="@dimen/x22"/>
+        android:layout_height="@dimen/x22"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x49"/>
 
     <ImageView
         android:id="@+id/iv_monitors_test_complete"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x320"
         android:layout_width="@dimen/x22"
-        android:layout_height="@dimen/x22"/>
-
+        android:layout_height="@dimen/x22"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x121"/>
 
 
 </RelativeLayout>

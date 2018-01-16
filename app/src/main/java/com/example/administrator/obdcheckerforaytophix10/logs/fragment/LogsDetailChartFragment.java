@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  * Created by CHD on 2017/10/9.
  */
 //这个是真正实际的   回放的Fragment
-
+//OBDLogsFileDetailFragment  这个是这个的父Fragment
 public class LogsDetailChartFragment extends Fragment {
 
     private LineChart chratOne , chartTwo;
@@ -56,6 +57,14 @@ public class LogsDetailChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_logdetail_chart, null);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+
+
     }
 
     @Override

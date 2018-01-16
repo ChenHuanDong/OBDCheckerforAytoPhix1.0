@@ -54,6 +54,8 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_logsdetail"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/performance_text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x40"/>
 

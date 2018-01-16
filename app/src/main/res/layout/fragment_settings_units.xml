@@ -66,7 +66,8 @@
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x14"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x340"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             android:scaleType="fitXY"
             android:src="@drawable/dui"/>
 
@@ -100,7 +101,8 @@
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x14"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x340"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             android:scaleType="fitXY"
             android:src="@drawable/dui"/>
 

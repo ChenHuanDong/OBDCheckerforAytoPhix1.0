@@ -3,6 +3,7 @@ package com.example.administrator.obdcheckerforaytophix10.logs.fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,10 +104,12 @@ public class AdapterLogsFiles extends BaseAdapter implements View.OnClickListene
 
 
 
-                setPromptWin(dialog);
+
                 dialog.setContentView(view_rd);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
+
+
 
             }
         });

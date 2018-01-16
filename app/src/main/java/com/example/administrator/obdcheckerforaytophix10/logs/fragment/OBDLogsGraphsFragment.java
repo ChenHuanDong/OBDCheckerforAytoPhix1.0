@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,9 @@ import java.util.ArrayList;
  */
 
 //回放的Fragment   LogsDetailChartFragment
+//这个是刚开始展示的Fragment
+
+//   现在猜测，如果添加数据的时候空指针的话  就是    mChart_zero mChart_one 空了，判断不为空的时候添加数据进表格
 
 public class OBDLogsGraphsFragment extends Fragment {
 
@@ -52,7 +56,7 @@ public class OBDLogsGraphsFragment extends Fragment {
     private BroadcastReceiver br, brdata;
     private RelativeLayout.LayoutParams params_top;
     private RelativeLayout.LayoutParams params_bottom;
-    private RelativeLayout.LayoutParams params;
+    private RelativeLayout.LayoutParams params , params_left ,params_right , params_horr;
 
     //计数
     private int i = 0;
@@ -67,6 +71,7 @@ public class OBDLogsGraphsFragment extends Fragment {
     //存数据的ArrayList
     private ArrayList<Integer> data;
 
+    private int orientation;
 
 
 
@@ -93,21 +98,12 @@ public class OBDLogsGraphsFragment extends Fragment {
         dataFileTwo = new ArrayList<>();
         dataFileThree = new ArrayList<>();
         dataFileFour = new ArrayList<>();
+        orientation = getResources().getConfiguration().orientation;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-        //为Y轴添数据
-//        for (int i = 0; i < 31; i++) {
-//            yValue_zero.add(new Entry(i + 1, i));
-//            yValue_one.add(new Entry(2000, i));
-//            yValue_two.add(new Entry(100 - i, i));
-//            yValue_three.add(new Entry(70, i));
-//            xValue.add(i + "");
-//        }
 
 
         initView();
@@ -137,6 +133,7 @@ public class OBDLogsGraphsFragment extends Fragment {
                 //判断如果是就储存到数据库里面
                 if (intent.getBooleanExtra("finish" , false)){
                     //更改数据库   之前先存一个空的
+
                     FileLTool.getOutInstance().upDateColorByKey("testListOne" , dataFileOne);
                     FileLTool.getOutInstance().upDateColorByKey("testListTwo" , dataFileTwo);
                     FileLTool.getOutInstance().upDateColorByKey("testListThree" , dataFileThree);
@@ -232,11 +229,21 @@ public class OBDLogsGraphsFragment extends Fragment {
                 mChart_zero.setData(mData);
                 mChart_one.setData(mData_one);
 
+                orientation = getResources().getConfiguration().orientation;
                 if (DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_3").getIsTure() || DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_4").getIsTure()) {
-                    mRe.addView(mChart_zero, params_top);
-                    mRe.addView(mChart_one, params_bottom);
+                    if (orientation == 1){
+                        mRe.addView(mChart_zero, params_top);
+                        mRe.addView(mChart_one, params_bottom);
+                    }else {
+                        mRe.addView(mChart_zero, params_left);
+                        mRe.addView(mChart_one, params_right);
+                    }
                 } else {
-                    mRe.addView(mChart_zero, params);
+                    if (orientation == 1){
+                        mRe.addView(mChart_zero, params);
+                    }else {
+                        mRe.addView(mChart_zero, params_horr);
+                    }
                 }
 
 
@@ -252,6 +259,31 @@ public class OBDLogsGraphsFragment extends Fragment {
         intent_data.addAction("bluetoothBT---logdata");
         getActivity().registerReceiver(brdata, intent_data);
 
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        mRe.removeAllViews();
+
+        orientation = getResources().getConfiguration().orientation;
+        if (DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_3").getIsTure() || DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_4").getIsTure()) {
+            if (orientation == 1){
+                mRe.addView(mChart_zero, params_top);
+                mRe.addView(mChart_one, params_bottom);
+            }else {
+                mRe.addView(mChart_zero, params_left);
+                mRe.addView(mChart_one, params_right);
+            }
+        } else {
+            if (orientation == 1){
+                mRe.addView(mChart_zero, params);
+            }else {
+                mRe.addView(mChart_zero, params_horr);
+            }
+        }
 
     }
 
@@ -301,6 +333,15 @@ public class OBDLogsGraphsFragment extends Fragment {
         params_bottom.topMargin = (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 279f);
         params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
+        //横屏
+        params_left = new RelativeLayout.LayoutParams((int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 333f),
+                (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 280f));
+        params_right = new RelativeLayout.LayoutParams((int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 333f),
+                (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 280f));
+        params_right.leftMargin = (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 333f);
+        params_horr = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) ConversionUtil.myWantValue(ScreenUtils.getScreenWidth(getActivity()), 280f));
+
 //----------------------------广播要变的    下面四组判断  *  2 ---------------------------
         //设置曲线变圆滑
         if (DBTool.getOutInstance().getQueryKey("logs_graphs_smoothing_1").getIsTure()) {
@@ -349,11 +390,23 @@ public class OBDLogsGraphsFragment extends Fragment {
 
 //----------------------------------广播改变的    下面if-----------------------------------------
         if (DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_3").getIsTure() || DBTool.getOutInstance().getQueryKey("logs_graphs_enabled_4").getIsTure()) {
-            mRe.addView(mChart_zero, params_top);
-            mRe.addView(mChart_one, params_bottom);
+            if (orientation == 1){
+                mRe.addView(mChart_zero, params_top);
+                mRe.addView(mChart_one, params_bottom);
+            }else {
+                mRe.addView(mChart_zero, params_left);
+                mRe.addView(mChart_one, params_right);
+            }
         } else {
-            mRe.addView(mChart_zero, params);
+            if (orientation == 1){
+                mRe.addView(mChart_zero, params);
+            }else {
+                mRe.addView(mChart_zero, params_horr);
+            }
         }
+
+
+
         mChart_zero.setData(mData);
         mChart_one.setData(mData_one);
 

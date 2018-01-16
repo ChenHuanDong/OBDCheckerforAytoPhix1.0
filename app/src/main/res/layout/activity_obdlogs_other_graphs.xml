@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorDialogBackGround"
             android:orientation="vertical">
+
             <!--Selet-->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -99,9 +100,10 @@
                     android:textSize="@dimen/x16"/>
 
                 <TextView
-                    android:layout_width="@dimen/x340"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x35"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:text="Accel X"
@@ -112,7 +114,8 @@
                 <ImageView
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/x18"
-                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/x13"
                     android:scaleType="fitXY"
                     android:src="@drawable/enter"/>
@@ -146,7 +149,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -176,10 +180,12 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                   android:layout_marginRight="@dimen/x15"
+                   android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
+
         </LinearLayout>
 
         <!--绿色方块加TV-->
@@ -233,6 +239,7 @@
                     android:layout_width="@dimen/x340"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x35"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:text="Mass air flow rate"
@@ -243,7 +250,8 @@
                 <ImageView
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/x18"
-                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/x13"
                     android:scaleType="fitXY"
                     android:src="@drawable/enter"/>
@@ -277,7 +285,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -307,7 +316,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -364,6 +374,7 @@
                     android:layout_width="@dimen/x340"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x35"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:text="Accel X"
@@ -374,7 +385,8 @@
                 <ImageView
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/x18"
-                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/x13"
                     android:scaleType="fitXY"
                     android:src="@drawable/enter"/>
@@ -408,7 +420,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -438,7 +451,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -496,6 +510,7 @@
                     android:layout_width="@dimen/x340"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x35"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:text="Accel Z"
@@ -506,7 +521,8 @@
                 <ImageView
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/x18"
-                    android:layout_marginLeft="@dimen/x350"
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/x13"
                     android:scaleType="fitXY"
                     android:src="@drawable/enter"/>
@@ -540,7 +556,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -570,7 +587,8 @@
                     android:layout_width="@dimen/x44"
                     android:layout_height="@dimen/x22"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x316"/>
+                    android:layout_marginRight="@dimen/x15"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>
@@ -584,4 +602,6 @@
 
 
     </LinearLayout>
+
+
 </ScrollView>

@@ -5,39 +5,45 @@
               android:background="@color/colorOBDbackground"
               android:orientation="vertical">
 
+    <!--放上面占位-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x35"
         android:background="@color/colorOBDbackground"/>
-
-    <Button
-        android:id="@+id/btn_diagnostic_clearcode"
-        android:textAllCaps="false"
-        android:singleLine="true"
-        android:layout_width="@dimen/x260"
-        android:layout_height="@dimen/x30"
-        android:layout_marginLeft="@dimen/x57"
-        android:gravity="center"
-        android:text="@string/clear_fault_codes"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/btn_clear_code"
-        android:textSize="@dimen/x16"/>
-
-    <Button
-        android:id="@+id/btn_diagnostic_historical"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30">
+        <Button
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_diagnostic_clearcode"
+            android:textAllCaps="false"
+            android:singleLine="true"
+            android:layout_width="@dimen/x260"
+            android:layout_height="@dimen/x30"
+            android:gravity="center"
+            android:text="@string/clear_fault_codes"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_clear_code"
+            android:textSize="@dimen/x16"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_marginTop="@dimen/x16"
-        android:textAllCaps="false"
-        android:singleLine="true"
-        android:layout_width="@dimen/x260"
-        android:layout_height="@dimen/x30"
-        android:layout_marginLeft="@dimen/x57"
-        android:gravity="center"
-        android:text="@string/historical_trouble_code"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/btn_historical_code"
-        android:textSize="@dimen/x16"/>
-        
-    
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30">
+        <Button
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_diagnostic_historical"
+            android:textAllCaps="false"
+            android:singleLine="true"
+            android:layout_width="@dimen/x260"
+            android:layout_height="@dimen/x30"
+            android:gravity="center"
+            android:text="@string/historical_trouble_code"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_historical_code"
+            android:textSize="@dimen/x16"/>
+    </RelativeLayout>
+    <!--下面占位-->
     <ImageView
         android:background="@color/colorTransparent"
         android:layout_width="match_parent"

@@ -4,22 +4,27 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.example.administrator.obdcheckerforaytophix10.dashboards.FragmentBackListener;
+import com.example.administrator.obdcheckerforaytophix10.dashboards.OBDHUDActivity;
 import com.example.administrator.obdcheckerforaytophix10.main.MainOBDFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainPersionalFragment;
 import com.example.administrator.obdcheckerforaytophix10.main.MainSpecialFragment;
@@ -33,6 +38,10 @@ import java.util.List;
 
 //我在这里变最大值最小值
 //搜索上面的话  找到  在哪里改变的最大值最小值
+//向右的尖括号图片名字叫enter
+
+//横竖屏那个  Dashboards页面和Log页面  在相对布局添加控件最好是转横竖屏的时候发送广播
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //底部三个RadioButton
@@ -48,8 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentBackListener backListener;
     private boolean isInterception = false;
 
-    private ImageView iv_bottom_left , iv_bottom_right;
+    private ImageView iv_bottom_left, iv_bottom_right;
 
+    //横屏相关
+    private MyOrientationEventListener mListener;
+    private int orientation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置第一个按钮不可点击
         mRadioButton_obd.setClickable(false);
 
-        //自定义初始化数据库
-        initGreedDaoData();
-        //自定义初始化第一个表
+
+        //自定义初始化数据库   仪表盘的数据库
+
+        initGreedDaoData(orientation);
+        //自定义初始化第一个表    图表的数据库 还有一些设置
         if (FileLTool.getOutInstance().isSave("isFirst")) {
         } else {
             initFileGreenDao();
         }
+
+
 
 
 //        List<OBDL> list = DBTool.getOutInstance().queryAll();
@@ -89,14 +105,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+//        this.setRequestedOrientation(orientation);
+        //1 是竖屏  2是横屏
+//        setContentView(R.layout.activity_main);
+        //初始化
+        initView();
+        mRadioButton_obd.setClickable(true);
+        mRadioButton_obd.performClick();
+        //设置第一个按钮不可点击
+        mRadioButton_obd.setClickable(false);
+
+    }
+
+
+    //继承OrientationEventListener类监听手机的旋转
+    public class MyOrientationEventListener extends OrientationEventListener {
+
+        public MyOrientationEventListener(Context context) {
+            super(context);
+        }
+
+        public MyOrientationEventListener(Context context, int rate) {
+            super(context, rate);
+        }
+
+        @Override
+        public void onOrientationChanged(int i) {
+            //i  表示偏移角度  -1的话是水平放置  0~359  手机逆时针旋转的话是 慢慢增加的
+            int screenOrientation = getResources().getConfiguration().orientation;
+            if (((i >= 0) && (i < 45)) || (i > 315)) {
+                //设置竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                        && i != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+            } else if (i > 255 && i < 315) {
+                //设置横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+            } else if (i > 45 && i < 135) {
+                //设置反向横屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                }
+            } else if (i > 135 && i < 225) {
+                //反向竖屏
+                if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                }
+            }
+
+
+        }
+    }
+
+
     private void initFileGreenDao() {
         FileL fileL = new FileL();
+        //这个是是否存过
         fileL.setId(null).setKey("isFirst").setTure(true);
         FileLTool.getOutInstance().insertBean(fileL);
+        //这个是存放HUD模式的字体颜色
         fileL.setId(null).setKey("obdHudcolor").setValue(1);
         FileLTool.getOutInstance().insertBean(fileL);
         ArrayList da = new ArrayList();
         da.add(0);
+        //这个是存放四个回放的集合
         fileL.setId(null).setKey("testListOne").setDatas(da);
         FileLTool.getOutInstance().insertBean(fileL);
         fileL.setId(null).setKey("testListTwo").setDatas(da);
@@ -105,10 +184,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FileLTool.getOutInstance().insertBean(fileL);
         fileL.setId(null).setKey("testListFour").setDatas(da);
         FileLTool.getOutInstance().insertBean(fileL);
+        //这里是存性能测试的
+
+
+
+
     }
 
-
-    public static void initGreedDaoData() {
+    //传入的参数是横屏还是竖屏
+    public static void initGreedDaoData(int or) {
         if (DBTool.getOutInstance().isSave("isFirst")) {
             //LogUtil.fussenLog().d("不为空");
         } else {
@@ -135,6 +219,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("display_style_6").setValue(0);
             DBTool.getOutInstance().insertBean(obdl);
+
+            obdl.setId(null).setKey("display_style_other7").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_other8").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("display_style_other9").setValue(0);
+            DBTool.getOutInstance().insertBean(obdl);
+
 
             //变成经典的还要存一遍    大小位置九个单独存   其他九个只存一遍
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_1_default").setValue(40);
@@ -191,11 +283,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_9_default").setFloValue(15.3846f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_min_1_default").setValue(0);
-            DBTool.getOutInstance().insertBean(obdl);
 
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_1_default").setValue(160);
-            DBTool.getOutInstance().insertBean(obdl);
+
+//            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_min_1_default").setValue(0);
+//            DBTool.getOutInstance().insertBean(obdl);
+//
+//            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_value_max_1_default").setValue(160);
+//            DBTool.getOutInstance().insertBean(obdl);
 
             obdl.setId(null).setKey("dashboardsdisplay_style_back_innercolor_1_default").setColor("00000000");
             DBTool.getOutInstance().insertBean(obdl);
@@ -397,55 +491,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 //--------------------------------------------------------------------------------------------------------------
+            //下面的是自定义模式
+            //根据是横竖屏
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_1").setValue(40);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_1").setFloValue(6.667f);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_2").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_3").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_4").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_5").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_6").setValue(40);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_7").setValue(59);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_8").setValue(59);
+            DBTool.getOutInstance().insertBean(obdl);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_9").setValue(80);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_1").setFloValue(1.748f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_2").setValue(40);
+            obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_1").setFloValue(6.667f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_2").setFloValue(53.333f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_2").setFloValue(1.748f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_3").setValue(40);
-            DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_3").setFloValue(6.667f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_3").setFloValue(34.266f);
-            DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_4").setValue(40);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_4").setFloValue(53.333f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_4").setFloValue(34.266f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_5").setValue(40);
-            DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_5").setFloValue(6.667f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_5").setFloValue(66.783f);
-            DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_6").setValue(40);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_6").setFloValue(53.333f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_6").setFloValue(66.783f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_7").setValue(59);
-            DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_7").setFloValue(20.5333f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_7").setFloValue(3.1469f);
             DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_8").setValue(59);
-            DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_8").setFloValue(20.5333f);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_top_8").setFloValue(51.7483f);
-            DBTool.getOutInstance().insertBean(obdl);
-            obdl.setId(null).setKey("dashboardsdisplaysizeandlocationwidth_9").setValue(80);
             DBTool.getOutInstance().insertBean(obdl);
             obdl.setId(null).setKey("dashboardsdisplaysizeandlocation_left_9").setFloValue(9.8667f);
             DBTool.getOutInstance().insertBean(obdl);
@@ -1283,13 +1379,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestart();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
 
     private void initView() {
+        orientation = getResources().getConfiguration().orientation;
+        mListener = new MyOrientationEventListener(this);
+        boolean autoRotateOn = (Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+        if (autoRotateOn) {
+            mListener.enable();
+        }
         mRadioButton_obd = (RadioButton) findViewById(R.id.btn_main_obd);
         mRadioButton_persional = (RadioButton) findViewById(R.id.btn_main_persional);
         mRadioButton_obd.setOnClickListener(this);
@@ -1308,6 +1406,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        orientation = getResources().getConfiguration().orientation;
         switch (view.getId()) {
             case R.id.btn_main_obd:
                 //第一个不可点后两个可以点击
@@ -1316,11 +1415,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startFragmentAdd(mOBDFragment, R.anim.slide_left_mid, R.anim.slide_mid_right);
                 //设置页数在第一页
                 page = 1;
-
-                iv_bottom_left.setImageResource(R.mipmap.mainobdobdc);
-                iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalb);
-
-
+                if (orientation == 1) {
+                    iv_bottom_left.setImageResource(R.mipmap.mainobdobdc);
+                    iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalb);
+                } else {
+                    iv_bottom_left.setImageResource(R.mipmap.landmainobdobdc);
+                    iv_bottom_right.setImageResource(R.mipmap.landmainobdpersonalb);
+                }
                 break;
             case R.id.btn_main_persional:
                 //第三个不可点后两个可以点击
@@ -1329,10 +1430,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startFragmentAdd(mPersionalFragment, R.anim.slide_right_mid, R.anim.slide_mid_left);
                 //设置页数在第三页
                 page = 3;
-
-                iv_bottom_left.setImageResource(R.mipmap.mainobdobdb);
-                iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalc);
-
+                if (orientation == 1) {
+                    iv_bottom_left.setImageResource(R.mipmap.mainobdobdb);
+                    iv_bottom_right.setImageResource(R.mipmap.mainobdpersonalc);
+                } else {
+                    iv_bottom_left.setImageResource(R.mipmap.landmainobdobdb);
+                    iv_bottom_right.setImageResource(R.mipmap.landmainobdpersonalc);
+                }
                 break;
         }
     }
@@ -1345,17 +1449,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置动画  必须要在add  remove  replace 之前调用
         fragmentTransaction.setCustomAnimations(anim_in, anim_out);
         if (current_fragment == null) {
-            fragmentTransaction.add(R.id.frame_main_replace, fragment).commit();
+            fragmentTransaction.add(R.id.frame_main_replace, fragment).commitAllowingStateLoss();
             current_fragment = fragment;
         }
         if (current_fragment != fragment) {
             // 先判断是否被add过
             if (!fragment.isAdded()) {
                 // 隐藏当前的fragment，add下一个到Activity中
-                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commit();
+                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commitAllowingStateLoss();
             } else {
                 // 隐藏当前的fragment，显示下一个
-                fragmentTransaction.hide(current_fragment).show(fragment).commit();
+                fragmentTransaction.hide(current_fragment).show(fragment).commitAllowingStateLoss();
             }
             current_fragment = fragment;
         }
@@ -1368,17 +1472,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
         if (current_fragment == null) {
-            fragmentTransaction.add(R.id.frame_main_replace, fragment).commit();
+            fragmentTransaction.add(R.id.frame_main_replace, fragment).commitAllowingStateLoss();
             current_fragment = fragment;
         }
         if (current_fragment != fragment) {
             // 先判断是否被add过
             if (!fragment.isAdded()) {
                 // 隐藏当前的fragment，add下一个到Activity中
-                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commit();
+                fragmentTransaction.hide(current_fragment).add(R.id.frame_main_replace, fragment).commitAllowingStateLoss();
             } else {
                 // 隐藏当前的fragment，显示下一个
-                fragmentTransaction.hide(current_fragment).show(fragment).commit();
+                fragmentTransaction.hide(current_fragment).show(fragment).commitAllowingStateLoss();
             }
             current_fragment = fragment;
         }

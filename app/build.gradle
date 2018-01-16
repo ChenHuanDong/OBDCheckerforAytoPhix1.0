@@ -24,6 +24,17 @@ android {
     }
 }
 
+////应用插件
+//apply plugin: 'com.bugtags.library.plugin'
+//
+////自动上传插件
+//bugtags {
+//    appKey "f98d497747c9e91df9db3591d12320b9"  //这里是你的 appKey
+//    appSecret "c72edd4971699db619dafa618b3642b7"    //这里是你的 appSecret，管理员在设置页可以查看
+//}
+
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -39,4 +50,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.android.support:design:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
+//    compile 'com.bugtags.library:bugtags-lib:latest.integration'
 }

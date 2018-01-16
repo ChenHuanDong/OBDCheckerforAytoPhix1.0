@@ -5,6 +5,7 @@
                 android:background="@color/colorDialogBackGround"
                 android:orientation="vertical">
 
+    <!--横着上面的TID那个-->
     <TextView
         android:id="@+id/tv_monitors_otwo_item_title"
         android:layout_width="@dimen/x292"
@@ -39,8 +40,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x25"
-        android:layout_marginTop="@dimen/x76"
         android:layout_marginLeft="@dimen/x160"
+        android:layout_marginTop="@dimen/x76"
         android:text="@string/max"
         android:textColor="@color/colorTextColorDemo"
         android:textSize="@dimen/x14"/>
@@ -50,8 +51,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x25"
-        android:layout_marginTop="@dimen/x76"
         android:layout_marginLeft="@dimen/x234"
+        android:layout_marginTop="@dimen/x76"
         android:text="@string/units"
         android:textColor="@color/colorTextColorDemo"
         android:textSize="@dimen/x14"/>
@@ -101,19 +102,19 @@
 
 
     <ImageView
+        android:layout_marginRight="@dimen/x44"
+        android:layout_alignParentRight="true"
         android:layout_width="@dimen/x26"
         android:layout_height="@dimen/x19"
-        android:layout_marginLeft="@dimen/x334"
         android:layout_marginTop="@dimen/x77"
         android:src="@drawable/monitors_yes_gurren"/>
 
 
     <ImageView
-        android:background="@color/colorOBDbackground"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
         android:layout_alignParentBottom="true"
-        android:layout_height="@dimen/x30"/>
-
+        android:background="@color/colorOBDbackground"/>
 
 
 </RelativeLayout>

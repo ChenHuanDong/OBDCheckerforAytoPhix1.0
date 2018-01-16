@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,7 +25,6 @@
             android:textColor="@color/colorConnectDetail"
             android:textSize="@dimen/x18"/>
 
-
         <ImageView
             android:layout_width="@dimen/x10"
             android:layout_height="@dimen/x18"
@@ -37,11 +36,11 @@
         <ImageView
             android:layout_width="@dimen/x22"
             android:layout_height="@dimen/x22"
-            android:layout_marginLeft="@dimen/x338"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x15"
             android:layout_marginTop="@dimen/x11"
             android:scaleType="fitXY"
             android:src="@drawable/shuaxin_diagnostics"/>
-
 
         <!--点击返回的透明按钮-->
         <ImageView
@@ -53,14 +52,18 @@
         <ImageView
             android:id="@+id/iv_diagno_flash"
             android:layout_width="@dimen/x37"
-            android:background="@color/colorTransparent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x338"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@color/colorTransparent"/>
+
 
     </RelativeLayout>
 
     <!--四个中间的展示层-->
+    <!--Trouble Codes-->
     <LinearLayout
+        android:layout_marginTop="@dimen/y40"
         android:id="@+id/ll_mid_trouble_code"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y558"
@@ -74,8 +77,9 @@
             android:divider="@null"/>
 
     </LinearLayout>
-    <!--333-->
+    <!--Freeze Frame-->
     <LinearLayout
+        android:layout_marginTop="@dimen/y40"
         android:id="@+id/ll_mid_readiness_rest"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y558"
@@ -172,8 +176,9 @@
 
 
     </LinearLayout>
-    <!--222-->
+    <!--Readiness Test-->
     <LinearLayout
+        android:layout_marginTop="@dimen/y40"
         android:id="@+id/ll_mid_freeze_frame"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y558"
@@ -187,8 +192,9 @@
 
 
     </LinearLayout>
-    <!--444-->
+    <!--Report-->
     <LinearLayout
+        android:layout_marginTop="@dimen/y40"
         android:id="@+id/ll_mid_report"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y558"
@@ -349,6 +355,7 @@
 
     <!--下方-->
     <LinearLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y45"
         android:orientation="horizontal">
@@ -361,14 +368,33 @@
             android:layout_weight="1"
             android:background="@color/colorDialogBackGround">
 
-            <ImageView
-                android:id="@+id/iv_diagnostic_trouble_code"
-                android:layout_width="@dimen/x24"
-                android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x35"
-                android:layout_marginTop="@dimen/x4"
-                android:background="@color/colorTransparent"
-                android:src="@drawable/guzhang_b"/>
+            <!--图片加上面的15-->
+            <LinearLayout
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_diagnostic_trouble_code"
+                    android:layout_width="@dimen/x24"
+                    android:layout_height="@dimen/x20"
+                    android:layout_marginTop="@dimen/x4"
+                    android:background="@color/colorTransparent"
+                    android:src="@drawable/guzhang_b"/>
+
+                <Button
+                    android:layout_width="@dimen/x14"
+                    android:layout_height="@dimen/x14"
+                    android:layout_marginTop="@dimen/x4"
+                    android:background="@drawable/btn_diagnosticscircle"
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/x8"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
 
             <!--另一个颜色   colorDashboardsPointer-->
             <TextView
@@ -381,20 +407,9 @@
                 android:textColor="@color/colorTextColorDemo"
                 android:textSize="@dimen/x10"/>
 
-            <Button
-                android:layout_width="@dimen/x14"
-                android:layout_height="@dimen/x14"
-                android:layout_marginLeft="@dimen/x61"
-                android:layout_marginTop="@dimen/x4"
-                android:background="@drawable/btn_diagnosticscircle"
-                android:gravity="center"
-                android:text="15"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/x8"
-                android:textStyle="bold"/>
+
 
         </RelativeLayout>
-
         <ImageView
             android:layout_width="@dimen/x1"
             android:layout_height="match_parent"
@@ -409,10 +424,10 @@
             android:background="@color/colorDialogBackGround">
 
             <ImageView
+                android:layout_centerHorizontal="true"
                 android:id="@+id/iv_diagnostic_freeze_frame"
                 android:layout_width="@dimen/x24"
                 android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x35"
                 android:layout_marginTop="@dimen/x4"
                 android:background="@color/colorTransparent"
                 android:src="@drawable/freeze_b"/>
@@ -428,13 +443,11 @@
                 android:textSize="@dimen/x10"/>
 
         </RelativeLayout>
-
         <ImageView
             android:layout_width="@dimen/x1"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/line_shu_ui"/>
-
         <!--Readiness Test-->
         <RelativeLayout
             android:id="@+id/re_diagnostic_readiness_test"
@@ -447,7 +460,7 @@
                 android:id="@+id/iv_diagnostic_readiness_test"
                 android:layout_width="@dimen/x24"
                 android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x35"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/x4"
                 android:background="@color/colorTransparent"
                 android:src="@drawable/readiness_b"/>
@@ -463,13 +476,11 @@
                 android:textSize="@dimen/x10"/>
 
         </RelativeLayout>
-
         <ImageView
             android:layout_width="@dimen/x1"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/line_shu_ui"/>
-
         <!--Report-->
         <RelativeLayout
             android:id="@+id/re_diagnostic_report"
@@ -482,7 +493,7 @@
                 android:id="@+id/iv_diagnostic_report"
                 android:layout_width="@dimen/x24"
                 android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x35"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/x4"
                 android:background="@color/colorTransparent"
                 android:src="@drawable/report_balck"/>
@@ -502,4 +513,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

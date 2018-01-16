@@ -5,7 +5,6 @@
                 android:background="@color/colorDialogBackGround"
                 android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/tv_delete_title"
         android:layout_width="@dimen/x252"

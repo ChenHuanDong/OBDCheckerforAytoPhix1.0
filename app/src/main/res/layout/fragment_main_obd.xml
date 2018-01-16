@@ -17,18 +17,24 @@
         android:background="@color/colorOBDbackground"/>
 
 
+
     <!--中间显示连接状态-->
     <!--这个在外面显示了   要改的话去外面也要改-->
     <TextView
         android:id="@+id/obd_tv_title_connect"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/y44"
         android:background="@color/colorOBDbackground"
         android:gravity="center"
+        android:layout_marginLeft="@dimen/x150"
         android:text="@string/main_obd_connect"
         android:textColor="@color/colorTextColorDemo"
         android:textSize="@dimen/x18"
         android:textStyle="bold"/>
+
+
+
+
 
     <!--点击弹出PopupWindow-->
     <Button
@@ -240,6 +246,9 @@
         android:layout_marginTop="@dimen/y442"
         android:scaleType="fitXY"
         android:src="@drawable/settings_ui"/>
+
+
+
 
 
 </RelativeLayout>

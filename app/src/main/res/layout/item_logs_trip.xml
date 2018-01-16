@@ -39,9 +39,10 @@
 
         <TextView
             android:id="@+id/tv_logs_trip_distance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x286"
+            android:layout_marginRight="@dimen/x40"
+            android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>
@@ -66,9 +67,10 @@
 
         <TextView
             android:id="@+id/tv_logs_trip_fuel"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x302"
+            android:layout_marginRight="@dimen/x40"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/x45"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextColorDemo"
@@ -95,10 +97,11 @@
 
         <TextView
             android:id="@+id/tv_logs_trip_economy"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/x44"
-            android:layout_marginLeft="@dimen/x302"
             android:layout_marginTop="@dimen/x90"
+            android:layout_marginRight="@dimen/x40"
+            android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:textColor="@color/colorTextColorDemo"
             android:textSize="@dimen/x16"/>

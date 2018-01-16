@@ -7,6 +7,12 @@
               android:clickable="true"
               android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
     <!--标题栏-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -147,7 +153,8 @@
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/x30"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x310"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_alignParentRight="true"
             app:isOpened="true"/>
 
 
@@ -160,7 +167,7 @@
 
 
     <TextView
-        android:layout_width="@dimen/x44"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x30"
         android:gravity="center"
@@ -168,5 +175,6 @@
         android:textColor="@color/colorDashboardsPointer"
         android:textSize="@dimen/x16"/>
 
+    </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,8 @@
               android:background="@color/colorDialogBackGround"
               android:orientation="vertical">
 
+    <!--这个是Logs File 在外层界面  File 1 橙色字  箭头-->
+
     <!--最外层  不加线-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,24 +41,32 @@
 
         </LinearLayout>
 
+        <!--右边的橙色字  和  向右箭头-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_logs_item_file_pid"
-            android:layout_width="@dimen/x150"
-            android:layout_height="@dimen/x44"
-            android:singleLine="true"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorDashboardsPointer"
-            android:textSize="@dimen/x16"/>
+            <TextView
+                android:id="@+id/tv_logs_item_file_pid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x44"
+                android:singleLine="true"
+                android:layout_marginRight="@dimen/x40"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorDashboardsPointer"
+                android:textSize="@dimen/x16"/>
 
-        <ImageView
-            android:layout_marginTop="@dimen/x13"
-            android:layout_width="@dimen/x10"
-            android:layout_height="@dimen/x18"
-            android:scaleType="fitXY"
-            android:src="@drawable/enter"/>
+            <ImageView
+                android:layout_marginRight="@dimen/x15"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/x13"
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x18"
+                android:scaleType="fitXY"
+                android:src="@drawable/enter"/>
 
-
+        </RelativeLayout>
 
     </LinearLayout>
 

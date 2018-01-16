@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorOBDbackground"
+                android:clickable="true"
+                android:orientation="vertical">
+
+    <!--两个显示链接状态的文字的字体颜色还没有具体给出，要具体的话别忘了去Java代码里面改-->
+
+    <!--TextView 下方的布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground"/>
+
+
+    <!--中间显示连接状态-->
+    <!--这个在外面显示了   要改的话去外面也要改-->
+    <TextView
+        android:id="@+id/obd_tv_title_connect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y44"
+        android:background="@color/colorOBDbackground"
+        android:gravity="center"
+        android:text="@string/main_obd_connect"
+        android:textColor="@color/colorTextColorDemo"
+        android:textSize="@dimen/x18"
+        android:textStyle="bold"/>
+
+    <!--点击弹出PopupWindow-->
+    <Button
+        android:id="@+id/obd_btn_title_connect"
+        android:layout_width="@dimen/x15"
+        android:layout_height="@dimen/y10"
+        android:layout_marginLeft="@dimen/x370"
+        android:layout_marginTop="@dimen/y19"
+        android:background="@drawable/xiala_ui"/>
+
+    <!--覆盖在上面的-->
+    <!--相当于点击弹出Dialog-->
+    <ImageView
+        android:id="@+id/obd_iv_title_connecttra"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/y44"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorTransparent"/>
+
+
+    <!--左上角图标-->
+    <ImageView
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x19"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/y12"
+        android:src="@drawable/upload_buttom_ui"/>
+
+
+    <!--右上角图片-->
+    <ImageView
+        android:layout_width="@dimen/x19"
+        android:layout_height="@dimen/x19"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x27"
+        android:layout_marginTop="@dimen/y12"
+        android:src="@drawable/help_buttom_ui"/>
+
+    <!--链接状态展示的底栏-->
+    <ImageView
+        android:layout_width="@dimen/y568"
+        android:layout_height="@dimen/y41"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginTop="@dimen/y55"
+        android:background="#ffffff"
+        android:scaleType="fitXY"
+        android:src="@drawable/information_ui"/>
+
+
+    <!--详细细节的文字-->
+    <!--和上面连接状态文字一样-->
+    <TextView
+        android:id="@+id/obd_tv_detail_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y41"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y55"
+        android:background="@color/colorTransparent"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/main_tv_obd_connectdetail_do"
+        android:textColor="@color/colorConnectDetail"
+        android:textSize="@dimen/x16"/>
+
+    <!--显示连接状态的图标-->
+    <ImageView
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/y20"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/y66"
+        android:layout_toRightOf="@+id/obd_tv_detail_connect"
+        android:scaleType="fitXY"
+        android:src="@drawable/signal_ui"/>
+
+
+    <!--线  灰色的线-->
+    <!--标题栏下面的-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_marginTop="@dimen/y44"
+        android:scaleType="fitXY"
+        android:src="@drawable/line_ui"/>
+
+
+    <!--装下面六个的横向S-->
+    <HorizontalScrollView
+        android:scrollbars="none"
+        android:layout_marginTop="@dimen/x147"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x123">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <!--Dashboards-->
+            <LinearLayout
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_dashboards"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dashboards_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/dashboards"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+            </LinearLayout>
+
+            <!--Diagnostics-->
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x41"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_diagnostics"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/diagnostics_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/diagnostics"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+            </LinearLayout>
+
+            <!--Montiors-->
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/x41">
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_montiors"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/montiors_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/montiors"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+            </LinearLayout>
+
+            <!--Logs-->
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/x41"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_logs"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logs_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/logs"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+
+            </LinearLayout>
+
+            <!--Performance()-->
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/x41">
+
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_performance"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/performance_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/performance"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+
+            </LinearLayout>
+
+            <!--Settings-->
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/x41">
+
+
+                <ImageView
+                    android:id="@+id/obd_iv_main_settings"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/settings_ui"/>
+
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y24"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/settings"
+                    android:textColor="@color/colorTextColorDemo"
+                    android:textSize="@dimen/x15"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+</RelativeLayout>
